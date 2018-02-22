@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Font Awesome CSS -->
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="bootswatch.css">
+
+  <title>Photon News</title>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="row">
+          <img class="col" alt="Logo"/>
+          <h1 class="col"><a>Photon News</a></h1>
+          <form class="form-inline my-2 my-lg-0">
+              <input class="col form-control mr-sm-2" type="text" placeholder="Search">
+              <button class="col btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+          </form>
+          <div class="col container" id="profile">
+            <div class="row">
+                <img class="col" alt="notifications">
+                <img class="col" alt="profile">
+            </div>
+            <div class="row">
+                <img class="col" alt="forum">
+                <img class="col" alt="settings">
+            </div>
+          </div>
+      </div>
+    </div>
+    <!-- Navegador -->
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#news">News</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#comments">Comments</a>
+      </li>
+    </ul>
+  </header>
+  <div class="container">
+    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+      <h1>Reports</h1>
+      <div class="btn-group" role="group">
+        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+          <a class="dropdown-item" href="#">Most Recent</a>
+          <a class="dropdown-item" href="#">Most Reported</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" id="menu1" type="button" data-toggle="dropdown">Dropdown Example
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">HTML</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">CSS</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">JavaScript</a></li>
+      <li role="presentation" class="divider"></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">About Us</a></li>
+    </ul>
+  </div>
+  </div>
+  <script>
+    $(document).ready(function(){
+        $(".dropdown-toggle").dropdown();
+    });
+  </script>
+  <footer>
+  </footer>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

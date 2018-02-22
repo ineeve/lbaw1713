@@ -15,35 +15,39 @@
   <title>Photon News</title>
 </head>
 <body>
-  <header>
-    <div class="container-fluid">
-      <div class="row">
-          <h1 class="col-sm"><a>Photon News</a></h1>
-          <form class="form-inline my-2 my-lg-0">
-              <input class="col form-control mr-sm-2" type="text" placeholder="Search">
-              <button class="col btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+  <header class="container">
+    <!-- NAVBAR <nav class="row navbar navbar-expand-lg navbar-light bg-light"> -->
+    <nav class="row navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#">Photon News</a>
+          <!-- SEARCH FORM -->
+          <form class="form-inline my-2 my-lg-0 mx-auto">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
           </form>
-          <div class="col-sm container" id="profile">
-            <div class="row">
-                <span class="fa fa-search" aria-hidden="true"></span>
-                <span class="fa fa-cog" alt="profile"></span>
-            </div>
-            <div class="row">
-                <img class="col" alt="forum">
-                <img class="col" alt="settings">
-            </div>
-          </div>
-      </div>
-    </div>
-
-    <ul class="nav nav-tabs">
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#article">Article</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#comments">Comments</a>
-      </li>
-    </ul>
+          <ul class="navbar-nav ml-2 mt-2 mt-lg-0">
+            <!-- NOTIFICATIONS -->
+            <li class="nav-item ml-2">
+              <i class="fa fa-bell"></i>
+            </li>
+            <!-- USER PROFILE -->
+            <li class="nav-item ml-2">
+              <a href="profile.html"><i class="fa fa-user"></i></a>
+            </li>
+            <!-- SETTINGS -->
+            <li class="nav-item ml-2">
+              <i class="fa fa-cog"></i>
+            </li>
+          </ul>
+      </nav>
+      <!-- TABS -->
+      <ul class="row nav nav-tabs justify-content-center">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Headlines</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">For You</a>
+          </li>
+        </ul>
   </header>
 
   <div id="myTabContent" class="tab-content">
