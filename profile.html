@@ -15,26 +15,31 @@
 </head>
 <body>
   <header>
-    <div class="container">
-      <div class="row">
-          <img class="col" alt="Logo"/>
-          <h1 class="col"><a>Photon News</a></h1>
-          <form class="form-inline my-2 my-lg-0">
-              <input class="col form-control mr-sm-2" type="text" placeholder="Search">
-              <button class="col btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-          </form>
-          <div class="col container" id="profile">
-            <div class="row">
-                <img class="col" alt="notifications">
-                <img class="col" alt="profile">
-            </div>
-            <div class="row">
-                <img class="col" alt="forum">
-                <img class="col" alt="settings">
-            </div>
-          </div>
-      </div>
-    </div>
+    <header class="container">
+      <!-- NAVBAR <nav class="row navbar navbar-expand-lg navbar-light bg-light"> -->
+      <nav class="row navbar navbar-expand-lg navbar-light">
+          <a class="navbar-brand" href="#">Photon News</a>
+            <!-- SEARCH FORM -->
+            <form class="form-inline my-2 my-lg-0 mx-auto">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+            <ul class="navbar-nav ml-2 mt-2 mt-lg-0">
+              <!-- NOTIFICATIONS -->
+              <li class="nav-item ml-2">
+                <i class="fa fa-bell"></i>
+              </li>
+              <!-- USER PROFILE -->
+              <li class="nav-item ml-2">
+                <a href="profile.html"><i class="fa fa-user"></i></a>
+              </li>
+              <!-- SETTINGS -->
+              <li class="nav-item ml-2">
+                <i class="fa fa-cog"></i>
+              </li>
+            </ul>
+        </nav>
+
     <!-- Navegador -->
     <ul class="nav nav-tabs">
       <li class="nav-item">
