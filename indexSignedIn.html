@@ -16,7 +16,7 @@
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  <script src="./scripts/index.js" defer></script>
+
   <title>Photon News</title>
 </head>
 <body>
@@ -30,38 +30,17 @@
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
           </form>
           <ul class="navbar-nav ml-2 mt-2 mt-lg-0">
-            
-            <!-- SETTINGS -->
-            <li class="nav-item my-auto">
-              <i class="fa fa-cog"></i>
+            <!-- NOTIFICATIONS -->
+            <li class="nav-item ml-2">
+              <i class="fa fa-bell"></i>
             </li>
-            <!-- SIGN IN -->
-            <li class="nav-item dropdown my-auto">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Sign In
-              </a>
-              <div class="dropdown-menu dropdown-menu-right mt-0">
-                <form class="px-4 py-3">
-                  <div class="form-group">
-                    <label for="dropdownFormEmail">Email address</label>
-                    <input type="email" class="form-control" id="dropdownFormEmail" placeholder="email@example.com">
-                  </div>
-                  <div class="form-group">
-                    <label for="dropdownFormPassword">Password</label>
-                    <input type="password" class="form-control" id="dropdownFormPassword" placeholder="Password">
-                  </div>
-                  <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="dropdownCheck">
-                    <label class="form-check-label" for="dropdownCheck">
-                      Remember me
-                    </label>
-                  </div>
-                  <button onclick="signIn()" type="submit" class="btn btn-primary">Sign in</button>
-                </form>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">New around here? Sign up</a>
-                <a class="dropdown-item" href="#">Forgot password?</a>
-              </div>
+            <!-- USER PROFILE -->
+            <li class="nav-item ml-2">
+              <a href="profile.html"><i class="fa fa-user-circle"></i></a>
+            </li>
+            <!-- SETTINGS -->
+            <li class="nav-item ml-2">
+              <i class="fa fa-cog"></i>
             </li>
           </ul>
       </nav>
@@ -222,13 +201,71 @@
                 <!-- LEFT-SECTIONS -->
                 <div class="col-3" id="sections">
                     <ul class="list-group ">
-                      <a href="#" class="border-0 list-group-item list-group-item-action">Manage Interests</a>
-                    </ul>    
+                      <a href="#" role="button" class="border-0 list-group-item list-group-item-action"><i class="fa fa-laptop"></i>  Technology</a>
+                      <a href="#" role="button" class="border-0 list-group-item list-group-item-action"><i class="fa fa-bitcoin"></i>  Blockchain</a>
+                      <a href="#" role="button" class="border-0 list-group-item list-group-item-action"><i class="fa fa-briefcase"></i>  Business</a>
+                      <hr>
+                      <a href="#" class="border-0 list-group-item list-froup-item-action">Manage Interests</a>
+                    </ul>
+    
+    
                 </div>
-
                 <!-- MID-News -->
                 <div class="col-6" id="news">
-                    <a href="#">Sign in </a><span>to follow your interests.</span>
+                    <!-- News Header -->
+                    <div class="d-flex flex-column">
+                      <!-- 1st News Item -->
+                      <div class="news_item border container my-2">
+                          <div class="row">
+                            <div class="col w-25">
+                              <img class="w-100" src="https://image.flaticon.com/teams/slug/freepik.jpg" alt="Icon">
+                            </div>
+                            <div class="col-6">
+                              <div class="row">
+                                <h3>Bitcoin reaches $20k</h3>
+                              </div>
+                              <div class="row">
+                                <p>Author's name &middot; 12:25 23/02/2018</p>
+                              </div>
+                            </div>
+                            <div class="col align-self-end  mb-2"><span class="fa fa-chevron-down float-right"></span></div>
+                          </div>
+                        </div>
+                        <!-- 2nd News Item -->
+                        <div class="news_item border container my-2">
+                          <div class="row">
+                            <div class="col w-25">
+                              <img class="w-100" src="https://image.flaticon.com/teams/slug/freepik.jpg" alt="Icon">
+                            </div>
+                            <div class="col-6">
+                              <div class="row">
+                                <h3>Polymagnets making their way to the moon</h3>
+                              </div>
+                              <div class="row">
+                                <p>Author's name &middot; 12:25 23/02/2018</p>
+                              </div>
+                            </div>
+                            <div class="col align-self-end  mb-2"><span class="fa fa-chevron-down float-right"></span></div>
+                          </div>
+                        </div>
+                        <!-- 3rd News Item -->
+                        <div class="news_item border container my-2">
+                            <div class="row">
+                              <div class="col w-25">
+                                <img class="w-100" src="https://image.flaticon.com/teams/slug/freepik.jpg" alt="Icon">
+                              </div>
+                              <div class="col-6">
+                                <div class="row">
+                                  <h3>SpaceX landed on Mars</h3>
+                                </div>
+                                <div class="row">
+                                  <p>Author's name &middot; 12:25 23/02/2018</p>
+                                </div>
+                              </div>
+                              <div class="col align-self-end  mb-2"><span class="fa fa-chevron-down float-right"></span></div>
+                            </div>
+                          </div>
+                    </div>
                 </div>
                 <!-- RIGHT Create News -->
                 <div class="col-3" id="right-panel">
