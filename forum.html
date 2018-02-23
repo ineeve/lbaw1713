@@ -14,66 +14,53 @@
   <title>Photon News</title>
 </head>
 <body>
-  <header>
-    <div class="container">
-      <div class="row">
-          <img class="col" alt="Logo"/>
-          <h1 class="col"><a>Photon News</a></h1>
-          <form class="form-inline my-2 my-lg-0">
-              <input class="col form-control mr-sm-2" type="text" placeholder="Search">
-              <button class="col btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+  <header class="container">
+    <!-- NAVBAR <nav class="row navbar navbar-expand-lg navbar-light bg-light"> -->
+    <nav class="row navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#">Photon News</a>
+          <!-- SEARCH FORM -->
+          <form class="form-inline my-2 my-lg-0 mx-auto">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
           </form>
-          <div class="col container" id="profile">
-            <div class="row">
-                <img class="col" alt="notifications">
-                <img class="col" alt="profile">
-            </div>
-            <div class="row">
-                <img class="col" alt="forum">
-                <img class="col" alt="settings">
-            </div>
-          </div>
-      </div>
-    </div>
-    <!-- Navegador -->
-    <ul class="nav nav-tabs">
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#news">News</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#comments">Comments</a>
-      </li>
-    </ul>
+          <ul class="navbar-nav ml-2 mt-2 mt-lg-0">
+            <!-- NOTIFICATIONS -->
+            <li class="nav-item ml-2">
+              <i class="fa fa-bell"></i>
+            </li>
+            <!-- USER PROFILE -->
+            <li class="nav-item ml-2">
+              <a href="profile.html"><i class="fa fa-user"></i></a>
+            </li>
+            <!-- SETTINGS -->
+            <li class="nav-item ml-2">
+              <i class="fa fa-cog"></i>
+            </li>
+          </ul>
+      </nav>
+      <!-- TABS -->
+      <ul class="row nav nav-tabs justify-content-center">
+          <li class="nav-item">
+            <a class="nav-link" href="#">News</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Comments</a>
+          </li>
+        </ul>
   </header>
   <div class="container">
     <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
       <h1>Reports</h1>
       <div class="btn-group" role="group">
-        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+        <button id="btnGroupDrop1" type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
           <a class="dropdown-item" href="#">Most Recent</a>
           <a class="dropdown-item" href="#">Most Reported</a>
         </div>
       </div>
-    </div>
+      <span> <h3 class="sort-option"> Most Recent </h3></span>
 
-    <div class="dropdown">
-    <button class="btn btn-primary dropdown-toggle" id="menu1" type="button" data-toggle="dropdown">Dropdown Example
-    <span class="caret"></span></button>
-    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">HTML</a></li>
-      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">CSS</a></li>
-      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">JavaScript</a></li>
-      <li role="presentation" class="divider"></li>
-      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">About Us</a></li>
-    </ul>
   </div>
-  </div>
-  <script>
-    $(document).ready(function(){
-        $(".dropdown-toggle").dropdown();
-    });
-  </script>
   <footer>
   </footer>
 
@@ -82,5 +69,10 @@
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script>
+    $(".dropdown-item").click(function(event){
+      $(".sort-option").text($(this).text());
+    });
+  </script>
 </body>
 </html>
