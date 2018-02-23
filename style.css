@@ -1,0 +1,8 @@
+.article-options .news-vote-btn {
+    opacity: 1;
+}
+
+.article-options .news-vote-btn:hover {
+    opacity: 0;
+    transition: opacity .5s;
+}
