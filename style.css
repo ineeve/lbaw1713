@@ -30,11 +30,19 @@
 }
 
 div.sort-option {
-  position: relative;
-  /* width: auto; */
+  display: flex;
+  flex-direction: column-reverse;
 }
-h5.sort-option {
+/* h5.sort-option {
   position: absolute;
   bottom: 0px;
-  width: 200px;
+} */
+
+div.container > div.btn-group {
+  display: flex;
+  flex-direction: row;
+}
+
+div.sort-option > span {
+  vertical-align: bottom;
 }
