@@ -76,19 +76,53 @@
   <div id="myTabContent" class="tab-content">
     <div class="tab-pane fade active show" id="article">
         <div class="row">
-          <div class="col-2 mod-comments">
-            <input type="text">
-            <button>Comment</button>
+          <!-- MOD COMMENTS -->
+          <div class="col-3 mt-2 pl-4 mod-comments">
+            <form>
+              <input type="text" class="form-control">
+              <button type="submit" class="btn">Comment</button>
+            </form>
             <div class="scrollable">
-              <div>
-                <p>Dolor incididunt laboris labore qui velit fugiat officia tempor sint sunt id tempor consequat occaecat. Culpa enim id qui tempor. Veniam do et anim nostrud mollit adipisicing pariatur amet cillum proident. Dolore ea duis nulla amet adipisicing eiusmod eu nostrud. Qui excepteur cillum ea sint pariatur eu ea nostrud non est. Dolore esse anim mollit tempor eiusmod velit id aliqua laboris elit laborum exercitation laboris.</p>
+              <div class="card border-dark my-3">
+                <div class="card-body">
+                  <div class="row">
+                      <div class="col-4 p-0">
+                        <img class="w-100" alt="pPic" src="images/generic_avatar.png">
+                      </div>
+                      <div class="col-8 p-0">
+                        <div class="owner">NAME</div>
+                        <time class="date">2008-02-14 20:00</time>
+                      </div>
+                    </div>
+                      <div class="row">
+                        <div class="col-12 p-1">
+                          <p>Exercitation nulla mollit esse cupidatat laborum sunt laborum culpa non mollit id cupidatat incididunt eu. Velit dolore exercitation irure fugiat officia est velit incididunt aliquip. Laboris sit anim sunt labore.</p>
+                        </div>
+                      </div>
+                </div>
               </div>
-              <div>
-                <p>Tempor ex elit ad excepteur veniam voluptate est velit non nisi consequat. Culpa id do exercitation ad aliquip enim ex magna tempor est ea qui. Reprehenderit amet in ullamco ad mollit deserunt voluptate. Ullamco nisi aute excepteur dolore Lorem consectetur reprehenderit anim nulla adipisicing nostrud eiusmod cupidatat. Eu ad nostrud consectetur laborum id voluptate incididunt occaecat aliquip. Qui laboris voluptate ipsum tempor dolore proident ut irure non qui pariatur enim ut nisi.</p>
+              <div class="card border-dark my-3">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-4 p-0">
+                      <img class="w-100" alt="pPic" src="images/generic_avatar.png">
+                    </div>
+                    <div class="col-8 p-0">
+                      <div class="owner">NAME</div>
+                      <time class="date">2008-02-14 20:00</time>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12 p-1">
+                      <p>Labore ea laborum eu anim pariatur ipsum. Eu occaecat exercitation dolor duis esse dolor nostrud ipsum do adipisicing ea ad do proident.</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          <div class="col-8 article">
+          <!-- ARTICLE -->
+          <div class="col-7 article">
             <h6 class="category">Sports</h2>
             <h2 class="title">Title</h2>
             <h6 class="author">Author &middot; 20/02/2018</h6>
@@ -111,6 +145,7 @@
             <h4>Source</h4>
             <a href="https://www.google.pt/search?q=lorem+ipsum&oq=lorem+ipsum&aqs=chrome..69i57j0l5.2104j0j4&sourceid=chrome&ie=UTF-8">Google</a>
           </div>
+          <!-- ARTICLE OPTIONS -->
           <div class="col-2">
             <div class="d-flex mt-5">
               <div class="d-flex flex-column article-options">
@@ -238,5 +273,7 @@
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  <script src="scripts/buttons.js" defer></script>
 </body>
 </html>
