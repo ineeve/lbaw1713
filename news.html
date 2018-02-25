@@ -13,6 +13,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="bootswatch.css">
 
+  <link rel="stylesheet" href="style.css">
+
   <title>Photon News</title>
 </head>
 <body>
@@ -73,10 +75,18 @@
 
   <div id="myTabContent" class="tab-content">
     <div class="tab-pane fade active show" id="article">
-      <div class="container">
         <div class="row">
-          <div class="col-2  mod-comments">
-              
+          <div class="col-2 mod-comments">
+            <input type="text">
+            <button>Comment</button>
+            <div class="scrollable">
+              <div>
+                <p>Dolor incididunt laboris labore qui velit fugiat officia tempor sint sunt id tempor consequat occaecat. Culpa enim id qui tempor. Veniam do et anim nostrud mollit adipisicing pariatur amet cillum proident. Dolore ea duis nulla amet adipisicing eiusmod eu nostrud. Qui excepteur cillum ea sint pariatur eu ea nostrud non est. Dolore esse anim mollit tempor eiusmod velit id aliqua laboris elit laborum exercitation laboris.</p>
+              </div>
+              <div>
+                <p>Tempor ex elit ad excepteur veniam voluptate est velit non nisi consequat. Culpa id do exercitation ad aliquip enim ex magna tempor est ea qui. Reprehenderit amet in ullamco ad mollit deserunt voluptate. Ullamco nisi aute excepteur dolore Lorem consectetur reprehenderit anim nulla adipisicing nostrud eiusmod cupidatat. Eu ad nostrud consectetur laborum id voluptate incididunt occaecat aliquip. Qui laboris voluptate ipsum tempor dolore proident ut irure non qui pariatur enim ut nisi.</p>
+              </div>
+            </div>
           </div>
           <div class="col-8 article">
             <h6 class="category">Sports</h2>
@@ -108,45 +118,41 @@
                 <i class="fa fa-arrow-alt-circle-down mt-2 news-vote-btn"></i>
                 <i class="fa fa-times mt-2 report-news-btn"></i>
               </div>
-              <div class="">100</div>
+              <div class="ml-2 mt-1">100</div>
             </div>
           </div>
         </div>
-      </div>
     </div>
 
     <!-- Comments section -->
     <div class="tab-pane fade" id="comments">
       <div class="col-8 mx-auto">
       <!-- Comment 1 -->
-      <div class="container">
-        <div class="card border-dark my-3">
-          <div class="card-body">
-            <div class="d-flex">
-              <div>
-                <img alt="pPic">
-              </div>
-              <div>
-                <div class="owner">NAME</div>
-                <time class="date">2008-02-14 20:00</time>
-              </div>
-              <div class="ml-auto">
-                <button type="button" class="btn"><span class="fa fa-angle-down" alt="x"></span></button>
-              </div>
+      <div class="card border-dark my-3">
+        <div class="card-body">
+          <div class="d-flex">
+            <div>
+              <img alt="pPic">
             </div>
-            <div class="row">
-              <div class="col">
-                <p>Exercitation nulla mollit esse cupidatat laborum sunt laborum culpa non mollit id cupidatat incididunt eu. Velit dolore exercitation irure fugiat officia est velit incididunt aliquip. Ea commodo pariatur velit consequat elit deserunt. Irure sunt consequat occaecat in. Laboris sit anim sunt labore.
-                  Id cillum nulla eu quis ipsum cillum amet deserunt fugiat reprehenderit. Commodo sit culpa mollit esse aliquip qui dolor excepteur elit qui ut fugiat ut. Labore ea minim Lorem laborum voluptate commodo excepteur sunt elit esse nostrud. Proident laboris amet commodo consectetur esse qui.</p>
-                </p>
-              </div>
+            <div>
+              <div class="owner">NAME</div>
+              <time class="date">2008-02-14 20:00</time>
+            </div>
+            <div class="ml-auto">
+              <button type="button" class="btn"><span class="fa fa-angle-down" alt="x"></span></button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <p>Exercitation nulla mollit esse cupidatat laborum sunt laborum culpa non mollit id cupidatat incididunt eu. Velit dolore exercitation irure fugiat officia est velit incididunt aliquip. Ea commodo pariatur velit consequat elit deserunt. Irure sunt consequat occaecat in. Laboris sit anim sunt labore.
+                Id cillum nulla eu quis ipsum cillum amet deserunt fugiat reprehenderit. Commodo sit culpa mollit esse aliquip qui dolor excepteur elit qui ut fugiat ut. Labore ea minim Lorem laborum voluptate commodo excepteur sunt elit esse nostrud. Proident laboris amet commodo consectetur esse qui.</p>
+              </p>
             </div>
           </div>
         </div>
       </div>
         
       <!-- Comment 2 -->
-      <div class="container w-60">
         <div class="card border-dark my-3">
           <div class="card-body">
             <div class="d-flex">
@@ -170,10 +176,8 @@
             </div>
           </div>
         </div>
-      </div>
 
       <!-- Comment 3 -->
-      <div class="container w-60">
           <div class="card border-dark my-3">
             <div class="card-body">
               <div class="d-flex">
@@ -197,10 +201,8 @@
               </div>
             </div>
           </div>
-        </div>
 
       <!-- Comment 4 -->
-      <div class="container w-60">
           <div class="card border-dark my-3">
             <div class="card-body">
               <div class="d-flex">
@@ -224,7 +226,6 @@
               </div>
             </div>
           </div>
-        </div>
       </div>
     </div>
   </div>

@@ -37,3 +37,8 @@ div.sort-option {
 div.section-div {
   border-bottom: 4px solid #E0E0E0;
 }
+
+.scrollable {
+  max-height: 75vh;
+  overflow: auto;
+}
