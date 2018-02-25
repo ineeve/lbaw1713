@@ -1,10 +1,10 @@
-.article-options .news-vote-btn {
-    opacity: 1;
+.article-options .clickable-btn {
+    opacity: 0.7;
 }
 
-.article-options .news-vote-btn:hover {
-    opacity: 0;
-    transition: opacity .5s;
+.article-options .clickable-btn:hover {
+    opacity: 1;
+    transition: opacity;
 }
 
 #btnGroupDrop1 {
