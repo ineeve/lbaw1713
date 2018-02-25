@@ -38,3 +38,8 @@ h5.sort-option {
   bottom: 0px;
   width: 200px;
 }
+
+.scrollable {
+  max-height: 75vh;
+  overflow: auto;
+}
