@@ -15,7 +15,7 @@
   <title>Photon News</title>
 </head>
 <body>
-  <header class="container">
+  <header class="container-fluid">
     <!-- NAVBAR <nav class="row navbar navbar-expand-lg navbar-light bg-light"> -->
     <nav class="row navbar navbar-expand-lg navbar-light">
         <a class="navbar-brand" href="#">Photon News</a>
@@ -42,28 +42,184 @@
       <!-- TABS -->
       <ul class="row nav nav-tabs justify-content-center">
           <li class="nav-item">
-            <a class="nav-link" href="#">News</a>
+            <a class="nav-link" href="#news-reports">News</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Comments</a>
+            <a class="nav-link" href="#comments-reports">Comments</a>
           </li>
         </ul>
   </header>
-  <div class="container">
-    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-      <h1>Reports</h1>
-      <div class="btn-group" role="group">
-        <button id="btnGroupDrop1" type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-          <a class="dropdown-item" href="#">Most Recent</a>
-          <a class="dropdown-item" href="#">Most Reported</a>
+  <div id="myTabContent" class="tab-content">
+<!-- NEWS' REPORTS TAB -->
+      <div class="tab-pane fade active show" id="news-reports">
+        <div class="container-fluid">
+          <div class="row mt-2">
+            <div class="col-3"></div>
+            <div class="col-6">
+              <div class="container">
+                <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                  <h1>Reports</h1>
+                  <div class="btn-group" role="group">
+                    <button id="btnGroupDrop1" type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                      <a class="dropdown-item" href="#">Most Recent</a>
+                      <a class="dropdown-item" href="#">Most Reported</a>
+                    </div>
+                  </div>
+                  <div class="sort-option"> <h5 class="sort-option"> Most Recent </h5></div>
+                  <div class="col-auto align-self-end" style="margin-bottom:  0.5rem;">
+                      <a class="mr-2" id="reverse" href="#"> <i class="fa fa-sort"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-3"></div>
+        </div>
+
+<!-- CAIXAS DE TEXTO/ SEGUNDA LINHA -->
+  <div class="row mt-2">
+    <!-- LEFT COLUMN (EMPTY)-->
+    <div class="col-3" id="sections"></div>
+    <!-- MID COLUMN (REPORT BOXES)-->
+    <div class="col-6">
+        <!-- News Header -->
+        <div class="d-flex flex-column">
+          <!-- 1st News Item -->
+          <div class="news_item border container my-2">
+            <div class="row">
+              <div class="col w-25">
+                <img class="w-100" src="https://image.flaticon.com/teams/slug/freepik.jpg" alt="Icon">
+              </div>
+              <div class="col-6">
+                <div class="row">
+                  <h3>Stephen Fry has prostate cancer</h3>
+                </div>
+                <div class="row">
+                  <p>Author's name &middot; 12:25 23/02/2018</p>
+                </div>
+              </div>
+              <div class="col align-self-end  mb-2"><span class="fa fa-chevron-down float-right"></span></div>
+            </div>
+          </div>
+          <!-- 2nd News Item -->
+          <div class="news_item border container my-2">
+            <div class="row">
+              <div class="col w-25">
+                <img class="w-100" src="https://image.flaticon.com/teams/slug/freepik.jpg" alt="Icon">
+              </div>
+              <div class="col-6">
+                <div class="row">
+                  <h3>Theresa May to set out Brexit plan following Chequers talks</h3>
+                </div>
+                <div class="row">
+                  <p>Author's name &middot; 12:25 23/02/2018</p>
+                </div>
+              </div>
+              <div class="col align-self-end  mb-2"><span class="fa fa-chevron-down float-right"></span></div>
+            </div>
+          </div>
+          <!-- 3rd News Item -->
+          <div class="news_item border container my-2">
+              <div class="row">
+                <div class="col w-25">
+                  <img class="w-100" src="https://image.flaticon.com/teams/slug/freepik.jpg" alt="Icon">
+                </div>
+                <div class="col-6">
+                  <div class="row">
+                    <h3>Paedophile slashes his own throat in the dock as he's found guilty</h3>
+                  </div>
+                  <div class="row">
+                    <p>Author's name &middot; 12:25 23/02/2018</p>
+                  </div>
+                </div>
+                <div class="col align-self-end  mb-2"><span class="fa fa-chevron-down float-right"></span></div>
+              </div>
+            </div>
+        </div>
+    </div>
+    <!-- RIGHT COLUMN (EMPTY)-->
+    <div class="col-3" id="right-panel"></div>
+  </div>
+</div>
+</div>
+
+<!-- COMMENTS' REPORTS TAB -->
+<div class="tab-pane fade" id="comments-reports">
+  <div class="container-fluid">
+    <div class="row mt-2">
+      <div class="col-3"></div>
+      <div class="col-6">
+        <div class="container">
+          <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+            <h1>Reports</h1>
+            <div class="btn-group" role="group">
+              <button id="btnGroupDrop1" type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+              <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                <a class="dropdown-item" href="#">Most Recent</a>
+                <a class="dropdown-item" href="#">Most Reported</a>
+              </div>
+            </div>
+            <div class="sort-option"> <h5 class="sort-option"> Most Recent </h5></div>
+            <div class="col-auto align-self-end" style="margin-bottom:  0.5rem;">
+                <a class="mr-2" id="reverse" href="#"> <i class="fa fa-sort"></i></a>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="sort-option"> <h5 class="sort-option"> Most Recent </h5></div>
-      <div class="col-auto align-self-end" style="margin-bottom:  0.5rem;">
-          <a class="mr-2" id="reverse" href="#"> <i class="fa fa-sort"></i></a>
-      </div>
+      <div class="col-3"></div>
   </div>
+
+<!-- CAIXAS DE TEXTO/ SEGUNDA LINHA -->
+<div class="row mt-2">
+<!-- LEFT COLUMN (EMPTY)-->
+<div class="col-3" id="sections"></div>
+<!-- MID COLUMN (REPORT BOXES)-->
+<div class="col-6">
+  <!-- News Header -->
+  <div class="d-flex flex-column">
+    <!-- 1st News Item -->
+    <div class="news_item border container my-2">
+      <div class="row">
+        <div class="col w-25">
+          <img class="w-100" src="https://image.flaticon.com/teams/slug/freepik.jpg" alt="Icon">
+        </div>
+        <div class="col-6">
+          <div class="row">
+            <h3>Stephen Fry has prostate cancer</h3>
+          </div>
+          <div class="row">
+            <p>Author's name &middot; 12:25 23/02/2018</p>
+          </div>
+        </div>
+        <div class="col align-self-end  mb-2"><span class="fa fa-chevron-down float-right"></span></div>
+      </div>
+    </div>
+    <!-- 2nd News Item -->
+    <div class="news_item border container my-2">
+      <div class="row">
+        <div class="col w-25">
+          <img class="w-100" src="https://image.flaticon.com/teams/slug/freepik.jpg" alt="Icon">
+        </div>
+        <div class="col-6">
+          <div class="row">
+            <h3>Theresa May to set out Brexit plan following Chequers talks</h3>
+          </div>
+          <div class="row">
+            <p>Author's name &middot; 12:25 23/02/2018</p>
+          </div>
+        </div>
+        <div class="col align-self-end  mb-2"><span class="fa fa-chevron-down float-right"></span></div>
+      </div>
+    </div>
+    <!-- 3rd News Item -->
+
+  </div>
+</div>
+<!-- RIGHT COLUMN (EMPTY)-->
+<div class="col-3" id="right-panel"></div>
+</div>
+</div>
+</div>
   </div>
   <footer>
   </footer>
