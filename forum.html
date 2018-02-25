@@ -59,8 +59,11 @@
           <a class="dropdown-item" href="#">Most Reported</a>
         </div>
       </div>
-      <div class="sort-option"> <h5 class="sort-option"> Most Recent </h3></div>
-
+      <div class="sort-option"> <h5 class="sort-option"> Most Recent </h5></div>
+      <div class="col-auto align-self-end" style="margin-bottom:  0.5rem;">
+          <a class="mr-2" id="reverse" href="#"> <i class="fa fa-sort"></i></a>
+      </div>
+  </div>
   </div>
   <footer>
   </footer>
@@ -72,7 +75,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <script>
     $(".dropdown-item").click(function(event){
-      $(".sort-option").text($(this).text());
+      $("h5.sort-option").text($(this).text());
     });
   </script>
 </body>

@@ -11,6 +11,7 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="bootswatch.css">
+  <link rel="stylesheet" href="style.css">
   
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -31,7 +32,7 @@
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
           </form>
           <ul class="navbar-nav ml-2 mt-2 mt-lg-0">
-            
+
             <!-- SETTINGS -->
             <li class="nav-item my-auto">
               <i class="fa fa-cog"></i>
@@ -87,104 +88,131 @@
             <div class="col-6">
               <!-- Sort News Dropdown -->
               <div class="row">
-                <div class="col-auto mr-auto dropright">
-                  <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownSortNews" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Sort News
-                  </button>
-                  <div class="dropdown-menu" aria-labelledby="dropdownSortNews">
-                    <a class="dropdown-item active" href="#">Most Popular</a>
-                    <a class="dropdown-item" href="#">Most Voted</a>
-                    <a class="dropdown-item" href="#">Most Recent</a>
-                  </div>
-                </div>
+                <!-- <div class="col-auto mr-auto dropright"> -->
+                  <!-- <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownSortNews" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
+                    <!-- Sort News -->
+                  <!-- </button> -->
+                  <!-- <a class="dropdown-item active" href="#">Most Popular</a> -->
+                  <!-- <div class="dropdown-menu" aria-labelledby="dropdownSortNews"> -->
+                    <!-- <a class="dropdown-item" href="#">Most Voted</a> -->
+                    <!-- <a class="dropdown-item" href="#">Most Recent</a> -->
+                  <!-- </div> -->
+                <!-- </div> -->
                 <!-- Reverse order button -->
-                <div class="col-auto align-self-end">
-                    <a class="mr-2" id="reverse" href="#"> <i class="fa fa-sort"></i></a>
+                <!-- <div class="col-auto align-self-end"> -->
+                    <!-- <a class="mr-2" id="reverse" href="#"> <i class="fa fa-sort"></i></a> -->
+                <!-- </div> -->
+
+                <div class="container">
+                  <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                    <h1>All</h1>
+                    <div class="btn-group" role="group">
+                      <button id="btnGroupDrop1" type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                      <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                        <a class="dropdown-item" href="#">Most Popular</a>
+                        <a class="dropdown-item" href="#">Most Voted</a>
+                        <a class="dropdown-item" href="#">Most Recent</a>
+                      </div>
+                    </div>
+                    <div class="sort-option"> <h5 class="sort-option"> Most Popular </h5></div>
+                    <div class="col-auto align-self-end" style="margin-bottom:  0.5rem;">
+                        <a class="mr-2" id="reverse" href="#"> <i class="fa fa-sort"></i></a>
+                    </div>
+
                 </div>
+                <script>
+                  $(".dropdown-item").click(function(event){
+                    $("h5.sort-option").text($(this).text());
+                  });
+                </script>
               </div>
-            </div>
-            <div class="col-3">
-              <a href="#"><h6>Create News</h6></a>
-            </div>
+
+              </div>
           </div>
-          <div class="row mt-2">
-            <!-- LEFT-SECTIONS -->
-            <div class="col-3" id="sections">
-                <ul class="list-group ">
-                    <a href="#" role="button" class="border-0 list-group-item list-group-item-action">
-                      <i class="fa fa-globe"></i>  World</a>
-                    <a href="#" role="button" class="border-0 list-group-item list-group-item-action"><i class="fa fa-laptop"></i>  Technology</a>
-                    <a href="#" role="button" class="border-0 list-group-item list-group-item-action"><i class="fa fa-flask"></i>  Science</a>
-                    <a href="#" role="button" class="border-0 list-group-item list-group-item-action"><i class="fa fa-briefcase"></i>  Business</a>
-                    <a href="#" role="button" class="border-0 list-group-item list-group-item-action"><i class="fa fa-briefcase"></i>  Sports</a>
-                    <hr>
-                    <a href="#" class="border-0 list-group-item list-froup-item-action">Manage Sections</a>
-                  </ul>
+          <div class="col-3">
+            <a href="#"><h6>Create News</h6></a>
+          </div>
+
+        </div>
+        <div class="row mt-2">
+          <!-- LEFT-SECTIONS -->
+          <div class="col-3" id="sections">
+              <ul class="list-group ">
+                <a href="#" role="button" class="border-0 list-group-item list-group-item-action">
+                  <i class="fa fa-bullseye"></i>  All</a>
+                  <a href="#" role="button" class="border-0 list-group-item list-group-item-action">
+                    <i class="fa fa-globe"></i>  World</a>
+                  <a href="#" role="button" class="border-0 list-group-item list-group-item-action"><i class="fa fa-laptop"></i>  Technology</a>
+                  <a href="#" role="button" class="border-0 list-group-item list-group-item-action"><i class="fa fa-flask"></i>  Science</a>
+                  <a href="#" role="button" class="border-0 list-group-item list-group-item-action"><i class="fa fa-briefcase"></i>  Business</a>
+                  <a href="#" role="button" class="border-0 list-group-item list-group-item-action"><i class="fa fa-briefcase"></i>  Sports</a>
+                  <hr>
+                  <a href="#" class="border-0 list-group-item list-froup-item-action">Manage Sections</a>
+                </ul>
 
 
-            </div>
-            <!-- MID-News -->
-            <div class="col-6" id="news">
-                <!-- News Header -->
-                <div class="d-flex flex-column">
-                  <!-- 1st News Item -->
-                  <div class="news_item border container my-2">
-                    <div class="row">
-                      <div class="col w-25">
-                        <img class="w-100" src="https://image.flaticon.com/teams/slug/freepik.jpg" alt="Icon">
-                      </div>
-                      <div class="col-6">
-                        <div class="row">
-                          <h3>Stephen Fry has prostate cancer</h3>
-                        </div>
-                        <div class="row">
-                          <p>Author's name &middot; 12:25 23/02/2018</p>
-                        </div>
-                      </div>
-                      <div class="col align-self-end  mb-2"><span class="fa fa-chevron-down float-right"></span></div>
+          </div>
+          <!-- MID-News -->
+          <div class="col-6" id="news">
+              <!-- News Header -->
+              <div class="d-flex flex-column">
+                <!-- 1st News Item -->
+                <div class="news_item border container my-2">
+                  <div class="row">
+                    <div class="col w-25">
+                      <img class="w-100" src="https://image.flaticon.com/teams/slug/freepik.jpg" alt="Icon">
                     </div>
-                  </div>
-                  <!-- 2nd News Item -->
-                  <div class="news_item border container my-2">
-                    <div class="row">
-                      <div class="col w-25">
-                        <img class="w-100" src="https://image.flaticon.com/teams/slug/freepik.jpg" alt="Icon">
-                      </div>
-                      <div class="col-6">
-                        <div class="row">
-                          <h3>Theresa May to set out Brexit plan following Chequers talks</h3>
-                        </div>
-                        <div class="row">
-                          <p>Author's name &middot; 12:25 23/02/2018</p>
-                        </div>
-                      </div>
-                      <div class="col align-self-end  mb-2"><span class="fa fa-chevron-down float-right"></span></div>
-                    </div>
-                  </div>
-                  <!-- 3rd News Item -->
-                  <div class="news_item border container my-2">
+                    <div class="col-6">
                       <div class="row">
-                        <div class="col w-25">
-                          <img class="w-100" src="https://image.flaticon.com/teams/slug/freepik.jpg" alt="Icon">
-                        </div>
-                        <div class="col-6">
-                          <div class="row">
-                            <h3>Paedophile slashes his own throat in the dock as he's found guilty</h3>
-                          </div>
-                          <div class="row">
-                            <p>Author's name &middot; 12:25 23/02/2018</p>
-                          </div>
-                        </div>
-                        <div class="col align-self-end  mb-2"><span class="fa fa-chevron-down float-right"></span></div>
+                        <h3>Stephen Fry has prostate cancer</h3>
+                      </div>
+                      <div class="row">
+                        <p>Author's name &middot; 12:25 23/02/2018</p>
                       </div>
                     </div>
+                    <div class="col align-self-end  mb-2"><span class="fa fa-chevron-down float-right"></span></div>
+                  </div>
                 </div>
-            </div>
-            <!-- RIGHT Create News -->
-            <div class="col-3" id="right-panel">
-                
-                
-            </div>
+                <!-- 2nd News Item -->
+                <div class="news_item border container my-2">
+                  <div class="row">
+                    <div class="col w-25">
+                      <img class="w-100" src="https://image.flaticon.com/teams/slug/freepik.jpg" alt="Icon">
+                    </div>
+                    <div class="col-6">
+                      <div class="row">
+                        <h3>Theresa May to set out Brexit plan following Chequers talks</h3>
+                      </div>
+                      <div class="row">
+                        <p>Author's name &middot; 12:25 23/02/2018</p>
+                      </div>
+                    </div>
+                    <div class="col align-self-end  mb-2"><span class="fa fa-chevron-down float-right"></span></div>
+                  </div>
+                </div>
+                <!-- 3rd News Item -->
+                <div class="news_item border container my-2">
+                    <div class="row">
+                      <div class="col w-25">
+                        <img class="w-100" src="https://image.flaticon.com/teams/slug/freepik.jpg" alt="Icon">
+                      </div>
+                      <div class="col-6">
+                        <div class="row">
+                          <h3>Paedophile slashes his own throat in the dock as he's found guilty</h3>
+                        </div>
+                        <div class="row">
+                          <p>Author's name &middot; 12:25 23/02/2018</p>
+                        </div>
+                      </div>
+                      <div class="col align-self-end  mb-2"><span class="fa fa-chevron-down float-right"></span></div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+          <!-- RIGHT Create News -->
+          <div class="col-3" id="right-panel">
+
+
           </div>
         </div>
       </div>
@@ -223,7 +251,7 @@
                 <div class="col-3" id="sections">
                     <ul class="list-group ">
                       <a href="#" class="border-0 list-group-item list-group-item-action">Manage Interests</a>
-                    </ul>    
+                    </ul>
                 </div>
 
                 <!-- MID-News -->
@@ -232,8 +260,8 @@
                 </div>
                 <!-- RIGHT Create News -->
                 <div class="col-3" id="right-panel">
-                    
-                    
+
+
                 </div>
               </div>
             </div>
