@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Font Awesome CSS -->
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -95,32 +95,34 @@
             </div>
             <div class="tab-pane fade" id="notifications">
               <h3>Manage Notifications</h3>
-              <form>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="article-comments">
-                  <label class="form-check-label" for="article-comments">
-                    Comments To My Articles
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="article-votes">
-                  <label class="form-check-label" for="article-votes">
-                    Votes In My Articles
-                  </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="follow-articles">
-                    <label class="form-check-label" for="follow-articles">
-                      Articles from people I follow
+              <fieldset>
+                <div class="form-group">
+                  <div class="custom-control custom-checkbox">
+                    <input class="custom-control-input" type="checkbox" value="" id="article-comments">
+                    <label class="custom-control-label" for="article-comments">
+                      Comments To My Articles
                     </label>
-                </div>
-                <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" id="article-interest">
-                      <label class="form-check-label" for="article-votes">
-                        New articles of my interest
+                  </div>
+                  <div class="custom-control custom-checkbox">
+                    <input class="custom-control-input" type="checkbox" value="" id="article-votes">
+                    <label class="custom-control-label" for="article-votes">
+                      Votes In My Articles
+                    </label>
+                  </div>
+                  <div class="custom-control custom-checkbox">
+                      <input class="custom-control-input" type="checkbox" value="" id="follow-articles" checked>
+                      <label class="custom-control-label" for="follow-articles">
+                        Articles from people I follow
                       </label>
-                </div>
-              </form>
+                  </div>
+                  <div class="custom-control custom-checkbox">
+                        <input class="custom-control-input" type="checkbox" value="" id="article-interest">
+                        <label class="custom-control-label" for="article-interest">
+                          New articles of my interest
+                        </label>
+                  </div>
+                  </div>
+              </fieldset>
             </div>
         </div>
       </div>
