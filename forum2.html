@@ -63,21 +63,21 @@
             <div class="col-1"></div>
         </div>
 
-<!-- CAIXAS DE TEXTO/ SEGUNDA LINHA -->
+<!-- TABELA/ SEGUNDA LINHA -->
   <div class="row mt-2">
     <!-- LEFT COLUMN (EMPTY)-->
-    <div class="col-1" id="sections"></div>
-    <!-- MID COLUMN (REPORT BOXES)-->
+    <div class="col-1"></div>
+    <!-- MID COLUMN (TABLE)-->
     <div class="col-10">
-      <table class="table table-striped table-hover table-responsive">
+      <table class="table table-hover table-responsive">
         <thead>
           <tr>
-            <th scope="col" style="width: 16.67%;">News Title</th>
-            <th scope="col" style="width: 16.67%;">Author of the news</th>
-            <th scope="col" style="width: 16.67%;">Date of the posting</th>
-            <th scope="col" style="width: 16.67%;">Nº reports</th>
-            <th scope="col" style="width: 16.67%;">Date of the last report</th>
-            <th scope="col" style="width: 16.67%;">Reasons of the last report</th>
+            <th scope="col" style="width: 16.67%; height: 25%;">News Title</th>
+            <th scope="col" style="width: 16.67%; height: 25%;">Author of the news</th>
+            <th scope="col" style="width: 16.67%; height: 25%;">Date of the posting<i class="fas fa-caret-down"></i></th>
+            <th scope="col" style="width: 16.67%; height: 25%;">Nº reports<i class="fas fa-caret-down"></i></th>
+            <th scope="col" style="width: 16.67%; height: 25%;">Date of the last report<i class="fas fa-caret-down"></i></th>
+            <th scope="col" style="width: 16.67%; height: 25%;">Reasons of the last report</th>
           </tr>
         </thead>
         <tbody>
@@ -109,7 +109,7 @@
       </table>
     </div>
     <!-- RIGHT COLUMN (EMPTY)-->
-    <div class="col-1" id="right-panel"></div>
+    <div class="col-1"></div>
   </div>
   <div class="row mt-2">
     <div class="col-1"></div>
@@ -148,119 +148,94 @@
 <!-- COMMENTS' REPORTS TAB -->
 <div class="tab-pane fade" id="comments-reports">
   <div class="container-fluid">
-    <div class="row mt-2">
-      <div class="col-3"></div>
-      <div class="col-6">
+    <div class="row my-2">
+      <div class="col-1"></div>
+      <div class="col-10">
         <div class="container">
-          <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-            <h1>Reports</h1>
-            <div class="btn-group" role="group">
-              <button id="btnGroupDrop1" type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-              <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                <a class="dropdown-item" href="#">Most Recent</a>
-                <a class="dropdown-item" href="#">Most Reported</a>
-              </div>
-            </div>
-            <div class="sort-option"> <h5 class="sort-option"> Most Recent </h5></div>
-            <div class="col-auto align-self-end" style="margin-bottom:  0.5rem;">
-                <a class="mr-2" id="reverse" href="#"> <i class="fa fa-sort"></i></a>
-            </div>
-          </div>
+          <h1>Reports</h1>
         </div>
       </div>
-      <div class="col-3"></div>
+      <div class="col-1"></div>
   </div>
 
-<!-- CAIXAS DE TEXTO/ SEGUNDA LINHA -->
+<!-- TABELA/ SEGUNDA LINHA -->
 <div class="row mt-2">
 <!-- LEFT COLUMN (EMPTY)-->
-<div class="col-3" id="sections"></div>
-<!-- MID COLUMN (REPORT BOXES)-->
-<div class="col-6">
-  <!-- News Header -->
-  <div class="d-flex flex-column">
-    <!-- 1st News Item -->
-    <div class="news_item border container my-2">
-      <div class="row">
-        <div class="col w-25">
-          <img class="w-100" src="https://images.vexels.com/media/users/3/140384/isolated/preview/fa2513b856a0c96691ae3c5c39629f31-girl-profile-avatar-1-by-vexels.png" alt="Icon">
-        </div>
-        <div class="col-6">
-          <div class="row">
-            <a href="#"><h3>Stephen Fry has prostate cancer</h3></a>
-          </div>
-          <div class="row">
-            <p class="font-weight-bold">3 reports</p>
-          </div>
-          <div class="row">
-            <p>Author of the reported comment &middot; 12:25 23/02/2018</p>
-          </div>
-          <!-- EXTRA INFO -->
-          <div id="Creport1" class="collapse">
-            <div class="py-2">
-              <h5>User1</h5>
-              <div>
-                <span>Reason1</span>
-                <span>Reason2</span>
-              </div>
-            </div>
-            <div class="py-2">
-              <h5>User2</h5>
-              <div>
-                <span>Reason1</span>
-                <span>Reason2</span>
-                <span>Reason3</span>
-              </div>
-            </div>
-            <a href="#"><h5>Show All Reports</h5></a>
-          </div>
-        </div>
-        <div class="col align-self-end  mb-2" data-toggle="collapse" data-target="#Creport1"><span class="fa fa-chevron-down float-right"></span></div>
-      </div>
-    </div>
-    <!-- 2nd News Item -->
-    <div class="news_item border container my-2">
-      <div class="row">
-        <div class="col w-25">
-          <img class="w-100" src="https://images.vexels.com/media/users/3/140384/isolated/preview/fa2513b856a0c96691ae3c5c39629f31-girl-profile-avatar-1-by-vexels.png" alt="Icon">
-        </div>
-        <div class="col-6">
-          <div class="row">
-            <a href="#"><h3>Theresa May to set out Brexit plan following Chequers talks</h3></a>
-          </div>
-          <div class="row">
-            <p class="font-weight-bold">1 reports</p>
-          </div>
-          <div class="row">
-            <p>Author of the reported comment &middot; 12:25 23/02/2018</p>
-          </div>
-          <!-- EXTRA INFO -->
-          <div id="Creport2" class="collapse">
-            <div class="py-2">
-              <h5>User1</h5>
-              <div>
-                <span>Reason1</span>
-                <span>Reason2</span>
-              </div>
-            </div>
-            <div class="py-2">
-              <h5>User2</h5>
-              <div>
-                <span>Reason1</span>
-              </div>
-            </div>
-            <a href="#"><h5>Show All Reports</h5></a>
-          </div>
-        </div>
-        <div class="col align-self-end  mb-2" data-toggle="collapse" data-target="#Creport2"><span class="fa fa-chevron-down float-right"></span></div>
-      </div>
-    </div>
-    <!-- 3rd News Item -->
-
-  </div>
+<div class="col-1"></div>
+<!-- MID COLUMN (TABLE)-->
+<div class="col-10">
+<table class="table table-hover table-responsive">
+  <thead>
+    <tr>
+      <th scope="col" style="width: 16.67%; height: 25%;">Comment ID</th>
+      <th scope="col" style="width: 16.67%; height: 25%;">Author of the comment</th>
+      <th scope="col" style="width: 16.67%; height: 25%;">Date of the posting<i class="fas fa-caret-down"></i></th>
+      <th scope="col" style="width: 16.67%; height: 25%;">Nº reports<i class="fas fa-caret-down"></i></th>
+      <th scope="col" style="width: 16.67%; height: 25%;">Date of the last report<i class="fas fa-caret-down"></i></th>
+      <th scope="col" style="width: 16.67%; height: 25%;">Reasons of the last report</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="table-light">
+      <th scope="row" style="width: 16.67%; height: 25%;"><a href="#">uuuuuu asfdcfd sdfsv vsdvsvsvdsv dvsv uuuuuuuuuu uuuuuuuuuuuuuuuuuuu uuuuuuuu</a></th>
+      <td style="width: 16.67%; height: 25%;">Mark</td>
+      <td style="width: 16.67%; height: 25%;">12:25 23/02/2018</td>
+      <td style="width: 16.67%; height: 25%;"><div class="d-flex flex-column justify-content-between"><p>20</p><a href="#">+ Show More</a></div></td>
+      <td style="width: 16.67%; height: 25%;">15:31 26/02/2018</td>
+      <td style="width: 16.67%; height: 25%;">Has violent or prohibited content<br>It's offensive<br>I do not agree with this</td>
+    </tr>
+    <tr class="table-light">
+      <th scope="row" style="width: 16.67%; height: 25%;"><a href="#">#15</a></th>
+      <td style="width: 16.67%; height: 25%;">Dylan</td>
+      <td style="width: 16.67%; height: 25%;">12:25 23/02/2018</td>
+      <td style="width: 16.67%; height: 25%;"><div class="d-flex flex-column justify-content-between"><p>10</p><a href="#">+ Show More</a></div></td>
+      <td style="width: 16.67%; height: 25%;">15:31 26/02/2018</td>
+      <td style="width: 16.67%; height: 25%;">It's spam</td>
+    </tr>
+    <tr class="table-light">
+      <th scope="row" style="width: 16.67%; height: 25%;"><a href="#">#189</a></th>
+      <td style="width: 16.67%; height: 25%;">David</td>
+      <td style="width: 16.67%; height: 25%;">12:25 23/02/2018</td>
+      <td style="width: 16.67%; height: 25%;"><div class="d-flex flex-column justify-content-between"><p>6</p><a href="#">+ Show More</a></div></td>
+      <td style="width: 16.67%; height: 25%;">15:31 26/02/2018</td>
+      <td style="width: 16.67%; height: 25%;">Is sexually inappropriate</td>
+    </tr>
+  </tbody>
+</table>
 </div>
 <!-- RIGHT COLUMN (EMPTY)-->
-<div class="col-3" id="right-panel"></div>
+<div class="col-1"></div>
+</div>
+<div class="row mt-2">
+<div class="col-1"></div>
+<div class="col-10">
+<div class="col-lg-20 col-centered">
+  <ul class="pagination pagination-sm justify-content-center">
+    <li class="page-item disabled">
+      <a class="page-link" href="#">&laquo;</a>
+    </li>
+    <li class="page-item active">
+      <a class="page-link" href="#">1</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#">2</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#">3</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#">4</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#">5</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#">&raquo;</a>
+    </li>
+  </ul>
+</div>
+</div>
+<div class="col-1"></div>
 </div>
 </div>
 </div>
