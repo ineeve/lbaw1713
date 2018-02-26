@@ -10,70 +10,244 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="bootswatch.css">
+  <link rel="stylesheet" href="style.css">
 
   <title>Photon News</title>
 </head>
 <body>
-  <header>
-    <div class="container">
-      <div class="row">
-          <img class="col" alt="Logo"/>
-          <h1 class="col"><a>Photon News</a></h1>
-          <form class="form-inline my-2 my-lg-0">
-              <input class="col form-control mr-sm-2" type="text" placeholder="Search">
-              <button class="col btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+  <header class="container-fluid">
+    <!-- NAVBAR <nav class="row navbar navbar-expand-lg navbar-light bg-light"> -->
+    <nav class="row navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#">Photon News</a>
+          <!-- SEARCH FORM -->
+          <form class="form-inline my-2 my-lg-0 mx-auto">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
           </form>
-          <div class="col container" id="profile">
-            <div class="row">
-                <img class="col" alt="notifications">
-                <img class="col" alt="profile">
+          <ul class="navbar-nav ml-2 mt-2 mt-lg-0">
+            <!-- NOTIFICATIONS -->
+            <li class="nav-item ml-2">
+              <i class="fa fa-bell"></i>
+            </li>
+            <!-- USER PROFILE -->
+            <li class="nav-item ml-2">
+              <a href="profile.html"><i class="fa fa-user"></i></a>
+            </li>
+            <!-- SETTINGS -->
+            <li class="nav-item ml-2">
+              <i class="fa fa-cog"></i>
+            </li>
+          </ul>
+      </nav>
+      <!-- TABS -->
+      <ul class="row nav nav-tabs justify-content-center">
+          <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#news-reports">News</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#comments-reports">Comments</a>
+          </li>
+        </ul>
+  </header>
+  <div id="myTabContent" class="tab-content">
+<!-- NEWS' REPORTS TAB -->
+      <div class="tab-pane fade active show" id="news-reports">
+        <div class="container-fluid">
+          <div class="row mt-2">
+            <div class="col-3"></div>
+            <div class="col-6">
+              <div class="container">
+                <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                  <h1>Reports</h1>
+                  <div class="btn-group" role="group">
+                    <button id="btnGroupDrop1" type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                      <a class="dropdown-item" href="#">Most Recent</a>
+                      <a class="dropdown-item" href="#">Most Reported</a>
+                    </div>
+                  </div>
+                  <div class="sort-option"> <h5 class="sort-option"> Most Recent </h5></div>
+                  <div class="col-auto align-self-end" style="margin-bottom:  0.5rem;">
+                      <a class="mr-2" id="reverse" href="#"> <i class="fa fa-sort"></i></a>
+                  </div>
+                </div>
+              </div>
             </div>
+            <div class="col-3"></div>
+        </div>
+
+<!-- CAIXAS DE TEXTO/ SEGUNDA LINHA -->
+  <div class="row mt-2">
+    <!-- LEFT COLUMN (EMPTY)-->
+    <div class="col-3" id="sections"></div>
+    <!-- MID COLUMN (REPORT BOXES)-->
+    <div class="col-6">
+        <!-- News Header -->
+        <div class="d-flex flex-column">
+          <!-- 1st News Item -->
+          <div class="news_item border container my-2">
             <div class="row">
-                <img class="col" alt="forum">
-                <img class="col" alt="settings">
+              <div class="col-6">
+                <div class="row">
+                  <a href="#"><h3>Stephen Fry has prostate cancer</h3></a>
+                </div>
+                <div class="row">
+                  <p>Author's name &middot; 12:25 23/02/2018</p>
+                </div>
+              </div>
+              <div class="col align-self-end  mb-2"><span class="fa fa-chevron-down float-right"></span></div>
             </div>
           </div>
-      </div>
+          <!-- 2nd News Item -->
+          <div class="news_item border container my-2">
+            <div class="row">
+              <div class="col-6">
+                <div class="row">
+                  <a href="#"><h3>Theresa May to set out Brexit plan following Chequers talks</h3></a>
+                </div>
+                <div class="row">
+                  <p>Author's name &middot; 12:25 23/02/2018</p>
+                </div>
+              </div>
+              <div class="col align-self-end  mb-2"><span class="fa fa-chevron-down float-right"></span></div>
+            </div>
+          </div>
+          <!-- 3rd News Item -->
+          <div class="news_item border container my-2">
+              <div class="row">
+                <div class="col-6">
+                  <div class="row">
+                    <a href="#"><h3>Paedophile slashes his own throat in the dock as he's found guilty</h3></a>
+                  </div>
+                  <div class="row">
+                    <p>Author's name &middot; 12:25 23/02/2018</p>
+                  </div>
+                </div>
+                <div class="col align-self-end  mb-2"><span class="fa fa-chevron-down float-right"></span></div>
+              </div>
+            </div>
+        </div>
     </div>
-    <!-- Navegador -->
-    <ul class="nav nav-tabs">
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#news">News</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#comments">Comments</a>
-      </li>
-    </ul>
-  </header>
-  <div class="container">
-    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-      <h1>Reports</h1>
-      <div class="btn-group" role="group">
-        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-          <a class="dropdown-item" href="#">Most Recent</a>
-          <a class="dropdown-item" href="#">Most Reported</a>
+    <!-- RIGHT COLUMN (EMPTY)-->
+    <div class="col-3" id="right-panel"></div>
+  </div>
+</div>
+</div>
+
+<!-- COMMENTS' REPORTS TAB -->
+<div class="tab-pane fade" id="comments-reports">
+  <div class="container-fluid">
+    <div class="row mt-2">
+      <div class="col-3"></div>
+      <div class="col-6">
+        <div class="container">
+          <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+            <h1>Reports</h1>
+            <div class="btn-group" role="group">
+              <button id="btnGroupDrop1" type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+              <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                <a class="dropdown-item" href="#">Most Recent</a>
+                <a class="dropdown-item" href="#">Most Reported</a>
+              </div>
+            </div>
+            <div class="sort-option"> <h5 class="sort-option"> Most Recent </h5></div>
+            <div class="col-auto align-self-end" style="margin-bottom:  0.5rem;">
+                <a class="mr-2" id="reverse" href="#"> <i class="fa fa-sort"></i></a>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+      <div class="col-3"></div>
+  </div>
 
-    <div class="dropdown">
-    <button class="btn btn-primary dropdown-toggle" id="menu1" type="button" data-toggle="dropdown">Dropdown Example
-    <span class="caret"></span></button>
-    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">HTML</a></li>
-      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">CSS</a></li>
-      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">JavaScript</a></li>
-      <li role="presentation" class="divider"></li>
-      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">About Us</a></li>
-    </ul>
+<!-- CAIXAS DE TEXTO/ SEGUNDA LINHA -->
+<div class="row mt-2">
+<!-- LEFT COLUMN (EMPTY)-->
+<div class="col-3" id="sections"></div>
+<!-- MID COLUMN (REPORT BOXES)-->
+<div class="col-6">
+  <!-- News Header -->
+  <div class="d-flex flex-column">
+    <!-- 1st News Item -->
+    <div class="news_item border container my-2">
+      <div class="row">
+        <div class="col w-25">
+          <img class="w-100" src="https://images.vexels.com/media/users/3/140384/isolated/preview/fa2513b856a0c96691ae3c5c39629f31-girl-profile-avatar-1-by-vexels.png" alt="Icon">
+        </div>
+        <div class="col-6">
+          <div class="row">
+            <a href="#"><h3>Stephen Fry has prostate cancer</h3></a>
+          </div>
+          <div class="row">
+            <p>Author of the reported comment &middot; 12:25 23/02/2018</p>
+          </div>
+          <!-- EXTRA INFO -->
+          <div id="demo1" class="collapse">
+            <div class="py-2">
+              <h5>User1</h5>
+              <div>
+                <span>Reason1</span>
+                <span>Reason2</span>
+              </div>
+            </div>
+            <div class="py-2">
+              <h5>User2</h5>
+              <div>
+                <span>Reason1</span>
+                <span>Reason2</span>
+                <span>Reason3</span>
+              </div>
+            </div>
+            <a href="#"><h5>Show All Reports</h5></a>
+          </div>
+        </div>
+        <div class="col align-self-end  mb-2" data-toggle="collapse" data-target="#demo1"><span class="fa fa-chevron-down float-right"></span></div>
+      </div>
+    </div>
+    <!-- 2nd News Item -->
+    <div class="news_item border container my-2">
+      <div class="row">
+        <div class="col w-25">
+          <img class="w-100" src="https://images.vexels.com/media/users/3/140384/isolated/preview/fa2513b856a0c96691ae3c5c39629f31-girl-profile-avatar-1-by-vexels.png" alt="Icon">
+        </div>
+        <div class="col-6">
+          <div class="row">
+            <a href="#"><h3>Theresa May to set out Brexit plan following Chequers talks</h3></a>
+          </div>
+          <div class="row">
+            <p>Author of the reported comment &middot; 12:25 23/02/2018</p>
+          </div>
+          <!-- EXTRA INFO -->
+          <div id="demo2" class="collapse">
+            <div class="py-2">
+              <h5>User1</h5>
+              <div>
+                <span>Reason1</span>
+                <span>Reason2</span>
+              </div>
+            </div>
+            <div class="py-2">
+              <h5>User2</h5>
+              <div>
+                <span>Reason1</span>
+              </div>
+            </div>
+            <a href="#"><h5>Show All Reports</h5></a>
+          </div>
+        </div>
+        <div class="col align-self-end  mb-2" data-toggle="collapse" data-target="#demo2"><span class="fa fa-chevron-down float-right"></span></div>
+      </div>
+    </div>
+    <!-- 3rd News Item -->
+
   </div>
+</div>
+<!-- RIGHT COLUMN (EMPTY)-->
+<div class="col-3" id="right-panel"></div>
+</div>
+</div>
+</div>
   </div>
-  <script>
-    $(document).ready(function(){
-        $(".dropdown-toggle").dropdown();
-    });
-  </script>
   <footer>
   </footer>
 
@@ -82,5 +256,10 @@
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script>
+    $(".dropdown-item").click(function(event){
+      $("h5.sort-option").text($(this).text());
+    });
+  </script>
 </body>
 </html>
