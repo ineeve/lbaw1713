@@ -16,39 +16,46 @@
 </head>
 <body>
   <header class="container-fluid">
-    <!-- NAVBAR <nav class="row navbar navbar-expand-lg navbar-light bg-light"> -->
+  <!-- NAVBAR <nav class="row navbar navbar-expand-lg navbar-light bg-light"> -->
     <nav class="row navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href="index.html">Photon News</a>
-          <!-- SEARCH FORM -->
-          <form class="form-inline my-2 my-lg-0 mx-auto">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
-          <ul class="navbar-nav ml-2 mt-2 mt-lg-0">
-            <!-- NOTIFICATIONS -->
-            <li class="nav-item ml-2">
-              <i class="fa fa-bell"></i>
-            </li>
-            <!-- USER PROFILE -->
-            <li class="nav-item ml-2">
-              <a href="profile.html"><i class="fa fa-user"></i></a>
-            </li>
-            <!-- SETTINGS -->
-            <li class="nav-item ml-2">
-              <i class="fa fa-cog"></i>
-            </li>
-          </ul>
-      </nav>
-      <!-- TABS -->
-      <ul class="row nav nav-tabs justify-content-center">
-          <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="#news-reports">News</a>
+      <a class="navbar-brand" href="#">Photon News</a>
+      <!-- SEARCH FORM -->
+      <form class="form-inline my-2 my-lg-0 mx-auto">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          <a class="small ml-2" href="">advanced search</a>
+      </form>
+      <!-- CREATE NEWS -->
+      <button class="btn btn-primary"><i class="fa fa-plus"></i>&nbsp&nbspCreate News</button>
+
+      <ul class="navbar-nav ml-2 mt-2 mt-lg-0">
+          <!-- NOTIFICATIONS -->
+          <li class="nav-item ml-2 pt-2">
+          <i class="fa fa-bell"></i> Notifications
           </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#comments-reports">Comments</a>
+          <!-- USER PROFILE -->
+          <li class="nav-item dropdown ml-2">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
+                  <i class="fa fa-user-circle"></i> Account
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-start">
+                  <a class="dropdown-item" href="profile.html">Profile</a>
+                  <a class="dropdown-item" href="settings.html">Settings</a>
+                  <a class="dropdown-item" href="index.html">Log out</a>
+              </div>
           </li>
-        </ul>
-  </header>
+      </ul>
+  </nav>
+  <!-- TABS -->
+  <ul class="row nav nav-tabs justify-content-center">
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#news-reports">News</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#comments-reports">Comments</a>
+    </li>
+  </ul>
+</header>
   <div id="myTabContent" class="tab-content">
 <!-- NEWS' REPORTS TAB -->
       <div class="tab-pane fade active show" id="news-reports">

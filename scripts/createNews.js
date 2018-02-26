@@ -1,12 +1,8 @@
-// initialize tiny mce
-tinymce.init({ selector:'#tinymce' });
-
-//initialize ckeditor
-ClassicEditor
-        .create( document.querySelector( '#ckeditor_classic' ) )
-        .catch( error => {
-            console.error( error );
-        } );
-
 //initialize froala
-$(function() { $('#froala').froalaEditor() });
+$(function() { 
+    $('#newsBody').froalaEditor({
+        heightMin: 300,
+        tabSpaces: 4,
+        toolbarButtonsXS: ['bold', 'italic', 'underline', 'fontSize', 'insertImage','|', 'undo', 'redo'],
+    })
+ });
