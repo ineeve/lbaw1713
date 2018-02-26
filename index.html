@@ -58,7 +58,7 @@
                   <button onclick="signIn()" type="submit" class="btn btn-primary">Sign in</button>
                 </form>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">New around here? Sign up</a>
+                <a class="dropdown-item" href="create_profile.html">New around here? Sign up</a>
                 <a class="dropdown-item" href="#">Forgot password?</a>
               </div>
             </li>
@@ -83,7 +83,7 @@
             <div class="col-3">
               <h6>Sections</h6>
             </div>
-            <div class="col-6">
+            <div class="col-xl-8 col-9">
               <!-- Sort News Dropdown -->
               <div class="row">
                 <div class="container d-flex justify-content-between">
@@ -114,25 +114,17 @@
         <div class="row mt-2">
           <!-- LEFT-SECTIONS -->
           <div class="col-3" id="sections">
-              <div class="section-div">
-                <ul class="list-group ">
-                <a href="#" role="button" class="border-0 list-group-item list-group-item-action">
-                  <i class="fa fa-bullseye"></i>  All</a>
-                  <a href="#" role="button" class="border-0 list-group-item list-group-item-action">
-                    <i class="fa fa-globe"></i>  World</a>
+                <ul class="list-group">
+                  <a href="#" role="button" class="border-0 list-group-item list-group-item-action"><i class="fa fa-bullseye"></i>  All</a>
+                  <a href="#" role="button" class="border-0 list-group-item list-group-item-action"><i class="fa fa-globe"></i>  World</a>
                   <a href="#" role="button" class="border-0 list-group-item list-group-item-action"><i class="fa fa-laptop"></i>  Technology</a>
                   <a href="#" role="button" class="border-0 list-group-item list-group-item-action"><i class="fa fa-flask"></i>  Science</a>
                   <a href="#" role="button" class="border-0 list-group-item list-group-item-action"><i class="fa fa-briefcase"></i>  Business</a>
                   <a href="#" role="button" class="border-0 list-group-item list-group-item-action"><i class="fa fa-briefcase"></i>  Sports</a>
-                  <hr>
                 </ul>
-              </div>
-              <a href="#" class="border-0 list-group-item list-froup-item-action">Manage Sections</a>
-
-
           </div>
           <!-- MID-News -->
-          <div class="col-6" id="news">
+          <div class="col-xl-8 col-9" id="news">
               <!-- News Header -->
               <div class="d-flex flex-column">
                 <!-- 1st News Item -->
@@ -188,10 +180,6 @@
                   </div>
               </div>
           </div>
-          <!-- RIGHT Create News -->
-          <div class="col-3" id="right-panel">
-
-          </div>
         </div>
       </div>
     </div>
@@ -203,21 +191,23 @@
           <div class="col-3">
             <h6>My Interests</h6>
           </div>
-          <div class="col-6">
+          <div class="col-xl-8 col-9">
             <!-- Sort News Dropdown -->
             <div class="row">
-              <div class="container">
+              <div class="container-fluid">
                 <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
                   <h1>Suggested for you</h1>
-                  <div class="btn-group" role="group">
-                    <button id="btnGroupDrop1" type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                      <a class="dropdown-item" href="#">Most Popular</a>
-                      <a class="dropdown-item" href="#">Most Voted</a>
-                      <a class="dropdown-item" href="#">Most Recent</a>
-                    </div>
+                  <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                      <div class="sort-option"> <h5 class="sort-option"> Most Popular </h5></div>
+                      <div class="btn-group" role="group">
+                        <button id="btnGroupDrop1" type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                          <a class="dropdown-item" href="#">Most Popular</a>
+                          <a class="dropdown-item" href="#">Most Voted</a>
+                          <a class="dropdown-item" href="#">Most Recent</a>
+                        </div>
+                      </div>
                   </div>
-                  <div class="sort-option"> <h5 class="sort-option"> Most Popular </h5></div>
                   <div class="col-auto align-self-end" style="margin-bottom:  0.5rem;">
                       <a class="mr-2" id="reverse" href="#"> <i class="fa fa-sort"></i></a>
                   </div>
@@ -230,9 +220,6 @@
             </div>
 
             </div>
-        </div>
-          <div class="col-3">
-          <a href="#"><h6>+ Create News</h6></a>
         </div>
       </div>
       <!-- SECOND ROW -->
@@ -254,48 +241,12 @@
         </div>
         <!-- MID-News -->
         <div class="col-6" id="news">
-            <!-- News Header -->
-            <div class="d-flex flex-column">
-              <!-- 1st News Item -->
-              <div class="news_item border container my-2">
-                <div class="row">
-                  <div class="col w-25">
-                    <img class="w-100" src="https://bloximages.newyork1.vip.townnews.com/thenewsenterprise.com/content/tncms/assets/v3/editorial/0/79/079dc3f7-68d4-5afe-aa30-836a0f4a5dab/5a920e2393041.image.jpg?resize=1200%2C763" alt="Icon">
-                  </div>
-                  <div class="col-6">
-                    <div class="row">
-                      <h3>Just imagine it: Psychic talks to animals</h3>
-                    </div>
-                    <div class="row">
-                      <p>Author's name &middot; 12:25 23/02/2018</p>
-                    </div>
-                  </div>
-                  <div class="col align-self-end  mb-2"><span class="fa fa-chevron-down float-right"></span></div>
-                </div>
-              </div>
-              <!-- 2nd News Item -->
-              <div class="news_item border container my-2">
-                <div class="row">
-                  <div class="col w-25">
-                    <img class="w-100" src="https://s.aolcdn.com/hss/storage/midas/5acae0744f37913b534fe4b2b42fa09b/206156022/sepakers-ed.jpg" alt="Icon">
-                  </div>
-                  <div class="col-6">
-                    <div class="row">
-                      <h3>The best smart speakers for music fans</h3>
-                    </div>
-                    <div class="row">
-                      <p>João Esteves &middot; 12:25 23/02/2018</p>
-                    </div>
-                  </div>
-                  <div class="col align-self-end  mb-2"><span class="fa fa-chevron-down float-right"></span></div>
-                </div>
-              </div>
-            </div>
+          <a href="#">Sign in </a><span>to follow your interests.</span>
         </div>
         <!-- RIGHT Create News -->
         <div class="col-3" id="right-panel">
           <!-- ADVANCED SEARCH -->
-          
+
 
         </div>
       </div>
