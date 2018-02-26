@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Font Awesome CSS -->
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -25,19 +25,20 @@
   <header class="container-fluid">
     <!-- NAVBAR <nav class="row navbar navbar-expand-lg navbar-light bg-light"> -->
     <nav class="row navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href="index.html">Photon News</a>
+        <a class="col navbar-brand" href="index.html">Photon News</a>
           <!-- SEARCH FORM -->
-          <form class="form-inline my-2 my-lg-0 mx-auto">
+          <form class="col form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             <a class="small ml-2" href="">advanced search</a>
           </form>
 
-          <ul class="navbar-nav ml-2 mt-2 mt-lg-0">
-            <!-- SETTINGS -->
-            <!--li class="nav-item my-auto">
-              <i class="fa fa-cog"></i>
-            </li-->
+          <div class="col">
+            <button class="btn btn-primary"><i class="fas fa-plus"></i>Create News</button>
+          </div>
+
+          <ul class="col navbar-nav ml-2 mt-2 mt-lg-0">
+
             <!-- SIGN IN -->
             <li class="nav-item dropdown my-auto">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -128,9 +129,6 @@
               </div>
 
               </div>
-          </div>
-            <div class="col-3">
-            <a href="#"><h6>+ Create News</h6></a>
           </div>
         </div>
         <!-- SECOND ROW -->
