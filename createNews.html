@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Font Awesome CSS -->
+  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="bootswatch.css">
+    <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!-- TINY MCE EDITOR -->
+  <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+    <!-- CKEDITOR 5 -->
+    <!-- classic -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/1.0.0-alpha.2/classic/ckeditor.js"></script>
+
+  <!-- FROALA -->
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.5/css/froala_editor.min.css' rel='stylesheet' type='text/css' />
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.5/css/froala_style.min.css' rel='stylesheet' type='text/css' />
+  <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.5/js/froala_editor.min.js'></script>
+
+  <script src="scripts/createNews.js" defer></script>
+  <!-- TITLE -->
+  <title>Photon News</title>
+</head>
+<body>
+    <header class="container-fluid">
+    <!-- NAVBAR <nav class="row navbar navbar-expand-lg navbar-light bg-light"> -->
+        <nav class="row navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand" href="#">Photon News</a>
+            <!-- SEARCH FORM -->
+            <form class="form-inline my-2 my-lg-0 mx-auto">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <a class="small ml-2" href="">advanced search</a>
+            </form>
+            <!-- CREATE NEWS -->
+            <button class="btn btn-primary"><i class="fas fa-plus"></i>&nbsp&nbspCreate News</button>
+
+            <ul class="navbar-nav ml-2 mt-2 mt-lg-0">
+                <!-- NOTIFICATIONS -->
+                <li class="nav-item ml-2">
+                <i class="fas fa-bell"></i> Notifications
+                </li>
+                <!-- USER PROFILE -->
+                <li class="nav-item ml-2">
+                <i class="fas fa-user-circle"></i> Account
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <body>
+    <div class="container">
+        <h3>Create Your News!</h3>
+        <!-- Tiny MCE -->
+        <h6>Tiny MCE</h6>
+        <textarea id="tinymce">This is Tiny MCE editor</textarea>
+        
+        <!-- CKEDITOR CLASSIC -->
+        <br>
+        <h6>CKEditor5 classic</h6>
+        <textarea name="content" id="ckeditor_classic"><p>CKEditor classic</p></textarea>
+        <!-- FROALA -->
+        <br>
+        <h6>Froala</h6>
+        <textarea id="froala">Froala editor</textarea>
+        
+    </div>
+    </body>
+</html>
