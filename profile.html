@@ -3,171 +3,277 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
   <!-- Font Awesome CSS -->
-  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-
+  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js">
+  </script>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="bootswatch.css">
-
-  <title>Photon News</title>
+  <title>Photon News
+  </title>
 </head>
 <body>
-  <header>
-    <header class="container">
-      <!-- NAVBAR <nav class="row navbar navbar-expand-lg navbar-light bg-light"> -->
-      <nav class="row navbar navbar-expand-lg navbar-light">
-          <a class="navbar-brand" href="#">Photon News</a>
-            <!-- SEARCH FORM -->
-            <form class="form-inline my-2 my-lg-0 mx-auto">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-            <ul class="navbar-nav ml-2 mt-2 mt-lg-0">
-              <!-- NOTIFICATIONS -->
-              <li class="nav-item ml-2">
-                <i class="fa fa-bell"></i>
-              </li>
-              <!-- USER PROFILE -->
-              <li class="nav-item ml-2">
-                <a href="profile.html"><i class="fa fa-user"></i></a>
-              </li>
-              <!-- SETTINGS -->
-              <li class="nav-item ml-2">
-                <i class="fa fa-cog"></i>
-              </li>
-            </ul>
-        </nav>
+  <header class="container">
 
-    <!-- Navegador -->
-    <ul class="nav nav-tabs">
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#profile_page">Profile</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#news">News</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#badges">Badges</a>
-      </li>
-    </ul>
+    <!-- NAVBAR -->
+
+    <nav class="row navbar navbar-expand-lg navbar-light">
+
+      <a class="navbar-brand" href="#">Photon News</a>
+
+      <!-- SEARCH FORM -->
+
+      <form class="form-inline my-2 my-lg-0 mx-auto">
+
+        <input class="form-control mr-sm-2" type="search" placeholder="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search
+        </button>
+
+      </form>
+
+      <ul class="navbar-nav ml-2 mt-2 mt-lg-0">
+
+        <!-- NOTIFICATIONS -->
+
+        <li class="nav-item ml-2">
+          <i class="fa fa-bell"></i>
+        </li>
+
+        <!-- USER PROFILE -->
+
+        <li class="nav-item ml-2">
+          <a href="profile.html">
+            <i class="fa fa-user"></i>
+          </a>
+        </li>
+
+        <!-- SETTINGS -->
+
+        <li class="nav-item ml-2">
+          <i class="fa fa-cog"></i>
+        </li>
+
+      </ul>
+
+    </nav>
+
   </header>
-  <div id="myTabContent" class="tab-content">
-    <div class="tab-pane fade show active" id="profile_page">
-      <div class="profile_item border container p-2 mx-auto mt-2">
-        <div class="row">
-          <div class="col"><img src="https://images.vexels.com/media/users/3/140237/isolated/preview/90175ec3f4696bde71b1d2890ed60c80-perfil-fmea-avatar-4-by-vexels.png" alt="pic" height="200px" width="200px"></div>
-          <div class="col">
-            <div class="row"><div class="col"><p>Total Points:</p></div></div>
-            <div class="row"><div class="col">
-              <span class="badge badge-pill badge-light">152</span>
-            </div></div>
-            <div class="row"><div class="col">
-              <p>Joana Moreira</p>
-            </div></div>
-          </div>
-          <div class="col">
-          <span class="fa fa-edit float-right"></span>
-          </div>
-        </div>
-        <div class="row"><div class="col">
-          <p>Female</p>
-        </div></div>
-        <div class="row"><div class="col">
-          <p><time>25-Jan-1980</time></p>
-        </div></div>
-        <div class="row"><div class="col">
-          <p>Portugal</p>
-        </div></div>
-        <div class="row"><div class="col">
-          <p>exemple@exemple.ex</p>
-        </div></div>
-      </div>
-    </div>
-    <div class="tab-pane fade" id="news">
-      <div class="d-flex flex-column mx-auto w-75">
-        <div class="news_item border container my-2">
-          <div class="row">
-            <div class="col w-25">
-              <img class="w-100" src="https://image.flaticon.com/teams/slug/freepik.jpg" alt="Foto" height="200px" width="200px"></div>
-            <div class="col"><div class="row">
-              <h3>Title2</h3></div>
-              <div class="row">
-                <p>Auther</p>
-                <p> . </p>
-                <p>Date</p>
-              </div>
-            </div>
-            <div class="col align-self-end  mb-2"><span class="fa fa-chevron-down float-right"></span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="tab-pane fade" id="badges">
-      <div class="d-flex flex-wrap justify-content-center mx-auto w-75 mt-3">
-        <div class="badge">
-          <img alt="Icon">
-          <h3>Title</h3>
-          <p>Brief</p>
-        </div>
-        <div class="badge">
-          <img alt="Icon">
-          <h3>Title2</h3>
-          <p>Brief</p>
-        </div><div class="badge">
-          <img alt="Icon">
-          <h3>Title</h3>
-          <p>Brief</p>
-        </div>
-        <div class="badge">
-          <img alt="Icon">
-          <h3>Title1</h3>
-          <p>Brief</p>
-        </div>
-        <div class="badge">
-          <img alt="Icon">
-          <h3>Title2</h3>
-          <p>Brief</p>
-        </div><div class="badge">
-          <img alt="Icon">
-          <h3>Title</h3>
-          <p>Brief</p>
-        </div>
-        <div class="badge">
-          <img alt="Icon">
-          <h3>Title1</h3>
-          <p>Brief</p>
-        </div>
-        <div class="badge">
-          <img alt="Icon">
-          <h3>Title2</h3>
-          <p>Brief</p>
-        </div><div class="badge">
-          <img alt="Icon">
-          <h3>Title</h3>
-          <p>Brief</p>
-        </div>
-        <div class="badge">
-          <img alt="Icon">
-          <h3>Title1</h3>
-          <p>Brief</p>
-        </div>
-        <div class="badge">
-          <img alt="Icon">
-          <h3>Title2</h3>
-          <p>Brief</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <footer>
-  </footer>
 
-  <!-- Optional JavaScript -->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <div class="container-fluid">
+
+    <div class="row">
+
+      <div class="col col-sm-auto">
+
+        <div class="profile_item border container p-2 mx-auto mt-2">
+
+          <a href="profile_edit.html">
+            <span class="fa fa-edit float-right">
+            </span>
+          </a>
+
+          <div class="row">
+
+            <div class="col ">
+
+              <img class="img-responsive" src="https://c1.staticflickr.com/3/2936/14387367072_85312c31b3_b.jpg" alt="pic" height="200px" width="200px">
+            </div>
+
+            <div class="col">
+
+              <div class="row">
+                <div class="col">
+                  <p>Total Points:
+                  </p>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col">
+
+                  <span class="badge badge-pill badge-light">152
+                  </span>
+
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col">
+
+                  <p>Joana Moreira
+                  </p>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="row">
+
+            <div class="col">
+
+              <p>Female
+              </p>
+
+            </div>
+          </div>
+
+          <div class="row">
+
+            <div class="col">
+
+              <p>
+                <time>25-Jan-1980
+                </time>
+              </p>
+
+            </div>
+          </div>
+
+          <div class="row">
+
+            <div class="col">
+
+              <p>Portugal
+              </p>
+
+            </div>
+          </div>
+
+          <div class="row">
+
+            <div class="col">
+
+              <p>exemple@exemple.ex
+              </p>
+
+            </div>
+          </div>
+
+        </div>
+
+        <div class="border mt-2">
+
+          <h3>Badges
+          </h3>
+
+          <div class="d-flex flex-wrap justify-content-center mx-auto mt-3">
+
+            <div class="badge">
+
+              <img alt="Icon" src="http://icons.iconarchive.com/icons/seanau/fresh-web/128/Badge-icon.png" width="80" height="80">
+
+              <h3>Commentator
+              </h3>
+
+              <p>Award for 10 comments!
+              </p>
+
+            </div>
+
+            <div class="badge">
+
+              <img alt="Icon" src="http://icons.iconarchive.com/icons/seanau/fresh-web/128/Badge-icon.png" width="80" height="80">
+
+              <h3>Publisher
+              </h3>
+
+              <p>Award for 10 news!
+              </p>
+
+            </div>
+
+            <div class="badge">
+
+              <img alt="Icon" src="http://icons.iconarchive.com/icons/seanau/fresh-web/128/Badge-icon.png" width="80" height="80">
+
+              <h3>Citizen
+              </h3>
+
+              <p>Award for 10 votes!
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="col w-75">
+
+        <div class="d-flex flex-column mx-auto">
+
+          <div class="news_item border container my-2">
+
+            <div class="row">
+
+              <div class="col">
+
+                <img class="w-100" src="https://image.flaticon.com/teams/slug/freepik.jpg" alt="Foto" height="200px" width="200px">
+              </div>
+
+              <div class="col">
+                <div class="row">
+
+                  <h3>Title2
+                  </h3>
+                </div>
+
+                <div class="row">
+
+                  <p>Auther
+                  </p>
+
+                  <p> .
+                  </p>
+
+                  <p>Date
+                  </p>
+
+                </div>
+
+              </div>
+
+              <div class="col align-self-end mb-2">
+                <span class="fa fa-chevron-down float-right">
+                </span>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+
+</footer>
+
+<!-- Optional JavaScript -->
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+</script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+</script>
+
 </body>
+
 </html>
