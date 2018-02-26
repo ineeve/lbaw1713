@@ -75,7 +75,7 @@
         <h3>Settings</h3>
         <ul class="nav nav-pills flex-column">
           <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#sections">Sections</a>
+            <a class="nav-link active" data-toggle="tab" href="#sections">Sections</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#interests">Interests</a>
@@ -89,9 +89,15 @@
         <div id="settingsTabContent" class="tab-content">
             <div class="tab-pane fade active show" id="sections">
               <h3>Manage Sections</h3>
+              <h4>Active</h4>
+              <h4>Hidden</h4>
             </div>
             <div class="tab-pane fade" id="interests">
               <h3>Manage Interests</h3>
+              <h4>Add New Interests</h4>
+              <form>
+                <input type="text" name="interest">
+              </form>
             </div>
             <div class="tab-pane fade" id="notifications">
               <h3>Manage Notifications</h3>
