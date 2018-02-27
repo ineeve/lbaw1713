@@ -6,17 +6,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Font Awesome CSS -->
-  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+  <link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="bootswatch.css">
+  <link rel="stylesheet" href="style.css">
     <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
   <title>Photon News</title>
 </head>
 <body>
@@ -67,27 +67,34 @@
         <div class="container-fluid">
           <!-- HEADERS -->
           <div class="row mt-2">
-            <div class="col-3">
-              <h6>Sections</h6>
-            </div>
-            <div class="col-6">
-              <!-- Sort News Dropdown -->
-              <div class="row">
-                <div class="col-auto mr-auto dropright">
-                  <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownSortNews" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Sort News
-                  </button>
-                  <div class="dropdown-menu" aria-labelledby="dropdownSortNews">
-                    <a class="dropdown-item active" href="#">Most Popular</a>
-                    <a class="dropdown-item" href="#">Most Voted</a>
-                    <a class="dropdown-item" href="#">Most Recent</a>
-                  </div>
-                </div>
-                <!-- Reverse order button -->
-                <div class="col-auto align-self-end">
-                    <a class="mr-2" id="reverse" href="#"> <i class="fas fa-sort"></i></a>
-                </div>
+              <div class="col-3">
+                <h6>Sections</h6>
               </div>
+              <div class="col-xl-8 col-9">
+                <!-- Sort News Dropdown -->
+                <div class="row">
+                    <div class="container d-flex justify-content-between">
+                      <h1><i class="fas fa-globe"></i> World</h1>
+    
+                      <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                        <div class="sort-option"> <h5 class="sort-option"> Most Popular </h5></div>
+                        <div class="btn-group" role="group">
+                          <button id="btnGroupDrop1" type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                          <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                            <a class="dropdown-item" href="#">Most Popular</a>
+                            <a class="dropdown-item" href="#">Most Voted</a>
+                            <a class="dropdown-item" href="#">Most Recent</a>
+                          </div>
+                        </div>
+                    </div>
+                    <script>
+                      $(".dropdown-item").click(function(event){
+                        $("h5.sort-option").text($(this).text());
+                      });
+                    </script>
+                  </div>
+    
+                  </div>
             </div>
           </div>
           <div class="row mt-2">
@@ -106,7 +113,7 @@
                 <!-- News Header -->
                 <div class="d-flex flex-column">
                   <!-- 1st News Item -->
-                  <div class="news_item border container-fluid my-2">
+                  <div class="news_item border container my-2">
                     <div class="row">
                       <div class="col w-25">
                         <img class="w-100" src="https://image.flaticon.com/teams/slug/freepik.jpg" alt="Icon">
@@ -165,27 +172,33 @@
           <div class="container-fluid">
               <!-- HEADERS -->
               <div class="row mt-2">
-                <div class="col-3">
-                  <h6>My Interests</h6>
-                </div>
-                <div class="col-6">
-                  <!-- Sort News Dropdown -->
-                  <div class="row">
-                    <div class="col-auto mr-auto dropright">
-                      <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownSortNews" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Sort News
-                      </button>
-                      <div class="dropdown-menu" aria-labelledby="dropdownSortNews">
-                        <a class="dropdown-item active" href="#">Most Popular</a>
-                        <a class="dropdown-item" href="#">Most Voted</a>
-                        <a class="dropdown-item" href="#">Most Recent</a>
-                      </div>
-                    </div>
-                    <!-- Reverse order button -->
-                    <div class="col-auto align-self-end">
-                        <a class="mr-2" id="reverse" href="#"> <i class="fas fa-sort"></i></a>
-                    </div>
+                  <div class="col-3">
+                    <h6>My Interests</h6>
                   </div>
+                  <div class="col-xl-8 col-9">
+                    <!-- Sort News Dropdown -->
+                    <div class="row">
+                      <div class="container d-flex justify-content-between">
+                        <h1>Suggested For You</h1>
+                        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                          <div class="sort-option"> <h5 class="sort-option"> Most Popular </h5></div>
+                          <div class="btn-group" role="group">
+                            <button id="btnGroupDrop1" type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                              <a class="dropdown-item" href="#">Most Popular</a>
+                              <a class="dropdown-item" href="#">Most Voted</a>
+                              <a class="dropdown-item" href="#">Most Recent</a>
+                            </div>
+                          </div>
+                      </div>
+                      <script>
+                        $(".dropdown-item").click(function(event){
+                          $("h5.sort-option").text($(this).text());
+                        });
+                      </script>
+                    </div>
+        
+                    </div>
                 </div>
               </div>
               <div class="row mt-2">
@@ -202,7 +215,7 @@
     
                 </div>
                 <!-- MID-News -->
-                <div class="col-6" id="news">
+                <div class="col-xl-8 col-9" id="news_for_you">
                     <!-- News Header -->
                     <div class="d-flex flex-column">
                       <!-- 1st News Item -->
