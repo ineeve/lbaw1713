@@ -73,6 +73,13 @@
           <form class="" action="#" method="post">
             <div class="form-group my-1">
               <select class="custom-select">
+                <option selected>Search for...</option>
+                <option value="1">title</option>
+                <option value="2">author</option>
+              </select>
+            </div>
+            <div class="form-group my-1">
+              <select class="custom-select">
                 <option selected>Section...</option>
                 <option value="1">World</option>
                 <option value="2">Technology</option>
@@ -81,13 +88,13 @@
                 <option value="5">Sports</option>
               </select>
             </div>
-            <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="Author...">
-            <div class="form-group my-1">
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="customCheck1" checked="">
-                <label class="custom-control-label" for="customCheck1">Only search on the title.</label>
-              </div>
-            </div>
+            <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="News' Author...">
+            <!-- <div class="form-group my-1"> -->
+              <!-- <div class="custom-control custom-checkbox"> -->
+                <!-- <input type="checkbox" class="custom-control-input" id="customCheck1" checked=""> -->
+                <!-- <label class="custom-control-label" for="customCheck1">Only search on the title.</label> -->
+              <!-- </div> -->
+            <!-- </div> -->
             <div class="d-flex">
               <div class="form-group">
                 <!-- <p><time></time></p> -->
@@ -127,7 +134,7 @@
               <div class="row">
                 <div class="container d-flex justify-content-between">
                   <h1><i class="fa fa-bullseye"></i> All</h1>
-                    
+
                     <div class="btn-group" role="group">
                       <button id="btnGroupDrop1" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           <div class="d-flex">
@@ -236,7 +243,7 @@
               <div class="row">
                 <div class="container d-flex justify-content-between">
                   <h1>Suggested For You</h1>
-                    
+
                     <div class="btn-group" role="group">
                       <button id="btnGroupDrop1" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           <div class="d-flex">

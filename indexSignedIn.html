@@ -25,11 +25,13 @@
     <nav class="row navbar navbar-expand-lg navbar-light">
         <a class="navbar-brand" href="#">Photon News</a>
           <!-- SEARCH FORM -->
-          <form class="form-inline my-2 my-lg-0 mx-auto">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            <a class="small ml-2" href="">advanced search</a>
-          </form>
+          <div class="d-flex my-2 my-lg-0 mx-auto">
+            <form class="form-inline">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+            <a class="small ml-2 my-auto" data-toggle="collapse" data-target="#advanced-search-dropdown" href="">advanced search</a>
+          </div>
           <!-- CREATE NEWS -->
           <a href="createNews.html" class="btn btn-primary" role="button"><i class="fas fa-plus"></i>&nbsp&nbspCreate News</a>
 
@@ -51,6 +53,43 @@
             </li>
           </ul>
       </nav>
+      <!-- ADVANCED SEARCH -->
+      <div class="row">
+        <div id="advanced-search-dropdown" class="collapse my-2 my-lg-0 mx-auto">
+          <form class="" action="#" method="post">
+            <div class="form-group my-1">
+              <select class="custom-select">
+                <option selected>Search for...</option>
+                <option value="1">title</option>
+                <option value="2">author</option>
+              </select>
+            </div>
+            <div class="form-group my-1">
+              <select class="custom-select">
+                <option selected>Section...</option>
+                <option value="1">World</option>
+                <option value="2">Technology</option>
+                <option value="3">Science</option>
+                <option value="4">Business</option>
+                <option value="5">Sports</option>
+              </select>
+            </div>
+            <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="News' Author...">
+            <div class="d-flex">
+              <div class="form-group">
+                <!-- <p><time></time></p> -->
+                <label class="col-form-label">Begin:</label>
+                <input type="date" class="form-control" value="1990-01-01">
+              </div>
+              <div class="form-group">
+                <!-- <p><time></time></p> -->
+                <label class="col-form-label" >End:</label>
+                <input type="date" class="form-control" value="2018-03-15">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
       <!-- TABS -->
       <ul class="row nav nav-tabs justify-content-center">
           <li class="nav-item">
@@ -75,7 +114,7 @@
                 <div class="row">
                     <div class="container d-flex justify-content-between">
                       <h1><i class="fas fa-globe"></i> World</h1>
-    
+
                       <div class="btn-group" role="group">
                           <button id="btnGroupDrop1" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               <div class="d-flex">
@@ -94,7 +133,7 @@
                       });
                     </script>
                   </div>
-    
+
                   </div>
             </div>
           </div>
@@ -199,7 +238,7 @@
                         });
                       </script>
                     </div>
-        
+
                     </div>
                 </div>
               </div>
@@ -213,8 +252,8 @@
                       <hr>
                       <a href="#" class="border-0 list-group-item list-froup-item-action">Manage Interests</a>
                     </ul>
-    
-    
+
+
                 </div>
                 <!-- MID-News -->
                 <div class="col-xl-8 col-9" id="news_for_you">
