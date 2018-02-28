@@ -45,6 +45,27 @@
 
 <body>
     <header class="container-fluid border-bottom">
+<<<<<<< HEAD
+    <!-- NAVBAR <nav class="row navbar navbar-expand-lg navbar-light bg-light"> -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a class="navbar-brand" href="#">Photon News</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="true" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="navbar-collapse collapse show" id="navbar">
+                <ul class="navbar-nav mr-auto">
+                <!-- Account -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
+                    <i class="fas fa-user-circle"></i> Account
+                    </a>
+                    <div class="dropdown-menu" x-placement="bottom-start">
+                    <a class="dropdown-item" href="profile.html"><i class="fas fa-user"></i> Profile</a>
+                    <a class="dropdown-item" href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+                    <a class="dropdown-item" href="index.html"><i class="fas fa-sign-out-alt"></i> Log out</a>
+                    </div>
+=======
         <!-- NAVBAR <nav class="row navbar navbar-expand-lg navbar-light bg-light"> -->
         <nav class="row navbar navbar-expand-lg navbar-light">
             <a class="navbar-brand" href="index.html">Photon News</a>
@@ -64,19 +85,30 @@
                 <!-- NOTIFICATIONS -->
                 <li class="nav-item ml-2 pt-2">
                     <i class="fa fa-bell"></i> Notifications
+>>>>>>> 7347eb8dcac333bcae85586ab846fcc420c73a33
                 </li>
-                <!-- USER PROFILE -->
-                <li class="nav-item dropdown ml-2">
+                <!-- Notifications -->
+                <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
-                        <i class="fa fa-user-circle"></i> Account
+                        <i class="fas fa-bell"></i> Notifications
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-start">
-                        <a class="dropdown-item" href="profile.html">Profile</a>
-                        <a class="dropdown-item" href="settings.html">Settings</a>
-                        <a class="dropdown-item" href="index.html">Log out</a>
+                    <div class="dropdown-menu" x-placement="bottom-start">
+                        <a class="dropdown-item" href="#"><i class="fas fa-user-circle"></i> User1 is following you</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-user-circle"></i> User2 published an article</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-user-circle"></i> User3 commented on your news</a>
                     </div>
+                    
                 </li>
-            </ul>
+                <li class="nav-item">
+                    <button class="btn btn-outline-light my-2 my-sm-0 rounded">
+                        <a href="createNews.html" style="color:inherit; text-decoration:none"></i>Publish</a></button>
+                </li>
+                </ul>
+                <form class="form-inline">
+                <input class="form-control mr-sm-2 rounded" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-light my-2 my-sm-0 rounded" type="submit">Search</button>
+                </form>
+            </div>
         </nav>
         <div class="row">
           <div id="advanced-search-dropdown" class="collapse my-2 my-lg-0 mx-auto">
