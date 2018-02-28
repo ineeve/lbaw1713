@@ -12,37 +12,76 @@
   </title>
 </head>
 <body>
-  <header class="container">
+  <header class="container-fluid">
     <!-- NAVBAR <nav class="row navbar navbar-expand-lg navbar-light bg-light"> -->
-        <nav class="row navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand" href="#">Photon News</a>
-            <!-- SEARCH FORM -->
-            <form class="form-inline my-2 my-lg-0 mx-auto">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                <a class="small ml-2" href="">advanced search</a>
-            </form>
-            <!-- CREATE NEWS -->
-            <button class="btn btn-primary"><i class="fa fa-plus"></i>&nbsp;&nbsp;Create News</button>
+    <nav class="row navbar navbar-expand-lg navbar-light">
+      <a class="navbar-brand" href="#">Photon News</a>
+      <!-- SEARCH FORM -->
+      <div class="d-flex my-2 my-lg-0 mx-auto">
+        <form class="form-inline">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        <a class="small ml-2 my-auto" data-toggle="collapse" data-target="#advanced-search-dropdown" href="">advanced search</a>
+      </div>
+      <!-- CREATE NEWS -->
+      <button class="btn btn-primary"><i class="fa fa-plus"></i>&nbsp;&nbsp;Create News</button>
 
-            <ul class="navbar-nav ml-2 mt-2 mt-lg-0">
-                <!-- NOTIFICATIONS -->
-                <li class="nav-item ml-2 pt-2">
-                <i class="fa fa-bell"></i> Notifications
-                </li>
-                <!-- USER PROFILE -->
-                <li class="nav-item dropdown ml-2">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
-                        <i class="fa fa-user-circle"></i> Account
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-start">
-                        <a class="dropdown-item" href="profile.html">Profile</a>
-                        <a class="dropdown-item" href="settings.html">Settings</a>
-                        <a class="dropdown-item" href="index.html">Log out</a>
-                    </div>
-                </li>
-            </ul>
-        </nav>
+      <ul class="navbar-nav ml-2 mt-2 mt-lg-0">
+        <!-- NOTIFICATIONS -->
+        <li class="nav-item ml-2 pt-2">
+          <i class="fa fa-bell"></i> Notifications
+        </li>
+        <!-- USER PROFILE -->
+        <li class="nav-item dropdown ml-2">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
+            <i class="fa fa-user-circle"></i> Account
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-start">
+            <a class="dropdown-item" href="profile.html">Profile</a>
+            <a class="dropdown-item" href="settings.html">Settings</a>
+            <a class="dropdown-item" href="index.html">Log out</a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+    <!-- ADVANCED SEARCH -->
+    <div class="row">
+      <div id="advanced-search-dropdown" class="collapse my-2 my-lg-0 mx-auto">
+        <form class="" action="#" method="post">
+          <div class="form-group my-1">
+            <select class="custom-select">
+              <option selected>Search for...</option>
+              <option value="1">title</option>
+              <option value="2">author</option>
+            </select>
+          </div>
+          <div class="form-group my-1">
+            <select class="custom-select">
+              <option selected>Section...</option>
+              <option value="1">World</option>
+              <option value="2">Technology</option>
+              <option value="3">Science</option>
+              <option value="4">Business</option>
+              <option value="5">Sports</option>
+            </select>
+          </div>
+          <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="News' Author...">
+          <div class="d-flex">
+            <div class="form-group">
+              <!-- <p><time></time></p> -->
+              <label class="col-form-label">Begin:</label>
+              <input type="date" class="form-control" value="1990-01-01">
+            </div>
+            <div class="form-group">
+              <!-- <p><time></time></p> -->
+              <label class="col-form-label" >End:</label>
+              <input type="date" class="form-control" value="2018-03-15">
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
   </header>
 
   <div class="container-fluid">
@@ -84,7 +123,7 @@
               </div>
 
               <div class="row">
-                <div class="col">
+                <div class="col mt-5">
 
                   <p>Joana Moreira
                   </p>
@@ -141,7 +180,7 @@
 
         </div>
 
-        <div class="border mt-2">
+        <div class="border p-2 mt-2">
 
           <h3>Badges
           </h3>
@@ -190,31 +229,15 @@
 
       </div>
 
-      <div class="col">
-
-        <div class="d-flex flex-column mx-auto">
-
-<div class="news_item border container my-2">
-  <div class="row" style="position:relative;">
-    <div class="col col-sm-auto">
-      <img class="w-100" src="https://image.flaticon.com/teams/slug/freepik.jpg" alt="Foto" height="200px" width="200px">
-    </div>
-    <div class="col">
-      <div class="row">
-        <h3>John Oliver Is Now A Candidate In The World’s Craziest Election
-        </h3>
-      </div>
-      <div class="row">
-        <p>Joana Moreira</p>
-        <p> &middot;
-        </p>
-        <p>26/02/2018</p>
-      </div>
-    </div>
-    <span class="fa fa-chevron-down float-right" style="position:absolute;bottom:10px;right:10px;"></span>
-  </div>
-
+      <div class="col border mt-2">
+<div class="row p-2">
+  <h2>Articles</h2>
 </div>
+<div class="row p-2">
+
+
+        <div class="d-flex flex-column mx-auto" style="max-height:100vh; overflow: scroll;">
+
           <div class="news_item border container my-2">
             <div class="row" style="position:relative;">
               <div class="col col-sm-auto">
@@ -222,14 +245,147 @@
               </div>
               <div class="col">
                 <div class="row">
-                  <h3>Olympic figure skater handles wardrobe malfunction perfectly
+                  <h3>John Oliver Is Now A Candidate In The World’s Craziest Election
                   </h3>
                 </div>
                 <div class="row">
-                  <p>Joana Moreira</p>
-                  <p> &middot;
-                  </p>
-                  <p>26/02/2018</p>
+                  <p>Joana Moreira &middot; 26/02/2018</p>
+                </div>
+              </div>
+              <span class="fa fa-chevron-down float-right" style="position:absolute;bottom:10px;right:10px;"></span>
+            </div>
+
+          </div><div class="news_item border container my-2">
+            <div class="row" style="position:relative;">
+              <div class="col col-sm-auto">
+                <img class="w-100" src="https://image.flaticon.com/teams/slug/freepik.jpg" alt="Foto" height="200px" width="200px">
+              </div>
+              <div class="col">
+                <div class="row">
+                  <h3>John Oliver Is Now A Candidate In The World’s Craziest Election
+                  </h3>
+                </div>
+                <div class="row">
+                  <p>Joana Moreira &middot; 26/02/2018</p>
+                </div>
+              </div>
+              <span class="fa fa-chevron-down float-right" style="position:absolute;bottom:10px;right:10px;"></span>
+            </div>
+
+          </div><div class="news_item border container my-2">
+            <div class="row" style="position:relative;">
+              <div class="col col-sm-auto">
+                <img class="w-100" src="https://image.flaticon.com/teams/slug/freepik.jpg" alt="Foto" height="200px" width="200px">
+              </div>
+              <div class="col">
+                <div class="row">
+                  <h3>John Oliver Is Now A Candidate In The World’s Craziest Election
+                  </h3>
+                </div>
+                <div class="row">
+                  <p>Joana Moreira &middot; 26/02/2018</p>
+                </div>
+              </div>
+              <span class="fa fa-chevron-down float-right" style="position:absolute;bottom:10px;right:10px;"></span>
+            </div>
+
+          </div><div class="news_item border container my-2">
+            <div class="row" style="position:relative;">
+              <div class="col col-sm-auto">
+                <img class="w-100" src="https://image.flaticon.com/teams/slug/freepik.jpg" alt="Foto" height="200px" width="200px">
+              </div>
+              <div class="col">
+                <div class="row">
+                  <h3>John Oliver Is Now A Candidate In The World’s Craziest Election
+                  </h3>
+                </div>
+                <div class="row">
+                  <p>Joana Moreira &middot; 26/02/2018</p>
+                </div>
+              </div>
+              <span class="fa fa-chevron-down float-right" style="position:absolute;bottom:10px;right:10px;"></span>
+            </div>
+
+          </div><div class="news_item border container my-2">
+            <div class="row" style="position:relative;">
+              <div class="col col-sm-auto">
+                <img class="w-100" src="https://image.flaticon.com/teams/slug/freepik.jpg" alt="Foto" height="200px" width="200px">
+              </div>
+              <div class="col">
+                <div class="row">
+                  <h3>John Oliver Is Now A Candidate In The World’s Craziest Election
+                  </h3>
+                </div>
+                <div class="row">
+                  <p>Joana Moreira &middot; 26/02/2018</p>
+                </div>
+              </div>
+              <span class="fa fa-chevron-down float-right" style="position:absolute;bottom:10px;right:10px;"></span>
+            </div>
+
+          </div><div class="news_item border container my-2">
+            <div class="row" style="position:relative;">
+              <div class="col col-sm-auto">
+                <img class="w-100" src="https://image.flaticon.com/teams/slug/freepik.jpg" alt="Foto" height="200px" width="200px">
+              </div>
+              <div class="col">
+                <div class="row">
+                  <h3>John Oliver Is Now A Candidate In The World’s Craziest Election
+                  </h3>
+                </div>
+                <div class="row">
+                  <p>Joana Moreira &middot; 26/02/2018</p>
+                </div>
+              </div>
+              <span class="fa fa-chevron-down float-right" style="position:absolute;bottom:10px;right:10px;"></span>
+            </div>
+
+          </div><div class="news_item border container my-2">
+            <div class="row" style="position:relative;">
+              <div class="col col-sm-auto">
+                <img class="w-100" src="https://image.flaticon.com/teams/slug/freepik.jpg" alt="Foto" height="200px" width="200px">
+              </div>
+              <div class="col">
+                <div class="row">
+                  <h3>John Oliver Is Now A Candidate In The World’s Craziest Election
+                  </h3>
+                </div>
+                <div class="row">
+                  <p>Joana Moreira &middot; 26/02/2018</p>
+                </div>
+              </div>
+              <span class="fa fa-chevron-down float-right" style="position:absolute;bottom:10px;right:10px;"></span>
+            </div>
+
+          </div><div class="news_item border container my-2">
+            <div class="row" style="position:relative;">
+              <div class="col col-sm-auto">
+                <img class="w-100" src="https://image.flaticon.com/teams/slug/freepik.jpg" alt="Foto" height="200px" width="200px">
+              </div>
+              <div class="col">
+                <div class="row">
+                  <h3>John Oliver Is Now A Candidate In The World’s Craziest Election
+                  </h3>
+                </div>
+                <div class="row">
+                  <p>Joana Moreira &middot; 26/02/2018</p>
+                </div>
+              </div>
+              <span class="fa fa-chevron-down float-right" style="position:absolute;bottom:10px;right:10px;"></span>
+            </div>
+
+          </div><div class="news_item border container my-2">
+            <div class="row" style="position:relative;">
+              <div class="col col-sm-auto">
+                <img class="w-100" src="https://image.flaticon.com/teams/slug/freepik.jpg" alt="Foto" height="200px" width="200px">
+              </div>
+              <div class="col">
+                <div class="row">
+                  <h3>John Oliver Is Now A Candidate In The World’s Craziest Election
+                  </h3>
+                </div>
+                <div class="row">
+                  <p>Joana Moreira &middot; 26/02/2018</p>
                 </div>
               </div>
               <span class="fa fa-chevron-down float-right" style="position:absolute;bottom:10px;right:10px;"></span>

@@ -15,6 +15,7 @@
 </head>
 <body>
   <header>
+<<<<<<< HEAD
     <header class="container-fluid">
       <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
           <a class="navbar-brand" href="#">Photon News</a>
@@ -59,6 +60,71 @@
             </form>
           </div>
         </nav>
+=======
+    <header class="container">
+      <!-- NAVBAR <nav class="row navbar navbar-expand-lg navbar-light bg-light"> -->
+      <nav class="row navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#">Photon News</a>
+        <!-- SEARCH FORM -->
+        <div class="d-flex my-2 my-lg-0 mx-auto">
+          <form class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+          <a class="small ml-2 my-auto" data-toggle="collapse" data-target="#advanced-search-dropdown" href="">advanced search</a>
+        </div>
+        <ul class="navbar-nav ml-2 mt-2 mt-lg-0">
+          <!-- NOTIFICATIONS -->
+          <li class="nav-item ml-2">
+            <i class="fa fa-bell"></i>
+          </li>
+          <!-- USER PROFILE -->
+          <li class="nav-item ml-2">
+            <a href="profile.html"><i class="fa fa-user"></i></a>
+          </li>
+          <!-- SETTINGS -->
+          <li class="nav-item ml-2">
+            <i class="fa fa-cog"></i>
+          </li>
+        </ul>
+      </nav>
+      <div class="row">
+        <div id="advanced-search-dropdown" class="collapse my-2 my-lg-0 mx-auto">
+          <form class="" action="#" method="post">
+            <div class="form-group my-1">
+              <select class="custom-select">
+                <option selected>Search for...</option>
+                <option value="1">title</option>
+                <option value="2">author</option>
+              </select>
+            </div>
+            <div class="form-group my-1">
+              <select class="custom-select">
+                <option selected>Section...</option>
+                <option value="1">World</option>
+                <option value="2">Technology</option>
+                <option value="3">Science</option>
+                <option value="4">Business</option>
+                <option value="5">Sports</option>
+              </select>
+            </div>
+            <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="News' Author...">
+            <div class="d-flex">
+              <div class="form-group">
+                <!-- <p><time></time></p> -->
+                <label class="col-form-label">Begin:</label>
+                <input type="date" class="form-control" value="1990-01-01">
+              </div>
+              <div class="form-group">
+                <!-- <p><time></time></p> -->
+                <label class="col-form-label" >End:</label>
+                <input type="date" class="form-control" value="2018-03-15">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+>>>>>>> 7347eb8dcac333bcae85586ab846fcc420c73a33
     </header>
 
     <form class="profile_item border container p-2 mx-auto mt-2"

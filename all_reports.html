@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Font Awesome CSS -->
+  <link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="bootswatch.css">
+  <link rel="stylesheet" href="style.css">
+    <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <title>Photon News</title>
+</head>
+<body>
+  <header class="container-fluid">
+    <!-- NAVBAR <nav class="row navbar navbar-expand-lg navbar-light bg-light"> -->
+    <nav class="row navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#">Photon News</a>
+          <!-- SEARCH FORM -->
+          <form class="form-inline my-2 my-lg-0 mx-auto">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <a class="small ml-2" href="">advanced search</a>
+          </form>
+          <!-- CREATE NEWS -->
+          <a href="createNews.html" class="btn btn-primary" role="button"><i class="fas fa-plus"></i>&nbsp&nbspCreate News</a>
+
+          <ul class="navbar-nav ml-2 mt-2 mt-lg-0">
+            <!-- NOTIFICATIONS -->
+            <li class="nav-item ml-2 pt-2">
+              <i class="fas fa-bell"></i>
+            </li>
+            <!-- USER PROFILE -->
+            <li class="nav-item dropdown ml-2">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
+                  <i class="fas fa-user-circle"></i> Account
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-start">
+                  <a class="dropdown-item" href="profile.html">Profile</a>
+                  <a class="dropdown-item" href="settings.html">Settings</a>
+                  <a class="dropdown-item" href="index.html">Log out</a>
+                </div>
+            </li>
+          </ul>
+      </nav>
+  </header>
+  <div class="container-fluid">
+    <h2><a class="nounderline" href="news.html">Title</a></h2>
+    <h6>Author &middot; 27/02/2018</h6>
+
+    <!-- FIRST REPORT -->
+    <div class="container-fluid">
+        <div class="row">
+          <div class="d-flex">
+            <img class="w-100" src="images/generic_avatar.png" alt="pPic">
+            <div>
+              <h5>Name</h4>
+              <h6>Date</h6>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <p>Reasons:</p>
+        </div>
+        <div class="row">
+            <button type="button" class="btn btn-outline-info mx-1">Offensive</button>
+            <button type="button" class="btn btn-outline-info mx-1">Sexually Inappropriate</button>
+            <button type="button" class="btn btn-outline-info mx-1">Scam</button>
+        </div>
+        <div class="container-fluid">
+          <h6>Description:</h6>
+          <p>Pornographic live-camera signup scam.</p>
+        </div>
+    </div>
+    <!-- SECOND REPORT -->
+
+  </div>
+</body>
+</html>

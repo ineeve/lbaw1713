@@ -16,6 +16,7 @@
 </head>
 <body>
   <header class="container-fluid">
+<<<<<<< HEAD
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary border-bottom">
       <a class="navbar-brand" href="#">Photon News</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="true" aria-label="Toggle navigation">
@@ -58,6 +59,76 @@
         </form>
       </div>
     </nav>
+=======
+    <!-- NAVBAR <nav class="row navbar navbar-expand-lg navbar-light bg-light"> -->
+    <nav class="row navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="index.html">Photon News</a>
+          <!-- SEARCH FORM -->
+          <div class="d-flex my-2 my-lg-0 mx-auto">
+            <form class="form-inline">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+            <a class="small ml-2 my-auto" data-toggle="collapse" data-target="#advanced-search-dropdown" href="">advanced search</a>
+          </div>
+          <!-- CREATE NEWS -->
+          <button class="btn btn-primary"><i class="fa fa-plus"></i>&nbsp&nbspCreate News</button>
+
+          <ul class="navbar-nav ml-2 mt-2 mt-lg-0">
+              <!-- NOTIFICATIONS -->
+              <li class="nav-item ml-2 pt-2">
+              <i class="fa fa-bell"></i> Notifications
+              </li>
+              <!-- USER PROFILE -->
+              <li class="nav-item dropdown ml-2">
+                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
+                      <i class="fa fa-user-circle"></i> Account
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-start">
+                      <a class="dropdown-item" href="profile.html">Profile</a>
+                      <a class="dropdown-item" href="settings.html">Settings</a>
+                      <a class="dropdown-item" href="index.html">Log out</a>
+                  </div>
+              </li>
+          </ul>
+      </nav>
+      <div class="row">
+        <div id="advanced-search-dropdown" class="collapse my-2 my-lg-0 mx-auto">
+          <form class="" action="#" method="post">
+            <div class="form-group my-1">
+              <select class="custom-select">
+                <option selected>Search for...</option>
+                <option value="1">title</option>
+                <option value="2">author</option>
+              </select>
+            </div>
+            <div class="form-group my-1">
+              <select class="custom-select">
+                <option selected>Section...</option>
+                <option value="1">World</option>
+                <option value="2">Technology</option>
+                <option value="3">Science</option>
+                <option value="4">Business</option>
+                <option value="5">Sports</option>
+              </select>
+            </div>
+            <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="News' Author...">
+            <div class="d-flex">
+              <div class="form-group">
+                <!-- <p><time></time></p> -->
+                <label class="col-form-label">Begin:</label>
+                <input type="date" class="form-control" value="1990-01-01">
+              </div>
+              <div class="form-group">
+                <!-- <p><time></time></p> -->
+                <label class="col-form-label" >End:</label>
+                <input type="date" class="form-control" value="2018-03-15">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+>>>>>>> 7347eb8dcac333bcae85586ab846fcc420c73a33
       <!-- TABS -->
       <ul class="row nav nav-tabs justify-content-center">
           <li class="nav-item">
@@ -104,7 +175,7 @@
             <th scope="row"><a href="#">Stephen Fry has prostate cancer</a></th>
             <td>John</td>
             <td>12:25 23/02/2018</td>
-            <td><div class="d-flex flex-column justify-content-between"><p>20</p><a href="#">+ Show More</a></div></td>
+            <td><div class="d-flex flex-column justify-content-between"><p>20</p><a href="all_reports.html">+ Show More</a></div></td>
             <td>15:31 26/02/2018</td>
             <td>Has violent or prohibited content<br>It's offensive<br>I do not agree with this</td>
           </tr>
@@ -112,7 +183,7 @@
             <th scope="row"><a href="#">Theresa May to set out Brexit plan following Chequers talks</a></th>
             <td>Hanna</td>
             <td>12:25 23/02/2018</td>
-            <td><div class="d-flex flex-column justify-content-between"><p>10</p><a href="#">+ Show More</a></div></td>
+            <td><div class="d-flex flex-column justify-content-between"><p>10</p><a href="all_reports.html">+ Show More</a></div></td>
             <td>15:31 26/02/2018</td>
             <td>It's spam</td>
           </tr>
@@ -120,7 +191,7 @@
             <th scope="row"><a href="#">Paedophile slashes his own throat in the dock as he's found guilty</a></th>
             <td>David</td>
             <td>12:25 23/02/2018</td>
-            <td><div class="d-flex flex-column justify-content-between"><p>6</p><a href="#">+ Show More</a></div></td>
+            <td><div class="d-flex flex-column justify-content-between"><p>6</p><a href="all_reports.html">+ Show More</a></div></td>
             <td>15:31 26/02/2018</td>
             <td>I do not agree with this<br>It's a fake news</td>
           </tr>
@@ -199,7 +270,7 @@
       <th scope="row" style="width: 16.67%; height: 25%;"><a href="#">uuuuuu asfdcfd sdfsv vsdvsvsvdsv dvsv uuuuuuuuuu uuuuuuuuuuuuuuuuuuu uuuuuuuu</a></th>
       <td style="width: 16.67%; height: 25%;">Mark</td>
       <td style="width: 16.67%; height: 25%;">12:25 23/02/2018</td>
-      <td style="width: 16.67%; height: 25%;"><div class="d-flex flex-column justify-content-between"><p>20</p><a href="#">+ Show More</a></div></td>
+      <td style="width: 16.67%; height: 25%;"><div class="d-flex flex-column justify-content-between"><p>20</p><a href="all_reports.html">+ Show More</a></div></td>
       <td style="width: 16.67%; height: 25%;">15:31 26/02/2018</td>
       <td style="width: 16.67%; height: 25%;">Has violent or prohibited content<br>It's offensive<br>I do not agree with this</td>
     </tr>
@@ -207,7 +278,7 @@
       <th scope="row" style="width: 16.67%; height: 25%;"><a href="#">#15</a></th>
       <td style="width: 16.67%; height: 25%;">Dylan</td>
       <td style="width: 16.67%; height: 25%;">12:25 23/02/2018</td>
-      <td style="width: 16.67%; height: 25%;"><div class="d-flex flex-column justify-content-between"><p>10</p><a href="#">+ Show More</a></div></td>
+      <td style="width: 16.67%; height: 25%;"><div class="d-flex flex-column justify-content-between"><p>10</p><a href="all_reports.html">+ Show More</a></div></td>
       <td style="width: 16.67%; height: 25%;">15:31 26/02/2018</td>
       <td style="width: 16.67%; height: 25%;">It's spam</td>
     </tr>
@@ -215,7 +286,7 @@
       <th scope="row" style="width: 16.67%; height: 25%;"><a href="#">#189</a></th>
       <td style="width: 16.67%; height: 25%;">David</td>
       <td style="width: 16.67%; height: 25%;">12:25 23/02/2018</td>
-      <td style="width: 16.67%; height: 25%;"><div class="d-flex flex-column justify-content-between"><p>6</p><a href="#">+ Show More</a></div></td>
+      <td style="width: 16.67%; height: 25%;"><div class="d-flex flex-column justify-content-between"><p>6</p><a href="all_reports.html">+ Show More</a></div></td>
       <td style="width: 16.67%; height: 25%;">15:31 26/02/2018</td>
       <td style="width: 16.67%; height: 25%;">Is sexually inappropriate</td>
     </tr>

@@ -21,3 +21,7 @@ div.section-div {
   max-height: 70vh;
   overflow: auto;
 }
+
+a.nounderline {
+  text-decoration: none;
+}
