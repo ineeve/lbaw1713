@@ -21,10 +21,263 @@
         
         <title>Photon News</title>
     </head>
-    <header>
-        Insert Header HERE
-    </header>
+    
     <body>
-        
+        <header>
+            Insert Header HERE
+        </header>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="users-tab" data-toggle="tab" href="#users" role="tab" aria-controls="users" aria-selected="true">Users</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="bagdes-tab" data-toggle="tab" href="#badges" role="tab" aria-controls="badges" aria-selected="false">Categories</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="categories-tab" data-toggle="tab" href="#categories" role="tab" aria-controls="categories" aria-selected="false">Badges</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="statistics-tab" data-toggle="tab" href="#statistics" role="tab" aria-controls="statistics" aria-selected="false">Statistics</a>
+            </li>
+            </ul>
+            
+            <!-- Tab panes -->
+            <div class="tab-content">
+            <div class="tab-pane active" id="users" role="tabpanel" aria-labelledby="users-tab">
+                <div class="container-fluid row m-2">
+                    <div class="col-12 col-lg-10">
+                        <h3>Users</h3>
+                        <div class="row m-2 align-items-center">
+                            <h5>Filter By</h5>
+                            <form class="d-flex ml-2">
+                                <div class="dropdown">
+                                    <button class="btn btn-light dropdown-toggle" type="button" id="roleFilter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Role
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="roleFilter">
+                                        <li><a class="dropdown-item" href="#"><input type="checkbox"> Admin</a></li>
+                                        <li><a class="dropdown-item" href="#"><input type="checkbox"> Moderator</a></li>
+                                        <li><a class="dropdown-item" href="#"><input type="checkbox"> Basic</a></li>
+                                    </ul>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-light dropdown-toggle" type="button" id="roleFilter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Status
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="roleFilter">
+                                        <li><a class="dropdown-item" href="#"><input type="checkbox"> Active <i class="text-success fas fa-circle"></i></a></li>
+                                        <li><a class="dropdown-item" href="#"><input type="checkbox"> Semi-Active <i class="text-warning fas fa-circle"></i></a></li>
+                                        <li><a class="dropdown-item" href="#"><input type="checkbox"> Inactive <i class="text-danger fas fa-circle"></i></a></li>
+                                    </ul>
+                                </div>
+                            </form>
+                            
+                        </div>
+                        <div class="row m-2">
+                            <form class="d-flex align-items-center">
+                                <input class="form-control mr-sm-2 rounded" type="search" placeholder="Search by username ..." aria-label="Search">
+                            </form>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Username</th>
+                                    <th scope="col">Role</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Score</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Registered Since</th>
+                                    <th scope="col">Actions<th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>root</td>
+                                        <td>admin</td>
+                                        <td>admin@photonnews.com</td>
+                                        <td>150</td>
+                                        <td><i class="text-success fas fa-circle"></i></td>
+                                        <td>10/5/2017</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>Jacob</td>
+                                        <td>moderator</td>
+                                        <td>jacob@gmail.com</td>
+                                        <td>150</td>
+                                        <td><i class="text-warning fas fa-circle"></i></td>
+                                        <td>10/5/2017</td>
+                                        <td>
+                                            <i class="text-danger fas fa-ban"></i>
+                                            <i class="text-danger fas fa-angle-double-down"></i>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                    <th scope="row">3</th>
+                                        <td>Mark</td>
+                                        <td>basic</td>
+                                        <td>Mark@gmail.com</td>
+                                        <td>100</td>
+                                        <td><i class="text-danger fas fa-circle"></i></td>
+                                        <td>10/5/2017</td>
+                                        <td>
+                                            <i class="text-danger fas fa-ban"></i>
+                                            <i class="text-success fas fa-angle-double-up"></i>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                    <th scope="row">4</th>
+                                        <td>MKAsd23k</td>
+                                        <td>basic</td>
+                                        <td>Marasdask@gmail.com</td>
+                                        <td>100</td>
+                                        <td><i class="text-danger fas fa-circle"></i></td>
+                                        <td>10/5/2017</td>
+                                        <td>
+                                            <i class="text-danger fas fa-ban"></i>
+                                            <i class="text-success fas fa-angle-double-up"></i>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">5</th>
+                                        <td>aine3k</td>
+                                        <td>basic</td>
+                                        <td>ain3k@gmail.com</td>
+                                        <td>100</td>
+                                        <td><i class="text-success fas fa-circle"></i></td>
+                                        <td>10/5/2017</td>
+                                        <td>
+                                            <i class="text-danger fas fa-ban"></i>
+                                            <i class="text-success fas fa-angle-double-up"></i>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">6</th>
+                                        <td>aine3k</td>
+                                        <td>basic</td>
+                                        <td>ain3k@gmail.com</td>
+                                        <td>100</td>
+                                        <td><i class="text-success fas fa-circle"></i></td>
+                                        <td>10/5/2017</td>
+                                        <td>
+                                            <i class="text-danger fas fa-ban"></i>
+                                            <i class="text-success fas fa-angle-double-up"></i>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">7</th>
+                                        <td>aine3k</td>
+                                        <td>basic</td>
+                                        <td>ain3k@gmail.com</td>
+                                        <td>100</td>
+                                        <td><i class="text-success fas fa-circle"></i></td>
+                                        <td>10/5/2017</td>
+                                        <td>
+                                            <i class="text-danger fas fa-ban"></i>
+                                            <i class="text-success fas fa-angle-double-up"></i>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">8</th>
+                                        <td>aine3k</td>
+                                        <td>basic</td>
+                                        <td>ain3k@gmail.com</td>
+                                        <td>100</td>
+                                        <td><i class="text-success fas fa-circle"></i></td>
+                                        <td>10/5/2017</td>
+                                        <td>
+                                            <i class="text-danger fas fa-ban"></i>
+                                            <i class="text-success fas fa-angle-double-up"></i>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">9</th>
+                                        <td>aine3k</td>
+                                        <td>basic</td>
+                                        <td>ain3k@gmail.com</td>
+                                        <td>100</td>
+                                        <td><i class="text-success fas fa-circle"></i></td>
+                                        <td>10/5/2017</td>
+                                        <td>
+                                            <i class="text-danger fas fa-ban"></i>
+                                            <i class="text-success fas fa-angle-double-up"></i>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">10</th>
+                                        <td>aine3k</td>
+                                        <td>basic</td>
+                                        <td>ain3k@gmail.com</td>
+                                        <td>100</td>
+                                        <td><i class="text-success fas fa-circle"></i></td>
+                                        <td>10/5/2017</td>
+                                        <td>
+                                            <i class="text-danger fas fa-ban"></i>
+                                            <i class="text-success fas fa-angle-double-up"></i>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <nav aria-label="...">
+                                <ul class="pagination">
+                                    <li class="page-item disabled">
+                                    <span class="page-link">Previous</span>
+                                    </li>
+                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a>
+                                    </li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-2">
+                        <h3>Subtitles</h3>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Symbol</th>
+                                    <th scope="col">Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th><i class="text-danger fas fa-ban"></i></th>
+                                    <td>ban</td>
+                                </tr>
+                                <tr>
+                                    <th><i class="text-success fas fa-angle-double-up"></i></th>
+                                    <td>promote</td>
+                                </tr>
+                                <tr>
+                                    <th><i class="text-danger fas fa-angle-double-down"></i></th>
+                                    <td>demote</td>
+                                </tr>
+                                <tr>
+                                    <th><i class="text-success fas fa-circle"></i></th>
+                                    <td>Active in last 24h</td>
+                                </tr>
+                                <tr>
+                                    <th><i class="text-warning fas fa-circle"></i></th>
+                                    <td>Active in last week</td>
+                                </tr>
+                                <tr>
+                                    <th><i class="text-danger fas fa-circle"></i></th>
+                                    <td>Inactive</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="badges" role="tabpanel" aria-labelledby="badges-tab">...</div>
+            <div class="tab-pane" id="categories" role="tabpanel" aria-labelledby="categories-tab">...</div>
+            <div class="tab-pane" id="statistics" role="tabpanel" aria-labelledby="statistics-tab">...</div>
+            </div>
+            </body>
+        <ul>
     </body>
 </html>
