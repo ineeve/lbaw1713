@@ -44,58 +44,65 @@
 </head>
 
 <body>
-    <header class="container-fluid border-bottom">
-        <!-- NAVBAR <nav class="row navbar navbar-expand-lg navbar-light bg-light"> -->
-        <nav class="row navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand" href="index.html">Photon News</a>
-            <!-- SEARCH FORM -->
-            <div class="d-flex my-2 my-lg-0 mx-auto">
-              <form class="form-inline">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-              </form>
-              <a class="small ml-2 my-auto" data-toggle="collapse" data-target="#advanced-search-dropdown" href="">advanced search</a>
-            </div>
-            <!-- CREATE NEWS -->
-            <button class="btn btn-primary">
-                <i class="fa fa-plus"></i>&nbsp&nbspCreate News</button>
+  <header class="container-fluid px-0">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <a class="navbar-brand" href="#">Photon News</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="true" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-            <ul class="navbar-nav ml-2 mt-2 mt-lg-0">
-                <!-- NOTIFICATIONS -->
-                <li class="nav-item ml-2 pt-2">
-                    <i class="fa fa-bell"></i> Notifications
-                </li>
-                <!-- Notifications -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
-                        <i class="fas fa-bell"></i> Notifications
-                    </a>
-                    <div class="dropdown-menu" x-placement="bottom-start">
-                        <a class="dropdown-item" href="#"><i class="fas fa-user-circle"></i> User1 is following you</a>
-                        <a class="dropdown-item" href="#"><i class="fas fa-user-circle"></i> User2 published an article</a>
-                        <a class="dropdown-item" href="#"><i class="fas fa-user-circle"></i> User3 commented on your news</a>
-                    </div>
-                    
-                </li>
-                <li class="nav-item">
-                    <button class="btn btn-outline-light my-2 my-sm-0 rounded">
-                        <a href="createNews.html" style="color:inherit; text-decoration:none"></i>Publish</a></button>
-                </li>
-                </ul>
-                <form class="form-inline">
-                <input class="form-control mr-sm-2 rounded" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-light my-2 my-sm-0 rounded" type="submit">Search</button>
-                </form>
+      <div class="navbar-collapse collapse show" id="navbar">
+        <ul class="navbar-nav mr-auto">
+          <!-- Account -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
+              <i class="fas fa-user-circle"></i> Account
+            </a>
+            <div class="dropdown-menu" x-placement="bottom-start">
+              <a class="dropdown-item" href="profile.html"><i class="fas fa-user"></i> Profile</a>
+              <a class="dropdown-item" href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+              <a class="dropdown-item" href="index.html"><i class="fas fa-sign-out-alt"></i> Log out</a>
             </div>
+          </li>
+          <!-- Notifications -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
+              <i class="fas fa-bell"></i> Notifications
+            </a>
+            <div class="dropdown-menu" x-placement="bottom-start">
+              <a class="dropdown-item" href="#"><i class="fas fa-user-circle"></i> User1 is following you</a>
+              <a class="dropdown-item" href="#"><i class="fas fa-user-circle"></i> User2 published an article</a>
+              <a class="dropdown-item" href="#"><i class="fas fa-user-circle"></i> User3 commented on your news</a>
+            </div>
+
+              </li>
+              <li class="nav-item">
+                  <button class="btn btn-outline-light my-2 my-sm-0 rounded">
+                    <a href="createNews.html" style="color:inherit; text-decoration:none"></i>Publish</a></button>
+              </li>
+            </ul>
+            <div class="d-flex flex-column">
+              <form class="form-inline">
+                <input class="form-control mr-sm-2 rounded" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-light my-2 my-sm-0 rounded" type="submit">
+                  <a href="advance_search.html" style="color:inherit; text-decoration:none">Search</a>
+                </button>
+              </form>
+                <a class="small" data-toggle="collapse" data-target="#advanced-search-dropdown" style="color:white;" href="">advanced search</a>
+            </div>
+          </div>
         </nav>
-        <div class="row">
-          <div id="advanced-search-dropdown" class="collapse my-2 my-lg-0 mx-auto">
+        <!-- ADVANCED SEARCH -->
+        <div class="navbar navbar-expand-lg navbar-dark bg-primary">
+          <div id="advanced-search-dropdown" class="collapse ml-1 ml-lg-auto">
             <form class="" action="#" method="post">
               <div class="form-group my-1">
                 <select class="custom-select">
                   <option selected>Search for...</option>
-                  <option value="1">title</option>
-                  <option value="2">author</option>
+                  <option value="1">Only title</option>
+                  <option value="2">Only body</option>
+                  <option value="3">Title and body</option>
+                  <option value="4">Username</option>
                 </select>
               </div>
               <div class="form-group my-1">
@@ -127,7 +134,7 @@
     </header>
 
     <body>
-        <div class="container mt-2">
+        <div class="container my-2">
             <h3 class="text-primary">Post a news story!</h3>
             <form action="news.html">
                 <fieldset class="form-group">

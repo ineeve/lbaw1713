@@ -78,6 +78,7 @@
                   <option value="1">Only title</option>
                   <option value="2">Only body</option>
                   <option value="3">Title and body</option>
+                  <option value="4">Username</option>
                 </select>
               </div>
               <div class="form-group my-1">
@@ -106,23 +107,10 @@
             </form>
           </div>
         </div>
-      </nav>
-      <!-- TABS -->
-      <ul class="row nav nav-tabs justify-content-center">
-        <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="#headlines">Headlines</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="#forYou">For You</a>
-        </li>
-      </ul>
     </header>
 
-    <div id="myTabContent" class="tab-content">
-      <div class="tab-pane fade active show" id="headlines">
-        <div class="container-fluid">
-          <!-- HEADERS -->
-          <div class="row mt-2">
+    <!-- HEADERS -->
+          <div class="row container-fluid mt-2">
             <!-- LEFT-SECTIONS -->
             <div class="col-md-3" id="sections">
               <h6>Sections</h6>
@@ -132,6 +120,11 @@
                 <a href="#" role="button" class="border-0 list-group-item list-group-item-action"><i class="fas fa-flask"></i>  Science</a>
                 <a href="#" role="button" class="border-0 list-group-item list-group-item-action"><i class="fas fa-briefcase"></i>  Business</a>
                 <a href="#" role="button" class="border-0 list-group-item list-group-item-action"><i class="fas fa-briefcase"></i>  Sports</a>
+                <a href="#" role="button" data-toggle="collapse" data-target="#my-interests" class="border-0 list-group-item list-group-item-action"><i class="fas fa-heart"></i>  For You</a>
+                <ul id="my-interests" class="collapse">
+                  <li>Animals</li>
+                  <li>Music</li>
+                </ul>
               </ul>
             </div>
             <!-- MID-News -->
@@ -175,8 +168,12 @@
                       <div class="row">
                         <p>Author's name &middot; 12:25 23/02/2018</p>
                       </div>
+                      <div class="lorem collapse ml-1 ml-lg-auto" id="one">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Neque sodales ut etiam sit amet nisl purus. Donec massa sapien faucibus et molestie ac feugiat sed lectus.</p>
+                      </div>
                     </div>
-                    <span class="fa fa-chevron-down float-right" style="position:absolute;bottom:10px;right:10px;"></span>
+                    <a data-toggle="collapse" data-target="#one" style="color:inherit;" href="">
+                    <span class="fa fa-chevron-down float-right" style="position:absolute;bottom:10px;right:10px;"></span></a>
                   </div>
                 </div>
                 <!-- 2nd News Item -->
@@ -192,141 +189,36 @@
                       <div class="row">
                         <p>Author's name &middot; 12:25 23/02/2018</p>
                       </div>
-                    </div>
-                    <span class="fa fa-chevron-down float-right" style="position:absolute;bottom:10px;right:10px;"></span>
-                  </div>
-                </div>
-                <!-- 3rd News Item -->
-                <div class="news_item border container my-2">
-                  <div class="row" style="position:relative;">
-                    <div class="col col-sm-auto m-auto">
-                      <img src="http://maxpixel.freegreatpicture.com/static/photo/1x/After-Rain-Dock-Harbor-Sunset-Boats-Docks-2302785.jpg" width="100px" height="100px" alt="Icon">
-                    </div>
-                    <div class="col">
-                      <div class="row">
-                        <h3>Paedophile slashes his own throat in the dock as he's found guilty</h3>
-                      </div>
-                      <div class="row">
-                        <p>Author's name &middot; 12:25 23/02/2018</p>
+                      <div class="lorem collapse ml-1 ml-lg-auto" id="two">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Neque sodales ut etiam sit amet nisl purus. Donec massa sapien faucibus et molestie ac feugiat sed lectus.</p>
                       </div>
                     </div>
-                    <span class="fa fa-chevron-down float-right" style="position:absolute;bottom:10px;right:10px;"></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="tab-pane fade" id="forYou">
-        <div class="container-fluid">
-          <!-- HEADERS -->
-          <div class="row mt-2">
-            <div class="col-3">
-              <h6>My Interests</h6>
-            </div>
-            <div class="col-xl-8 col-9">
-              <!-- Sort News Dropdown -->
-              <div class="row">
-                <div class="container d-flex justify-content-between">
-                  <h1>Suggested For You</h1>
-                  <div class="btn-group" role="group">
-                    <button id="btnGroupDrop1" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <div class="d-flex">
-                        <h5 class="sort-option">Most Popular </h5> <i class="fas fa-chevron-down ml-2 mt-1"></i>
-                      </div>
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                      <a class="dropdown-item" href="#">Most Popular</a>
-                      <a class="dropdown-item" href="#">Most Voted</a>
-                      <a class="dropdown-item" href="#">Most Recent</a>
-                    </div>
-                  </div>
-                  <script>
-                  $(".dropdown-item").click(function(event){
-                    $(".sort-option").html($(this).text());
-                  });
-                  </script>
-                </div>
-
-              </div>
-            </div>
-          </div>
-          <div class="row mt-2">
-            <!-- LEFT-SECTIONS -->
-            <div class="col-3" id="sections">
-              <ul class="list-group ">
-                <a href="#" role="button" class="border-0 list-group-item list-group-item-action"><i class="fas fa-laptop"></i>  Technology</a>
-                <a href="#" role="button" class="border-0 list-group-item list-group-item-action"><i class="fab fa-bitcoin"></i>  Blockchain</a>
-                <a href="#" role="button" class="border-0 list-group-item list-group-item-action"><i class="fas fa-briefcase"></i>  Business</a>
-                <hr>
-                <a href="#" class="border-0 list-group-item list-froup-item-action">Manage Interests</a>
-              </ul>
-
-
-            </div>
-            <!-- MID-News -->
-            <div class="col-xl-8 col-9" id="news_for_you">
-              <!-- News Header -->
-              <div class="d-flex flex-column">
-                <!-- 1st News Item -->
-                <div class="news_item border container my-2">
-                  <div class="row" style="position:relative;">
-                    <div class="col col-sm-auto m-auto">
-                      <img src="https://cdn.pixabay.com/photo/2016/11/10/05/09/bitcoin-1813503_960_720.jpg" width="100px" height="100px" alt="Icon">
-                    </div>
-                    <div class="col">
-                      <div class="row">
-                        <h3>Bitcoin reaches $20k</h3>
-                      </div>
-                      <div class="row">
-                        <p>Author's name &middot; 12:25 23/02/2018</p>
-                      </div>
-                    </div>
-                    <span class="fa fa-chevron-down float-right" style="position:absolute;bottom:10px;right:10px;"></span>
-                  </div>
-                </div>
-                <!-- 2nd News Item -->
-                <div class="news_item border container my-2">
-                  <div class="row" style="position:relative;">
-                    <div class="col col-sm-auto m-auto">
-                      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Moon_right-view_%28Clementine_dataset%29.png/800px-Moon_right-view_%28Clementine_dataset%29.png" width="100px" height="100px" alt="Icon">
-                    </div>
-                    <div class="col">
-                      <div class="row">
-                        <h3>Polymagnets making their way to the moon</h3>
-                      </div>
-                      <div class="row">
-                        <p>Author's name &middot; 12:25 23/02/2018</p>
-                      </div>
-                    </div>
-                    <span class="fa fa-chevron-down float-right" style="position:absolute;bottom:10px;right:10px;"></span>
-                  </div>
+                    <a data-toggle="collapse" data-target="#two" style="color:inherit;" href="">
+                    <span class="fa fa-chevron-down float-right" style="position:absolute;bottom:10px;right:10px;"></span></a></div>
                 </div>
                 <!-- 3rd News Item -->
                 <div class="news_item border container my-2">
                     <div class="row" style="position:relative;">
                       <div class="col col-sm-auto m-auto">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/d/de/SpaceX-Logo.svg" width="100px" height="100px" alt="Icon">
+                        <img src="http://maxpixel.freegreatpicture.com/static/photo/1x/After-Rain-Dock-Harbor-Sunset-Boats-Docks-2302785.jpg" width="100px" height="100px" alt="Icon">
                       </div>
                       <div class="col">
                         <div class="row">
-                          <h3>SpaceX landed on Mars</h3>
+                          <h3>Paedophile slashes his own throat in the dock as he's found guilty</h3>
                         </div>
                         <div class="row">
                           <p>Author's name &middot; 12:25 23/02/2018</p>
-                        </div>
-                      </div>
-                      <span class="fa fa-chevron-down float-right" style="position:absolute;bottom:10px;right:10px;"></span>
-                    </div>
+                        </div>                  <div class="lorem collapse ml-1 ml-lg-auto" id="three">
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Neque sodales ut etiam sit amet nisl purus. Donec massa sapien faucibus et molestie ac feugiat sed lectus.</p>
+                                          </div>
+                                        </div>
+                                        <a data-toggle="collapse" data-target="#three" style="color:inherit;" href="">
+                                        <span class="fa fa-chevron-down float-right" style="position:absolute;bottom:10px;right:10px;"></span></a>
+                                      </div>
                   </div>
-
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
 
     <footer>
     </footer>

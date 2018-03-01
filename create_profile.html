@@ -14,76 +14,104 @@
   <title>Photon News</title>
 </head>
 <body>
-  <header>
-    <header class="container">
-      <!-- NAVBAR <nav class="row navbar navbar-expand-lg navbar-light bg-light"> -->
-      <nav class="row navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href="#">Photon News</a>
-        <!-- SEARCH FORM -->
-        <div class="d-flex my-2 my-lg-0 mx-auto">
-          <form class="form-inline">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
-          <a class="small ml-2 my-auto" data-toggle="collapse" data-target="#advanced-search-dropdown" href="">advanced search</a>
-        </div>
-        <ul class="navbar-nav ml-2 mt-2 mt-lg-0">
-          <!-- NOTIFICATIONS -->
-          <li class="nav-item ml-2">
-            <i class="fa fa-bell"></i>
-          </li>
-          <!-- USER PROFILE -->
-          <li class="nav-item ml-2">
-            <a href="profile.html"><i class="fa fa-user"></i></a>
-          </li>
-          <!-- SETTINGS -->
-          <li class="nav-item ml-2">
-            <i class="fa fa-cog"></i>
+  <header class="container-fluid px-0">
+    <!-- NAVBAR <nav class="row navbar navbar-expand-lg navbar-light bg-light"> -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <a class="navbar-brand" href="index.html">Photon News</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="true" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- SIGN IN -->
+      <div class="navbar-collapse collapse show" id="navbar">
+        <ul class="navbar-nav mr-auto">
+          <!-- Account -->
+          <li class="nav-item dropdown">
+
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-user-circle"></i> Sign In
+              </a>
+              <!-- DROPDOWN FOR SIGN IN -->
+              <div class="dropdown-menu dropdown-menu-right mt-0">
+                <form class="px-4 py-3">
+                  <div class="form-group">
+                    <label for="dropdownFormEmail">Email address</label>
+                    <input type="email" class="form-control" id="dropdownFormEmail" placeholder="email@example.com">
+                  </div>
+                  <div class="form-group">
+                    <label for="dropdownFormPassword">Password</label>
+                    <input type="password" class="form-control" id="dropdownFormPassword" placeholder="Password">
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="dropdownCheck">
+                    <label class="form-check-label" for="dropdownCheck">
+                      Remember me
+                    </label>
+                  </div>
+                  <button onclick="signIn()" type="submit" class="btn btn-primary">Sign in</button>
+                </form>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="create_profile.html">New around here? Sign up</a>
+                <a class="dropdown-item" href="#">Forgot password?</a>
+              </div>
           </li>
         </ul>
-      </nav>
-      <div class="row">
-        <div id="advanced-search-dropdown" class="collapse my-2 my-lg-0 mx-auto">
-          <form class="" action="#" method="post">
-            <div class="form-group my-1">
-              <select class="custom-select">
-                <option selected>Search for...</option>
-                <option value="1">title</option>
-                <option value="2">author</option>
-              </select>
+            <div class="d-flex flex-column">
+              <form class="form-inline">
+                <input class="form-control mr-sm-2 rounded" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-light my-2 my-sm-0 rounded" type="submit">
+                  <a href="advance_search.html" style="color:inherit; text-decoration:none">Search</a>
+                </button>
+              </form>
+                <a class="small" data-toggle="collapse" data-target="#advanced-search-dropdown" style="color:white;" href="">advanced search</a>
             </div>
-            <div class="form-group my-1">
-              <select class="custom-select">
-                <option selected>Section...</option>
-                <option value="1">World</option>
-                <option value="2">Technology</option>
-                <option value="3">Science</option>
-                <option value="4">Business</option>
-                <option value="5">Sports</option>
-              </select>
+          </div>
+    </nav>
+    <!-- ADVANCED SEARCH -->
+    <div class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div id="advanced-search-dropdown" class="collapse ml-1 ml-lg-auto">
+        <form class="" action="#" method="post">
+          <div class="form-group my-1">
+            <select class="custom-select">
+              <option selected>Search for...</option>
+              <option value="1">Only title</option>
+              <option value="2">Only body</option>
+              <option value="3">Title and body</option>
+              <option value="4">Username</option>
+            </select>
+          </div>
+          <div class="form-group my-1">
+            <select class="custom-select">
+              <option selected>Section...</option>
+              <option value="1">World</option>
+              <option value="2">Technology</option>
+              <option value="3">Science</option>
+              <option value="4">Business</option>
+              <option value="5">Sports</option>
+            </select>
+          </div>
+          <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="News' Author...">
+          <div class="d-flex">
+            <div class="form-group">
+              <!-- <p><time></time></p> -->
+              <label class="col-form-label">Begin:</label>
+              <input type="date" class="form-control" value="1990-01-01">
             </div>
-            <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="News' Author...">
-            <div class="d-flex">
-              <div class="form-group">
-                <!-- <p><time></time></p> -->
-                <label class="col-form-label">Begin:</label>
-                <input type="date" class="form-control" value="1990-01-01">
-              </div>
-              <div class="form-group">
-                <!-- <p><time></time></p> -->
-                <label class="col-form-label" >End:</label>
-                <input type="date" class="form-control" value="2018-03-15">
-              </div>
+            <div class="form-group">
+              <!-- <p><time></time></p> -->
+              <label class="col-form-label" >End:</label>
+              <input type="date" class="form-control" value="2018-03-15">
             </div>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
-    </header>
+    </div>
+  </header>
 
-    <form class="profile_item border container p-2 mx-auto mt-2"
+    <form class="profile_item border container p-2 mx-auto mt-5"
     action="profile.html" method="post">
     <div class="row">
-      <div class="col">
+      <div class="col-md-6">
         <div class="form-group">
           <label for="inputPhoto">Input Photo:</label>
           <input type="file" class="form-control-file" id="inputPhoto" aria-describedby="fileHelp">
@@ -102,7 +130,7 @@
           </select>
         </div>
       </div>
-      <div class="col">
+      <div class="col-md-6">
         <div class="form-group">
           <label class="col-form-label" for="inputDefault">Name:</label>
           <input type="text" class="form-control" placeholder="Your name" id="nameInput">
