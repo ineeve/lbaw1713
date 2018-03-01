@@ -23,8 +23,27 @@
     </head>
     
     <body>
-        <header>
-            Insert Header HERE
+        <header class="container-fluid px-0">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                <a class="navbar-brand" href="#">Photon News</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="true" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            
+                <div class="navbar-collapse collapse show" id="navbar">
+                    <ul class="navbar-nav mr-auto">
+                    <!-- Account -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
+                        <i class="fas fa-user-circle"></i> Account
+                        </a>
+                        <div class="dropdown-menu" x-placement="bottom-start">
+                        <a class="dropdown-item" href="index.html"><i class="fas fa-sign-out-alt"></i> Log out</a>
+                        </div>
+                    </li>
+                    </ul>
+                </div>
+            </nav>
         </header>
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item">
@@ -96,7 +115,7 @@
                                         <td>root</td>
                                         <td>admin</td>
                                         <td>admin@photonnews.com</td>
-                                        <td>150</td>
+                                        <td>0</td>
                                         <td><i class="text-success fas fa-circle"></i></td>
                                         <td>10/5/2017</td>
                                         <td></td>

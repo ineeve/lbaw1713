@@ -25,3 +25,7 @@ div.section-div {
 a.nounderline {
   text-decoration: none;
 }
+
+.no-display {
+  display: none;
+}

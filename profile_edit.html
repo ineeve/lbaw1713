@@ -14,13 +14,6 @@
   <title>Photon News</title>
 </head>
 <body>
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous" defer></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous" defer></script>
-  <header>
     <header class="container">
       <!-- NAVBAR <nav class="row navbar navbar-expand-lg navbar-light bg-light"> -->
       <nav class="row navbar navbar-expand-lg navbar-light">
@@ -34,7 +27,7 @@
           <a class="small ml-2 my-auto" data-toggle="collapse" data-target="#advanced-search-dropdown" href="">advanced search</a>
         </div>
         <!-- CREATE NEWS -->
-        <a href="createNews.html" class="btn btn-primary" role="button"><i class="fas fa-plus"></i>&nbsp&nbspCreate News</a>
+        <a href="createNews.html" class="btn btn-primary" role="button"><i class="fas fa-plus"></i>&nbsp;&nbsp;Create News</a>
 
         <ul class="navbar-nav ml-2 mt-2 mt-lg-0">
           <!-- NOTIFICATIONS -->
@@ -43,14 +36,14 @@
           </li>
           <!-- USER PROFILE -->
           <li class="nav-item dropdown ml-2">
-              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
-                <i class="fas fa-user-circle"></i> Account
-              </a>
-              <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-start">
-                <a class="dropdown-item" href="profile.html">Profile</a>
-                <a class="dropdown-item" href="settings.html">Settings</a>
-                <a class="dropdown-item" href="index.html">Log out</a>
-              </div>
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
+              <i class="fas fa-user-circle"></i> Account
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-start">
+              <a class="dropdown-item" href="profile.html">Profile</a>
+              <a class="dropdown-item" href="settings.html">Settings</a>
+              <a class="dropdown-item" href="index.html">Log out</a>
+            </div>
           </li>
         </ul>
       </nav>
@@ -94,61 +87,65 @@
 
     <form class="profile_item border container p-2 mx-auto mt-2"
     action="profile.html" method="post">
-                <div class="row">
-                  <div class="col">
-                    <img src="https://c1.staticflickr.com/3/2936/14387367072_85312c31b3_b.jpg" alt="pic" height="200px" width="200px">
-                    <div class="form-group">
-                      <label for="inputPhoto">Input Photo:</label>
-                      <input type="file" class="form-control-file" id="inputPhoto" aria-describedby="fileHelp">
-                      <small id="fileHelp" class="form-text text-muted">Please choose an image!</small>
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleInputEmail1">Email address:</label>
-                      <input type="email" class="form-control" id="inputEmail1" aria-describedby="emailHelp" placeholder="exemple@exemple.ex">
-                      <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
-                    </div>
-                    <div class="form-group">
-                      <label for="inputCountry">Country:</label>
-                      <select id="inputCountry" class="form-control">
-                        <option selected>Portugal</option>
-                        <option>USA</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-group">
-                      <label class="col-form-label" for="inputDefault">Name:</label>
-                      <input type="text" class="form-control" placeholder="Joana Moreira" id="nameInput">
-                    </div>
-                    <div class="form-group">
-                      <label class="col-form-label" for="gender">Gender:</label>
-                      <select class="custom-select" id="gender">
-                        <option value="female">Female</option>
-                        <option value="male">Male</option>
-                      </select>
-                    </div>
-                    <div class="form-group">
-                      <!-- <p><time></time></p> -->
-                      <label class="col-form-label" for="bday">Birthday:</label>
-                      <input type="date" class="form-control" id="bday" name="bday" value="1980-01-25">
-                    </div>
-                    <div class="border p-2 mb-1">
-                    <div class="form-group">
-                      <label for="exampleInputPassword1">Password</label>
-                      <input type="password" class="form-control" id="inputPassword1" placeholder="Password">
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleInputPassword1">Confirm Password</label>
-                      <input type="password" class="form-control" id="confirmPassword1" placeholder="Password">
-                    </div>
-                  </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                  </div>
-                </div>
+    <div class="row">
+      <div class="col-md-6">
+        <img src="https://c1.staticflickr.com/3/2936/14387367072_85312c31b3_b.jpg" alt="pic" height="200px" width="200px">
+        <div class="form-group">
+          <label for="inputPhoto">Input Photo:</label>
+          <input type="file" class="form-control-file" id="inputPhoto" aria-describedby="fileHelp">
+          <small id="fileHelp" class="form-text text-muted">Please choose an image!</small>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email address:</label>
+          <input type="email" class="form-control" id="inputEmail1" aria-describedby="emailHelp" placeholder="exemple@exemple.ex">
+          <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+        </div>
+        <div class="form-group">
+          <label for="inputCountry">Country:</label>
+          <select id="inputCountry" class="form-control">
+            <option selected>Portugal</option>
+            <option>USA</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="col-form-label" for="inputDefault">Name:</label>
+          <input type="text" class="form-control" placeholder="Joana Moreira" id="nameInput">
+        </div>
+        <div class="form-group">
+          <label class="col-form-label" for="gender">Gender:</label>
+          <select class="custom-select" id="gender">
+            <option value="female">Female</option>
+            <option value="male">Male</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <!-- <p><time></time></p> -->
+          <label class="col-form-label" for="bday">Birthday:</label>
+          <input type="date" class="form-control" id="bday" name="bday" value="1980-01-25">
+        </div>
+        <div class="border p-2 mb-1">
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="inputPassword1" placeholder="Password">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Confirm Password</label>
+            <input type="password" class="form-control" id="confirmPassword1" placeholder="Password">
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
 
   </form>
   <footer>
   </footer>
-
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous" defer></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous" defer></script>
 </body>
 </html>
