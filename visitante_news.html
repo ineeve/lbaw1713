@@ -120,61 +120,32 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="reportModalLabel">Report</h5>
+          <h5 class="modal-title" id="reportModalLabel">You need to be registered in our website to report</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <form>
-              <div class="form-group">
-                <label>Reasons:</label>
-                <div class="d-flex flex-wrap items-collection">
-                  <div class="mr-2 items">
-                    <div class="info-block block-info clearfix">
-                      <div data-toggle="buttons" class="btn-group bizmoduleselect">
-                        <label class="btn btn-primary">
-                          <div class="itemcontent">
-                            <input class="no-display" type="checkbox" name="var_id[]" autocomplete="off" value="">
-                            <h5>Offensive</h5>
-                          </div>
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="mr-2 items">
-                    <div class="info-block block-info clearfix">
-                      <div data-toggle="buttons" class="btn-group itemcontent">
-                        <label class="btn btn-primary">
-                          <div class="itemcontent">
-                            <input class="no-display" type="checkbox" name="var_id[]" autocomplete="off" value="">
-                            <h5>Scam/Spam</h5>
-                          </div>
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="mr-2 items">
-                    <div class="info-block block-info clearfix">
-                      <div data-toggle="buttons" class="btn-group itemcontent">
-                        <label class="btn btn-primary">
-                          <div class="itemcontent">
-                            <input class="no-display" type="checkbox" name="var_id[]" autocomplete="off" value="">
-                            <h5>Sexually Inappropriate</h5>
-                          </div>
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="report-description-area">Description:</label>
-                <textarea class="form-control" id="report-description-area" rows="3"></textarea>
-              </div>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-              <button type="submit" class="btn btn-primary">Submit</button>
+          <form class="px-4 py-3">
+            <div class="form-group">
+              <label for="dropdownFormEmail">Email address</label>
+              <input type="email" class="form-control" id="dropdownFormEmail" placeholder="email@example.com">
+            </div>
+            <div class="form-group">
+              <label for="dropdownFormPassword">Password</label>
+              <input type="password" class="form-control" id="dropdownFormPassword" placeholder="Password">
+            </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="dropdownCheck">
+              <label class="form-check-label" for="dropdownCheck">
+                Remember me
+              </label>
+            </div>
+            <button onclick="signIn()" type="submit" class="btn btn-primary">Sign in</button>
           </form>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="create_profile.html">New around here? Sign up</a>
+          <a class="dropdown-item" href="#">Forgot password?</a>
         </div>
       </div>
     </div>
@@ -186,7 +157,7 @@
         <div class="row">
           <!-- ARTICLE OPTIONS -->
           <div class="col-1 pr-0">
-            <div class="d-flex mt-4 justify-content-end">
+            <div class="d-flex mt-5 justify-content-end">
               <div class="mr-2 mt-1">100</div>
               <div class="d-flex flex-column article-options">
                 <i class="fas fa-arrow-alt-circle-up clickable-btn"></i>
@@ -197,54 +168,33 @@
             </div>
           </div>
           <!-- ARTICLE -->
-          <div class="col-11 col-lg-10 article">
+          <div class="col-11 col-lg-10 mt-3 article">
             <h6 class="category">Sports</h6>
-              <h2 class="title">Title</h2>
-              <h6 class="author">Author &middot; 20/02/2018</h6>
+              <h2 class="title">Fox News Published An Opinion Piece Raging Against Diversity In Sports. Then They Deleted It.</h2>
+              <h6 class="author">David Mack &middot; February 9, 2018, at 7:27 p.m</h6>
+              <img class="img-responsive mx-auto my-3 d-block" src="images/sports-news.jpg" alt="Fox" width="460" height="345">
               <div class="body">
-                <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth
-                  master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro
-                  keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat
-                  salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
-                <p>Pariatur labore pariatur veniam velit ipsum non nulla minim esse. Commodo commodo pariatur adipisicing laboris
-                  eu do. Sint minim ipsum nostrud ad laboris amet commodo cupidatat. Labore duis in commodo cillum do adipisicing
-                  duis magna id deserunt veniam consectetur in.</p>
-                <p>Exercitation magna ea voluptate sunt dolor velit nostrud est nulla sunt irure.</p>
-                <p>Reprehenderit commodo aliqua ad ea labore ea pariatur cupidatat duis. Non nulla consequat amet tempor cillum
-                  id dolor ullamco Lorem commodo reprehenderit sit velit duis. Adipisicing id id consectetur mollit aliquip
-                  culpa adipisicing commodo excepteur laboris. Aliqua veniam incididunt duis sunt cillum cupidatat enim sit.
-                  Amet eiusmod nulla est pariatur eiusmod.</p>
-                <p>Non Lorem dolore qui nostrud ullamco magna ut culpa eiusmod. Dolor minim duis aliqua excepteur et incididunt.
-                  Nulla sit exercitation aliqua officia officia nisi ad labore aliqua Lorem adipisicing pariatur mollit labore.
-                  Ullamco dolore nulla ad aute esse consectetur esse. Do veniam velit dolore ex. Irure nulla voluptate quis
-                  officia ut non laboris sit. Velit tempor ullamco commodo officia culpa. Exercitation tempor dolore est
-                  pariatur veniam. Ut minim eiusmod culpa pariatur. Eu aliquip anim laborum consectetur. Ipsum est dolor
-                  anim voluptate irure ad amet sint reprehenderit aliquip anim. Consequat veniam laboris ea elit do. Mollit
-                  Lorem esse labore nisi eu deserunt anim non dolore. Velit enim mollit occaecat proident laboris voluptate
-                  eiusmod. Magna ex sunt incididunt velit cupidatat cillum duis mollit in. Sint duis Lorem adipisicing pariatur
-                  est enim eiusmod adipisicing do. Nostrud eiusmod aliquip adipisicing adipisicing elit Lorem deserunt eu
-                  ex tempor. In aliquip labore excepteur eiusmod id minim sint excepteur labore elit do sunt. Minim officia
-                  quis excepteur eiusmod minim quis mollit eu officia id non. Esse Lorem eiusmod ad sunt et nisi. Nulla aute
-                  fugiat eiusmod sunt tempor laborum proident ex. Veniam veniam culpa culpa deserunt anim. Sit et veniam
-                  est duis laboris eiusmod ut est amet nisi nisi dolor reprehenderit.
-                </p>
-                <p>Esse officia do non adipisicing ipsum esse aute elit dolore cupidatat laboris aliquip labore. Esse laboris
-                  amet sit nostrud elit irure do. Consectetur sit culpa dolor nostrud sit ut elit consectetur amet voluptate
-                  sint dolor Lorem eu. Exercitation adipisicing nisi sunt est consectetur nisi incididunt duis pariatur enim
-                  et. Commodo incididunt amet voluptate dolore esse laborum nulla est ex amet voluptate voluptate consectetur
-                  ipsum. Nisi elit ut nulla deserunt sint officia minim aliqua. Dolor mollit fugiat exercitation cupidatat
-                  sunt cupidatat aliquip amet culpa aliquip. Laboris nisi sint incididunt eu id dolor aliqua ipsum quis ut
-                  ex. Dolor eiusmod cupidatat cillum occaecat sunt dolore aliqua occaecat reprehenderit occaecat excepteur
-                  nostrud et. Officia est consequat ullamco laborum nisi dolore consequat irure dolor voluptate ad laboris.
-                  Ad ex et enim voluptate dolore aliqua non amet irure irure ipsum laborum. Non veniam culpa deserunt veniam
-                  elit est. Amet nisi nulla laborum et veniam aliqua culpa amet. Consectetur enim quis occaecat sit aute.
-                  Pariatur dolore duis aliqua ipsum magna consectetur non. Do esse sunt cupidatat pariatur est. Aute non
-                  voluptate eiusmod veniam sunt voluptate nisi occaecat tempor ut enim. Id duis ea sit fugiat dolore aliqua
-                  magna nostrud qui incididunt laboris do. Consequat culpa in officia sunt ullamco amet adipisicing eiusmod.
-                  Eiusmod esse ea nostrud ipsum sit. Magna sit duis in veniam ex voluptate aliquip magna.</p>
+                <p>Fox News on Friday deleted a controversial opinion column written by a top network executive that argued the
+                   US Olympic team had "[bowed to] political correctness by assigning teams quotas for race, religion, or sexuality."</p>
+                <p>The piece, titled "In Olympics, let's focus on the winner of the race — not the race of the winner," criticized a
+                  US Olympic official for praising the diversity of this year's US athletes and caused outrage after it was published Wednesday.
+"That was followed by a, frankly, embarrassing laundry list of how many African-Americans, Asians and openly gay athletes are on this year’s US team,
+" wrote John Moody, the executive vice president and executive editor for Fox News. "No sport that we are aware of awards points — or medals — for skin color or sexual orientation."
+"Unless it’s changed overnight, the motto of the Olympics, since 1894, has been 'Faster, Higher, Stronger,'" he wrote. "It appears the US Olympic Committee would like to change that
+ to 'Darker, Gayer, Different.'"</p>
+                <p>The column was attacked by many online, including three prominent LGBT rights groups: GLAAD, the Human Rights Campaign, and the National Center for Lesbian Rights.
+
+"These athletes are at the Olympics because they already won by qualifying to represent the United States on the world's stage," GLAAD CEO Sarah Kate Ellis said, "and they did so despite
+ facing discrimination from places like Fox News throughout their careers."</p>
+                <p>But by Friday, it was gone, with a network spokesperson confirming that it had been removed.
+"John Moody’s column does not reflect the views or values of Fox News and has been removed," a Fox News spokesperson said via email.
+The spokesperson did not immediately respond to a question about whether all opinion pieces published by Fox News reflect the network's views.
+A person with knowledge of the network's internal workings said Moody has no editorial oversight on any platform.
+The person said editors were too deferential to Moody due to his longevity at the network, so they didn't put the column through a proper vetting process.</p>
+
               </div>
               <h4>Source</h4>
-              <a href="https://www.google.pt/search?q=lorem+ipsum&oq=lorem+ipsum&aqs=chrome..69i57j0l5.2104j0j4&sourceid=chrome&ie=UTF-8">Google</a>
+              <a href="https://www.buzzfeed.com/davidmack/fox-news-deletes-anti-diversity-winter-olympics-op-ed?utm_term=.pbarWObP7#.tdkAg8ZlJ">BuzzFeedNews</a>
               <h3 class="mt-4">Comments</h3>
               <form class="mt-3 mb-4">
                 <div class="form-group">
@@ -256,30 +206,26 @@
               <div class="card border-dark my-3">
                 <div class="card-body">
                   <div class="d-flex">
-                    <div>
-                      <img src="images/generic_avatar.png" style="max-width: 70px;" alt="pPic">
+                    <div class="mr-2">
+                      <img src="images/user1.jpg" style="max-height: 70px; max-width: 70px;" alt="pPic">
                     </div>
                     <div>
-                      <div class="owner">NAME</div>
-                      <time class="date">2008-02-14 20:00</time>
+                      <div class="owner">LN Moore</div>
+                      <time class="date">February 28, 2018, at 8:05 p.m</time>
                     </div>
                     <div class="ml-auto">
                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
                         <!-- <i class="fa fa-angle-down" ></i> -->
                       </a>
                       <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-start">
-                        <a class="dropdown-item" href="#">Report</a>
+                        <a class="dropdown-item" href="#">You need to be registered in our website <br> to report this comment</a>
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col">
-                      <p>Exercitation nulla mollit esse cupidatat laborum sunt laborum culpa non mollit id cupidatat incididunt
-                        eu. Velit dolore exercitation irure fugiat officia est velit incididunt aliquip. Ea commodo pariatur
-                        velit consequat elit deserunt. Irure sunt consequat occaecat in. Laboris sit anim sunt labore. Id
-                        cillum nulla eu quis ipsum cillum amet deserunt fugiat reprehenderit. Commodo sit culpa mollit esse
-                        aliquip qui dolor excepteur elit qui ut fugiat ut. Labore ea minim Lorem laborum voluptate commodo
-                        excepteur sunt elit esse nostrud. Proident laboris amet commodo consectetur esse qui.</p>
+                      <p>ah yes, no matter your qualification, it will be assumed your race was the cause.
+                        #blackandproud #lawdegreewithhonors.</p>
                       </p>
                     </div>
                   </div>
@@ -290,30 +236,26 @@
               <div class="card border-dark my-3">
                 <div class="card-body">
                   <div class="d-flex">
-                    <div>
-                      <img src="images/generic_avatar.png" style="max-width: 70px;" alt="pPic">
+                    <div class="mr-2">
+                      <img src="images/user2.jpg" style="max-height: 70px; max-width: 70px;" alt="pPic">
                     </div>
                     <div>
-                      <div class="owner">NAME</div>
-                      <time class="date">2008-02-14 20:00</time>
+                      <div class="owner">Connor R Macdonald</div>
+                      <time class="date">February 28, 2018, at 10:17 a.m</time>
                     </div>
                     <div class="ml-auto">
                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
                         <!-- <i class="fa fa-angle-down" ></i> -->
                       </a>
                       <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-start">
-                        <a class="dropdown-item" href="#">Report</a>
+                        <a class="dropdown-item" href="#">You need to be registered in our website <br> to report this comment</a>
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col">
-                      <p>Exercitation nulla mollit esse cupidatat laborum sunt laborum culpa non mollit id cupidatat incididunt
-                        eu. Velit dolore exercitation irure fugiat officia est velit incididunt aliquip. Ea commodo pariatur
-                        velit consequat elit deserunt. Irure sunt consequat occaecat in. Laboris sit anim sunt labore. Id
-                        cillum nulla eu quis ipsum cillum amet deserunt fugiat reprehenderit. Commodo sit culpa mollit esse
-                        aliquip qui dolor excepteur elit qui ut fugiat ut. Labore ea minim Lorem laborum voluptate commodo
-                        excepteur sunt elit esse nostrud. Proident laboris amet commodo consectetur esse qui.</p>
+                      <p>"Unless it’s changed overnight, the motto of the Olympics, since 1894, has been 'Faster, Higher, Stronger,'" he wrote. "It appears the US Olympic Committee would like to change that to 'Darker, Gayer, Different.'"
+                        And with that, Fox shows their hand. Not that we needed clarification, but Fox always consider anything but a straight white person to be abnormal.</p>
                       </p>
                     </div>
                   </div>
@@ -324,30 +266,26 @@
               <div class="card border-dark my-3">
                 <div class="card-body">
                   <div class="d-flex">
-                    <div>
-                      <img src="images/generic_avatar.png" style="max-width: 70px;" alt="pPic">
+                    <div class="mr-2">
+                      <img src="images/user3.jpg" style="max-height: 70px; max-width: 70px;" alt="pPic">
                     </div>
                     <div>
-                      <div class="owner">NAME</div>
-                      <time class="date">2008-02-14 20:00</time>
+                      <div class="owner">Alexander Boschkov</div>
+                      <time class="date">February 27, 2018, at 5:05 p.m</time>
                     </div>
                     <div class="ml-auto">
                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
                         <!-- <i class="fa fa-angle-down" ></i> -->
                       </a>
                       <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-start">
-                        <a class="dropdown-item" href="#">Report</a>
+                        <a class="dropdown-item" href="#">You need to be registered in our website <br> to report this comment</a>
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col">
-                      <p>Exercitation nulla mollit esse cupidatat laborum sunt laborum culpa non mollit id cupidatat incididunt
-                        eu. Velit dolore exercitation irure fugiat officia est velit incididunt aliquip. Ea commodo pariatur
-                        velit consequat elit deserunt. Irure sunt consequat occaecat in. Laboris sit anim sunt labore. Id
-                        cillum nulla eu quis ipsum cillum amet deserunt fugiat reprehenderit. Commodo sit culpa mollit esse
-                        aliquip qui dolor excepteur elit qui ut fugiat ut. Labore ea minim Lorem laborum voluptate commodo
-                        excepteur sunt elit esse nostrud. Proident laboris amet commodo consectetur esse qui.</p>
+                      <p>Fox shold be the last place to question the qualifciations of anybody. I am pretty sure you can piack a dozen random people of the street
+                         and you will find someone more qualified then the incompetent people working at Fox</p>
                       </p>
                     </div>
                   </div>
@@ -358,35 +296,31 @@
               <div class="card border-dark my-3">
                 <div class="card-body">
                   <div class="d-flex">
-                    <div>
-                      <img src="images/generic_avatar.png" style="max-width: 70px;" alt="pPic">
+                    <div class="mr-2">
+                      <img src="images/user4.jpg" style="max-height: 70px; max-width: 70px;" alt="pPic">
                     </div>
                     <div>
-                      <div class="owner">NAME</div>
-                      <time class="date">2008-02-14 20:00</time>
+                      <div class="owner">Ashley Bullard </div>
+                      <time class="date">February 28, 2018, at 11:06 p.m</time>
                     </div>
                     <div class="ml-auto">
                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
                         <!-- <i class="fa fa-angle-down" ></i> -->
                       </a>
                       <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-start">
-                        <a class="dropdown-item" href="#">Report</a>
+                        <a class="dropdown-item" href="#">You need to be registered in our website <br> to report this comment</a>
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col">
-                      <p>Exercitation nulla mollit esse cupidatat laborum sunt laborum culpa non mollit id cupidatat incididunt
-                        eu. Velit dolore exercitation irure fugiat officia est velit incididunt aliquip. Ea commodo pariatur
-                        velit consequat elit deserunt. Irure sunt consequat occaecat in. Laboris sit anim sunt labore. Id
-                        cillum nulla eu quis ipsum cillum amet deserunt fugiat reprehenderit. Commodo sit culpa mollit esse
-                        aliquip qui dolor excepteur elit qui ut fugiat ut. Labore ea minim Lorem laborum voluptate commodo
-                        excepteur sunt elit esse nostrud. Proident laboris amet commodo consectetur esse qui.</p>
+                      <p>This is exactly the type of shit your network promotes</p>
                       </p>
                     </div>
                   </div>
                 </div>
               </div>
+
               <ul class="pagination pagination-sm">
                 <li class="page-item disabled">
                   <a class="page-link" href="#">&laquo;</a>
@@ -410,86 +344,6 @@
                   <a class="page-link" href="#">&raquo;</a>
                 </li>
               </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Mod Comments section -->
-    <div class="tab-pane fade" id="mod-comments">
-      <div class="col-lg-10 mx-auto">
-        <!-- Comment 1 -->
-        <div class="card border-dark my-3">
-          <div class="card-body">
-            <div class="d-flex">
-              <div>
-                <img src="images/generic_avatar.png" style="max-width: 70px;" alt="pPic">
-              </div>
-              <div>
-                <div class="owner">NAME</div>
-                <time class="date">2008-02-14 20:00</time>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">
-                <p>Exercitation nulla mollit esse cupidatat laborum sunt laborum culpa non mollit id cupidatat incididunt eu.
-                  Velit dolore exercitation irure fugiat officia est velit incididunt aliquip. Ea commodo pariatur velit
-                  consequat elit deserunt. Irure sunt consequat occaecat in. Laboris sit anim sunt labore. Id cillum nulla
-                  eu quis ipsum cillum amet deserunt fugiat reprehenderit.</p>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Comment 2 -->
-        <div class="card border-dark my-3">
-          <div class="card-body">
-            <div class="d-flex">
-              <div>
-                <img src="images/generic_avatar.png" style="max-width: 70px;" alt="pPic">
-              </div>
-              <div>
-                <div class="owner">NAME</div>
-                <time class="date">2008-02-14 20:00</time>
-              </div>
-
-            </div>
-            <div class="row">
-              <div class="col">
-                <p>Exercitation nulla mollit esse cupidatat laborum sunt laborum culpa non mollit id cupidatat incididunt eu.
-                </p>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Comment 3 -->
-        <div class="card border-dark my-3">
-          <div class="card-body">
-            <div class="d-flex">
-              <div>
-                <img src="images/generic_avatar.png" style="max-width: 70px;" alt="pPic">
-              </div>
-              <div>
-                <div class="owner">NAME</div>
-                <time class="date">2008-02-14 20:00</time>
-              </div>
-
-            </div>
-            <div class="row">
-              <div class="col">
-                <p>Exercitation nulla mollit esse cupidatat laborum sunt laborum culpa non mollit id cupidatat incididunt eu.
-                  Velit dolore exercitation irure fugiat officia est velit incididunt aliquip. Ea commodo pariatur velit
-                  consequat elit deserunt. Irure sunt consequat occaecat in. Laboris sit anim sunt labore. Id cillum nulla
-                  eu quis ipsum cillum amet deserunt fugiat reprehenderit. Commodo sit culpa mollit esse aliquip qui dolor
-                  excepteur elit qui ut fugiat ut. Labore ea minim Lorem laborum voluptate commodo excepteur sunt elit esse
-                  nostrud.
-                </p>
-                </p>
-              </div>
-            </div>
           </div>
         </div>
       </div>
