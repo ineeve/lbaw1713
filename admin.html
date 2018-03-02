@@ -3,25 +3,36 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <script src="./scripts/index.js" defer></script>
-        
+
         <!-- Font Awesome CSS -->
         <link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
-        
+
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="bootswatch.css">
         <link rel="stylesheet" href="style.css">
-        
+
         <!-- Optional JavaScript -->
-        
+
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        
+
+        <style>
+          a#users-tab {color:white;}
+          a#users-tab.active {color:black;}
+          a#bagdes-tab {color:white;}
+          a#bagdes-tab.active {color:black;}
+          a#categories-tab {color:white;}
+          a#categories-tab.active {color:black;}
+          a#statistics-tab {color:white;}
+          a#statistics-tab.active {color:black;}
+        </style>
+
         <title>Photon News</title>
     </head>
-    
+
     <body>
         <header class="container-fluid px-0">
             <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -29,7 +40,7 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="true" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-            
+
                 <div class="navbar-collapse collapse show" id="navbar">
                     <ul class="navbar-nav mr-auto">
                     <!-- Account -->
@@ -45,7 +56,7 @@
                 </div>
             </nav>
         </header>
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <ul class="nav nav-tabs bg-primary" id="myTab" role="tablist">
             <li class="nav-item">
                 <a class="nav-link active" id="users-tab" data-toggle="tab" href="#users" role="tab" aria-controls="users" aria-selected="true">Users</a>
             </li>
@@ -59,7 +70,7 @@
                 <a class="nav-link" id="statistics-tab" data-toggle="tab" href="#statistics" role="tab" aria-controls="statistics" aria-selected="false">Statistics</a>
             </li>
             </ul>
-            
+
             <!-- Tab panes -->
             <div class="tab-content">
             <div class="tab-pane active" id="users" role="tabpanel" aria-labelledby="users-tab">
@@ -90,7 +101,7 @@
                                     </ul>
                                 </div>
                             </form>
-                            
+
                         </div>
                         <div class="row m-2">
                             <form class="d-flex align-items-center">
