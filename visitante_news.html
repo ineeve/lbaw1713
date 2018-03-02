@@ -115,20 +115,57 @@
   </header>
 
 
+  <!-- REPORT MODAL -->
+  <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="reportModalLabel">You need to be registered in our website to report</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form class="px-4 py-3">
+            <div class="form-group">
+              <label for="dropdownFormEmail">Email address</label>
+              <input type="email" class="form-control" id="dropdownFormEmail" placeholder="email@example.com">
+            </div>
+            <div class="form-group">
+              <label for="dropdownFormPassword">Password</label>
+              <input type="password" class="form-control" id="dropdownFormPassword" placeholder="Password">
+            </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="dropdownCheck">
+              <label class="form-check-label" for="dropdownCheck">
+                Remember me
+              </label>
+            </div>
+            <button onclick="signIn()" type="submit" class="btn btn-primary">Sign in</button>
+          </form>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="create_profile.html">New around here? Sign up</a>
+          <a class="dropdown-item" href="#">Forgot password?</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div id="myTabContent" class="tab-content">
     <div class="tab-pane fade active show" id="article">
       <div class="container-fluid">
         <div class="row">
           <!-- ARTICLE OPTIONS -->
           <div class="col-1 pr-0">
-              <div class="d-flex mt-5 justify-content-end">
-                <div class="mr-2 mt-1">100</div>
-                <div class="d-flex flex-column article-options">
-                  <i class="fas fa-arrow-alt-circle-up clickable-btn"></i>
-                  <i class="fas fa-arrow-alt-circle-down mt-2 clickable-btn"></i>
-                  <i class="fas fa-ban mt-2 clickable-btn"></i> <!-- Report -->
-                </div>
+            <div class="d-flex mt-5 justify-content-end">
+              <div class="mr-2 mt-1">100</div>
+              <div class="d-flex flex-column article-options">
+                <i class="fas fa-arrow-alt-circle-up clickable-btn"></i>
+                <i class="fas fa-arrow-alt-circle-down mt-2 clickable-btn"></i>
+                <i class="fas fa-ban mt-2 clickable-btn" data-toggle="modal" data-target="#reportModal"></i>
+                <!-- Report -->
               </div>
+            </div>
           </div>
           <!-- ARTICLE -->
           <div class="col-11 col-lg-10 mt-3 article">
