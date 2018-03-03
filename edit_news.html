@@ -136,19 +136,36 @@
 
     <body>
         <div class="container my-5">
-            <h3 class="text-primary">Post a news story!</h3>
-            <form onclick="createArticle()">
+            <h3 class="text-primary">Edit your article</h3>
+            <form action="#">
                 <fieldset class="form-group">
                     <label for="newsTitle">Title</label>
-                    <input type="text" class="form-control" id="newsTitle" placeholder="Insert the title here">
+                    <input type="text" class="form-control" id="newsTitle" placeholder="Fox News Published An Opinion Piece Raging Against Diversity In Sports. Then They Deleted It.">
                 </fieldset>
                 <fieldset class="form-group">
                     <label for="newsBody">Body</label>
-                    <textarea id="newsBody"></textarea>
+                    <textarea id="newsBody"><p>Fox News on Friday deleted a controversial opinion column written by a top network executive that argued the
+                       US Olympic team had "[bowed to] political correctness by assigning teams quotas for race, religion, or sexuality."</p>
+                    <p>The piece, titled "In Olympics, let's focus on the winner of the race — not the race of the winner," criticized a
+                      US Olympic official for praising the diversity of this year's US athletes and caused outrage after it was published Wednesday.
+    "That was followed by a, frankly, embarrassing laundry list of how many African-Americans, Asians and openly gay athletes are on this year’s US team,
+    " wrote John Moody, the executive vice president and executive editor for Fox News. "No sport that we are aware of awards points — or medals — for skin color or sexual orientation."
+    "Unless it’s changed overnight, the motto of the Olympics, since 1894, has been 'Faster, Higher, Stronger,'" he wrote. "It appears the US Olympic Committee would like to change that
+     to 'Darker, Gayer, Different.'"</p>
+                    <p>The column was attacked by many online, including three prominent LGBT rights groups: GLAAD, the Human Rights Campaign, and the National Center for Lesbian Rights.
+
+    "These athletes are at the Olympics because they already won by qualifying to represent the United States on the world's stage," GLAAD CEO Sarah Kate Ellis said, "and they did so despite
+     facing discrimination from places like Fox News throughout their careers."</p>
+                    <p>But by Friday, it was gone, with a network spokesperson confirming that it had been removed.
+    "John Moody’s column does not reflect the views or values of Fox News and has been removed," a Fox News spokesperson said via email.
+    The spokesperson did not immediately respond to a question about whether all opinion pieces published by Fox News reflect the network's views.
+    A person with knowledge of the network's internal workings said Moody has no editorial oversight on any platform.
+    The person said editors were too deferential to Moody due to his longevity at the network, so they didn't put the column through a proper vetting process.</p>
+  </textarea>
                 </fieldset>
                 <fieldset class="form-group">
                     <label for="sources">Sources</label>
-                    <input id="sources " class="form-control" type="text" placeholder="Insert links to source, separated by comma">
+                    <input id="sources " class="form-control" type="text" placeholder="https://www.buzzfeed.com/davidmack/fox-news-deletes-anti-diversity-winter-olympics-op-ed?utm_term=.pbarWObP7#.tdkAg8ZlJ">
                 </fieldset>
 
                 <button type="submit" class="btn btn-primary">Submit</button>
