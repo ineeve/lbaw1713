@@ -137,10 +137,24 @@
     <body>
         <div class="container my-5">
             <h3 class="text-primary">Edit your article</h3>
-            <form onclick="createArticle()">
+            <form>
                 <fieldset class="form-group">
                     <label for="newsTitle">Title</label>
-                    <input type="text" class="form-control" id="newsTitle" placeholder="Fox News Published An Opinion Piece Raging Against Diversity In Sports. Then They Deleted It.">
+                    <input type="text" class="form-control" id="newsTitle" placeholder="Insert the title here" value="Fox News Published An Opinion Piece Raging Against Diversity In Sports. Then They Deleted It.">
+                    <label for="list_categories">Select category</label>
+                    <input list="list_categories" name="category" value="Sports" placeholder="Category" class="form-control">
+                    <datalist id="list_categories">
+                      <option value="Sports">
+                      <option value="Politics">
+                      <option value="Business">
+                      <option value="Technology">
+                      <option value="Science">
+                    </datalist>
+                    <label for="coverImage">Cover image</label>
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="coverImage">
+                      <label class="custom-file-label" for="coverImage">Upload cover image</label>
+                    </div>
                 </fieldset>
                 <fieldset class="form-group">
                     <label for="newsBody">Body</label>
@@ -165,10 +179,10 @@
                 </fieldset>
                 <fieldset class="form-group">
                     <label for="sources">Sources</label>
-                    <input id="sources " class="form-control" type="text" placeholder="https://www.buzzfeed.com/davidmack/fox-news-deletes-anti-diversity-winter-olympics-op-ed?utm_term=.pbarWObP7#.tdkAg8ZlJ">
+                    <input id="sources " class="form-control" type="text" placeholder="Insert links to source, separated by comma" value="https://www.buzzfeed.com/davidmack/fox-news-deletes-anti-diversity-winter-olympics-op-ed?utm_term=.pbarWObP7#.tdkAg8ZlJ">
                 </fieldset>
 
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button onclick="createArticle()" type="submit" class="btn btn-primary">Submit</button>
             </form>
 
         </div>
