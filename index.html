@@ -19,8 +19,10 @@
   <!-- Optional JavaScript -->
 
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
@@ -133,7 +135,7 @@
         <div class="row mt-2">
           <!-- LEFT-SECTIONS -->
           <div class="col-md-3" id="sections">
-            <h3 data-toggle="collapse" data-target="#sections_list" aria-expanded="true" aria-controls="sections_list">Sections</h3>
+            <h3 data-toggle="collapse" data-target="#sections_list" aria-expanded="true" aria-controls="sections_list"><i class="fas fa-bars"></i> Sections</h3>
             <div class=" collapse show" id="sections_list">
               <ul class="list-group">
                 <a href="#" role="button" class="border-0 list-group-item list-group-item-action">
@@ -207,7 +209,7 @@
             </div>
             <div class="d-flex flex-column">
               <!-- 1st News Item -->
-              <div class="news_item border container ml-0 my-2">
+              <div class="news_box border container ml-0 my-2">
                 <div class="row" style="position:relative;">
                   <div class="col col-sm-auto my-2">
                     <img src="images/fry.jpg" width="100px" height="100px" alt="Icon">
@@ -229,7 +231,7 @@
                 </div>
               </div>
               <!-- 2nd News Item -->
-              <div class="news_item border container ml-0 my-2">
+              <div class="news_box border container ml-0 my-2">
                 <div class="row" style="position:relative;">
                   <div class="col col-sm-auto my-2">
                     <img src="images/may_brexit.jpg" width="100px" height="100px" alt="Icon">
@@ -253,7 +255,7 @@
                 </div>
               </div>
               <!-- 3rd News Item -->
-              <div class="news_item border container ml-0 my-2">
+              <div class="news_box border container ml-0 my-2">
                 <div class="row" style="position:relative;">
                   <div class="col col-sm-auto my-2">
                     <img src="images/dock_pedo.jpg" width="100px" height="100px" alt="Icon">
@@ -277,7 +279,7 @@
                 </div>
               </div>
               <!-- 4th News Item -->
-              <div class="news_item border container ml-0 my-2">
+              <div class="news_box border container ml-0 my-2">
                 <div class="row" style="position:relative;">
                   <div class="col col-sm-auto my-2">
                     <img src="images/faso.jpg" width="100px" height="100px" alt="Icon">
@@ -299,7 +301,7 @@
                 </div>
               </div>
               <!-- 5th News Item -->
-              <div class="news_item border container ml-0 my-2">
+              <div class="news_box border container ml-0 my-2">
                 <div class="row" style="position:relative;">
                   <div class="col col-sm-auto my-2">
                     <img src="images/may2.jpg" width="100px" height="100px" alt="Icon">
@@ -323,7 +325,7 @@
                 </div>
               </div>
               <!-- 6th News Item -->
-              <div class="news_item border container ml-0 my-2">
+              <div class="news_box border container ml-0 my-2">
                 <div class="row" style="position:relative;">
                   <div class="col col-sm-auto my-2">
                     <img src="images/thomson.jpg" width="100px" height="100px" alt="Icon">
@@ -347,7 +349,7 @@
                 </div>
               </div>
               <!-- 7th News Item -->
-              <div class="news_item border container ml-0 my-2">
+              <div class="news_box border container ml-0 my-2">
                 <div class="row" style="position:relative;">
                   <div class="col col-sm-auto my-2">
                     <img src="images/airport.jpg" width="100px" height="100px" alt="Icon">
@@ -371,7 +373,7 @@
                 </div>
               </div>
               <!-- 8th News Item -->
-              <div class="news_item border container ml-0 my-2">
+              <div class="news_box border container ml-0 my-2">
                 <div class="row" style="position:relative;">
                   <div class="col col-sm-auto my-2">
                     <img src="images/rugby.jpg" width="100px" height="100px" alt="Icon">
@@ -395,7 +397,7 @@
                 </div>
               </div>
               <!-- 9th News Item -->
-              <div class="news_item border container ml-0 my-2">
+              <div class="news_box border container ml-0 my-2">
                 <div class="row" style="position:relative;">
                   <div class="col col-sm-auto my-2">
                     <img src="images/syria.jpg" width="100px" height="100px" alt="Icon">
@@ -419,7 +421,7 @@
                 </div>
               </div>
               <!-- 10th News Item -->
-              <div class="news_item border container ml-0 my-2">
+              <div class="news_box border container ml-0 my-2">
                 <div class="row" style="position:relative;">
                   <div class="col col-sm-auto my-2">
                     <img src="images/ussr_boris_tank.jpg" width="100px" height="100px" alt="Icon">
@@ -441,6 +443,12 @@
                   </div>
                 </div>
               </div>
+
+              <a href="#" id="loadMore" style="text-decoration: none;">Load More</a>
+
+              <p class="totop">
+                <a style="text-decoration: none;" href="#top">Back to top</a>
+              </p>
             </div>
             <nav aria-label="...">
               <ul class="pagination">
