@@ -29,3 +29,18 @@ a.nounderline {
 .no-display {
   display: none;
 }
+
+div#news_box {
+  display: none; 
+}
+
+#loadMore {
+  transition: all 600ms ease-in-out;
+  -webkit-transition: all 600ms ease-in-out;
+  -moz-transition: all 600ms ease-in-out;
+  -o-transition: all 600ms ease-in-out;
+}
+
+p.totop a {
+  display: none;
+}
