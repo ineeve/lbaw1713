@@ -50,3 +50,9 @@ div.news_box {
 p.totop a {
   display: none;
 }
+
+@media screen and (width: 768px) {
+  #sections_list {
+      display: none;
+  }
+}
