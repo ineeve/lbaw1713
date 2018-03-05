@@ -27,137 +27,143 @@
 </head>
 
 <body>
+
+  <!-- NEW HEADER ------------------------------------------------------------------>
   <header class="container-fluid px-0">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <a class="navbar-brand" href="#">Photon News
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="true"
-        aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon">
-        </span>
-      </button>
-      <div class="navbar-collapse collapse show" id="navbar">
-        <ul class="navbar-nav mr-auto">
-          <!-- Account -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
-              <i class="fas fa-user-circle">
-              </i> Account
-            </a>
-            <div class="dropdown-menu" x-placement="bottom-start">
-              <a class="dropdown-item" href="profile.html">
-                <i class="fas fa-user">
-                </i> Profile
-              </a>
-              <a class="dropdown-item" href="forum.html">
-                <i class="fas fa-university">
-                </i> Forum
-              </a>
-              <a class="dropdown-item" href="settings.html">
-                <i class="fas fa-cog">
-                </i> Settings
-              </a>
-              <a class="dropdown-item" href="index.html">
-                <i class="fas fa-sign-out-alt">
-                </i> Log out
-              </a>
+      <!-- NAVBAR <nav class="row navbar navbar-expand-lg navbar-light bg-light"> -->
+      <nav class="row navbar navbar-expand-lg navbar-dark bg-primary mx-0">
+          <div class="col-12 col-md-3">
+              <a class="navbar-brand" href="index_signed_in.html">Photon News</a>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="container ml-0 d-flex flex-column px-0">
+              <form class="form-inline">
+                <input class="form-control mr-sm-2 rounded" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-light my-2 my-sm-0 rounded" type="submit">
+                  <a href="advanced_search.html" style="color:inherit; text-decoration:none">Search</a>
+                </button>
+              </form>
+              <a class="small" data-toggle="collapse" data-target="#advanced-search-dropdown" style="color:white;" href="">advanced search</a>
             </div>
-          </li>
-          <!-- Notifications -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
-              <i class="fas fa-bell">
-              </i> Notifications
-            </a>
-            <div class="dropdown-menu" x-placement="bottom-start">
-              <a class="dropdown-item" href="#">
-                <i class="fas fa-user-circle">
-                </i> User1 is following you
-              </a>
-              <a class="dropdown-item" href="#">
-                <i class="fas fa-user-circle">
-                </i> User2 published an article
-              </a>
-              <a class="dropdown-item" href="#">
-                <i class="fas fa-user-circle">
-                </i> User3 commented on your news
-              </a>
+          </div>
+          <div class="col-12 col-md-3 ">
+            <div class="navbar-collapse collapse show" id="navbar">
+              <ul class="navbar-nav ml-auto">
+                <!-- Publish -->
+                <li class="nav-item">
+                  <button class="btn btn-outline-light my-2 my-sm-0 rounded">
+                    <a href="create_news.html" style="color:inherit; text-decoration:none">
+                      Publish
+                    </a>
+                  </button>
+                </li>
+                
+                <!-- Notifications -->
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
+                    <i class="fas fa-bell">
+                    </i> Notifications
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right position-absolute" x-placement="bottom-start">
+                    <a class="dropdown-item" href="#">
+                      <i class="fas fa-user-circle">
+                      </i> User1 is following you
+                    </a>
+                    <a class="dropdown-item" href="#">
+                      <i class="fas fa-user-circle">
+                      </i> User2 published an article
+                    </a>
+                    <a class="dropdown-item" href="#">
+                      <i class="fas fa-user-circle">
+                      </i> User3 commented on your news
+                    </a>
+                  </div>
+                </li>
+                <!-- Account -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
+                      <i class="fas fa-user-circle">
+                      </i> Account
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right position-absolute" x-placement="bottom-start">
+                      <a class="dropdown-item" href="profile.html">
+                        <i class="fas fa-user">
+                        </i> Profile
+                      </a>
+                      <a class="dropdown-item" href="forum.html">
+                        <i class="fas fa-university">
+                        </i> Forum
+                      </a>
+                      <a class="dropdown-item" href="settings.html">
+                        <i class="fas fa-cog">
+                        </i> Settings
+                      </a>
+                      <a class="dropdown-item" href="index.html">
+                        <i class="fas fa-sign-out-alt">
+                        </i> Log out
+                      </a>
+                    </div>
+                  </li>
+              </ul>
             </div>
-          </li>
-          <li class="nav-item">
-            <button class="btn btn-outline-light my-2 my-sm-0 rounded">
-              <a href="create_news.html" style="color:inherit; text-decoration:none">
-                Publish
-              </a>
-            </button>
-          </li>
-        </ul>
-        <div class="d-flex flex-column">
-          <form class="form-inline">
-            <input class="form-control mr-sm-2 rounded" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-light my-2 my-sm-0 rounded" type="submit">
-              <a href="search_result.html" style="color:inherit; text-decoration:none">Search
-              </a>
-            </button>
+      </div>
+      </nav>
+      <!-- ADVANCED SEARCH -->
+      <div class="px-0 navbar navbar-expand-lg navbar-dark bg-primary">
+        <div id="advanced-search-dropdown" class="collapse ml-1 ml-lg-auto">
+          <form class="" action="#" method="post">
+            <div class="form-group my-1">
+              <select class="custom-select">
+                <option selected>Search for...</option>
+                <option value="1">Only title</option>
+                <option value="2">Only body</option>
+                <option value="3">Title and body</option>
+                <option value="4">Username</option>
+              </select>
+            </div>
+            <div class="form-group my-1">
+              <select class="custom-select">
+                <option selected>Section...</option>
+                <option value="1">World</option>
+                <option value="2">Technology</option>
+                <option value="3">Science</option>
+                <option value="4">Business</option>
+                <option value="5">Sports</option>
+              </select>
+            </div>
+            <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="News' Author...">
+            <div class="d-flex">
+              <div class="form-group">
+                <!-- <p><time></time></p> -->
+                <label class="col-form-label">Begin:</label>
+                <input type="date" class="form-control" value="1990-01-01">
+              </div>
+              <div class="form-group">
+                <!-- <p><time></time></p> -->
+                <label class="col-form-label">End:</label>
+                <input type="date" class="form-control" value="2018-03-15">
+              </div>
+            </div>
           </form>
-          <a class="small" data-toggle="collapse" data-target="#advanced-search-dropdown" style="color:white;" href="">advanced search
-          </a>
         </div>
       </div>
-    </nav>
-    <!-- ADVANCED SEARCH -->
-    <div class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <div id="advanced-search-dropdown" class="collapse ml-1 ml-lg-auto">
-        <form class="" action="#" method="post">
-          <div class="form-group my-1">
-            <select class="custom-select">
-              <option selected>Search for...
-              </option>
-              <option value="1">Only title
-              </option>
-              <option value="2">Only body
-              </option>
-              <option value="3">Title and body
-              </option>
-              <option value="4">Username
-              </option>
-            </select>
-          </div>
-          <div class="form-group my-1">
-            <select class="custom-select">
-              <option selected>Section...
-              </option>
-              <option value="1">World
-              </option>
-              <option value="2">Technology
-              </option>
-              <option value="3">Science
-              </option>
-              <option value="4">Business
-              </option>
-              <option value="5">Sports
-              </option>
-            </select>
-          </div>
-          <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="News' Author...">
-          <div class="d-flex">
-            <div class="form-group">
-              <label class="col-form-label">Begin:
-              </label>
-              <input type="date" class="form-control" value="1990-01-01">
-            </div>
-            <div class="form-group">
-              <label class="col-form-label">End:
-              </label>
-              <input type="date" class="form-control" value="2018-03-15">
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </header>
+    </header>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   <!-- HEADERS -->
-  <div class="row container-fluid mt-2">
+  <div class="row container-fluid px-0 mx-0 mt-2">
     <!-- LEFT-SECTIONS -->
     <div class="col-md-3" id="sections">
       <h3>Sections
@@ -198,8 +204,8 @@
     <!-- MID-News -->
     <div class="col-md-8" id="news">
       <!-- Sort News Dropdown -->
-      <div class="row">
-        <div class="container d-flex justify-content-between">
+      <div class="row mx-0">
+        <div class="container d-flex justify-content-between ml-0">
           <h1>
             <i class="fas fa-bullseye">
             </i> All
@@ -232,7 +238,7 @@
       <!-- News Header -->
       <div class="d-flex flex-column">
         <!-- 1st News Item -->
-        <div class="news_item border container my-2">
+        <div class="news_item border container ml-0 my-2">
             <div class="row" style="position:relative;">
               <div class="col col-sm-auto my-2">
                 <img src="images/fry.jpg" width="100px" height="100px" alt="Icon">
@@ -255,7 +261,7 @@
             </div>
         </div>
           <!-- 2nd News Item -->
-          <div class="news_item border container my-2">
+          <div class="news_item border container ml-0 my-2">
             <div class="row" style="position:relative;">
               <div class="col col-sm-auto my-2">
                 <img src="images/may_brexit.jpg" width="100px" height="100px" alt="Icon">
@@ -280,7 +286,7 @@
             </div>
           </div>
           <!-- 3rd News Item -->
-          <div class="news_item border container my-2">
+          <div class="news_item border container ml-0 my-2">
             <div class="row" style="position:relative;">
               <div class="col col-sm-auto my-2">
                 <img src="images/dock_pedo.jpg" width="100px" height="100px" alt="Icon">
@@ -304,7 +310,7 @@
             </div>
           </div>
           <!-- 4th News Item -->
-          <div class="news_item border container my-2">
+          <div class="news_item border container ml-0 my-2">
             <div class="row" style="position:relative;">
               <div class="col col-sm-auto my-2">
                 <img src="images/faso.jpg" width="100px" height="100px" alt="Icon">
@@ -327,7 +333,7 @@
             </div>
           </div>
           <!-- 5th News Item -->
-          <div class="news_item border container my-2">
+          <div class="news_item border container ml-0 my-2">
             <div class="row" style="position:relative;">
               <div class="col col-sm-auto my-2">
                 <img src="images/may2.jpg" width="100px" height="100px" alt="Icon">
@@ -351,7 +357,7 @@
             </div>
           </div>
           <!-- 6th News Item -->
-          <div class="news_item border container my-2">
+          <div class="news_item border container ml-0 my-2">
             <div class="row" style="position:relative;">
               <div class="col col-sm-auto my-2">
                 <img src="images/thomson.jpg" width="100px" height="100px" alt="Icon">
@@ -375,7 +381,7 @@
             </div>
           </div>
           <!-- 7th News Item -->
-          <div class="news_item border container my-2">
+          <div class="news_item border container ml-0 my-2">
             <div class="row" style="position:relative;">
               <div class="col col-sm-auto my-2">
                 <img src="images/airport.jpg" width="100px" height="100px" alt="Icon">
@@ -399,7 +405,7 @@
             </div>
           </div>
           <!-- 8th News Item -->
-          <div class="news_item border container my-2">
+          <div class="news_item border container ml-0 my-2">
             <div class="row" style="position:relative;">
               <div class="col col-sm-auto my-2">
                 <img src="images/rugby.jpg" width="100px" height="100px" alt="Icon">
@@ -423,7 +429,7 @@
             </div>
           </div>
           <!-- 9th News Item -->
-          <div class="news_item border container my-2">
+          <div class="news_item border container ml-0 my-2">
             <div class="row" style="position:relative;">
               <div class="col col-sm-auto my-2">
                 <img src="images/syria.jpg" width="100px" height="100px" alt="Icon">
@@ -447,7 +453,7 @@
             </div>
           </div>
           <!-- 10th News Item -->
-          <div class="news_item border container my-2">
+          <div class="news_item border container ml-0 my-2">
             <div class="row" style="position:relative;">
               <div class="col col-sm-auto my-2">
                 <img src="images/ussr_boris_tank.jpg" width="100px" height="100px" alt="Icon">

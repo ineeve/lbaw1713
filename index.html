@@ -31,58 +31,58 @@
 
 <body>
   <header class="container-fluid px-0">
-    <!-- NAVBAR <nav class="row navbar navbar-expand-lg navbar-light bg-light"> -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <a class="navbar-brand" href="index.html">Photon News</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="true"
-        aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <!-- SIGN IN -->
-      <div class="navbar-collapse collapse show" id="navbar">
-        <ul class="navbar-nav mr-auto">
-          <!-- Account -->
-          <li class="nav-item dropdown">
-
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
-              <i class="fas fa-user-circle"></i> Sign In
-            </a>
-            <!-- DROPDOWN FOR SIGN IN -->
-            <div class="dropdown-menu dropdown-menu-right mt-0">
-              <form class="px-4 py-3">
-                <div class="form-group">
-                  <label for="dropdownFormEmail">Email address</label>
-                  <input type="email" class="form-control" id="dropdownFormEmail" placeholder="email@example.com">
-                </div>
-                <div class="form-group">
-                  <label for="dropdownFormPassword">Password</label>
-                  <input type="password" class="form-control" id="dropdownFormPassword" placeholder="Password">
-                </div>
-                <div class="form-check">
-                  <input type="checkbox" class="form-check-input" id="dropdownCheck">
-                  <label class="form-check-label" for="dropdownCheck">
-                    Remember me
-                  </label>
-                </div>
-                <button onclick="signIn()" type="submit" class="btn btn-primary">Sign in</button>
-              </form>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="create_profile.html">New around here? Sign up</a>
-              <a class="dropdown-item" href="#">Forgot password?</a>
-            </div>
-          </li>
-        </ul>
-        <div class="d-flex flex-column">
-          <form class="form-inline">
-            <input class="form-control mr-sm-2 rounded" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-light my-2 my-sm-0 rounded" type="submit">
-              <a href="advance_search.html" style="color:inherit; text-decoration:none">Search</a>
-            </button>
-          </form>
-          <a class="small" data-toggle="collapse" data-target="#advanced-search-dropdown" style="color:white;" href="">advanced search</a>
+    <!-- NAVBAR -->
+    <nav class="row navbar navbar-expand-lg navbar-dark bg-primary mx-0">
+        <div class="col-12 col-md-3 ">
+            <a class="navbar-brand" href="index.html">Photon News</a>
         </div>
+        <div class="col-12 col-md-6">
+          <div class="container ml-0 d-flex flex-column px-0">
+            <form class="form-inline">
+              <input class="form-control mr-sm-2 rounded" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-light my-2 my-sm-0 rounded" type="submit">
+                <a href="advanced_search.html" style="color:inherit; text-decoration:none">Search</a>
+              </button>
+            </form>
+            <a class="small" data-toggle="collapse" data-target="#advanced-search-dropdown" style="color:white;" href="">advanced search</a>
+          </div>
+        </div>
+        <div class="col-12 col-md-3">
+          <div class="navbar-collapse collapse show" id="navbar">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item dropdown">
+    
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                  aria-expanded="false">
+                  <!-- Account -->
+                  <i class="fas fa-user-circle"></i> Sign In
+                </a>
+                <!-- DROPDOWN FOR SIGN IN -->
+                <div class="dropdown-menu dropdown-menu-right position-absolute mt-0">
+                  <form class="px-4 py-3">
+                    <div class="form-group">
+                      <label for="dropdownFormEmail">Email address</label>
+                      <input type="email" class="form-control" id="dropdownFormEmail" placeholder="email@example.com">
+                    </div>
+                    <div class="form-group">
+                      <label for="dropdownFormPassword">Password</label>
+                      <input type="password" class="form-control" id="dropdownFormPassword" placeholder="Password">
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input" id="dropdownCheck">
+                      <label class="form-check-label" for="dropdownCheck">
+                        Remember me
+                      </label>
+                    </div>
+                    <button onclick="signIn()" type="submit" class="btn btn-primary">Sign in</button>
+                  </form>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="create_profile.html">New around here? Sign up</a>
+                  <a class="dropdown-item" href="#">Forgot password?</a>
+                </div>
+              </li>
+            </ul>
+          </div>
       </div>
     </nav>
     <!-- ADVANCED SEARCH -->
@@ -180,7 +180,7 @@
             <!-- News Header -->
             <!-- Sort News Dropdown -->
             <div class="row">
-              <div class="container d-flex justify-content-between">
+              <div class="container ml-0 d-flex justify-content-between">
                 <h1>
                   <i class="fa fa-bullseye"></i> All</h1>
 
@@ -207,7 +207,7 @@
             </div>
             <div class="d-flex flex-column">
               <!-- 1st News Item -->
-              <div class="news_item border container my-2">
+              <div class="news_item border container ml-0 my-2">
                 <div class="row" style="position:relative;">
                   <div class="col col-sm-auto my-2">
                     <img src="images/fry.jpg" width="100px" height="100px" alt="Icon">
@@ -229,7 +229,7 @@
                 </div>
               </div>
               <!-- 2nd News Item -->
-              <div class="news_item border container my-2">
+              <div class="news_item border container ml-0 my-2">
                 <div class="row" style="position:relative;">
                   <div class="col col-sm-auto my-2">
                     <img src="images/may_brexit.jpg" width="100px" height="100px" alt="Icon">
@@ -253,7 +253,7 @@
                 </div>
               </div>
               <!-- 3rd News Item -->
-              <div class="news_item border container my-2">
+              <div class="news_item border container ml-0 my-2">
                 <div class="row" style="position:relative;">
                   <div class="col col-sm-auto my-2">
                     <img src="images/dock_pedo.jpg" width="100px" height="100px" alt="Icon">
@@ -277,7 +277,7 @@
                 </div>
               </div>
               <!-- 4th News Item -->
-              <div class="news_item border container my-2">
+              <div class="news_item border container ml-0 my-2">
                 <div class="row" style="position:relative;">
                   <div class="col col-sm-auto my-2">
                     <img src="images/faso.jpg" width="100px" height="100px" alt="Icon">
@@ -299,7 +299,7 @@
                 </div>
               </div>
               <!-- 5th News Item -->
-              <div class="news_item border container my-2">
+              <div class="news_item border container ml-0 my-2">
                 <div class="row" style="position:relative;">
                   <div class="col col-sm-auto my-2">
                     <img src="images/may2.jpg" width="100px" height="100px" alt="Icon">
@@ -323,7 +323,7 @@
                 </div>
               </div>
               <!-- 6th News Item -->
-              <div class="news_item border container my-2">
+              <div class="news_item border container ml-0 my-2">
                 <div class="row" style="position:relative;">
                   <div class="col col-sm-auto my-2">
                     <img src="images/thomson.jpg" width="100px" height="100px" alt="Icon">
@@ -347,7 +347,7 @@
                 </div>
               </div>
               <!-- 7th News Item -->
-              <div class="news_item border container my-2">
+              <div class="news_item border container ml-0 my-2">
                 <div class="row" style="position:relative;">
                   <div class="col col-sm-auto my-2">
                     <img src="images/airport.jpg" width="100px" height="100px" alt="Icon">
@@ -371,7 +371,7 @@
                 </div>
               </div>
               <!-- 8th News Item -->
-              <div class="news_item border container my-2">
+              <div class="news_item border container ml-0 my-2">
                 <div class="row" style="position:relative;">
                   <div class="col col-sm-auto my-2">
                     <img src="images/rugby.jpg" width="100px" height="100px" alt="Icon">
@@ -395,7 +395,7 @@
                 </div>
               </div>
               <!-- 9th News Item -->
-              <div class="news_item border container my-2">
+              <div class="news_item border container ml-0 my-2">
                 <div class="row" style="position:relative;">
                   <div class="col col-sm-auto my-2">
                     <img src="images/syria.jpg" width="100px" height="100px" alt="Icon">
@@ -419,7 +419,7 @@
                 </div>
               </div>
               <!-- 10th News Item -->
-              <div class="news_item border container my-2">
+              <div class="news_item border container ml-0 my-2">
                 <div class="row" style="position:relative;">
                   <div class="col col-sm-auto my-2">
                     <img src="images/ussr_boris_tank.jpg" width="100px" height="100px" alt="Icon">
