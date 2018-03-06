@@ -15,69 +15,88 @@
 </head>
 
 <body>
+  <!-- NEW HEADER ------------------------------------------------------------------>
   <header class="container-fluid px-0">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <a class="navbar-brand" href="index.html">Photon News</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="true"
-        aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="navbar-collapse collapse show" id="navbar">
-        <ul class="navbar-nav mr-auto">
-          <!-- Account -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
-              <i class="fas fa-user-circle"></i> Account
-            </a>
-            <div class="dropdown-menu" x-placement="bottom-start">
-              <a class="dropdown-item" href="profile.html">
-                <i class="fas fa-user"></i> Profile</a>
-              <a class="dropdown-item" href="forum.html">
-                <i class="fas fa-university">
-                </i> Forum
-              </a>
-              <a class="dropdown-item" href="settings.html">
-                <i class="fas fa-cog"></i> Settings</a>
-              <a class="dropdown-item" href="index.html">
-                <i class="fas fa-sign-out-alt"></i> Log out</a>
-            </div>
-          </li>
-          <!-- Notifications -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
-              <i class="fas fa-bell"></i> Notifications
-            </a>
-            <div class="dropdown-menu" x-placement="bottom-start">
-              <a class="dropdown-item" href="#">
-                <i class="fas fa-user-circle"></i> User1 is following you</a>
-              <a class="dropdown-item" href="#">
-                <i class="fas fa-user-circle"></i> User2 published an article</a>
-              <a class="dropdown-item" href="#">
-                <i class="fas fa-user-circle"></i> User3 commented on your news</a>
-            </div>
-
-          </li>
-          <li class="nav-item">
-            <button class="btn btn-outline-light my-2 my-sm-0 rounded">
-              <a href="create_news.html" style="color:inherit; text-decoration:none">
-                </i>Publish</a>
-            </button>
-          </li>
-        </ul>
-        <div class="d-flex flex-column">
-          <form class="form-inline">
-            <input class="form-control mr-sm-2 rounded" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-light my-2 my-sm-0 rounded" type="submit">
-              <a href="advance_search.html" style="color:inherit; text-decoration:none">Search</a>
-            </button>
-          </form>
-          <a class="small" data-toggle="collapse" data-target="#advanced-search-dropdown" style="color:white;" href="">advanced search</a>
+    <!-- NAVBAR <nav class="row navbar navbar-expand-lg navbar-light bg-light"> -->
+    <nav class="row navbar navbar-expand-lg navbar-dark bg-primary mx-0">
+        <div class="col-12 col-md-3">
+            <a class="navbar-brand" href="index_signed_in.html">Photon News</a>
         </div>
-      </div>
+        <div class="col-12 col-md-6">
+          <div class="container ml-0 d-flex flex-column px-0">
+            <form class="form-inline">
+              <input class="form-control mr-sm-2 rounded" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-light my-2 my-sm-0 rounded" type="submit">
+                <a href="advanced_search.html" style="color:inherit; text-decoration:none">Search</a>
+              </button>
+            </form>
+            <a class="small" data-toggle="collapse" data-target="#advanced-search-dropdown" style="color:white;" href="">advanced search</a>
+          </div>
+        </div>
+        <div class="col-12 col-md-3 ">
+          <div class="navbar-collapse collapse show" id="navbar">
+            <ul class="navbar-nav ml-auto">
+              <!-- Publish -->
+              <li class="nav-item">
+                <button class="btn btn-outline-light my-2 my-sm-0 rounded">
+                  <a href="create_news.html" style="color:inherit; text-decoration:none">
+                    Publish
+                  </a>
+                </button>
+              </li>
+              
+              <!-- Notifications -->
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
+                  <i class="fas fa-bell">
+                  </i> Notifications
+                </a>
+                <div class="dropdown-menu dropdown-menu-right position-absolute" x-placement="bottom-start">
+                  <a class="dropdown-item" href="#">
+                    <i class="fas fa-user-circle">
+                    </i> User1 is following you
+                  </a>
+                  <a class="dropdown-item" href="#">
+                    <i class="fas fa-user-circle">
+                    </i> User2 published an article
+                  </a>
+                  <a class="dropdown-item" href="#">
+                    <i class="fas fa-user-circle">
+                    </i> User3 commented on your news
+                  </a>
+                </div>
+              </li>
+              <!-- Account -->
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
+                    <i class="fas fa-user-circle">
+                    </i> Account
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right position-absolute" x-placement="bottom-start">
+                    <a class="dropdown-item" href="profile.html">
+                      <i class="fas fa-user">
+                      </i> Profile
+                    </a>
+                    <a class="dropdown-item" href="forum.html">
+                      <i class="fas fa-university">
+                      </i> Forum
+                    </a>
+                    <a class="dropdown-item" href="settings.html">
+                      <i class="fas fa-cog">
+                      </i> Settings
+                    </a>
+                    <a class="dropdown-item" href="index.html">
+                      <i class="fas fa-sign-out-alt">
+                      </i> Log out
+                    </a>
+                  </div>
+                </li>
+            </ul>
+          </div>
+    </div>
     </nav>
     <!-- ADVANCED SEARCH -->
-    <div class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="px-0 navbar navbar-expand-lg navbar-dark bg-primary">
       <div id="advanced-search-dropdown" class="collapse ml-1 ml-lg-auto">
         <form class="" action="#" method="post">
           <div class="form-group my-1">
@@ -190,11 +209,116 @@
 
         </div>
 
-        <div class="border p-2 mt-3">
+        <div class="p-2 mt-3">
 
-          <h3>Badges</h3>
+          <h3>Last badges earned <span class="badge badge-secondary">3/10</span></h3>
+          <!-- Badges Modal -->
+          <div class="modal fade" id="badgesModal" tabindex="-1" role="dialog" aria-labelledby="badgesModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="badgesModalLabel">All Badges</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body d-flex flex-column align-content-between flex-wrap" style="height:650px;">
+                  <div class="badge mx-2">
 
-          <div class="row mx-auto mt-3">
+                    <img alt="Icon" src="http://icons.iconarchive.com/icons/seanau/fresh-web/128/Badge-icon.png" width="80" height="80">
+      
+                    <h3>Opiniator</h3>
+      
+                    <p>Do 10 comments</p>
+      
+                  </div>
+                  <div class="badge mx-2">
+
+                    <img alt="Icon" src="http://icons.iconarchive.com/icons/seanau/fresh-web/128/Badge-icon.png" width="80" height="80">
+      
+                    <h3>Citizen</h3>
+      
+                    <p>Do 10 votes</p>
+      
+                  </div>
+                  <div class="badge mx-2">
+
+                    <img alt="Icon" src="http://icons.iconarchive.com/icons/seanau/fresh-web/128/Badge-icon.png" width="80" height="80">
+      
+                    <h3>Navigator</h3>
+      
+                    <p>Read 5 news</p>
+      
+                  </div>
+                  <div class="badge mx-2">
+
+                    <img alt="Icon" src="http://icons.iconarchive.com/icons/seanau/fresh-web/128/Badge-icon.png" width="80" height="80">
+      
+                    <h3>Cultured</h3>
+      
+                    <p>Read 25 news</p>
+      
+                  </div>
+                  <div class="badge mx-2">
+
+                    <img alt="Icon" src="http://icons.iconarchive.com/icons/seanau/fresh-web/128/Badge-icon.png" width="80" height="80">
+      
+                    <h3>Readaholic</h3>
+      
+                    <p>Read 100 news</p>
+      
+                  </div>
+                  <div class="badge mx-2">
+
+                    <img alt="Icon" src="http://icons.iconarchive.com/icons/seanau/fresh-web/128/Badge-icon.png" width="80" height="80">
+      
+                    <h3>Writer</h3>
+      
+                    <p>Publish a news</p>
+      
+                  </div>
+                  <div class="badge mx-2">
+
+                    <img alt="Icon" src="http://icons.iconarchive.com/icons/seanau/fresh-web/128/Badge-icon.png" width="80" height="80">
+      
+                    <h3>Senior Writer</h3>
+      
+                    <p>Publish 20 news</p>
+      
+                  </div>
+                  <div class="badge mx-2">
+
+                    <img alt="Icon" src="http://icons.iconarchive.com/icons/seanau/fresh-web/128/Badge-icon.png" width="80" height="80">
+      
+                    <h3>Scribophile</h3>
+      
+                    <p>Publish 100 news</p>
+      
+                  </div>
+                  <div class="badge mx-2">
+
+                    <img alt="Icon" src="http://icons.iconarchive.com/icons/seanau/fresh-web/128/Badge-icon.png" width="80" height="80">
+      
+                    <h3>Scribophile</h3>
+      
+                    <p>Publish 100 news</p>
+      
+                  </div>
+                  <div class="badge mx-2">
+
+                    <img alt="Icon" src="http://icons.iconarchive.com/icons/seanau/fresh-web/128/Badge-icon.png" width="80" height="80">
+      
+                    <h3>Scribophile</h3>
+      
+                    <p>Publish 100 news</p>
+      
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mx-auto mt-3" data-toggle="modal" data-target="#badgesModal" style="cursor:pointer">
 
             <div class="col-12 col-lg-6 col-xl-4 badge">
 
@@ -210,7 +334,7 @@
 
               <img alt="Icon" src="http://icons.iconarchive.com/icons/seanau/fresh-web/128/Badge-icon.png" width="80" height="80">
 
-              <h3>Publisher</h3>
+              <h3>Scribophile</h3>
 
               <p>Publish 10 news</p>
 
@@ -227,14 +351,12 @@
             </div>
 
           </div>
-          <i class="fas fa-arrow-left text-muted"></i>
-          <i class="fas fa-arrow-right float-right text-muted"></i>
 
         </div>
 
       </div>
 
-      <div class="col-md-7 border mt-3 mx-2">
+      <div class="col-md-7 mt-3 mx-2">
         <div class="row p-2">
           <h2>Articles</h2>
         </div>
