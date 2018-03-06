@@ -135,45 +135,60 @@
         <div class="row mt-2">
           <!-- LEFT-SECTIONS -->
           <div class="col-md-3" id="sections">
-            <h3 data-toggle="collapse" data-target="#sections_list" aria-expanded="true" aria-controls="sections_list"><i class="fas fa-bars"></i> Sections</h3>
+            <h6 data-toggle="collapse" data-target="#sections_list" aria-expanded="true" aria-controls="sections_list">Sections</h6>
             <div class="collapse show" id="sections_list">
-              <ul class="list-group">
-                <a href="#" role="button" class="border-0 list-group-item list-group-item-action">
-                  <i class="fa fa-bullseye"></i> All</a>
-                <a href="#" role="button" class="border-0 list-group-item list-group-item-action">
-                  <i class="fa fa-laptop"></i> Technology</a>
-                <a href="#" role="button" class="border-0 list-group-item list-group-item-action">
-                  <i class="fa fa-flask"></i> Science</a>
-                <a href="#" role="button" class="border-0 list-group-item list-group-item-action">
-                  <i class="fa fa-briefcase"></i> Business</a>
-                <a href="#" role="button" class="border-0 list-group-item list-group-item-action">
-                  <i class="fa fa-briefcase"></i> Sports</a>
-                <a href="#" role="button" data-toggle="collapse" data-target="#my-interests" class="border-0 list-group-item list-group-item-action">
-                  <i class="fas fa-heart"></i> For You</a>
-                <div id="my-interests" class="collapse mb-3">
-                  <h5 class="ml-2">You need to be registered in our website </h5>
-                  <form class="px-4 pt-3 mb-4">
-                    <div class="form-group">
-                      <label for="dropdownFormEmail">Email address</label>
-                      <input type="email" class="form-control" id="dropdownFormEmail" placeholder="email@example.com">
+              <ul class="nav nav-pills flex-column left-pane">
+                <li class="nav-item">
+                  <a href="#" role="button" data-toggle="tab" class="nav-link active">
+                    <i class="fa fa-bullseye"></i> All</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" role="button" data-toggle="tab" class="nav-link">
+                    <i class="fa fa-laptop"></i> Technology</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" role="button" data-toggle="tab" class="nav-link">
+                    <i class="fa fa-flask"></i> Science</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" role="button" data-toggle="tab" class="nav-link">
+                    <i class="fa fa-briefcase"></i> Business</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" role="button" data-toggle="tab" class="nav-link">
+                    <i class="fa fa-briefcase"></i> Sports</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" role="button" data-toggle="tab" class="nav-link">
+                    <div data-toggle="collapse" data-target="#my-interests">
+                        <i class="fas fa-heart"></i> For You
                     </div>
-                    <div class="form-group">
-                      <label for="dropdownFormPassword">Password</label>
-                      <input type="password" class="form-control" id="dropdownFormPassword" placeholder="Password">
-                    </div>
-                    <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="dropdownCheck">
-                      <label class="form-check-label" for="dropdownCheck">
-                        Remember me
-                      </label>
-                    </div>
-                    <button onclick="signIn()" type="submit" class="btn btn-primary">Sign in</button>
-                  </form>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="create_profile.html">New around here? Sign up</a>
-                  <a class="dropdown-item" href="#">Forgot password?</a>
-                </div>
+                  </a>
+                </li>
               </ul>
+              <div id="my-interests" class="collapse mb-3">
+                <h5 class="ml-2">You need to be registered in our website </h5>
+                <form class="px-4 pt-3 mb-4">
+                  <div class="form-group">
+                    <label for="dropdownFormEmail">Email address</label>
+                    <input type="email" class="form-control" id="dropdownFormEmail" placeholder="email@example.com">
+                  </div>
+                  <div class="form-group">
+                    <label for="dropdownFormPassword">Password</label>
+                    <input type="password" class="form-control" id="dropdownFormPassword" placeholder="Password">
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="dropdownCheck">
+                    <label class="form-check-label" for="dropdownCheck">
+                      Remember me
+                    </label>
+                  </div>
+                  <button onclick="signIn()" type="submit" class="btn btn-primary">Sign in</button>
+                </form>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="create_profile.html">New around here? Sign up</a>
+                <a class="dropdown-item" href="#">Forgot password?</a>
+              </div>
             </div>
 
           </div>
@@ -221,7 +236,8 @@
                       </a>
                     </div>
                     <div class="row">
-                      <p><span class="font-weight-bold">101 points</span> &middot; NadiaKhomami &middot; 19:01 24/02/2018</p>
+                      <p>
+                        <span class="font-weight-bold">101 points</span> &middot; NadiaKhomami &middot; 19:01 24/02/2018</p>
                     </div>
                     <div class="ml-1 ml-lg-auto">
                       <p>Stephen Fry has announced that he has prostate cancer. The actor and TV presenter underwent an operation
@@ -243,7 +259,8 @@
                       </a>
                     </div>
                     <div class="row">
-                      <p><span class="font-weight-bold">564 points</span> &middot; Bibi97 &middot; 20:47 23/02/2018</p>
+                      <p>
+                        <span class="font-weight-bold">564 points</span> &middot; Bibi97 &middot; 20:47 23/02/2018</p>
                     </div>
                     <div class="ml-1 ml-lg-auto">
                       <p>Theresa May set out her vision for the UK’s post-Brexit relationship with the EU in a speech next Friday,
@@ -267,7 +284,8 @@
                       </a>
                     </div>
                     <div class="row">
-                      <p><span class="font-weight-bold">345 points</span> &middot; ineeve &middot; 12:25 23/02/2018</p>
+                      <p>
+                        <span class="font-weight-bold">345 points</span> &middot; ineeve &middot; 12:25 23/02/2018</p>
                     </div>
                     <div class="ml-1 ml-lg-auto" >
                       <p>A man who sexually abused his own daughter tried to take his own life by slashing his throat with a
@@ -291,7 +309,8 @@
                       </a>
                     </div>
                     <div class="row">
-                      <p><span class="font-weight-bold">5 points</span> &middot; Gonvas &middot; 12:01 22/02/2018</p>
+                      <p>
+                        <span class="font-weight-bold">5 points</span> &middot; Gonvas &middot; 12:01 22/02/2018</p>
                     </div>
                     <div class="ml-1 ml-lg-auto">
                       <p>Gunmen have launched an attack in the capital of Burkina Faso, Ouagadougou, with the French embassy
@@ -313,7 +332,8 @@
                       </a>
                     </div>
                     <div class="row">
-                      <p><span class="font-weight-bold">1001 points</span> &middot; Haydn &middot; 08:39 22/02/2018</p>
+                      <p>
+                        <span class="font-weight-bold">1001 points</span> &middot; Haydn &middot; 08:39 22/02/2018</p>
                     </div>
                     <div class="ml-1 ml-lg-auto">
                       <p>Theresa May has set out what she called "hard facts" about leaving the European Union, as she outlined
@@ -337,7 +357,8 @@
                       </a>
                     </div>
                     <div class="row">
-                      <p><span class="font-weight-bold">793 points</span> &middot; Nobody &middot; 23:25 19/02/2018</p>
+                      <p>
+                        <span class="font-weight-bold">793 points</span> &middot; Nobody &middot; 23:25 19/02/2018</p>
                     </div>
                     <div class="ml-1 ml-lg-auto" >
                       <p>Katarina Johnson-Thompson delivered an indoor personal best in shot put to sit second after three pentathlon
@@ -361,7 +382,8 @@
                       </a>
                     </div>
                     <div class="row">
-                      <p><span class="font-weight-bold">999 points</span> &middot; JohnAdams &middot; 06:36 15/02/2018</p>
+                      <p>
+                        <span class="font-weight-bold">999 points</span> &middot; JohnAdams &middot; 06:36 15/02/2018</p>
                     </div>
                     <div class="ml-1 ml-lg-auto">
                       <p>Queenstown Airport is a step closer to acquiring expansion land after the High Court dismissed an appeal
@@ -385,7 +407,8 @@
                       </a>
                     </div>
                     <div class="row">
-                      <p><span class="font-weight-bold">555 points</span> &middot; MMESIUSMARKO50TUS &middot; 20:11 14/02/2018</p>
+                      <p>
+                        <span class="font-weight-bold">555 points</span> &middot; MMESIUSMARKO50TUS &middot; 20:11 14/02/2018</p>
                     </div>
                     <div class="ml-1 ml-lg-auto">
                       <p>A year before Eddie Jones agreed to stay on as England rugby coach beyond the 2019 Rugby World Cup,
@@ -409,7 +432,8 @@
                       </a>
                     </div>
                     <div class="row">
-                      <p><span class="font-weight-bold">9999 points</span> &middot; Joao611 &middot; 19:21 14/02/2018</p>
+                      <p>
+                        <span class="font-weight-bold">9999 points</span> &middot; Joao611 &middot; 19:21 14/02/2018</p>
                     </div>
                     <div class="ml-1 ml-lg-auto">
                       <p>Syrian government forces aim to advance into eastern Ghouta one “bite” at a time, a commander said
@@ -433,7 +457,8 @@
                       </a>
                     </div>
                     <div class="row">
-                      <p><span class="font-weight-bold">1487 points</span> &middot; SergeSchmemann &middot; 11:01 26/12/1991</p>
+                      <p>
+                        <span class="font-weight-bold">1487 points</span> &middot; SergeSchmemann &middot; 11:01 26/12/1991</p>
                     </div>
                     <div class="ml-1 ml-lg-auto">
                       <p>MOSCOW, Dec. 25— The Soviet state, marked throughout its brief but tumultuous history by great achievement
@@ -559,5 +584,13 @@
 
 
 </body>
+
+<script>
+    $(".left-pane li").click(function() {
+      $("#my-interests").collapse({
+        toggle: false
+      });
+    });
+</script>
 
 </html>
