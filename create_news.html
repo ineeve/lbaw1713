@@ -22,16 +22,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 
-    <!-- FROALA -->
-    <!-- Include external CSS. -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"
-    />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css">
-    <!-- Include Editor style. -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.5/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css"
-    />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.5/css/froala_style.min.css" rel="stylesheet" type="text/css"
-    />
+    <!-- Tiny MCE -->
+    <script src="tinymce/tinymce.min.js"></script>
+    <!-- End Of Tiny MCE -->
     <!-- Include external JS libs. -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
@@ -73,7 +66,7 @@
                   </a>
                 </button>
               </li>
-              
+
               <!-- Notifications -->
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
@@ -189,7 +182,7 @@
                 </fieldset>
                 <fieldset class="form-group">
                     <label for="newsBody">Body</label>
-                    <textarea id="newsBody"></textarea>
+                    <textarea id="newsBody">Hello, World!</textarea>
                 </fieldset>
                 <fieldset class="form-group">
                     <label for="sources">Sources</label>
