@@ -131,7 +131,7 @@
     <div class="row mt-2">
       <!-- LEFT-SECTIONS -->
       <div class="col-md-3 col-12" id="sections">
-        <div class="col-sm-6 col-12">
+        <div class="col-md-12 col-sm-6 col-12">
           <h6 data-toggle="collapse" data-target="#sections_list" aria-expanded="true" aria-controls="sections_list">Sections</h6>
           <div class="collapse show" id="sections_list">
             <ul class="nav nav-pills flex-column left-pane">
@@ -481,63 +481,57 @@
           </div>
           <div class="tab-pane fade" id="forYou">
             <!-- FOR YOU -->
-            <div class="container-fluid">
-              <!-- HEADERS -->
-              <div class="row mt-2">
-                <div class="col-12">
-                  <!-- Sort News Dropdown -->
-                  <div class="row">
-                    <div class="container d-flex justify-content-between">
-                      <h1>Suggested For You</h1>
+            <!-- HEADERS -->
+            <div class="row">
+              <!-- Sort News Dropdown -->
+              <div class="container ml-0 d-flex justify-content-between">
+                <h1>
+                  <i class="fas fa-heart"></i> Suggested For You</h1>
 
-                      <div class="btn-group" role="group">
-                        <button id="btnGroupDrop1" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <div class="d-flex">
-                            <h5 class="sort-option">Most Popular </h5>
-                            <i class="fas fa-chevron-down ml-2 mt-1"></i>
-                          </div>
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                          <a class="dropdown-item" href="#">Most Popular</a>
-                          <a class="dropdown-item" href="#">Most Voted</a>
-                          <a class="dropdown-item" href="#">Most Recent</a>
-                        </div>
-                      </div>
-                      <script>
-                        $(".dropdown-item").click(function (event) {
-                          $(".sort-option").html($(this).text());
-                        });
-                      </script>
+                <div class="btn-group" role="group">
+                  <button id="btnGroupDrop1" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div class="d-flex">
+                      <h5 class="sort-option">Most Popular </h5>
+                      <i class="fas fa-chevron-down ml-2 mt-1"></i>
                     </div>
-
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                    <a class="dropdown-item" href="#">Most Popular</a>
+                    <a class="dropdown-item" href="#">Most Voted</a>
+                    <a class="dropdown-item" href="#">Most Recent</a>
                   </div>
                 </div>
+                <script>
+                  $(".dropdown-item").click(function (event) {
+                    $(".sort-option").html($(this).text());
+                  });
+                </script>
               </div>
-              <!-- SECOND ROW -->
-              <div class="row mt-2">
-                <!-- SIGN IN NOTICE -->
-                <div class="col-12" id="news_for_you">
-                  <div class="container">
-                    <a href="#">Sign in</a> to follow your interests.
-                  </div>
+            </div>
+            <!-- SECOND ROW -->
+            <div class="row mt-2">
+              <!-- SIGN IN NOTICE -->
+              <div class="col-12" id="news_for_you">
+                <div class="container">
+                  <a href="#">Sign in</a> to follow your interests.
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <!-- </div> -->
     </div>
+  </div>
 
-    <footer class="page-footer sticky-bottom mt-4">
-      <p class=" mx-auto text-center mb-0">
-        <a href="#">About us</a>
-        &middot;
-        <a href="#">FAQ</a>
-      </p>
-      <p class="text-center footer-copyright mb-1">
-        <i class="far fa-copyright"></i> 2018 Photon News</p>
-    </footer>
+  <footer class="page-footer sticky-bottom mt-4">
+    <p class=" mx-auto text-center mb-0">
+      <a href="#">About us</a>
+      &middot;
+      <a href="#">FAQ</a>
+    </p>
+    <p class="text-center footer-copyright mb-1">
+      <i class="far fa-copyright"></i> 2018 Photon News</p>
+  </footer>
 
 
 </body>
