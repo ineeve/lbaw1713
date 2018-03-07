@@ -30,7 +30,13 @@ a.nounderline {
   display: none;
 }
 
-div#news_box {
+@media (min-width: 768px){
+  .dropdown-menu-right {
+    right: 0;
+    left: auto;
+  }
+}
+div.news_box {
   display: none; 
 }
 
@@ -43,4 +49,10 @@ div#news_box {
 
 p.totop a {
   display: none;
+}
+
+@media screen and (width: 768px) {
+  #sections_list {
+      display: none;
+  }
 }

@@ -1,16 +1,16 @@
 function signIn(){
     event.preventDefault();
     console.log("Sign in pressed");
-    document.location.href = "indexSignedIn.html";
+    document.location.href = "index_signed_in.html";
 }
 
 $(function () {
-    $("div#news_box").slice(0, 5).show();
+    $("div.news_box").slice(0, 5).show();
     $("#loadMore").on('click', function (e) {
       console.log("entrou");
         e.preventDefault();
-        $('div#news_box[style="display: none;"]').slice(0, 5).slideDown();
-        if ($("div#news_box:hidden").length == 0) {
+        $('div.news_box[style="display: none;"]').slice(0, 5).slideDown();
+        if ($("div.news_box:hidden").length == 0) {
           console.log("escondidos");
             $("#load").fadeOut('slow');
         }

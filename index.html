@@ -19,10 +19,8 @@
   <!-- Optional JavaScript -->
 
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
@@ -33,57 +31,57 @@
 
 <body>
   <header class="container-fluid px-0">
-    <!-- NAVBAR <nav class="row navbar navbar-expand-lg navbar-light bg-light"> -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <a class="navbar-brand" href="index.html">Photon News</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="true"
-        aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <!-- SIGN IN -->
-      <div class="navbar-collapse collapse show" id="navbar">
-        <ul class="navbar-nav mr-auto">
-          <!-- Account -->
-          <li class="nav-item dropdown">
-
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
-              <i class="fas fa-user-circle"></i> Sign In
-            </a>
-            <!-- DROPDOWN FOR SIGN IN -->
-            <div class="dropdown-menu dropdown-menu-right mt-0">
-              <form class="px-4 py-3">
-                <div class="form-group">
-                  <label for="dropdownFormEmail">Email address</label>
-                  <input type="email" class="form-control" id="dropdownFormEmail" placeholder="email@example.com">
-                </div>
-                <div class="form-group">
-                  <label for="dropdownFormPassword">Password</label>
-                  <input type="password" class="form-control" id="dropdownFormPassword" placeholder="Password">
-                </div>
-                <div class="form-check">
-                  <input type="checkbox" class="form-check-input" id="dropdownCheck">
-                  <label class="form-check-label" for="dropdownCheck">
-                    Remember me
-                  </label>
-                </div>
-                <button onclick="signIn()" type="submit" class="btn btn-primary">Sign in</button>
-              </form>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="create_profile.html">New around here? Sign up</a>
-              <a class="dropdown-item" href="#">Forgot password?</a>
-            </div>
-          </li>
-        </ul>
-        <div class="d-flex flex-column">
+    <!-- NAVBAR -->
+    <nav class="row navbar navbar-expand-lg navbar-dark bg-primary mx-0">
+      <div class="col-12 col-md-3 ">
+        <a class="navbar-brand" href="index.html">Photon News</a>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="container ml-0 d-flex flex-column px-0">
           <form class="form-inline">
             <input class="form-control mr-sm-2 rounded" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-light my-2 my-sm-0 rounded" type="submit">
-              <a href="advance_search.html" style="color:inherit; text-decoration:none">Search</a>
+              <a href="advanced_search.html" style="color:inherit; text-decoration:none">Search</a>
             </button>
           </form>
           <a class="small" data-toggle="collapse" data-target="#advanced-search-dropdown" style="color:white;" href="">advanced search</a>
+        </div>
+      </div>
+      <div class="col-12 col-md-3">
+        <div class="navbar-collapse collapse show" id="navbar">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                <!-- Account -->
+                <i class="fas fa-user-circle"></i> Sign In
+              </a>
+              <!-- DROPDOWN FOR SIGN IN -->
+              <div class="dropdown-menu dropdown-menu-right position-absolute mt-0">
+                <form class="px-4 py-3">
+                  <div class="form-group">
+                    <label for="dropdownFormEmail">Email address</label>
+                    <input type="email" class="form-control" id="dropdownFormEmail" placeholder="email@example.com">
+                  </div>
+                  <div class="form-group">
+                    <label for="dropdownFormPassword">Password</label>
+                    <input type="password" class="form-control" id="dropdownFormPassword" placeholder="Password">
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="dropdownCheck">
+                    <label class="form-check-label" for="dropdownCheck">
+                      Remember me
+                    </label>
+                  </div>
+                  <button onclick="signIn()" type="submit" class="btn btn-primary">Sign in</button>
+                </form>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="create_profile.html">New around here? Sign up</a>
+                <a class="dropdown-item" href="#">Forgot password?</a>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>
@@ -128,64 +126,56 @@
     </div>
   </header>
 
-  <div id="myTabContent" class="tab-content">
-    <div class="tab-pane fade active show" id="headlines">
-      <div class="container-fluid">
-        <!-- SECOND ROW -->
-        <div class="row mt-2">
-          <!-- LEFT-SECTIONS -->
-          <div class="col-md-3" id="sections">
-            <h3 data-toggle="collapse" data-target="#sections_list" aria-expanded="true" aria-controls="sections_list"><i class="fas fa-bars"></i> Sections</h3>
-            <div class=" collapse show" id="sections_list">
-              <ul class="list-group">
-                <a href="#" role="button" class="border-0 list-group-item list-group-item-action">
+  <div class="container-fluid">
+    <!-- SECOND ROW -->
+    <div class="row mt-2">
+      <!-- LEFT-SECTIONS -->
+      <div class="col-md-3 col-12" id="sections">
+        <div class="col-md-12 col-sm-6 col-12">
+          <h3 data-toggle="collapse" data-target="#sections_list" aria-expanded="true" aria-controls="sections_list"><i class="fas fa-bars"></i> Sections</h3>
+          <div class="collapse show" id="sections_list">
+            <ul class="nav nav-pills flex-column left-pane">
+              <li class="nav-item">
+                <a href="#allNews" role="button" data-toggle="tab" class="nav-link active">
                   <i class="fa fa-bullseye"></i> All</a>
-                <a href="#" role="button" class="border-0 list-group-item list-group-item-action">
+              </li>
+              <li class="nav-item">
+                <a href="#allNews" role="button" data-toggle="tab" class="nav-link">
                   <i class="fa fa-laptop"></i> Technology</a>
-                <a href="#" role="button" class="border-0 list-group-item list-group-item-action">
+              </li>
+              <li class="nav-item">
+                <a href="#allNews" role="button" data-toggle="tab" class="nav-link">
                   <i class="fa fa-flask"></i> Science</a>
-                <a href="#" role="button" class="border-0 list-group-item list-group-item-action">
+              </li>
+              <li class="nav-item">
+                <a href="#allNews" role="button" data-toggle="tab" class="nav-link">
                   <i class="fa fa-briefcase"></i> Business</a>
-                <a href="#" role="button" class="border-0 list-group-item list-group-item-action">
+              </li>
+              <li class="nav-item">
+                <a href="#allNews" role="button" data-toggle="tab" class="nav-link">
                   <i class="fa fa-briefcase"></i> Sports</a>
-                <a href="#" role="button" data-toggle="collapse" data-target="#my-interests" class="border-0 list-group-item list-group-item-action">
+              </li>
+              <li class="nav-item">
+                <a href="#forYou" role="button" data-toggle="tab" class="nav-link">
                   <i class="fas fa-heart"></i> For You</a>
-                <div id="my-interests" class="collapse mb-3">
-                  <h5 class="ml-2">You need to be registered in our website </h5>
-                  <form class="px-4 pt-3 mb-4">
-                    <div class="form-group">
-                      <label for="dropdownFormEmail">Email address</label>
-                      <input type="email" class="form-control" id="dropdownFormEmail" placeholder="email@example.com">
-                    </div>
-                    <div class="form-group">
-                      <label for="dropdownFormPassword">Password</label>
-                      <input type="password" class="form-control" id="dropdownFormPassword" placeholder="Password">
-                    </div>
-                    <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="dropdownCheck">
-                      <label class="form-check-label" for="dropdownCheck">
-                        Remember me
-                      </label>
-                    </div>
-                    <button onclick="signIn()" type="submit" class="btn btn-primary">Sign in</button>
-                  </form>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="create_profile.html">New around here? Sign up</a>
-                  <a class="dropdown-item" href="#">Forgot password?</a>
-                </div>
-              </ul>
-            </div>
-
+              </li>
+            </ul>
           </div>
-          <!-- MID-News -->
-          <div class="col-md-8" id="news">
+        </div>
+      </div>
+
+      <!-- MAIN CONTENT  -->
+      <div class="col-lg-8 col-md-9 col-12">
+        <div id="myTabContent" class="tab-content">
+          <div class="tab-pane fade active show" id="allNews">
+            <!-- NEWS -->
             <!-- News Header -->
-            <!-- Sort News Dropdown -->
             <div class="row">
-              <div class="container d-flex justify-content-between">
+              <div class="container ml-0 d-flex justify-content-between">
                 <h1>
                   <i class="fa fa-bullseye"></i> All</h1>
 
+                <!-- Sort News Dropdown -->
                 <div class="btn-group" role="group">
                   <button id="btnGroupDrop1" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <div class="d-flex">
@@ -209,7 +199,7 @@
             </div>
             <div class="d-flex flex-column">
               <!-- 1st News Item -->
-              <div id="news_box" style="display: none;" class="news_item border container my-2">
+              <div style="display: none;" class="news_box border container ml-0 my-2">
                 <div class="row" style="position:relative;">
                   <div class="col col-sm-auto my-2">
                     <img src="images/fry.jpg" width="100px" height="100px" alt="Icon">
@@ -221,7 +211,8 @@
                       </a>
                     </div>
                     <div class="row">
-                      <p><span class="font-weight-bold">101 points</span> &middot; NadiaKhomami &middot; 19:01 24/02/2018</p>
+                      <p>
+                        <span class="font-weight-bold">101 points</span> &middot; NadiaKhomami &middot; 19:01 24/02/2018</p>
                     </div>
                     <div class="ml-1 ml-lg-auto">
                       <p>Stephen Fry has announced that he has prostate cancer. The actor and TV presenter underwent an operation
@@ -231,7 +222,7 @@
                 </div>
               </div>
               <!-- 2nd News Item -->
-              <div id="news_box" style="display: none;" class="news_item border container my-2">
+              <div style="display: none;" class="news_box border container ml-0 my-2">
                 <div class="row" style="position:relative;">
                   <div class="col col-sm-auto my-2">
                     <img src="images/may_brexit.jpg" width="100px" height="100px" alt="Icon">
@@ -243,7 +234,8 @@
                       </a>
                     </div>
                     <div class="row">
-                      <p><span class="font-weight-bold">564 points</span> &middot; Bibi97 &middot; 20:47 23/02/2018</p>
+                      <p>
+                        <span class="font-weight-bold">564 points</span> &middot; Bibi97 &middot; 20:47 23/02/2018</p>
                     </div>
                     <div class="ml-1 ml-lg-auto">
                       <p>Theresa May set out her vision for the UK’s post-Brexit relationship with the EU in a speech next Friday,
@@ -255,7 +247,7 @@
                 </div>
               </div>
               <!-- 3rd News Item -->
-              <div id="news_box" style="display: none;" class="news_item border container my-2">
+              <div style="display: none;" class="news_box border container ml-0 my-2">
                 <div class="row" style="position:relative;">
                   <div class="col col-sm-auto my-2">
                     <img src="images/dock_pedo.jpg" width="100px" height="100px" alt="Icon">
@@ -267,9 +259,10 @@
                       </a>
                     </div>
                     <div class="row">
-                      <p><span class="font-weight-bold">345 points</span> &middot; ineeve &middot; 12:25 23/02/2018</p>
+                      <p>
+                        <span class="font-weight-bold">345 points</span> &middot; ineeve &middot; 12:25 23/02/2018</p>
                     </div>
-                    <div class="ml-1 ml-lg-auto" >
+                    <div class="ml-1 ml-lg-auto">
                       <p>A man who sexually abused his own daughter tried to take his own life by slashing his throat with a
                         razor blade in the dock. The defendant, who cannot be named to protect his six-year-old victim, tried
                         to kill himself after he was told that he was guilty of the offence.</p>
@@ -279,7 +272,7 @@
                 </div>
               </div>
               <!-- 4th News Item -->
-              <div id="news_box" style="display: none;" class="news_item border container my-2">
+              <div style="display: none;" class="news_box border container ml-0 my-2">
                 <div class="row" style="position:relative;">
                   <div class="col col-sm-auto my-2">
                     <img src="images/faso.jpg" width="100px" height="100px" alt="Icon">
@@ -291,7 +284,8 @@
                       </a>
                     </div>
                     <div class="row">
-                      <p><span class="font-weight-bold">5 points</span> &middot; Gonvas &middot; 12:01 22/02/2018</p>
+                      <p>
+                        <span class="font-weight-bold">5 points</span> &middot; Gonvas &middot; 12:01 22/02/2018</p>
                     </div>
                     <div class="ml-1 ml-lg-auto">
                       <p>Gunmen have launched an attack in the capital of Burkina Faso, Ouagadougou, with the French embassy
@@ -301,7 +295,7 @@
                 </div>
               </div>
               <!-- 5th News Item -->
-              <div id="news_box" style="display: none;"class="news_item border container my-2">
+              <div style="display: none;" class="news_box border container ml-0 my-2">
                 <div class="row" style="position:relative;">
                   <div class="col col-sm-auto my-2">
                     <img src="images/may2.jpg" width="100px" height="100px" alt="Icon">
@@ -313,7 +307,8 @@
                       </a>
                     </div>
                     <div class="row">
-                      <p><span class="font-weight-bold">1001 points</span> &middot; Haydn &middot; 08:39 22/02/2018</p>
+                      <p>
+                        <span class="font-weight-bold">1001 points</span> &middot; Haydn &middot; 08:39 22/02/2018</p>
                     </div>
                     <div class="ml-1 ml-lg-auto">
                       <p>Theresa May has set out what she called "hard facts" about leaving the European Union, as she outlined
@@ -325,7 +320,7 @@
                 </div>
               </div>
               <!-- 6th News Item -->
-              <div id="news_box" style="display: none;" class="news_item border container my-2">
+              <div style="display: none;" class="news_box border container ml-0 my-2">
                 <div class="row" style="position:relative;">
                   <div class="col col-sm-auto my-2">
                     <img src="images/thomson.jpg" width="100px" height="100px" alt="Icon">
@@ -337,9 +332,10 @@
                       </a>
                     </div>
                     <div class="row">
-                      <p><span class="font-weight-bold">793 points</span> &middot; Nobody &middot; 23:25 19/02/2018</p>
+                      <p>
+                        <span class="font-weight-bold">793 points</span> &middot; Nobody &middot; 23:25 19/02/2018</p>
                     </div>
-                    <div class="ml-1 ml-lg-auto" >
+                    <div class="ml-1 ml-lg-auto">
                       <p>Katarina Johnson-Thompson delivered an indoor personal best in shot put to sit second after three pentathlon
                         events at the World Indoor Championships. The 25-year-old sits in silver medal position on 2,873
                         points, with Cuba's Yorgelis Rodriguez leading on 2,886.</p>
@@ -349,7 +345,7 @@
                 </div>
               </div>
               <!-- 7th News Item -->
-              <div id="news_box" style="display: none;" class="news_item border container my-2">
+              <div style="display: none;" class="news_box border container ml-0 my-2">
                 <div class="row" style="position:relative;">
                   <div class="col col-sm-auto my-2">
                     <img src="images/airport.jpg" width="100px" height="100px" alt="Icon">
@@ -361,19 +357,21 @@
                       </a>
                     </div>
                     <div class="row">
-                      <p><span class="font-weight-bold">999 points</span> &middot; JohnAdams &middot; 06:36 15/02/2018</p>
+                      <p>
+                        <span class="font-weight-bold">999 points</span> &middot; JohnAdams &middot; 06:36 15/02/2018</p>
                     </div>
                     <div class="ml-1 ml-lg-auto">
                       <p>Queenstown Airport is a step closer to acquiring expansion land after the High Court dismissed an appeal
                         by landowner Remarkables Park. In 2008 the airport moved to purchase the land as a compulsory acquisition.
-                        However, landowner Remarkables Park opposed the expansion bid on its "priceless"...</p>
+                        However, landowner Remarkables Park opposed the expansion bid on its "priceless"...
+                      </p>
                     </div>
                   </div>
 
                 </div>
               </div>
               <!-- 8th News Item -->
-              <div id="news_box" style="display: none;" class="news_item border container my-2">
+              <div style="display: none;" class="news_box border container ml-0 my-2">
                 <div class="row" style="position:relative;">
                   <div class="col col-sm-auto my-2">
                     <img src="images/rugby.jpg" width="100px" height="100px" alt="Icon">
@@ -385,19 +383,21 @@
                       </a>
                     </div>
                     <div class="row">
-                      <p><span class="font-weight-bold">555 points</span> &middot; MMESIUSMARKO50TUS &middot; 20:11 14/02/2018</p>
+                      <p>
+                        <span class="font-weight-bold">555 points</span> &middot; MMESIUSMARKO50TUS &middot; 20:11 14/02/2018</p>
                     </div>
                     <div class="ml-1 ml-lg-auto">
                       <p>A year before Eddie Jones agreed to stay on as England rugby coach beyond the 2019 Rugby World Cup,
                         he was in Sydney sussing out the Wallabies landscape. It was understood Jones caught up with Rugby
-                        Australia board power broker Brett Robinson during that time, and that the board was aware...</p>
+                        Australia board power broker Brett Robinson during that time, and that the board was aware...
+                      </p>
                     </div>
                   </div>
 
                 </div>
               </div>
               <!-- 9th News Item -->
-              <div id="news_box" style="display: none;" class="news_item border container my-2">
+              <div style="display: none;" class="news_box border container ml-0 my-2">
                 <div class="row" style="position:relative;">
                   <div class="col col-sm-auto my-2">
                     <img src="images/syria.jpg" width="100px" height="100px" alt="Icon">
@@ -409,19 +409,21 @@
                       </a>
                     </div>
                     <div class="row">
-                      <p><span class="font-weight-bold">9999 points</span> &middot; Joao611 &middot; 19:21 14/02/2018</p>
+                      <p>
+                        <span class="font-weight-bold">9999 points</span> &middot; Joao611 &middot; 19:21 14/02/2018</p>
                     </div>
                     <div class="ml-1 ml-lg-auto">
                       <p>Syrian government forces aim to advance into eastern Ghouta one “bite” at a time, a commander said
                         on Friday, as a war monitor reported that the army had seized new ground from rebels. In one of the
-                        deadliest offensives of the war, government airstrikes and bombardments have killed more than 600...</p>
+                        deadliest offensives of the war, government airstrikes and bombardments have killed more than 600...
+                      </p>
                     </div>
                   </div>
 
                 </div>
               </div>
               <!-- 10th News Item -->
-              <div id="news_box" style="display: none;" class="news_item border container my-2">
+              <div style="display: none;" class="news_box border container ml-0 my-2">
                 <div class="row" style="position:relative;">
                   <div class="col col-sm-auto my-2">
                     <img src="images/ussr_boris_tank.jpg" width="100px" height="100px" alt="Icon">
@@ -433,7 +435,160 @@
                       </a>
                     </div>
                     <div class="row">
-                      <p><span class="font-weight-bold">1487 points</span> &middot; SergeSchmemann &middot; 11:01 26/12/1991</p>
+                      <p>
+                        <span class="font-weight-bold">1487 points</span> &middot; SergeSchmemann &middot; 11:01 26/12/1991</p>
+                    </div>
+                    <div class="ml-1 ml-lg-auto">
+                      <p>MOSCOW, Dec. 25— The Soviet state, marked throughout its brief but tumultuous history by great achievement
+                        and terrible suffering, died today after a long and painful decline. It was 74 years old. Conceived
+                        in utopian promise and born in the violent upheavals of the "Great October Revolution of 1917,"...</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- 11th News Item -->
+              <div style="display: none;" class="news_box border container ml-0 my-2">
+                <div class="row" style="position:relative;">
+                  <div class="col col-sm-auto my-2">
+                    <img src="images/may2.jpg" width="100px" height="100px" alt="Icon">
+                  </div>
+                  <div class="col">
+                    <div class="row">
+                      <a class="nounderline" style="color:inherit;" href="visitante_news.html">
+                        <h3 class="font-weight-normal">Theresa May sets out 'hard facts' on Brexit in speech</h3>
+                      </a>
+                    </div>
+                    <div class="row">
+                      <p>
+                        <span class="font-weight-bold">1001 points</span> &middot; Haydn &middot; 08:39 22/02/2018</p>
+                    </div>
+                    <div class="ml-1 ml-lg-auto">
+                      <p>Theresa May has set out what she called "hard facts" about leaving the European Union, as she outlined
+                        her hopes for a future economic partnership. "We are leaving the single market, life is going to
+                        be different," she told an audience at London's Mansion House.</p>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <!-- 12th News Item -->
+              <div style="display: none;" class="news_box border container ml-0 my-2">
+                <div class="row" style="position:relative;">
+                  <div class="col col-sm-auto my-2">
+                    <img src="images/thomson.jpg" width="100px" height="100px" alt="Icon">
+                  </div>
+                  <div class="col">
+                    <div class="row">
+                      <a class="nounderline" style="color:inherit;" href="visitante_news.html">
+                        <h3 class="font-weight-normal">Johnson-Thompson closing on Worlds medal</h3>
+                      </a>
+                    </div>
+                    <div class="row">
+                      <p>
+                        <span class="font-weight-bold">793 points</span> &middot; Nobody &middot; 23:25 19/02/2018</p>
+                    </div>
+                    <div class="ml-1 ml-lg-auto">
+                      <p>Katarina Johnson-Thompson delivered an indoor personal best in shot put to sit second after three pentathlon
+                        events at the World Indoor Championships. The 25-year-old sits in silver medal position on 2,873
+                        points, with Cuba's Yorgelis Rodriguez leading on 2,886.</p>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <!-- 13th News Item -->
+              <div style="display: none;" class="news_box border container ml-0 my-2">
+                <div class="row" style="position:relative;">
+                  <div class="col col-sm-auto my-2">
+                    <img src="images/airport.jpg" width="100px" height="100px" alt="Icon">
+                  </div>
+                  <div class="col">
+                    <div class="row">
+                      <a class="nounderline" style="color:inherit;" href="visitante_news.html">
+                        <h3 class="font-weight-normal">Queenstown Airport a step closer to extension after appeal dismissed</h3>
+                      </a>
+                    </div>
+                    <div class="row">
+                      <p>
+                        <span class="font-weight-bold">999 points</span> &middot; JohnAdams &middot; 06:36 15/02/2018</p>
+                    </div>
+                    <div class="ml-1 ml-lg-auto">
+                      <p>Queenstown Airport is a step closer to acquiring expansion land after the High Court dismissed an appeal
+                        by landowner Remarkables Park. In 2008 the airport moved to purchase the land as a compulsory acquisition.
+                        However, landowner Remarkables Park opposed the expansion bid on its "priceless"...
+                      </p>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <!-- 14th News Item -->
+              <div style="display: none;" class="news_box border container ml-0 my-2">
+                <div class="row" style="position:relative;">
+                  <div class="col col-sm-auto my-2">
+                    <img src="images/rugby.jpg" width="100px" height="100px" alt="Icon">
+                  </div>
+                  <div class="col">
+                    <div class="row">
+                      <a class="nounderline" style="color:inherit;" href="visitante_news.html">
+                        <h3 class="font-weight-normal">The cauliflower: Australian rugby tidbits</h3>
+                      </a>
+                    </div>
+                    <div class="row">
+                      <p>
+                        <span class="font-weight-bold">555 points</span> &middot; MMESIUSMARKO50TUS &middot; 20:11 14/02/2018</p>
+                    </div>
+                    <div class="ml-1 ml-lg-auto">
+                      <p>A year before Eddie Jones agreed to stay on as England rugby coach beyond the 2019 Rugby World Cup,
+                        he was in Sydney sussing out the Wallabies landscape. It was understood Jones caught up with Rugby
+                        Australia board power broker Brett Robinson during that time, and that the board was aware...
+                      </p>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <!-- 15th News Item -->
+              <div style="display: none;" class="news_box border container ml-0 my-2">
+                <div class="row" style="position:relative;">
+                  <div class="col col-sm-auto my-2">
+                    <img src="images/syria.jpg" width="100px" height="100px" alt="Icon">
+                  </div>
+                  <div class="col">
+                    <div class="row">
+                      <a class="nounderline" style="color:inherit;" href="visitante_news.html">
+                        <h3 class="font-weight-normal">Syrian forces 'seize new ground' in rebel-held eastern Ghouta</h3>
+                      </a>
+                    </div>
+                    <div class="row">
+                      <p>
+                        <span class="font-weight-bold">9999 points</span> &middot; Joao611 &middot; 19:21 14/02/2018</p>
+                    </div>
+                    <div class="ml-1 ml-lg-auto">
+                      <p>Syrian government forces aim to advance into eastern Ghouta one “bite” at a time, a commander said
+                        on Friday, as a war monitor reported that the army had seized new ground from rebels. In one of the
+                        deadliest offensives of the war, government airstrikes and bombardments have killed more than 600...
+                      </p>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <!-- 16th News Item -->
+              <div style="display: none;" class="news_box border container ml-0 my-2">
+                <div class="row" style="position:relative;">
+                  <div class="col col-sm-auto my-2">
+                    <img src="images/ussr_boris_tank.jpg" width="100px" height="100px" alt="Icon">
+                  </div>
+                  <div class="col">
+                    <div class="row">
+                      <a class="nounderline" style="color:inherit;" href="visitante_news.html">
+                        <h3 class="font-weight-normal">END OF THE SOVIET UNION; The Soviet State, Born of a Dream, Dies</h3>
+                      </a>
+                    </div>
+                    <div class="row">
+                      <p>
+                        <span class="font-weight-bold">1487 points</span> &middot; SergeSchmemann &middot; 11:01 26/12/1991</p>
                     </div>
                     <div class="ml-1 ml-lg-auto">
                       <p>MOSCOW, Dec. 25— The Soviet state, marked throughout its brief but tumultuous history by great achievement
@@ -445,55 +600,22 @@
               </div>
 
               <div class="d-flex justify-content-between">
-              <a href="#" id="loadMore" style="text-decoration: none;">Show More</a>
+                <a href="#" id="loadMore" style="text-decoration: none;">Show More</a>
 
-              <p class="totop">
-                <a style="text-decoration: none;" href="#top">Back to top</a>
-              </p>
+                <p class="totop">
+                  <a style="text-decoration: none;" href="#top">Back to top</a>
+                </p>
             </div>
           </div>
-            <nav aria-label="...">
-              <ul class="pagination">
-                <li class="page-item disabled">
-                  <span class="page-link">Previous</span>
-                </li>
-                <li class="page-item active">
-                  <a class="page-link" href="#">1</a>
-                </li>
-                <li class="page-item">
-                  <a class="page-link" href="#">2</a>
-                </li>
-                <li class="page-item">
-                  <a class="page-link" href="#">3</a>
-                </li>
-                <li class="page-item">
-                  <a class="page-link" href="#">4</a>
-                </li>
-                <li class="page-item">
-                  <a class="page-link" href="#">5</a>
-                </li>
-                <li class="page-item">
-                  <a class="page-link" href="#">Next</a>
-                </li>
-              </ul>
-            </nav>
-          </div>
         </div>
-      </div>
-    </div>
-    <!-- FOR YOU  -->
-    <div class="tab-pane fade" id="forYou">
-      <div class="container-fluid">
-        <!-- HEADERS -->
-        <div class="row mt-2">
-          <div class="col-3">
-            <h6>Interests</h6>
-          </div>
-          <div class="col-xl-8 col-9">
-            <!-- Sort News Dropdown -->
+          <div class="tab-pane fade" id="forYou">
+            <!-- FOR YOU -->
+            <!-- HEADERS -->
             <div class="row">
-              <div class="container d-flex justify-content-between">
-                <h1>Suggested For You</h1>
+              <!-- Sort News Dropdown -->
+              <div class="container ml-0 d-flex justify-content-between">
+                <h1>
+                  <i class="fas fa-heart"></i> Suggested For You</h1>
 
                 <div class="btn-group" role="group">
                   <button id="btnGroupDrop1" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -514,39 +636,20 @@
                   });
                 </script>
               </div>
-
+            </div>
+            <!-- SECOND ROW -->
+            <div class="row mt-2">
+              <!-- SIGN IN NOTICE -->
+              <div class="col-12" id="news_for_you">
+                <div class="container">
+                  <a href="#">Sign in</a> to follow your interests.
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <!-- SECOND ROW -->
-        <div class="row mt-2">
-          <!-- LEFT-SECTIONS -->
-          <div class="col-3" id="sections">
-            <div class="section-div">
-              <ul class="list-group ">
-                <a href="#" role="button" class="border-0 list-group-item list-group-item-action">
-                  <i class="fas fa-paw"></i> Animals</a>
-                <a href="#" role="button" class="border-0 list-group-item list-group-item-action">
-                  <i class="fas fa-music"></i> Music</a>
-                <hr>
-              </ul>
-            </div>
-            <a href="#" class="border-0 list-group-item list-froup-item-action">Manage Interests</a>
-
-
-          </div>
-          <!-- MID-News -->
-          <div class="col-xl-8 col-9" id="news_for_you">
-            <div class="container">
-              <a href="#">Sign in </a>
-              <span>to follow your interests.</span>
-            </div>
-          </div>
-
         </div>
       </div>
     </div>
-  </div>
   </div>
 
   <footer class="page-footer sticky-bottom mt-4">
@@ -561,5 +664,13 @@
 
 
 </body>
+
+<script>
+  $(".left-pane li").click(function () {
+    $("#my-interests").collapse({
+      toggle: false
+    });
+  });
+</script>
 
 </html>

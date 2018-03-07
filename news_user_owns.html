@@ -27,143 +27,127 @@
 </head>
 
 <body>
+  <!-- NEW HEADER ------------------------------------------------------------------>
   <header class="container-fluid px-0">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <a class="navbar-brand" href="index_signed_in.html">Photon News
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="true" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon">
-        </span>
-      </button>
-      <div class="navbar-collapse collapse show" id="navbar">
-        <ul class="navbar-nav mr-auto">
-          <!-- Account -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
-              <i class="fas fa-user-circle">
-              </i> Account
-            </a>
-            <div class="dropdown-menu" x-placement="bottom-start">
-              <a class="dropdown-item" href="profile.html">
-                <i class="fas fa-user">
-                </i> Profile
-              </a>
-              <a class="dropdown-item" href="forum.html">
-                <i class="fas fa-university">
-                </i> Forum
-              </a>
-              <a class="dropdown-item" href="settings.html">
-                <i class="fas fa-cog">
-                </i> Settings
-              </a>
-              <a class="dropdown-item" href="index.html">
-                <i class="fas fa-sign-out-alt">
-                </i> Log out
-              </a>
-            </div>
-          </li>
-          <!-- Notifications -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
-              <i class="fas fa-bell">
-              </i> Notifications
-            </a>
-            <div class="dropdown-menu" x-placement="bottom-start">
-              <a class="dropdown-item" href="#">
-                <i class="fas fa-user-circle">
-                </i> User1 is following you
-              </a>
-              <a class="dropdown-item" href="#">
-                <i class="fas fa-user-circle">
-                </i> User2 published an article
-              </a>
-              <a class="dropdown-item" href="#">
-                <i class="fas fa-user-circle">
-                </i> User3 commented on your news
-              </a>
-            </div>
-          </li>
-          <li class="nav-item">
-            <button class="btn btn-outline-light my-2 my-sm-0 rounded">
-              <a href="create_news.html" style="color:inherit; text-decoration:none">
-                Publish
-              </a>
-            </button>
-          </li>
-        </ul>
-        <div class="d-flex flex-column">
-          <form class="form-inline">
-            <input class="form-control mr-sm-2 rounded" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-light my-2 my-sm-0 rounded" type="submit">
-              <a href="advance_search.html" style="color:inherit; text-decoration:none">Search
-              </a>
-            </button>
-          </form>
-          <a class="small" data-toggle="collapse" data-target="#advanced-search-dropdown" style="color:white;" href="">advanced search
-          </a>
+    <!-- NAVBAR <nav class="row navbar navbar-expand-lg navbar-light bg-light"> -->
+    <nav class="row navbar navbar-expand-lg navbar-dark bg-primary mx-0">
+        <div class="col-12 col-md-3">
+            <a class="navbar-brand" href="index_signed_in.html">Photon News</a>
         </div>
-      </div>
+        <div class="col-12 col-md-6">
+          <div class="container ml-0 d-flex flex-column px-0">
+            <form class="form-inline">
+              <input class="form-control mr-sm-2 rounded" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-light my-2 my-sm-0 rounded" type="submit">
+                <a href="advanced_search.html" style="color:inherit; text-decoration:none">Search</a>
+              </button>
+            </form>
+            <a class="small" data-toggle="collapse" data-target="#advanced-search-dropdown" style="color:white;" href="">advanced search</a>
+          </div>
+        </div>
+        <div class="col-12 col-md-3 ">
+          <div class="navbar-collapse collapse show" id="navbar">
+            <ul class="navbar-nav ml-auto">
+              <!-- Publish -->
+              <li class="nav-item">
+                <button class="btn btn-outline-light my-2 my-sm-0 rounded">
+                  <a href="create_news.html" style="color:inherit; text-decoration:none">
+                    Publish
+                  </a>
+                </button>
+              </li>
+              
+              <!-- Notifications -->
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
+                  <i class="fas fa-bell">
+                  </i> Notifications
+                </a>
+                <div class="dropdown-menu dropdown-menu-right position-absolute" x-placement="bottom-start">
+                  <a class="dropdown-item" href="#">
+                    <i class="fas fa-user-circle">
+                    </i> User1 is following you
+                  </a>
+                  <a class="dropdown-item" href="#">
+                    <i class="fas fa-user-circle">
+                    </i> User2 published an article
+                  </a>
+                  <a class="dropdown-item" href="#">
+                    <i class="fas fa-user-circle">
+                    </i> User3 commented on your news
+                  </a>
+                </div>
+              </li>
+              <!-- Account -->
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
+                    <i class="fas fa-user-circle">
+                    </i> Account
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right position-absolute" x-placement="bottom-start">
+                    <a class="dropdown-item" href="profile.html">
+                      <i class="fas fa-user">
+                      </i> Profile
+                    </a>
+                    <a class="dropdown-item" href="forum.html">
+                      <i class="fas fa-university">
+                      </i> Forum
+                    </a>
+                    <a class="dropdown-item" href="settings.html">
+                      <i class="fas fa-cog">
+                      </i> Settings
+                    </a>
+                    <a class="dropdown-item" href="index.html">
+                      <i class="fas fa-sign-out-alt">
+                      </i> Log out
+                    </a>
+                  </div>
+                </li>
+            </ul>
+          </div>
+    </div>
     </nav>
     <!-- ADVANCED SEARCH -->
-    <div class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="px-0 navbar navbar-expand-lg navbar-dark bg-primary">
       <div id="advanced-search-dropdown" class="collapse ml-1 ml-lg-auto">
         <form class="" action="#" method="post">
           <div class="form-group my-1">
             <select class="custom-select">
-              <option selected>Search for...
-              </option>
-              <option value="1">Only title
-              </option>
-              <option value="2">Only body
-              </option>
-              <option value="3">Title and body
-              </option>
-              <option value="4">Username
-              </option>
+              <option selected>Search for...</option>
+              <option value="1">Only title</option>
+              <option value="2">Only body</option>
+              <option value="3">Title and body</option>
+              <option value="4">Username</option>
             </select>
           </div>
           <div class="form-group my-1">
             <select class="custom-select">
-              <option selected>Section...
-              </option>
-              <option value="1">World
-              </option>
-              <option value="2">Technology
-              </option>
-              <option value="3">Science
-              </option>
-              <option value="4">Business
-              </option>
-              <option value="5">Sports
-              </option>
+              <option selected>Section...</option>
+              <option value="1">World</option>
+              <option value="2">Technology</option>
+              <option value="3">Science</option>
+              <option value="4">Business</option>
+              <option value="5">Sports</option>
             </select>
           </div>
           <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="News' Author...">
           <div class="d-flex">
             <div class="form-group">
-          <label class="col-form-label">Begin:
-          </label>
-          <input type="date" class="form-control" value="1990-01-01">
-        </div>
-        <div class="form-group">
-      <label class="col-form-label" >End:
-      </label>
-      <input type="date" class="form-control" value="2018-03-15">
+              <!-- <p><time></time></p> -->
+              <label class="col-form-label">Begin:</label>
+              <input type="date" class="form-control" value="1990-01-01">
+            </div>
+            <div class="form-group">
+              <!-- <p><time></time></p> -->
+              <label class="col-form-label">End:</label>
+              <input type="date" class="form-control" value="2018-03-15">
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
-  </div>
-</form>
-</div>
-</div>
-<!-- TABS -->
-<ul class="nav nav-tabs justify-content-center bg-primary">
-  <li class="nav-item">
-    <a id="article-tab" class="nav-link active" data-toggle="tab" href="#article">Article</a>
-  </li>
-  <li class="nav-item">
-    <a id="modComments-tab" class="nav-link" data-toggle="tab" href="#mod-comments">Mod Comments</a>
-  </li>
-</ul>
-</header>
+  </header>
+  INSERT SIDE BAR FOR ARTICLE|MOD COMMENTS
 
   <div id="myTabContent" class="tab-content">
     <div class="tab-pane fade active show" id="article">

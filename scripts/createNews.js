@@ -1,11 +1,15 @@
 //initialize froala
-$(function() {
-    $('#newsBody').froalaEditor({
-        heightMin: 300,
-        tabSpaces: 4,
-        toolbarButtonsXS: ['bold', 'italic', 'underline', 'fontSize', 'insertImage','|', 'undo', 'redo'],
-    })
- });
+tinymce.init({
+    selector: '#newsBody',
+    plugins: "image",
+    menubar: "insert",
+    toolbar: "image",
+    image_list: [
+      {title: 'My image 1', value: 'https://www.tinymce.com/my1.gif'},
+      {title: 'My image 2', value: 'http://www.moxiecode.com/my2.gif'}
+    ]
+  });
+
 
  function createArticle(){
      event.preventDefault();
