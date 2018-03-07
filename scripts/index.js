@@ -6,12 +6,25 @@ function signIn(){
 
 $(function () {
     $("div.news_box").slice(0, 5).show();
+    $("div.news_box_forYou").slice(0, 5).show();
     $(".loadMore").on('click', function (e) {
       console.log("entrou");
         e.preventDefault();
         $('div.news_box[style="display: none;"]').slice(0, 5).slideDown();
-        if ($("div.news_box:hidden").length == 0) {
-            $(".load").fadeOut('slow');
+        if ($('div.news_box[style="display: none;"]').length == 0) {
+            $(".loadMore").fadeOut('slow');
+        }
+        $('html,body').animate({
+            scrollTop: $(this).offset().top
+        }, 1500);
+    });
+
+    $(".loadMoreForYou").on('click', function (e) {
+      console.log("entrou");
+        e.preventDefault();
+        $('div.news_box_forYou[style="display: none;"]').slice(0, 5).slideDown();
+        if ($('div.news_box_forYou[style="display: none;"]').length == 0) {
+            $(".loadMoreForYou").fadeOut('slow');
         }
         $('html,body').animate({
             scrollTop: $(this).offset().top
