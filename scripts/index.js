@@ -6,13 +6,12 @@ function signIn(){
 
 $(function () {
     $("div.news_box").slice(0, 5).show();
-    $("#loadMore").on('click', function (e) {
+    $(".loadMore").on('click', function (e) {
       console.log("entrou");
         e.preventDefault();
         $('div.news_box[style="display: none;"]').slice(0, 5).slideDown();
         if ($("div.news_box:hidden").length == 0) {
-          console.log("escondidos");
-            $("#load").fadeOut('slow');
+            $(".load").fadeOut('slow');
         }
         $('html,body').animate({
             scrollTop: $(this).offset().top
