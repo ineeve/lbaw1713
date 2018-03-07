@@ -4,6 +4,13 @@ function signIn(){
     document.location.href = "index_signed_in.html";
 }
 
+if($(window).width() > 768){
+    console.log("BIG WINDOW");
+    $("#sections_list").addClass('show');
+}else{
+    console.log("SMALL WINDOW");
+}
+
 $(function () {
     $("div.news_box").slice(0, 4).show();
     $("#loadMore").on('click', function (e) {
@@ -36,3 +43,4 @@ $(window).scroll(function () {
         $('p.totop > a').fadeOut();
     }
 });
+
