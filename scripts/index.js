@@ -5,10 +5,7 @@ function signIn(){
 }
 
 if($(window).width() > 768){
-    console.log("BIG WINDOW");
     $("#sections_list").addClass('show');
-}else{
-    console.log("SMALL WINDOW");
 }
 
 $(function () {
