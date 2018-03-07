@@ -5,11 +5,11 @@ function signIn(){
 }
 
 $(function () {
-    $("div#news_box").slice(0, 4).show();
+    $("div#news_box").slice(0, 5).show();
     $("#loadMore").on('click', function (e) {
       console.log("entrou");
         e.preventDefault();
-        $('div#news_box[style*="display: none"]').slice(0, 4).slideDown();
+        $('div#news_box[style="display: none;"]').slice(0, 5).slideDown();
         if ($("div#news_box:hidden").length == 0) {
           console.log("escondidos");
             $("#load").fadeOut('slow');
@@ -28,11 +28,11 @@ $('a[href="#top"]').click(function () {
 });
 
 $(window).scroll(function () {
-    if ($(this).scrollTop() > 10) {
+    if ($(this).scrollTop() > 200) {
         $('p.totop > a').fadeIn();
-        console.log("em cima");
+        console.log("em baixo");
     } else {
-      console.log("a baixo");
+      console.log("em cima");
         $('p.totop > a').fadeOut();
     }
 });
