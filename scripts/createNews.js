@@ -1,14 +1,16 @@
 //initialize froala
 tinymce.init({
-    selector: '#newsBody',
-    plugins: "image",
-    menubar: "insert",
-    toolbar: "image",
-    image_list: [
-      {title: 'My image 1', value: 'https://www.tinymce.com/my1.gif'},
-      {title: 'My image 2', value: 'http://www.moxiecode.com/my2.gif'}
-    ]
-  });
+  selector: '#newsBody',
+  height: 300,
+  browser_spellcheck: true,
+  plugins: [
+    'advlist autolink link image lists charmap hr anchor pagebreak',
+    'searchreplace code fullscreen',
+    'save paste textcolor'
+  ],
+  content_css: 'bootswatch.css',
+  toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons'
+});
 
 
  function createArticle(){
