@@ -6,6 +6,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+  <script src="./scripts/index.js" defer></script>
+
   <!-- Font Awesome CSS -->
   <link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
 
@@ -13,8 +15,17 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
     crossorigin="anonymous">
   <link rel="stylesheet" href="bootswatch.css">
-
   <link rel="stylesheet" href="style.css">
+
+  <!-- Optional JavaScript -->
+
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
 
   <title>Photon News</title>
 
@@ -34,6 +45,8 @@
     a#modComments-tab.active {
       color: black;
     }
+
+
   </style>
 </head>
 
@@ -271,7 +284,10 @@
                 <!-- ARTICLE OPTIONS -->
                 <div class="col-1 pr-0">
                   <div class="d-flex mt-5 justify-content-end">
-                    <div class="mr-2 mt-1">100</div>
+                    <div class="position-relative mr-2 mt-1 d-flex flex-column justify-content-between align-items-end">
+                      <span>100</span>
+                        <span class="position-absolute" style="bottom: -4px;">Report</span>
+                    </div>
                     <div class="d-flex flex-column article-options">
                       <i class="fas fa-arrow-alt-circle-up clickable-btn"></i>
                       <i class="fas fa-arrow-alt-circle-down mt-2 clickable-btn"></i>
@@ -322,7 +338,7 @@
                     <button type="submit" class="btn btn-primary">Post</button>
                   </form>
                   <!-- Comment 1 -->
-                  <div class="card border-0 my-3">
+                  <div style="display: none;" class="news_box card border-0 my-3">
                     <div class="card-body">
                       <div class="d-flex">
                         <div class="mr-2">
@@ -353,7 +369,7 @@
                   </div>
 
                   <!-- Comment 2 -->
-                  <div class="card border-0 my-3">
+                  <div style="display: none;" class="news_box card border-0 my-3">
                     <div class="card-body">
                       <div class="d-flex">
                         <div class="mr-2">
@@ -385,7 +401,7 @@
                   </div>
 
                   <!-- Comment 3 -->
-                  <div class="card border-0 my-3">
+                  <div style="display: none;" class="news_box card border-0 my-3">
                     <div class="card-body">
                       <div class="d-flex">
                         <div class="mr-2">
@@ -416,7 +432,7 @@
                   </div>
 
                   <!-- Comment 4 -->
-                  <div class="card border-0 my-3">
+                  <div style="display: none;" class="news_box card border-0 my-3">
                     <div class="card-body">
                       <div class="d-flex">
                         <div class="mr-2">
@@ -444,29 +460,16 @@
                     </div>
                   </div>
 
-                  <ul class="pagination pagination-sm">
-                    <li class="page-item disabled">
-                      <a class="page-link" href="#">&laquo;</a>
-                    </li>
-                    <li class="page-item active">
-                      <a class="page-link" href="#">1</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#">2</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#">3</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#">4</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#">5</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#">&raquo;</a>
-                    </li>
-                  </ul>
+                  <div class="row">
+                    <div class="col">
+                      <a href="#" class="loadMore" style="text-decoration: none;">Show More</a>
+                    </div>
+                    <div class="col text-right">
+                      <p class="totop">
+                        <a style="text-decoration: none;" href="#top">Back to top</a>
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -566,15 +569,6 @@
     <p class="text-center footer-copyright mb-1">
       <i class="far fa-copyright"></i> 2018 Photon News</p>
   </footer>
-
-  <!-- Optional JavaScript -->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script>
 
   <script src="scripts/buttons.js" defer></script>
 </body>
