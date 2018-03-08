@@ -14,6 +14,7 @@ if($(window).width() > 768){
 $(function () {
     $("div.news_box").slice(0, 5).show();
     $("div.news_box_forYou").slice(0, 5).show();
+    
     $(".loadMore").on('click', function (e) {
       console.log("entrou");
         e.preventDefault();
@@ -55,4 +56,3 @@ $(window).scroll(function () {
         $('p.totop > a').fadeOut();
     }
 });
-
