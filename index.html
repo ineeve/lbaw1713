@@ -661,7 +661,29 @@
               <!-- SIGN IN NOTICE -->
               <div class="col-12" id="news_for_you">
                 <div class="container">
-                  <a href="#">Sign in</a> to follow your interests.
+                  Sign in to follow your interests.
+                  <div class="">
+                    <form class=" py-3">
+                      <div class="form-group">
+                        <label for="dropdownFormEmail">Email address</label>
+                        <input type="email" class="form-control" id="dropdownFormEmail" placeholder="email@example.com">
+                      </div>
+                      <div class="form-group">
+                        <label for="dropdownFormPassword">Password</label>
+                        <input type="password" class="form-control" id="dropdownFormPassword" placeholder="Password">
+                      </div>
+                      <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="dropdownCheck">
+                        <label class="form-check-label" for="dropdownCheck">
+                          Remember me
+                        </label>
+                      </div>
+                      <button onclick="signIn()" type="submit" class="btn btn-primary">Sign in</button>
+                    </form>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="create_profile.html">New around here? Sign up</a>
+                    <a class="dropdown-item" href="#">Forgot password?</a>
+                  </div>
                 </div>
               </div>
             </div>
