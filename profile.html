@@ -9,24 +9,20 @@
   <link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
 
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="bootswatch.css">
   <link rel="stylesheet" href="style.css">
 
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
   <title>Photon News
   </title>
 </head>
 
-<body>
+<body class="" style="">
   <!-- NEW HEADER ------------------------------------------------------------------>
   <header class="container-fluid px-0">
     <!-- NAVBAR <nav class="row navbar navbar-expand-lg navbar-light bg-light"> -->
@@ -116,7 +112,7 @@
         <div class="modal-header">
           <h5 class="modal-title" id="searchModalLabel">Advanced Search</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+            <span aria-hidden="true">×</span>
           </button>
         </div>
         <div class="modal-body">
@@ -126,7 +122,7 @@
             </div>
             <div class="form-group my-1">
               <select class="custom-select">
-                <option selected>Search for...</option>
+                <option selected="">Search for...</option>
                 <option value="1">Only title</option>
                 <option value="2">Only body</option>
                 <option value="3">Title and body</option>
@@ -135,7 +131,7 @@
             </div>
             <div class="form-group my-1">
               <select class="custom-select">
-                <option selected>Section...</option>
+                <option selected="">Section...</option>
                 <option value="1">World</option>
                 <option value="2">Technology</option>
                 <option value="3">Science</option>
@@ -167,51 +163,25 @@
 
     <div class="row">
 
-      <div class="col-md-4">
+      <div class="row col-lg-3 col-12 mx-0">
 
-        <div class="profile_item border container p-2 mx-auto mt-3">
+        <div class="border border-top-0 border-left-0 border-right-0 col-4 col-lg-12 profile_item container p-2 mx-auto mt-3">
 
-          <a href="profile_edit.html">
-            <span class="fa fa-edit float-right">
-            </span>
-          </a>
 
           <div class="row">
+            <div clas="col">
+              <a href="profile_edit.html">
 
-            <div class="col ">
-
-              <img class="img-responsive" src="https://c1.staticflickr.com/3/2936/14387367072_85312c31b3_b.jpg" alt="pic" height="200px"
-                width="200px">
+              <div class="ml-3 mt-1 d-flex flex-row align-items-center">
+                <i class="fa fa-edit"></i>
+                <h5 class="ml-2 mt-2">Edit Profile</h5>
+              </div>
+              </a>
             </div>
-
+          </div>
+          <div class="row">
             <div class="col">
-
-              <div class="row">
-                <div class="col">
-                  <p class="mb-0">Total Points:
-                  </p>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col">
-
-                  <span class="badge badge-pill badge-light">152
-                  </span>
-
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col mt-5">
-
-                  <h4 class="font-weight-bold">Joana Moreira
-                  </h4>
-
-                </div>
-
-              </div>
-
+              <img class="img-responsive" src="https://c1.staticflickr.com/3/2936/14387367072_85312c31b3_b.jpg" alt="pic" height="200px" width="200px">
             </div>
 
           </div>
@@ -220,6 +190,8 @@
 
             <div class="col">
 
+              <h4 class="font-weight-bold mt-2">Joana Moreira</h4>
+              <h4><span class="badge badge-secondary">128 points</span></h4>
               <p class="mb-0">Female
               </p>
               <p class="mb-0">
@@ -235,20 +207,19 @@
           </div>
 
         </div>
-
-        <div class="p-2 mt-3">
+        <div class="col-6 col-lg-12 p-2 mt-3">
 
           <h3>Last badges earned
-            <span class="badge badge-secondary">3/10</span>
+            <span class="badge badge-secondary">10/25</span>
           </h3>
           <!-- Badges Modal -->
-          <div class="modal fade" id="badgesModal" tabindex="-1" role="dialog" aria-labelledby="badgesModalLabel" aria-hidden="true">
+          <div class="modal fade" id="badgesModal" tabindex="-1" role="dialog" aria-labelledby="badgesModalLabel" style="display: none;" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title" id="badgesModalLabel">All Badges</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                    <span aria-hidden="true">×</span>
                   </button>
                 </div>
                 <div class="modal-body d-flex justify-content-around flex-wrap" style="height:650px;">
@@ -327,9 +298,9 @@
             </div>
           </div>
 
-          <div class="row mx-auto mt-3" data-toggle="modal" data-target="#badgesModal" style="cursor:pointer">
+          <div class="d-flex flex-wrap flex-row mx-auto mt-3" data-toggle="modal" data-target="#badgesModal" style="cursor:pointer">
 
-            <div class="col-12 col-lg-6 col-xl-4 badge">
+            <div class="badge">
 
               <img alt="Icon" src="http://icons.iconarchive.com/icons/seanau/fresh-web/128/Badge-icon.png" width="80" height="80">
               <h3>Opiniated</h3>
@@ -337,28 +308,36 @@
 
             </div>
 
-            <div class="col-12 col-lg-6 col-xl-4 badge">
+            <div class="badge">
 
               <img alt="Icon" src="http://icons.iconarchive.com/icons/seanau/fresh-web/128/Badge-icon.png" width="80" height="80">
               <h3>Scribophile</h3>
               <p>Publish 10 news</p>
             </div>
 
-            <div class="col-12 col-lg-6 col-xl-4 badge">
+
+
+            <div class="badge">
 
               <img alt="Icon" src="http://icons.iconarchive.com/icons/seanau/fresh-web/128/Badge-icon.png" width="80" height="80">
-              <h3>Citizen</h3>
-              <p>Do 10 votes</p>
+              <h3>Opiniated</h3>
+              <p>Do 10 comments</p>
 
             </div>
+            <div class="badge">
 
+              <img alt="Icon" src="http://icons.iconarchive.com/icons/seanau/fresh-web/128/Badge-icon.png" width="80" height="80">
+              <h3>Opiniated</h3>
+              <p>Do 10 comments</p>
+
+            </div>
           </div>
 
         </div>
 
       </div>
 
-      <div class="col-md-7 mt-3 mx-2">
+      <div class="col-lg-8 col-12 mt-3 mx-2">
         <div class="row p-2">
           <h2>Articles</h2>
         </div>
@@ -367,24 +346,21 @@
             <div class="d-flex flex-column mx-auto">
 
               <!-- 1st News Item -->
-              <div style="display: none;" class="news_box news_item border container my-2">
+              <div style="display: block;" class="news_box news_item border container my-2">
                 <div class="row" style="position:relative;">
                   <div class="col col-sm-auto my-2">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Jared_Kushner_Cropped.jpg/378px-Jared_Kushner_Cropped.jpg"
-                      width="100px" height="100px" alt="Icon">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Jared_Kushner_Cropped.jpg/378px-Jared_Kushner_Cropped.jpg" width="100px" height="100px" alt="Icon">
                   </div>
                   <div class="col">
                     <div class="row">
                       <h3>Kushner, Russia bombshells rock the White House</h3>
                     </div>
                     <div class="row">
-                      <p>Joana Moreira &middot; 12:25 23/02/2018</p>
+                      <p>Joana Moreira · 12:25 23/02/2018</p>
                     </div>
 
                     <div class="lorem collapse ml-1 ml-lg-auto" id="one">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                        et dolore magna aliqua. Neque sodales ut etiam sit amet nisl purus. Donec massa sapien faucibus et
-                        molestie ac feugiat sed lectus.</p>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Neque sodales ut etiam sit amet nisl purus. Donec massa sapien faucibus et molestie ac feugiat sed lectus.</p>
                     </div>
                   </div>
                   <a data-toggle="collapse" data-target="#one" style="color:inherit;" href="">
@@ -393,23 +369,20 @@
                 </div>
               </div>
               <!-- 2nd News Item -->
-              <div style="display: none;" class="news_box news_item border container my-2">
+              <div style="display: block;" class="news_box news_item border container my-2">
                 <div class="row" style="position:relative;">
                   <div class="col col-sm-auto my-2">
-                    <img src="https://ichef-1.bbci.co.uk/news/660/cpsprodpb/1327D/production/_100216487_hi045211153-2.jpg" width="100px" height="100px"
-                      alt="Icon">
+                    <img src="https://ichef-1.bbci.co.uk/news/660/cpsprodpb/1327D/production/_100216487_hi045211153-2.jpg" width="100px" height="100px" alt="Icon">
                   </div>
                   <div class="col">
                     <div class="row">
                       <h3>Reality Check: What does the EU Brexit draft reveal?</h3>
                     </div>
                     <div class="row">
-                      <p>Joana Moreira &middot; 12:25 23/02/2018</p>
+                      <p>Joana Moreira · 12:25 23/02/2018</p>
                     </div>
                     <div class="lorem collapse ml-1 ml-lg-auto" id="two">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                        et dolore magna aliqua. Neque sodales ut etiam sit amet nisl purus. Donec massa sapien faucibus et
-                        molestie ac feugiat sed lectus.</p>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Neque sodales ut etiam sit amet nisl purus. Donec massa sapien faucibus et molestie ac feugiat sed lectus.</p>
                     </div>
                   </div>
                   <a data-toggle="collapse" data-target="#two" style="color:inherit;" href="">
@@ -418,11 +391,10 @@
                 </div>
               </div>
               <!-- 3rd News Item -->
-              <div style="display: none;" class="news_box news_item border container my-2">
+              <div style="display: block;" class="news_box news_item border container my-2">
                 <div class="row" style="position:relative;">
                   <div class="col col-sm-auto my-2">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/71/Meghan_Markle_in_January_2013.jpg" width="100px" height="100px"
-                      alt="Icon">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/71/Meghan_Markle_in_January_2013.jpg" width="100px" height="100px" alt="Icon">
                     <!-- By Genevieve (DSC_3228) [CC BY 2.0 (http://creativecommons.org/licenses/by/2.0)], via Wikimedia Commons -->
                   </div>
                   <div class="col">
@@ -430,12 +402,10 @@
                       <h3>Meghan Markle wants to 'hit ground running' with royal charity work</h3>
                     </div>
                     <div class="row">
-                      <p>Joana Moreira &middot; 12:25 23/02/2018</p>
+                      <p>Joana Moreira · 12:25 23/02/2018</p>
                     </div>
                     <div class="lorem collapse ml-1 ml-lg-auto" id="three">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                        et dolore magna aliqua. Neque sodales ut etiam sit amet nisl purus. Donec massa sapien faucibus et
-                        molestie ac feugiat sed lectus.</p>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Neque sodales ut etiam sit amet nisl purus. Donec massa sapien faucibus et molestie ac feugiat sed lectus.</p>
                     </div>
                   </div>
                   <a data-toggle="collapse" data-target="#three" style="color:inherit;" href="">
@@ -444,23 +414,20 @@
                 </div>
               </div>
               <!-- 4th News Item -->
-              <div style="display: none;" class="news_box news_item border container my-2">
+              <div style="display: block;" class="news_box news_item border container my-2">
                 <div class="row" style="position:relative;">
                   <div class="col col-sm-auto my-2">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Amazon_logo_plain.svg/2000px-Amazon_logo_plain.svg.png"
-                      width="100px" height="100px" alt="Icon">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Amazon_logo_plain.svg/2000px-Amazon_logo_plain.svg.png" width="100px" height="100px" alt="Icon">
                   </div>
                   <div class="col">
                     <div class="row">
                       <h3>Amazon is buying Ring, a business that was once rejected on 'Shark Tank'</h3>
                     </div>
                     <div class="row">
-                      <p>Joana Moreira &middot; 12:25 23/02/2018</p>
+                      <p>Joana Moreira · 12:25 23/02/2018</p>
                     </div>
                     <div class="lorem collapse ml-1 ml-lg-auto" id="four">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                        et dolore magna aliqua. Neque sodales ut etiam sit amet nisl purus. Donec massa sapien faucibus et
-                        molestie ac feugiat sed lectus.</p>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Neque sodales ut etiam sit amet nisl purus. Donec massa sapien faucibus et molestie ac feugiat sed lectus.</p>
                     </div>
                   </div>
                   <a data-toggle="collapse" data-target="#four" style="color:inherit;" href="">
@@ -470,14 +437,14 @@
               </div>
               <div class="row">
                 <div class="col">
-                <a href="#" class="loadMore" style="text-decoration: none;">Show More</a>
+                  <a href="#" class="loadMore" style="text-decoration: none; display: none;">Show More</a>
+                </div>
+                <div class="col text-right">
+                  <p class="totop">
+                    <a style="text-decoration: none; display: none;" href="#top">Back to top</a>
+                  </p>
+                </div>
               </div>
-              <div class="col text-right">
-                <p class="totop">
-                  <a style="text-decoration: none;" href="#top">Back to top</a>
-                </p>
-              </div>
-            </div>
             </div>
 
 
@@ -491,13 +458,15 @@
 
   <footer class="page-footer sticky-bottom mt-4">
     <p class=" mx-auto text-center mb-0">
-      <a href="#">About us</a>
-      &middot;
+      <a href="#">About us</a> ·
       <a href="#">FAQ</a>
     </p>
     <p class="text-center footer-copyright mb-1">
       <i class="far fa-copyright"></i> 2018 Photon News</p>
   </footer>
+
+
+
 
 </body>
 
