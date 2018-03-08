@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <html>
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -9,98 +10,103 @@
   <link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
 
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
   <link rel="stylesheet" href="bootswatch.css">
   <link rel="stylesheet" href="style.css">
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
   <script src="./scripts/index.js" defer></script>
   <title>Photon News</title>
 </head>
+
 <body>
   <!-- NEW HEADER ------------------------------------------------------------------>
   <header class="container-fluid px-0">
     <!-- NAVBAR <nav class="row navbar navbar-expand-lg navbar-light bg-light"> -->
     <nav class="row navbar navbar-expand-lg navbar-dark bg-primary mx-0">
-        <div class="col-12 col-md-3">
-            <a class="navbar-brand" href="index_signed_in.html">Photon News</a>
+      <div class="col-12 col-md-3">
+        <a class="navbar-brand" href="index_signed_in.html">Photon News</a>
+      </div>
+      <div class="col-12 col-md-5">
+        <div class="container ml-0 d-flex flex-column px-0">
+          <form class="form-inline" action="search_result.html" method="post">
+            <input class="form-control mr-sm-2 rounded" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-light my-2 my-sm-0 rounded" type="submit">
+              <a href="search_result.html" style="color:inherit; text-decoration:none">Search</a>
+            </button>
+          </form>
+          <a class="small" data-toggle="modal" style="color:white;" href="#searchModal">advanced search</a>
         </div>
-        <div class="col-12 col-md-5">
-          <div class="container ml-0 d-flex flex-column px-0">
-            <form class="form-inline" action="search_result.html" method="post">
-              <input class="form-control mr-sm-2 rounded" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-light my-2 my-sm-0 rounded" type="submit">
-                <a href="search_result.html" style="color:inherit; text-decoration:none">Search</a>
-              </button>
-            </form>
-            <a class="small" data-toggle="modal" style="color:white;" href="#searchModal">advanced search</a>
-          </div>
-        </div>
-        <div class="col-12 col-md-4">
-          <div class="navbar-collapse collapse show" id="navbar">
-            <ul class="navbar-nav ml-auto">
-              <!-- Publish -->
-              <li class="nav-item">
-                <button class="btn btn-outline-light my-2 my-sm-0 rounded">
-                  <a href="create_news.html" style="color:inherit; text-decoration:none">
-                    Publish
-                  </a>
-                </button>
-              </li>
-              
-              <!-- Notifications -->
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
-                  <i class="fas fa-bell">
-                  </i> Notifications
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="navbar-collapse collapse show" id="navbar">
+          <ul class="navbar-nav ml-auto">
+            <!-- Publish -->
+            <li class="nav-item">
+              <button class="btn btn-outline-light my-2 my-sm-0 rounded">
+                <a href="create_news.html" style="color:inherit; text-decoration:none">
+                  Publish
                 </a>
-                <div class="dropdown-menu dropdown-menu-right position-absolute" x-placement="bottom-start">
-                  <a class="dropdown-item" href="#">
-                    <i class="fas fa-user-circle">
-                    </i> User1 is following you
-                  </a>
-                  <a class="dropdown-item" href="#">
-                    <i class="fas fa-user-circle">
-                    </i> User2 published an article
-                  </a>
-                  <a class="dropdown-item" href="#">
-                    <i class="fas fa-user-circle">
-                    </i> User3 commented on your news
-                  </a>
-                </div>
-              </li>
-              <!-- Account -->
-              <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
-                    <i class="fas fa-user-circle">
-                    </i> Account
-                  </a>
-                  <div class="dropdown-menu dropdown-menu-right position-absolute" x-placement="bottom-start">
-                    <a class="dropdown-item" href="profile.html">
-                      <i class="fas fa-user">
-                      </i> Profile
-                    </a>
-                    <a class="dropdown-item" href="forum.html">
-                      <i class="fas fa-university">
-                      </i> Forum
-                    </a>
-                    <a class="dropdown-item" href="settings.html">
-                      <i class="fas fa-cog">
-                      </i> Settings
-                    </a>
-                    <a class="dropdown-item" href="index.html">
-                      <i class="fas fa-sign-out-alt">
-                      </i> Log out
-                    </a>
-                  </div>
-                </li>
-            </ul>
-          </div>
-    </div>
+              </button>
+            </li>
+
+            <!-- Notifications -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
+                <i class="fas fa-bell">
+                </i> Notifications
+              </a>
+              <div class="dropdown-menu dropdown-menu-right position-absolute" x-placement="bottom-start">
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-user-circle">
+                  </i> User1 is following you
+                </a>
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-user-circle">
+                  </i> User2 published an article
+                </a>
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-user-circle">
+                  </i> User3 commented on your news
+                </a>
+              </div>
+            </li>
+            <!-- Account -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
+                <i class="fas fa-user-circle">
+                </i> Account
+              </a>
+              <div class="dropdown-menu dropdown-menu-right position-absolute" x-placement="bottom-start">
+                <a class="dropdown-item" href="profile.html">
+                  <i class="fas fa-user">
+                  </i> Profile
+                </a>
+                <a class="dropdown-item" href="forum.html">
+                  <i class="fas fa-university">
+                  </i> Forum
+                </a>
+                <a class="dropdown-item" href="settings.html">
+                  <i class="fas fa-cog">
+                  </i> Settings
+                </a>
+                <a class="dropdown-item" href="index.html">
+                  <i class="fas fa-sign-out-alt">
+                  </i> Log out
+                </a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
     </nav>
   </header>
 
@@ -168,7 +174,9 @@
               <h1>Porto Wine</h1>
 
               <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                <div class="sort-option"> <h5 class="sort-option"> Most Popular </h5></div>
+                <div class="sort-option">
+                  <h5 class="sort-option"> Most Popular </h5>
+                </div>
                 <div class="btn-group" role="group">
                   <button id="btnGroupDrop1" type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                   <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
@@ -179,12 +187,11 @@
                 </div>
               </div>
               <script>
-              $(".dropdown-item").click(function(event){
-                $("h5.sort-option").text($(this).text());
-              });
+                $(".dropdown-item").click(function (event) {
+                  $("h5.sort-option").text($(this).text());
+                });
               </script>
             </div>
-
           </div>
           <div class="d-flex flex-column">
             <!-- 1st News Item -->
@@ -195,78 +202,91 @@
                 </div>
                 <div class="col">
                   <div class="row">
-                    <a class="nounderline" style="color:inherit;" href="news_user_doesnt_own.html">
+                    <a class="nounderline" style="color:inherit;" href="visitante_news.html">
                       <h3 class="font-weight-normal">Stephen Fry has prostate cancer</h3>
                     </a>
                   </div>
                   <div class="row">
-                    <p>Author's name &middot; 12:25 23/02/2018</p>
+                    <p>
+                      <span class="font-weight-bold">101 points</span> &middot; NadiaKhomami &middot; 12:25 23/02/2018</p>
                   </div>
-                  <div class=" ml-1 ml-lg-auto">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Neque sodales ut etiam sit amet nisl purus. Donec massa sapien faucibus et molestie ac feugiat sed lectus.</p>
+                  <div class="ml-1 ml-lg-auto">
+                    <p>Stephen Fry has announced that he has prostate cancer. The actor and TV presenter underwent an operation
+                      in January to have his prostate and 11 lymph nodes removed.</p>
                   </div>
                 </div>
-
               </div>
             </div>
             <!-- 2nd News Item -->
             <div class="news_item border container my-2">
               <div class="row" style="position:relative;">
                 <div class="col col-sm-auto m-auto">
-                  <img src="http://www.anticapitalistes.net/local/cache-vignettes/L600xH338/arton6123-2005d.jpg" width="100px" height="100px" alt="Icon">
+                  <img src="http://www.anticapitalistes.net/local/cache-vignettes/L600xH338/arton6123-2005d.jpg" width="100px" height="100px"
+                    alt="Icon">
                 </div>
                 <div class="col">
                   <div class="row">
-                    <a class="nounderline" style="color:inherit;" href="news_user_doesnt_own.html">
+                    <a class="nounderline" style="color:inherit;" href="visitante_news.html">
                       <h3 class="font-weight-normal">Theresa May to set out Brexit plan following Chequers talks</h3>
                     </a>
                   </div>
                   <div class="row">
-                    <p>Author's name &middot; 12:25 23/02/2018</p>
+                    <p>
+                      <span class="font-weight-bold">564 points</span> &middot; Bibi97 &middot; 12:25 23/02/2018</p>
                   </div>
                   <div class="ml-1 ml-lg-auto">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Neque sodales ut etiam sit amet nisl purus. Donec massa sapien faucibus et molestie ac feugiat sed lectus.</p>
+                    <p>Theresa May set out her vision for the UK’s post-Brexit relationship with the EU in a speech next Friday,
+                      No 10 has announced, after she and senior cabinet members spent Thursday at Chequers hammering out
+                      a position. In a sign that the prime minister’s agreed position is expected to face resistance from
+                      Brussels, Downing Street reiterated her aim that...</p>
                   </div>
-                </div></div>
+                </div>
+              </div>
             </div>
             <!-- 3rd News Item -->
             <div class="news_item border container my-2">
-                <div class="row" style="position:relative;">
-                  <div class="col col-sm-auto m-auto">
-                    <img src="http://maxpixel.freegreatpicture.com/static/photo/1x/After-Rain-Dock-Harbor-Sunset-Boats-Docks-2302785.jpg" width="100px" height="100px" alt="Icon">
+              <div class="row" style="position:relative;">
+                <div class="col col-sm-auto m-auto">
+                  <img src="http://maxpixel.freegreatpicture.com/static/photo/1x/After-Rain-Dock-Harbor-Sunset-Boats-Docks-2302785.jpg" width="100px"
+                    height="100px" alt="Icon">
+                </div>
+                <div class="col">
+                  <div class="row">
+                    <a class="nounderline" style="color:inherit;" href="visitante_news.html">
+                      <h3 class="font-weight-normal">Paedophile slashes his own throat in the dock as he's found guilty</h3>
+                    </a>
                   </div>
-                  <div class="col">
-                    <div class="row">
-                      <a class="nounderline" style="color:inherit;" href="news_user_doesnt_own.html">
-                        <h3 class="font-weight-normal">Paedophile slashes his own throat in the dock as he's found guilty</h3>
-                      </a>
-                    </div>
-                    <div class="row">
-                      <p>Author's name &middot; 12:25 23/02/2018</p>
-                    </div>
-                                     <div class="ml-1 ml-lg-auto">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Neque sodales ut etiam sit amet nisl purus. Donec massa sapien faucibus et molestie ac feugiat sed lectus.</p>
-                                      </div>
-                                    </div>
-
-                                  </div>
+                  <div class="row">
+                    <p>
+                      <span class="font-weight-bold">345 points</span> &middot; ineeve &middot; 12:25 23/02/2018</p>
+                  </div>
+                  <div class="ml-1 ml-lg-auto">
+                    <p>A man who sexually abused his own daughter tried to take his own life by slashing his throat with a razor
+                      blade in the dock. The defendant, who cannot be named to protect his six-year-old victim, tried to
+                      kill himself after he was told that he was guilty of the offence.</p>
+                  </div>
+                </div>
               </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-</div>
+  </div>
+  </div>
 
-<footer class="page-footer sticky-bottom mt-4">
-        <p class=" mx-auto text-center mb-0"><a href="#">About us</a>
-        &middot;
-        <a href="#">FAQ</a></p>
+  <footer class="page-footer sticky-bottom mt-4">
+    <p class=" mx-auto text-center mb-0">
+      <a href="#">About us</a>
+      &middot;
+      <a href="#">FAQ</a>
+    </p>
     <p class="text-center footer-copyright mb-1">
       <i class="far fa-copyright"></i> 2018 Photon News</p>
-</footer>
+  </footer>
 
 
 </body>
+
 </html>
