@@ -5,16 +5,16 @@ function signIn(){
 }
 
 if($(window).width() > 768){
-    console.log("BIG WINDOW");
     $("#sections_list").addClass('show');
-}else{
-    console.log("SMALL WINDOW");
 }
 
 $(function () {
     $("div.news_box").slice(0, 5).show();
     $("div.news_box_forYou").slice(0, 5).show();
-    
+    if ($('div.news_box[style="display: none;"]').length == 0) {
+        $(".loadMore").fadeOut('slow');
+    }
+
     $(".loadMore").on('click', function (e) {
       console.log("entrou");
         e.preventDefault();
