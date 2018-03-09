@@ -4,7 +4,10 @@ function signIn(){
     document.location.href = "index_signed_in.html";
 }
 
-if($(window).width() > 768){
+if($(window).width() >= 576){
+    $("#settings_list").addClass('show');
+}
+if($(window).width() >= 768){
     $("#sections_list").addClass('show');
 }
 
