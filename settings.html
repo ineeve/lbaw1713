@@ -1,106 +1,115 @@
 <!DOCTYPE html>
 
 <html>
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <script src="./scripts/index.js" defer>
+  </script>
 
   <!-- Font Awesome CSS -->
   <link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
 
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
   <link rel="stylesheet" href="bootswatch.css">
   <link rel="stylesheet" href="style.css">
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
   <script src="./scripts/index.js" defer></script>
   <title>Photon News</title>
 </head>
+
 <body>
   <!-- NEW HEADER ------------------------------------------------------------------>
   <header class="container-fluid px-0">
     <!-- NAVBAR <nav class="row navbar navbar-expand-lg navbar-light bg-light"> -->
     <nav class="row navbar navbar-expand-lg navbar-dark bg-primary mx-0">
-        <div class="col-12 col-md-3">
-            <a class="navbar-brand" href="index_signed_in.html">Photon News</a>
+      <div class="col-12 col-md-3">
+        <a class="navbar-brand" href="index_signed_in.html">Photon News</a>
+      </div>
+      <div class="col-12 col-md-5">
+        <div class="container ml-0 d-flex flex-column px-0">
+          <form class="form-inline" action="advanced_search.html" method="post">
+            <input class="form-control mr-sm-2 rounded" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-light my-2 my-sm-0 rounded" type="submit">
+              <a href="advanced_search.html" style="color:inherit; text-decoration:none">Search</a>
+            </button>
+          </form>
+          <a class="small" data-toggle="modal" style="color:white;" href="#searchModal">advanced search</a>
         </div>
-        <div class="col-12 col-md-5">
-          <div class="container ml-0 d-flex flex-column px-0">
-            <form class="form-inline" action="advanced_search.html" method="post">
-              <input class="form-control mr-sm-2 rounded" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-light my-2 my-sm-0 rounded" type="submit">
-                <a href="advanced_search.html" style="color:inherit; text-decoration:none">Search</a>
-              </button>
-            </form>
-            <a class="small" data-toggle="modal" style="color:white;" href="#searchModal">advanced search</a>
-          </div>
-        </div>
-        <div class="col-12 col-md-4">
-          <div class="navbar-collapse collapse show" id="navbar">
-            <ul class="navbar-nav ml-auto">
-              <!-- Publish -->
-              <li class="nav-item">
-                <button class="btn btn-outline-light my-2 my-sm-0 rounded">
-                  <a href="create_news.html" style="color:inherit; text-decoration:none">
-                    Publish
-                  </a>
-                </button>
-              </li>
-
-              <!-- Notifications -->
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
-                  <i class="fas fa-bell">
-                  </i> Notifications
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="navbar-collapse collapse show" id="navbar">
+          <ul class="navbar-nav ml-auto">
+            <!-- Publish -->
+            <li class="nav-item">
+              <button class="btn btn-outline-light my-2 my-sm-0 rounded">
+                <a href="create_news.html" style="color:inherit; text-decoration:none">
+                  Publish
                 </a>
-                <div class="dropdown-menu dropdown-menu-right position-absolute" x-placement="bottom-start">
-                  <a class="dropdown-item" href="#">
-                    <i class="fas fa-user-circle">
-                    </i> User1 is following you
-                  </a>
-                  <a class="dropdown-item" href="#">
-                    <i class="fas fa-user-circle">
-                    </i> User2 published an article
-                  </a>
-                  <a class="dropdown-item" href="#">
-                    <i class="fas fa-user-circle">
-                    </i> User3 commented on your news
-                  </a>
-                </div>
-              </li>
-              <!-- Account -->
-              <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
-                    <i class="fas fa-user-circle">
-                    </i> Account
-                  </a>
-                  <div class="dropdown-menu dropdown-menu-right position-absolute" x-placement="bottom-start">
-                    <a class="dropdown-item" href="profile.html">
-                      <i class="fas fa-user">
-                      </i> Profile
-                    </a>
-                    <a class="dropdown-item" href="forum.html">
-                      <i class="fas fa-university">
-                      </i> Forum
-                    </a>
-                    <a class="dropdown-item" href="settings.html">
-                      <i class="fas fa-cog">
-                      </i> Settings
-                    </a>
-                    <a class="dropdown-item" href="index.html">
-                      <i class="fas fa-sign-out-alt">
-                      </i> Log out
-                    </a>
-                  </div>
-                </li>
-            </ul>
-          </div>
-    </div>
+              </button>
+            </li>
+
+            <!-- Notifications -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
+                <i class="fas fa-bell">
+                </i> Notifications
+              </a>
+              <div class="dropdown-menu dropdown-menu-right position-absolute" x-placement="bottom-start">
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-user-circle">
+                  </i> User1 is following you
+                </a>
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-user-circle">
+                  </i> User2 published an article
+                </a>
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-user-circle">
+                  </i> User3 commented on your news
+                </a>
+              </div>
+            </li>
+            <!-- Account -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
+                <i class="fas fa-user-circle">
+                </i> Account
+              </a>
+              <div class="dropdown-menu dropdown-menu-right position-absolute" x-placement="bottom-start">
+                <a class="dropdown-item" href="profile.html">
+                  <i class="fas fa-user">
+                  </i> Profile
+                </a>
+                <a class="dropdown-item" href="forum.html">
+                  <i class="fas fa-university">
+                  </i> Forum
+                </a>
+                <a class="dropdown-item" href="settings.html">
+                  <i class="fas fa-cog">
+                  </i> Settings
+                </a>
+                <a class="dropdown-item" href="index.html">
+                  <i class="fas fa-sign-out-alt">
+                  </i> Log out
+                </a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
     </nav>
   </header>
 
@@ -161,89 +170,95 @@
   <div class="container-fluid mt-2">
     <div class="row">
       <!-- TABS -->
-      <div class="col-3">
-        <h3>Settings</h3>
-        <ul class="nav nav-pills flex-column">
-          <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="#interests">Interests</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#notifications">Notifications</a>
-          </li>
-        </ul>
+      <div class="col-xl-2 col-sm-3 col-12">
+        <h3 data-toggle="collapse" data-target="#settings_list" aria-expanded="true" aria-controls="sections_list">
+          <i class="fas fa-bars"></i> Settings</h3>
+        <div class="collapse" id="settings_list">
+          <ul class="nav nav-pills flex-column">
+            <li class="nav-item">
+              <a class="nav-link active" data-toggle="tab" href="#interests">Interests</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#notifications">Notifications</a>
+            </li>
+          </ul>
+        </div>
       </div>
-      <div class="col-9" style="max-height: 90vh; overflow-y: auto;">
+      <div class="col-xl-10 col-sm-9 col-12">
         <div id="settingsTabContent" class="tab-content">
-            <div class="tab-pane fade active show" id="interests">
-              <h3>Manage Interests</h3>
-              <h4 class="pt-3">Add A New Interest</h4>
-              <form class="form-inline pb-3">
-                <input list="list_interests" name="interest" placeholder="Interest" class="form-control">
-                <datalist id="list_interests">
-                  <option value="Sports">
+          <div class="tab-pane fade active show" id="interests">
+            <h3>Manage Interests</h3>
+            <h4 class="pt-3">Add A New Interest</h4>
+            <form class="form-inline pb-3">
+              <input list="list_interests" name="interest" placeholder="Interest" class="form-control">
+              <datalist id="list_interests">
+                <option value="Sports">
                   <option value="Politics">
-                  <option value="Business">
-                  <option value="Technology">
-                  <option value="Science">
-                </datalist>
-                <input class="btn ml-2" value="Add" type="submit">
-              </form>
-              <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-action">Animals
-                  <div class="float-right">X</div>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">Music
-                  <div class="float-right">X</div>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">Food
-                  <div class="float-right">X</div>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">Travel
-                  <div class="float-right">X</div>
-                </a>
+                    <option value="Business">
+                      <option value="Technology">
+                        <option value="Science">
+              </datalist>
+              <input class="btn ml-2" value="Add" type="submit">
+            </form>
+            <div class="list-group">
+              <a href="#" class="list-group-item list-group-item-action">Animals
+                <div class="float-right">X</div>
+              </a>
+              <a href="#" class="list-group-item list-group-item-action">Music
+                <div class="float-right">X</div>
+              </a>
+              <a href="#" class="list-group-item list-group-item-action">Food
+                <div class="float-right">X</div>
+              </a>
+              <a href="#" class="list-group-item list-group-item-action">Travel
+                <div class="float-right">X</div>
+              </a>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="notifications">
+            <h3>Manage Notifications</h3>
+            <fieldset class="pt-3">
+              <div class="form-group">
+                <div class="custom-control custom-checkbox">
+                  <input class="custom-control-input" type="checkbox" value="" id="article-comments">
+                  <label class="custom-control-label" for="article-comments">
+                    Comments To My Articles
+                  </label>
+                </div>
+                <div class="custom-control custom-checkbox">
+                  <input class="custom-control-input" type="checkbox" value="" id="article-votes">
+                  <label class="custom-control-label" for="article-votes">
+                    Votes In My Articles
+                  </label>
+                </div>
+                <div class="custom-control custom-checkbox">
+                  <input class="custom-control-input" type="checkbox" value="" id="follow-articles" checked>
+                  <label class="custom-control-label" for="follow-articles">
+                    Articles from people I follow
+                  </label>
+                </div>
+                <div class="custom-control custom-checkbox">
+                  <input class="custom-control-input" type="checkbox" value="" id="article-interest">
+                  <label class="custom-control-label" for="article-interest">
+                    New articles of my interest
+                  </label>
+                </div>
               </div>
-            </div>
-            <div class="tab-pane fade" id="notifications">
-              <h3>Manage Notifications</h3>
-              <fieldset class="pt-3">
-                <div class="form-group">
-                  <div class="custom-control custom-checkbox">
-                    <input class="custom-control-input" type="checkbox" value="" id="article-comments">
-                    <label class="custom-control-label" for="article-comments">
-                      Comments To My Articles
-                    </label>
-                  </div>
-                  <div class="custom-control custom-checkbox">
-                    <input class="custom-control-input" type="checkbox" value="" id="article-votes">
-                    <label class="custom-control-label" for="article-votes">
-                      Votes In My Articles
-                    </label>
-                  </div>
-                  <div class="custom-control custom-checkbox">
-                      <input class="custom-control-input" type="checkbox" value="" id="follow-articles" checked>
-                      <label class="custom-control-label" for="follow-articles">
-                        Articles from people I follow
-                      </label>
-                  </div>
-                  <div class="custom-control custom-checkbox">
-                        <input class="custom-control-input" type="checkbox" value="" id="article-interest">
-                        <label class="custom-control-label" for="article-interest">
-                          New articles of my interest
-                        </label>
-                  </div>
-                  </div>
-              </fieldset>
-            </div>
+            </fieldset>
+          </div>
         </div>
       </div>
     </div>
   </div>
   <footer class="page-footer sticky-bottom mt-4">
-          <p class=" mx-auto text-center mb-0"><a href="#">About us</a>
-          &middot;
-          <a href="#">FAQ</a></p>
-      <p class="text-center footer-copyright mb-1">
-        <i class="far fa-copyright"></i> 2018 Photon News</p>
+    <p class=" mx-auto text-center mb-0">
+      <a href="#">About us</a>
+      &middot;
+      <a href="#">FAQ</a>
+    </p>
+    <p class="text-center footer-copyright mb-1">
+      <i class="far fa-copyright"></i> 2018 Photon News</p>
   </footer>
 </body>
+
 </html>

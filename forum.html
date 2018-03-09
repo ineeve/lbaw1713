@@ -5,6 +5,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+  <script src="./scripts/index.js" defer></script>
+
   <!-- Font Awesome CSS -->
   <link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
 
@@ -16,7 +18,7 @@
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>
@@ -190,15 +192,20 @@
     <div class="row">
       <!-- TABS -->
       <div class="col-xl-2 col-lg-3 col-12">
-        <h3>Reports</h3>
-        <ul class="nav nav-pills flex-column">
-          <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="#news-reports">News</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#comments-reports">Comments</a>
-          </li>
-        </ul>
+        <div class="container-fluid">
+          <h3 data-toggle="collapse" data-target="#sections_list" aria-expanded="true" aria-controls="sections_list">
+            <i class="fas fa-bars"></i> Reports</h3>
+          <div class="collapse" id="sections_list">
+            <ul class="nav nav-pills flex-column left-pane">
+              <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#news-reports">News</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#comments-reports">Comments</a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
       <!-- MAIN CONTENT -->
       <div class="col-xl-10 col-lg-9 col-12">
@@ -206,7 +213,7 @@
           <!-- NEWS' REPORTS TAB -->
           <div class="tab-pane fade active show" id="news-reports">
             <div class="container-fluid">
-              <div class="row my-2">
+              <div class="row mb-2">
                 <div class="col-12">
                   <h1>News Reports</h1>
                 </div>
