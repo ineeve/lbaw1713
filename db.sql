@@ -109,7 +109,8 @@ CREATE TABLE Source (
 
 CREATE TABLE Section (
    sectionID SERIAL NOT NULL,
-   name TEXT NOT NULL
+   name TEXT NOT NULL,
+   icon TEXT NOT NULL
 );
 
 CREATE TABLE Notification (
