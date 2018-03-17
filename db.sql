@@ -316,8 +316,6 @@ ALTER TABLE ONLY Badge
 
 ALTER TABLE ONLY Notification
 	ADD CONSTRAINT Notification_targetUser_fkey FOREIGN KEY (targetUser) REFERENCES UserAccount (userID);
-ALTER TABLE ONLY Notification
-	ADD CONSTRAINT Notification_user_fkey FOREIGN KEY (“user”) REFERENCES UserAccount (userID);
 
 ALTER TABLE ONLY Vote
 	ADD CONSTRAINT Vote_userID_fkey FOREIGN KEY (userID) REFERENCES UserAccount (userID);
