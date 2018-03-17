@@ -120,8 +120,7 @@ CREATE TABLE Notification (
    date DATE NOT NULL DEFAULT now(),
    type NotificationType NOT NULL,
    targetUser INTEGER,
-   wasRead BOOLEAN,
-   “user” INTEGER
+   wasRead BOOLEAN
 );
 
 CREATE TABLE Vote (
