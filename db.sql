@@ -1,19 +1,19 @@
 -- DROP TABLES
 
-DROP TABLE IF EXISTS UserAccount CASCADE;
+DROP TABLE IF EXISTS Users CASCADE;
 DROP TABLE IF EXISTS News CASCADE;
-DROP TABLE IF EXISTS Comment CASCADE;
-DROP TABLE IF EXISTS Reason CASCADE;
-DROP TABLE IF EXISTS ModeratorComment CASCADE;
-DROP TABLE IF EXISTS Badge CASCADE;
-DROP TABLE IF EXISTS FAQ CASCADE;
-DROP TABLE IF EXISTS Country CASCADE;
-DROP TABLE IF EXISTS Source CASCADE;
-DROP TABLE IF EXISTS Section CASCADE;
-DROP TABLE IF EXISTS Notification CASCADE;
-DROP TABLE IF EXISTS Vote CASCADE;
-DROP TABLE IF EXISTS Banned CASCADE;
-DROP TABLE IF EXISTS ReportNews CASCADE;
+DROP TABLE IF EXISTS Comments CASCADE;
+DROP TABLE IF EXISTS Reasons CASCADE;
+DROP TABLE IF EXISTS ModeratorComments CASCADE;
+DROP TABLE IF EXISTS Badges CASCADE;
+DROP TABLE IF EXISTS FAQs CASCADE;
+DROP TABLE IF EXISTS Countries CASCADE;
+DROP TABLE IF EXISTS Sources CASCADE;
+DROP TABLE IF EXISTS Sections CASCADE;
+DROP TABLE IF EXISTS Notifications CASCADE;
+DROP TABLE IF EXISTS Votes CASCADE;
+DROP TABLE IF EXISTS Bans CASCADE;
+DROP TABLE IF EXISTS ReportedNews CASCADE;
 DROP TABLE IF EXISTS ReasonsForReportNews CASCADE;
 DROP TABLE IF EXISTS ReportComment CASCADE;
 DROP TABLE IF EXISTS ReasonsForReportComment CASCADE;
@@ -23,12 +23,12 @@ DROP TABLE IF EXISTS DeletedNews CASCADE;
 DROP TABLE IF EXISTS Follows CASCADE;
 DROP TABLE IF EXISTS UserInterests CASCADE;
 DROP TABLE IF EXISTS DeletedNewsReason CASCADE;
-DROP TABLE IF EXISTS NewsSource CASCADE;
+DROP TABLE IF EXISTS NewsSources CASCADE;
 DROP TABLE IF EXISTS DeletedCommentReason CASCADE;
 
 -- CREATE TABLES
 
-CREATE TABLE UserAccount (    
+CREATE TABLE Users (
 	id SERIAL,
 	username text NOT NULL,
 	email text NOT NULL,
@@ -54,8 +54,8 @@ CREATE TABLE News (
 	author_id INTEGER NOT NULL
 );
 
-CREATE TABLE Comment(
-	 id SERIAL,
+CREATE TABLE Comments(
+	id SERIAL,
 	“text” text NOT NULL,
 	“date” TIMESTAMP WITH TIME zone DEFAULT now() NOT NULL,
 	creator INTEGER NOT NULL,
@@ -74,17 +74,19 @@ CREATE TABLE ModeratorComment(
 	“date” TIMESTAMP WITH TIME zone DEFAULT now() NOT NULL,
 	creator_user_id INTEGER NOT NULL,
 	news_id INTEGER,
-	comment_id INTEGER
+	comment_id INTEGER,
+	CONSTRAINT moderator_comment_attr_null CHECK (news_id NOT NULL OR comment_id NOT NULL)
 );
 
-CREATE TABLE Badge(
+CREATE TABLE Badges(
 	id SERIAL,
 	name text NOT NULL,
 	brief text,
 	votes INTEGER,
 	articles INTEGER,
 	comments INTEGER,
-	creator_user_id INTEGER NOT NULL
+	creator_user_id INTEGER NOT NULL,
+	CONSTRAINT notification_attr_null CHECK (votes NOT NULL OR articles NOT NULL OR comments NOT NULL)
 );
 
 CREATE TABLE FAQ (
@@ -94,12 +96,12 @@ CREATE TABLE FAQ (
 );
 
 
-CREATE TABLE Country (
+CREATE TABLE Countries (
    id SERIAL,
    name TEXT NOT NULL
 );
 
-CREATE TABLE Source (
+CREATE TABLE Sources (
    id SERIAL,
    link TEXT NOT NULL,
    author TEXT NOT NULL,
@@ -107,74 +109,75 @@ CREATE TABLE Source (
 );
 
 
-CREATE TABLE Section (
+CREATE TABLE Sections (
    id SERIAL,
    name TEXT NOT NULL,
    icon TEXT NOT NULL
 );
 
-CREATE TABLE Notification (
+CREATE DOMAIN NotificationType text CHECK (VALUE IN (’FollowMe’,‘CommentMyPost’, ‘FollowedPublish’, ‘VoteMyPost’));
+
+CREATE TABLE Notifications (
    id SERIAL,
-   date DATE NOT NULL DEFAULT now(),
+   "date" DATE NOT NULL DEFAULT now(),
    type NotificationType NOT NULL,
    target_user_id INTEGER,
    was_read BOOLEAN DEFAULT false,
    user_id INTEGER,
    news_id INTEGER,
-CONSTRAINT notification_type_attr CHECK ((type = ’FollowMe’ AND news_id NULL)OR user_id NULL),
-CONSTRAINT notification_attr_null CHECK (news_id NOT NULL OR user_id NOT NULL)
+	 CONSTRAINT notification_type_attr CHECK ((type = ’FollowMe’ AND news_id NULL)OR user_id NULL),
+	 CONSTRAINT notification_attr_null CHECK (news_id NOT NULL OR user_id NOT NULL)
 );
 
-CREATE DOMAIN NotificationType text CHECK (VALUE IN (’FollowMe’,‘CommentMyPost’, ‘FollowedPublish’, ‘VoteMyPost’));
 
-CREATE TABLE Vote (
-   userID INTEGER,
-   newsID INTEGER,
+CREATE TABLE Votes (
+   user_id INTEGER,
+   news_id INTEGER,
    type BOOLEAN NOT NULL
    );
 
 CREATE TABLE Achievements (
-	badgesID INTEGER NOT NULL,
-	userID INTEGER NOT NULL
+	badges_id INTEGER NOT NULL,
+	user_id INTEGER NOT NULL
 );
 CREATE TABLE DeletedNews (
-	news INTEGER NOT NULL,
-	“user” INTEGER NOT NULL,
-	date TIMESTAMP WITH TIME zone DEFAULT now() NOT NULL,
+	news_id INTEGER NOT NULL,
+	user_id INTEGER NOT NULL,
+	"date" TIMESTAMP WITH TIME zone DEFAULT now() NOT NULL,
 	brief TEXT
 );
 CREATE TABLE Follows (
-	follower INTEGER NOT NULL,
-	followed INTEGER NOT NULL
+	follower_user_id INTEGER NOT NULL,
+	followed_user_id INTEGER NOT NULL
 );
 CREATE TABLE UserInterests (
-	“user” INTEGER NOT NULL,
-	section INTEGER NOT NULL
+	user_id INTEGER NOT NULL,
+	section_id INTEGER NOT NULL
 );
 CREATE TABLE DeletedNewsReason (
-	deleted INTEGER NOT NULL,
-	reason INTEGER NOT NULL
+	deleted_news_id INTEGER NOT NULL,
+	deleted_comments_id INTEGER NOT NULL
 );
-CREATE TABLE NewsSource (
-	news INTEGER NOT NULL,
-	source INTEGER NOT NULL
+CREATE TABLE NewsSources (
+	news_id INTEGER NOT NULL,
+	source_id INTEGER NOT NULL
 );
 CREATE TABLE DeletedCommentReason (
-	reason INTEGER NOT NULL,
-	comment INTEGER NOT NULL
+	reason_id INTEGER NOT NULL,
+	comment_id INTEGER NOT NULL
 );
 
 
-CREATE TABLE Banned (
-	bannedID INTEGER,
-	admin INTEGER NOT NULL,
+CREATE TABLE Bans (
+	banned_user_id INTEGER,
+	admin_user_id INTEGER NOT NULL,
 	"date" TIMESTAMP WITH TIME zone DEFAULT now() NOT NULL,
 	reason text NOT NULL
 );
 
-CREATE TABLE ReportNews (
-	userID INTEGER,
-	newsID INTEGER,
+CREATE TABLE ReportedNews (
+	user_id INTEGER,
+	news_id INTEGER,
 	description text
 );
 
@@ -224,31 +227,31 @@ ALTER TABLE ONLY Reason
 ALTER TABLE ONLY ModeratorComment
 	ADD CONSTRAINT ModeratorComment_pkey PRIMARY KEY(moderatorCommentID);
 
-ALTER TABLE ONLY Badge
-	ADD CONSTRAINT Badge_pkey PRIMARY KEY(badgeID);
+ALTER TABLE ONLY Badges
+	ADD CONSTRAINT Badges_pkey PRIMARY KEY(badgeID);
 
 ALTER TABLE ONLY FAQ
 	ADD CONSTRAINT FAQ_faqID_pkey PRIMARY KEY (faqID);
 ALTER TABLE ONLY FAQ
 	ADD CONSTRAINT FAQ_question_key UNIQUE (question);
 
-ALTER TABLE ONLY Country
-	ADD CONSTRAINT Country_countryID_pkey PRIMARY KEY (countryID);
-ALTER TABLE ONLY Country
-	ADD CONSTRAINT Country_name_key UNIQUE (name);
+ALTER TABLE ONLY Countries
+	ADD CONSTRAINT Countries_countryID_pkey PRIMARY KEY (countryID);
+ALTER TABLE ONLY Countries
+	ADD CONSTRAINT Countries_name_key UNIQUE (name);
 
-ALTER TABLE ONLY Source
-	ADD CONSTRAINT Source_sourceID_pkey PRIMARY KEY (sourceID);
+ALTER TABLE ONLY Sources
+	ADD CONSTRAINT Sources_sourceID_pkey PRIMARY KEY (sourceID);
 
-ALTER TABLE ONLY Section
+ALTER TABLE ONLY Sections
 	ADD CONSTRAINT Section_sectionID_pkey PRIMARY KEY (sectionID);
-ALTER TABLE ONLY Section
+ALTER TABLE ONLY Sections
 	ADD CONSTRAINT Section_name_key UNIQUE (name);
 
-ALTER TABLE ONLY Notification
+ALTER TABLE ONLY Notifications
 	ADD CONSTRAINT Notification_notificationID_pkey PRIMARY KEY (notificationID);
 
-ALTER TABLE ONLY Vote
+ALTER TABLE ONLY Votes
 	ADD CONSTRAINT Vote_userID_newsID_pkey PRIMARY KEY (userID, newsID);
 
 ALTER TABLE ONLY Achievements
@@ -256,7 +259,7 @@ ALTER TABLE ONLY Achievements
 
 ALTER TABLE ONLY DeletedNews
 	ADD CONSTRAINT DeletedNews_pkey PRIMARY KEY (news);
-    
+
 ALTER TABLE ONLY Follows
 	ADD CONSTRAINT Follows_pkey PRIMARY KEY (follower, followed);
 
@@ -265,17 +268,17 @@ ALTER TABLE ONLY UserInterests
 
 ALTER TABLE ONLY DeletedNewsReason
 	ADD CONSTRAINT DeletedNewsReason_pkey PRIMARY KEY (deleted, reason);
-    
-ALTER TABLE ONLY NewsSource
-	ADD CONSTRAINT NewsSource_pkey PRIMARY KEY (news, source);
+
+ALTER TABLE ONLY NewsSources
+	ADD CONSTRAINT NewsSources_pkey PRIMARY KEY (news, source);
 
 ALTER TABLE ONLY DeletedCommentReason
 	ADD CONSTRAINT DeletedCommentReason_pkey PRIMARY KEY (reason, comment);
 
-ALTER TABLE ONLY Banned
+ALTER TABLE ONLY Bans
 	ADD CONSTRAINT Banned_bannedID_pkey PRIMARY KEY (bannedID);
 
-ALTER TABLE ONLY ReportNews
+ALTER TABLE ONLY ReportedNews
 	ADD CONSTRAINT ReportNews_reportNewsID_pkey PRIMARY KEY (userID,newsID);
 
 ALTER TABLE ONLY ReasonsForReportNews
@@ -296,10 +299,10 @@ ALTER TABLE ONLY DeletedComment
 
 
 ALTER TABLE ONLY UserAccount
-	ADD CONSTRAINT UserAccount_country_fkey FOREIGN KEY (country) REFERENCES Country(countryID);
+	ADD CONSTRAINT UserAccount_country_fkey FOREIGN KEY (country) REFERENCES Countries(countryID);
 
 ALTER TABLE ONLY News
-	ADD CONSTRAINT News_section_fkey FOREIGN KEY (section) REFERENCES Section(sectionID);
+	ADD CONSTRAINT News_section_fkey FOREIGN KEY (section) REFERENCES Sections(sectionID);
 ALTER TABLE ONLY News
 	ADD CONSTRAINT News_author_fkey FOREIGN KEY (author) REFERENCES UserAccount(userID);
 
@@ -315,76 +318,76 @@ ALTER TABLE ONLY ModeratorComment
 ALTER TABLE ONLY ModeratorComment
 	ADD CONSTRAINT ModeratorComment_comment_fkey FOREIGN KEY (news) REFERENCES Comment(commentID);
 
-ALTER TABLE ONLY Badge
-	ADD CONSTRAINT Badge_creator_fkey FOREIGN KEY (creator) REFERENCES UserAccount(userID);
+ALTER TABLE ONLY Badges
+	ADD CONSTRAINT Badges_creator_fkey FOREIGN KEY (creator) REFERENCES UserAccount(userID);
 
-ALTER TABLE ONLY Notification
+ALTER TABLE ONLY Notifications
 	ADD CONSTRAINT Notification_targetUser_fkey FOREIGN KEY (targetUser) REFERENCES UserAccount (userID);
-ALTER TABLE ONLY Notification
+ALTER TABLE ONLY Notifications
 	ADD CONSTRAINT Notification_user_fkey FOREIGN KEY (user_id) REFERENCES UserAccount (userID);
-ALTER TABLE ONLY Notification
+ALTER TABLE ONLY Notifications
 	ADD CONSTRAINT Notification_news_fkey FOREIGN KEY (news_id) REFERENCES News (id);
 
-ALTER TABLE ONLY Vote
+ALTER TABLE ONLY Votes
 	ADD CONSTRAINT Vote_userID_fkey FOREIGN KEY (userID) REFERENCES UserAccount (userID);
-ALTER TABLE ONLY Vote
+ALTER TABLE ONLY Votes
 	ADD CONSTRAINT Vote_newsID_fkey FOREIGN KEY (newsID) REFERENCES News (newsID);
- 
+
 ALTER TABLE ONLY Achievements
-	ADD CONSTRAINT Achievements_badges_fkey FOREIGN KEY (badgesID) REFERENCES Badge(badgeID);
- 
+	ADD CONSTRAINT Achievements_badges_fkey FOREIGN KEY (badgesID) REFERENCES Badges(badgeID);
+
 ALTER TABLE ONLY Achievements
 	ADD CONSTRAINT Achievements_user_fkey FOREIGN KEY (userID) REFERENCES UserAccount(userID) ON DELETE CASCADE;
 
 ALTER TABLE ONLY DeletedNews
 	ADD CONSTRAINT DeletedNews_news_fkey FOREIGN KEY (news) REFERENCES News(newsID) ON DELETE CASCADE;
- 
+
 ALTER TABLE ONLY DeletedNews
 	ADD CONSTRAINT DeletedNews_user_fkey FOREIGN KEY (“user”) REFERENCES UserAccount(userID);
 
 ALTER TABLE ONLY Follows
 	ADD CONSTRAINT Follows_follower_fkey FOREIGN KEY (follower) REFERENCES UserAccount(userID) ON DELETE CASCADE;
- 
+
 ALTER TABLE ONLY Follows
 	ADD CONSTRAINT Follows_followed_fkey FOREIGN KEY (followed) REFERENCES UserAccount(userID) ON DELETE CASCADE;
 
 ALTER TABLE ONLY UserInterests
 	ADD CONSTRAINT UserInterests_user_fkey FOREIGN KEY (“user”) REFERENCES UserAccount(userID) ON DELETE CASCADE;
- 
+
 ALTER TABLE ONLY UserInterests
-	ADD CONSTRAINT UserInterests_section_fkey FOREIGN KEY (section) REFERENCES Section(sectionID) ON DELETE CASCADE;
+	ADD CONSTRAINT UserInterests_section_fkey FOREIGN KEY (section) REFERENCES Sections(sectionID) ON DELETE CASCADE;
 
 ALTER TABLE ONLY DeletedNewsReason
 	ADD CONSTRAINT DeletedNewsReason_deleted_fkey FOREIGN KEY (deleted) REFERENCES DeletedNews(news) ON DELETE CASCADE;
- 
+
 ALTER TABLE ONLY DeletedNewsReason
 	ADD CONSTRAINT DeletedNewsReason_reason_fkey FOREIGN KEY (reason) REFERENCES Reason(reasonID);
 
 
-ALTER TABLE ONLY NewsSource
-	ADD CONSTRAINT NewsSource_news_fkey FOREIGN KEY (news) REFERENCES News(newsID) ON DELETE CASCADE;
- 
-ALTER TABLE ONLY NewsSource
-	ADD CONSTRAINT NewsSource_source_fkey FOREIGN KEY (source) REFERENCES Source(sourceID) ON DELETE CASCADE;
+ALTER TABLE ONLY NewsSources
+	ADD CONSTRAINT NewsSources_news_fkey FOREIGN KEY (news) REFERENCES News(newsID) ON DELETE CASCADE;
+
+ALTER TABLE ONLY NewsSources
+	ADD CONSTRAINT NewsSources_source_fkey FOREIGN KEY (source) REFERENCES Sources(sourceID) ON DELETE CASCADE;
 
 ALTER TABLE ONLY DeletedCommentReason
 	ADD CONSTRAINT DeletedCommentReason_reason_fkey FOREIGN KEY (reason) REFERENCES Reason(reasonID);
- 
+
 ALTER TABLE ONLY DeletedCommentReason
 	ADD CONSTRAINT DeletedCommentReason_comment_fkey FOREIGN KEY (comment) REFERENCES DeletedComment(commentID) ON DELETE CASCADE;
 
-ALTER TABLE ONLY Banned
+ALTER TABLE ONLY Bans
 	ADD CONSTRAINT Banned_admin_fkey FOREIGN KEY (admin) REFERENCES UserAccount (userID);
 
-ALTER TABLE ONLY ReportNews
+ALTER TABLE ONLY ReportedNews
 	ADD CONSTRAINT ReportNews_userID_fkey FOREIGN KEY (userID) REFERENCES UserAccount (userID);
-ALTER TABLE ONLY ReportNews
+ALTER TABLE ONLY ReportedNews
 	ADD CONSTRAINT ReportNews_newsID_fkey FOREIGN KEY (newsID) REFERENCES NEWS(newsID) ON DELETE CASCADE;
 
 ALTER TABLE ONLY ReasonsForReportNews
 	ADD CONSTRAINT ReasonsForReportNews_reasonID_fkey FOREIGN KEY (reasonID) REFERENCES Reason (reasonID);
 ALTER TABLE ONLY ReasonsForReportNews
-	ADD CONSTRAINT ReasonsForReportNews_reportNewsID_fkey FOREIGN KEY (userID, newsID) REFERENCES ReportNews;
+	ADD CONSTRAINT ReasonsForReportNews_reportNewsID_fkey FOREIGN KEY (userID, newsID) REFERENCES ReportedNews;
 
 ALTER TABLE ONLY ReportComment
 	ADD CONSTRAINT ReportComment_userID_fkey FOREIGN KEY (userID) REFERENCES UserAccount (userID);
