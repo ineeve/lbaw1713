@@ -29,11 +29,11 @@ DROP TABLE IF EXISTS DeletedCommentReason CASCADE;
 -- CREATE TABLES
 
 CREATE TABLE UserAccount (    
-	userID SERIAL NOT NULL,
+	id SERIAL,
 	username text NOT NULL,
 	email text NOT NULL,
 	gender text,
-	country INTEGER,
+	country_id INTEGER,
 	picture text,
 	password text NOT NULL,
 	points INTEGER NOT NULL,
@@ -44,84 +44,88 @@ CREATE TABLE UserAccount (
 );
 
 CREATE TABLE News (
-	newsID SERIAL NOT NULL,
+	id SERIAL,
 	title text NOT NULL,
 	"date" TIMESTAMP WITH TIME zone DEFAULT now() NOT NULL,
 	body text NOT NULL,
 	image text NOT NULL,
 	votes INTEGER NOT NULL,
-	section INTEGER NOT NULL,
-	author INTEGER NOT NULL
+	section_id INTEGER NOT NULL,
+	author_id INTEGER NOT NULL
 );
 
 CREATE TABLE Comment(
-	commentID SERIAL NOT NULL,
+	 id SERIAL,
 	“text” text NOT NULL,
 	“date” TIMESTAMP WITH TIME zone DEFAULT now() NOT NULL,
 	creator INTEGER NOT NULL,
-	targetNews INTEGER NOT NULL
+	target_news_id INTEGER NOT NULL
 );
 
 CREATE TABLE Reason(
-	reasonID SERIAL NOT NULL,
+	id SERIAL,
 	name text NOT NULL
 );
 
 
 CREATE TABLE ModeratorComment(
-	moderatorCommentID SERIAL NOT NULL,
+	id SERIAL,
 	“text” text NOT NULL,
 	“date” TIMESTAMP WITH TIME zone DEFAULT now() NOT NULL,
-	creator INTEGER NOT NULL,
-	news INTEGER,
-	comment INTEGER
+	creator_user_id INTEGER NOT NULL,
+	news_id INTEGER,
+	comment_id INTEGER
 );
 
 CREATE TABLE Badge(
-	badgeID SERIAL NOT NULL,
+	id SERIAL,
 	name text NOT NULL,
 	brief text,
 	votes INTEGER,
 	articles INTEGER,
 	comments INTEGER,
-	creator INTEGER NOT NULL
+	creator_user_id INTEGER NOT NULL
 );
 
 CREATE TABLE FAQ (
-   faqID SERIAL NOT NULL,
+   id SERIAL,
    question TEXT NOT NULL,
    answer TEXT NOT NULL
 );
 
 
 CREATE TABLE Country (
-   countryID SERIAL NOT NULL,
+   id SERIAL,
    name TEXT NOT NULL
 );
 
 CREATE TABLE Source (
-   sourceID SERIAL NOT NULL,
+   id SERIAL,
    link TEXT NOT NULL,
    author TEXT NOT NULL,
-   consultationDate DATE NOT NULL
+   consultation_date DATE NOT NULL
 );
 
 
 CREATE TABLE Section (
-   sectionID SERIAL NOT NULL,
+   id SERIAL,
    name TEXT NOT NULL,
    icon TEXT NOT NULL
 );
 
 CREATE TABLE Notification (
-   notificationID SERIAL NOT NULL,
-   link TEXT NOT NULL,
-   votesNum INTEGER,
+   id SERIAL,
    date DATE NOT NULL DEFAULT now(),
    type NotificationType NOT NULL,
-   targetUser INTEGER,
-   wasRead BOOLEAN
+   target_user_id INTEGER,
+   was_read BOOLEAN DEFAULT false,
+   user_id INTEGER,
+   news_id INTEGER,
+CONSTRAINT notification_type_attr CHECK ((type = ’FollowMe’ AND news_id NULL)OR user_id NULL),
+CONSTRAINT notification_attr_null CHECK (news_id NOT NULL OR user_id NOT NULL)
 );
+
+CREATE DOMAIN NotificationType text CHECK (VALUE IN (’FollowMe’,‘CommentMyPost’, ‘FollowedPublish’, ‘VoteMyPost’));
 
 CREATE TABLE Vote (
    userID INTEGER,
@@ -316,6 +320,10 @@ ALTER TABLE ONLY Badge
 
 ALTER TABLE ONLY Notification
 	ADD CONSTRAINT Notification_targetUser_fkey FOREIGN KEY (targetUser) REFERENCES UserAccount (userID);
+ALTER TABLE ONLY Notification
+	ADD CONSTRAINT Notification_user_fkey FOREIGN KEY (user_id) REFERENCES UserAccount (userID);
+ALTER TABLE ONLY Notification
+	ADD CONSTRAINT Notification_news_fkey FOREIGN KEY (news_id) REFERENCES News (id);
 
 ALTER TABLE ONLY Vote
 	ADD CONSTRAINT Vote_userID_fkey FOREIGN KEY (userID) REFERENCES UserAccount (userID);
