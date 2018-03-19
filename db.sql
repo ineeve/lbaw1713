@@ -16,10 +16,10 @@ DROP TABLE IF EXISTS Bans CASCADE;
 DROP TABLE IF EXISTS ReportedItems CASCADE;
 DROP TABLE IF EXISTS ReasonsForReport CASCADE;
 DROP TABLE IF EXISTS Achievements CASCADE;
-DROP TABLE IF EXISTS DeletedItem CASCADE;
+DROP TABLE IF EXISTS DeletedItems CASCADE;
 DROP TABLE IF EXISTS Follows CASCADE;
 DROP TABLE IF EXISTS UserInterests CASCADE;
-DROP TABLE IF EXISTS DeletedItemReason CASCADE;
+DROP TABLE IF EXISTS DeletedItemsReason CASCADE;
 DROP TABLE IF EXISTS NewsSource CASCADE;
 
 -- CREATE TABLES
@@ -133,15 +133,15 @@ CREATE TABLE Votes (
    );
 
 CREATE TABLE Achievements (
-	badges_id INTEGER NOT NULL,
+	badge_id INTEGER NOT NULL,
 	user_id INTEGER NOT NULL
 );
 
-CREATE TABLE DeletedItem (
-	newsID INTEGER NOT NULL,
-	userID INTEGER NOT NULL,
-	commentID INTEGER NOT NULL,
-	date TIMESTAMP WITH TIME zone DEFAULT now() NOT NULL,
+CREATE TABLE DeletedItems (
+	news_id INTEGER NOT NULL,
+	user_id INTEGER NOT NULL,
+	comment_id INTEGER NOT NULL,
+	"date" TIMESTAMP WITH TIME zone DEFAULT now() NOT NULL,
 	brief TEXT
 );
 CREATE TABLE Follows (
@@ -153,9 +153,9 @@ CREATE TABLE UserInterests (
 	section_id INTEGER NOT NULL
 );
 
-CREATE TABLE DeletedItemReason (
-	deleted_newsID INTEGER NOT NULL,
-	deleted_commentID INTEGER NOT NULL,
+CREATE TABLE DeletedItemsReason (
+	deleted_news_id INTEGER NOT NULL,
+	deleted_comment_id INTEGER NOT NULL,
 	reason INTEGER NOT NULL
 );
 CREATE TABLE NewsSources (
@@ -191,78 +191,78 @@ CREATE TABLE ReasonsForReport (
 
 
 ALTER TABLE ONLY Users
-	ADD CONSTRAINT Users_pkey PRIMARY KEY(userID);
+	ADD CONSTRAINT Users_pkey PRIMARY KEY(id);
 ALTER TABLE ONLY Users
 	ADD CONSTRAINT Users_username_key UNIQUE(username);
 ALTER TABLE ONLY Users
 	ADD CONSTRAINT Users_email_key UNIQUE(email);
 
 ALTER TABLE ONLY News
-	ADD CONSTRAINT News_pkey PRIMARY KEY(news_id);
+	ADD CONSTRAINT News_pkey PRIMARY KEY(id);
 
 ALTER TABLE ONLY Comments
-	ADD CONSTRAINT Comment_pkey PRIMARY KEY(commentID);
+	ADD CONSTRAINT Comment_pkey PRIMARY KEY(id);
 
 ALTER TABLE ONLY Reasons
-	ADD CONSTRAINT Reason_pkey PRIMARY KEY(reasonID);
+	ADD CONSTRAINT Reason_pkey PRIMARY KEY(id);
 
 ALTER TABLE ONLY ModeratorComment
-	ADD CONSTRAINT ModeratorComment_pkey PRIMARY KEY(moderatorCommentID);
+	ADD CONSTRAINT ModeratorComment_pkey PRIMARY KEY(id);
 
 ALTER TABLE ONLY Badges
-	ADD CONSTRAINT Badges_pkey PRIMARY KEY(badgeID);
+	ADD CONSTRAINT Badges_pkey PRIMARY KEY(id);
 
 ALTER TABLE ONLY FAQs
-	ADD CONSTRAINT FAQ_faqID_pkey PRIMARY KEY (faqID);
+	ADD CONSTRAINT FAQ_faqID_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY FAQs
 	ADD CONSTRAINT FAQ_question_key UNIQUE (question);
 
 ALTER TABLE ONLY Countries
-	ADD CONSTRAINT Countries_countryID_pkey PRIMARY KEY (countryID);
+	ADD CONSTRAINT Countries_countryID_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY Countries
 	ADD CONSTRAINT Countries_name_key UNIQUE (name);
 
 ALTER TABLE ONLY Sources
-	ADD CONSTRAINT Sources_sourceID_pkey PRIMARY KEY (sourceID);
+	ADD CONSTRAINT Sources_sourceID_pkey PRIMARY KEY (id);
 
 ALTER TABLE ONLY Sections
-	ADD CONSTRAINT Section_sectionID_pkey PRIMARY KEY (sectionID);
+	ADD CONSTRAINT Section_sectionID_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY Sections
 	ADD CONSTRAINT Section_name_key UNIQUE (name);
 
 ALTER TABLE ONLY Notifications
-	ADD CONSTRAINT Notification_notificationID_pkey PRIMARY KEY (notificationID);
+	ADD CONSTRAINT Notification_notificationID_pkey PRIMARY KEY (id);
 
 ALTER TABLE ONLY Votes
-	ADD CONSTRAINT Vote_userID_news_id_pkey PRIMARY KEY (userID, news_id);
+	ADD CONSTRAINT Vote_user_id_news_id_pkey PRIMARY KEY (user_id, news_id);
 
 ALTER TABLE ONLY Achievements
-	ADD CONSTRAINT Achievements_pkey PRIMARY KEY (badgesID, userID);
+	ADD CONSTRAINT Achievements_pkey PRIMARY KEY (badge_id, user_id);
 
-ALTER TABLE ONLY DeletedItem
-	ADD CONSTRAINT DeletedItem_pkey PRIMARY KEY (news_id,commentID);
+ALTER TABLE ONLY DeletedItems
+	ADD CONSTRAINT DeletedItems_pkey PRIMARY KEY (news_id,comment_id);
 
 ALTER TABLE ONLY Follows
-	ADD CONSTRAINT Follows_pkey PRIMARY KEY (follower, followed);
+	ADD CONSTRAINT Follows_pkey PRIMARY KEY (follower_user_id, followed_user_id);
 
 ALTER TABLE ONLY UserInterests
-	ADD CONSTRAINT UserInterests_pkey PRIMARY KEY (“user”, section);
+	ADD CONSTRAINT UserInterests_pkey PRIMARY KEY (user_id, section_id);
 
-ALTER TABLE ONLY DeletedItemReason
-	ADD CONSTRAINT DeletedItemReason_pkey PRIMARY KEY (news_id,commentID, reason);
+ALTER TABLE ONLY DeletedItemsReason
+	ADD CONSTRAINT DeletedItemsReason_pkey PRIMARY KEY (news_id, comment_id, reason);
 
 ALTER TABLE ONLY NewsSource
-	ADD CONSTRAINT NewsSource_pkey PRIMARY KEY (news, source);
+	ADD CONSTRAINT NewsSource_pkey PRIMARY KEY (news_id, source_id);
 
-ALTER TABLE ONLY Banned
-	ADD CONSTRAINT Banned_bannedID_pkey PRIMARY KEY (bannedID);
+ALTER TABLE ONLY Bans
+	ADD CONSTRAINT Bans_banned_user_id_pkey PRIMARY KEY (banned_user_id);
 
 
 ALTER TABLE ONLY ReportedItems
-	ADD CONSTRAINT ReportItems_ReportItemsID_pkey PRIMARY KEY (userID,news_id,commentID);
+	ADD CONSTRAINT ReportItems_ReportItemsID_pkey PRIMARY KEY (user_id,news_id,comment_id);
 
 ALTER TABLE ONLY ReasonsForReport
-	ADD CONSTRAINT ReasonsForReport_reasonsForReporNewsID_pkey PRIMARY KEY (reasonID,userID,news_id,commentID);
+	ADD CONSTRAINT ReasonsForReport_reasonsForReporNewsID_pkey PRIMARY KEY (reason_id,user_id,news_id,comment_id);
 
 
 -- FOREIGN KEYS
@@ -299,7 +299,7 @@ ALTER TABLE ONLY Notifications
 	ADD CONSTRAINT Notification_news_fkey FOREIGN KEY (news_id) REFERENCES News;
 
 ALTER TABLE ONLY Votes
-	ADD CONSTRAINT Vote_userID_fkey FOREIGN KEY (userID) REFERENCES Users;
+	ADD CONSTRAINT Vote_user_id_fkey FOREIGN KEY (user_id) REFERENCES Users;
 ALTER TABLE ONLY Votes
 	ADD CONSTRAINT Vote_news_id_fkey FOREIGN KEY (news_id) REFERENCES News;
 
@@ -307,20 +307,20 @@ ALTER TABLE ONLY Achievements
 	ADD CONSTRAINT Achievements_badges_fkey FOREIGN KEY (badgesID) REFERENCES Badges;
 
 ALTER TABLE ONLY Achievements
-	ADD CONSTRAINT Achievements_user_fkey FOREIGN KEY (userID) REFERENCES Users ON DELETE CASCADE;
+	ADD CONSTRAINT Achievements_user_fkey FOREIGN KEY (user_id) REFERENCES Users ON DELETE CASCADE;
 
-ALTER TABLE ONLY DeletedItem
-	ADD CONSTRAINT DeletedItem_news_fkey FOREIGN KEY (news) REFERENCES News ON DELETE CASCADE;
-ALTER TABLE ONLY DeletedItem
-	ADD CONSTRAINT DeletedItem_comment_fkey FOREIGN KEY (commentID) REFERENCES Comment ON DELETE CASCADE;
-ALTER TABLE ONLY DeletedItem
-	ADD CONSTRAINT DeletedItem_user_fkey FOREIGN KEY (“user”) REFERENCES Users;
-
-ALTER TABLE ONLY Follows
-	ADD CONSTRAINT Follows_follower_fkey FOREIGN KEY (follower) REFERENCES Users ON DELETE CASCADE;
+ALTER TABLE ONLY DeletedItems
+	ADD CONSTRAINT DeletedItems_news_fkey FOREIGN KEY (news) REFERENCES News ON DELETE CASCADE;
+ALTER TABLE ONLY DeletedItems
+	ADD CONSTRAINT DeletedItems_comment_fkey FOREIGN KEY (comment_id) REFERENCES Comments ON DELETE CASCADE;
+ALTER TABLE ONLY DeletedItems
+	ADD CONSTRAINT DeletedItems_user_fkey FOREIGN KEY (“user”) REFERENCES Users;
 
 ALTER TABLE ONLY Follows
-	ADD CONSTRAINT Follows_followed_fkey FOREIGN KEY (followed) REFERENCES Users ON DELETE CASCADE;
+	ADD CONSTRAINT Follows_follower_user_id_fkey FOREIGN KEY (follower_user_id) REFERENCES Users ON DELETE CASCADE;
+
+ALTER TABLE ONLY Follows
+	ADD CONSTRAINT Follows_followed_user_id_fkey FOREIGN KEY (followed_user_id) REFERENCES Users ON DELETE CASCADE;
 
 ALTER TABLE ONLY UserInterests
 	ADD CONSTRAINT UserInterests_user_fkey FOREIGN KEY (“user”) REFERENCES Users ON DELETE CASCADE;
@@ -328,14 +328,14 @@ ALTER TABLE ONLY UserInterests
 ALTER TABLE ONLY UserInterests
 	ADD CONSTRAINT UserInterests_section_fkey FOREIGN KEY (section) REFERENCES Sections ON DELETE CASCADE;
 
-ALTER TABLE ONLY DeletedItemReason
-	ADD CONSTRAINT DeletedItemReason_deletedNews_fkey FOREIGN KEY (deleted_NewsID) REFERENCES DeletedItems ON DELETE CASCADE;
+ALTER TABLE ONLY DeletedItemsReason
+	ADD CONSTRAINT DeletedItemsReason_deletedNews_fkey FOREIGN KEY (deleted_NewsID) REFERENCES DeletedItems ON DELETE CASCADE;
 
-ALTER TABLE ONLY DeletedItemReason
-	ADD CONSTRAINT DeletedItemReason_deletedComments_fkey FOREIGN KEY (deleted_CommentsID) REFERENCES DeletedItems ON DELETE CASCADE;
+ALTER TABLE ONLY DeletedItemsReason
+	ADD CONSTRAINT DeletedItemsReason_deletedComments_fkey FOREIGN KEY (deleted_CommentsID) REFERENCES DeletedItems ON DELETE CASCADE;
 
-ALTER TABLE ONLY DeletedItemReason
-	ADD CONSTRAINT DeletedItemReason_reason_fkey FOREIGN KEY (reason) REFERENCES Reason;
+ALTER TABLE ONLY DeletedItemsReason
+	ADD CONSTRAINT DeletedItemsReason_reason_fkey FOREIGN KEY (reason) REFERENCES Reason;
 
 ALTER TABLE ONLY NewsSources
 	ADD CONSTRAINT NewsSources_news_fkey FOREIGN KEY (news) REFERENCES News ON DELETE CASCADE;
@@ -343,18 +343,18 @@ ALTER TABLE ONLY NewsSources
 ALTER TABLE ONLY NewsSources
 	ADD CONSTRAINT NewsSources_source_fkey FOREIGN KEY (source) REFERENCES Sources ON DELETE CASCADE;
 
-ALTER TABLE ONLY Banned
-	ADD CONSTRAINT Banned_admin_fkey FOREIGN KEY (admin) REFERENCES Users;
+ALTER TABLE ONLY Bans
+	ADD CONSTRAINT Bans_admin_fkey FOREIGN KEY (admin) REFERENCES Users;
 
 
 ALTER TABLE ONLY ReportedItems
-	ADD CONSTRAINT ReportItems_userID_fkey FOREIGN KEY (userID) REFERENCES Users;
+	ADD CONSTRAINT ReportItems_user_id_fkey FOREIGN KEY (user_id) REFERENCES Users;
 ALTER TABLE ONLY ReportedItems
-	ADD CONSTRAINT ReportItems_newsID_fkey FOREIGN KEY (newsID) REFERENCES News ON DELETE CASCADE;
+	ADD CONSTRAINT ReportItems_news_id_fkey FOREIGN KEY (news_id) REFERENCES News ON DELETE CASCADE;
 ALTER TABLE ONLY ReportedItems
-	ADD CONSTRAINT ReportItems_commentID_fkey FOREIGN KEY (commentID) REFERENCES Comments ON DELETE CASCADE;
+	ADD CONSTRAINT ReportItems_comment_id_fkey FOREIGN KEY (comment_id) REFERENCES Comments ON DELETE CASCADE;
 
 ALTER TABLE ONLY ReasonsForReport
 	ADD CONSTRAINT ReasonsForReport_reasonID_fkey FOREIGN KEY (reasonID) REFERENCES Reasons;
 ALTER TABLE ONLY ReasonsForReport
-	ADD CONSTRAINT ReasonsForReport_reportNewsID_fkey FOREIGN KEY (userID, newsID, commentID) REFERENCES ReportNews;
+	ADD CONSTRAINT ReasonsForReport_reportNewsID_fkey FOREIGN KEY (user_id, news_id, comment_id) REFERENCES ReportNews;
