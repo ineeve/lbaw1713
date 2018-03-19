@@ -1,3 +1,7 @@
+-- CREATE DOMAINS
+CREATE DOMAIN NotificationType TEXT CHECK (VALUE IN ('FollowMe','CommentMyPost', 'FollowedPublish', 'VoteMyPost'));
+
+
 -- DROP TABLES
 
 DROP TABLE IF EXISTS Users CASCADE;
@@ -19,8 +23,8 @@ DROP TABLE IF EXISTS Achievements CASCADE;
 DROP TABLE IF EXISTS DeletedItems CASCADE;
 DROP TABLE IF EXISTS Follows CASCADE;
 DROP TABLE IF EXISTS UserInterests CASCADE;
-DROP TABLE IF EXISTS DeletedItemsReason CASCADE;
-DROP TABLE IF EXISTS NewsSource CASCADE;
+DROP TABLE IF EXISTS ReasonsForDelete CASCADE;
+DROP TABLE IF EXISTS NewsSources CASCADE;
 
 -- CREATE TABLES
 
@@ -111,7 +115,6 @@ CREATE TABLE Sections (
    icon TEXT NOT NULL
 );
 
-CREATE DOMAIN NotificationType AS TEXT CHECK (VALUE IN (’FollowMe’,‘CommentMyPost’, ‘FollowedPublish’, ‘VoteMyPost’));
 
 CREATE TABLE Notifications (
    id SERIAL,
@@ -121,7 +124,7 @@ CREATE TABLE Notifications (
    was_read BOOLEAN DEFAULT false,
    user_id INTEGER,
    news_id INTEGER,
-	 CONSTRAINT notification_type_attr CHECK ((type = ’FollowMe’ AND news_id IS NULL) OR user_id IS NULL),
+	 CONSTRAINT notification_type_attr CHECK ((type = 'FollowMe' AND news_id IS NULL) OR user_id IS NULL),
 	 CONSTRAINT notification_attr_null CHECK ((news_id IS NULL OR user_id IS NULL) AND news_id != user_id)
 );
 
@@ -137,13 +140,6 @@ CREATE TABLE Achievements (
 	user_id INTEGER NOT NULL
 );
 
-CREATE TABLE DeletedItems (
-	news_id INTEGER NOT NULL,
-	user_id INTEGER NOT NULL,
-	comment_id INTEGER NOT NULL,
-	"date" TIMESTAMP WITH TIME zone DEFAULT now() NOT NULL,
-	brief TEXT
-);
 CREATE TABLE Follows (
 	follower_user_id INTEGER NOT NULL,
 	followed_user_id INTEGER NOT NULL
@@ -153,13 +149,6 @@ CREATE TABLE UserInterests (
 	section_id INTEGER NOT NULL
 );
 
-CREATE TABLE DeletedItemsReason (
-	deleted_news_id INTEGER NOT NULL,
-	deleted_comment_id INTEGER NOT NULL,
-	reason_id INTEGER NOT NULL,
-	CONSTAINT deleted_items_reason_null CHECK
-	( (deleted_news_id IS NULL OR deleted_comment_id IS NULL) AND deleted_news_id != deleted_comment_id)
-);
 CREATE TABLE NewsSources (
 	news_id INTEGER NOT NULL,
 	source_id INTEGER NOT NULL
@@ -172,13 +161,12 @@ CREATE TABLE Bans (
 	reason text NOT NULL
 );
 
-
-CREATE TABLE ReportedItems (
-	user_id INTEGER, -- pkey
-	news_id INTEGER, -- pkey
-	comment_id INTEGER, -- pkey
-	description text,
-	CONSTRAINT reported_items_attr CHECK ((news_id IS NULL OR comment_id IS NULL) AND news_id != comment_id)
+CREATE TABLE ReasonsForDelete (
+	deleted_news_id INTEGER NOT NULL,
+	deleted_comment_id INTEGER NOT NULL,
+	reason_id INTEGER NOT NULL,
+	CONSTRAINT deleted_items_reason_null CHECK
+	( (deleted_news_id IS NULL OR deleted_comment_id IS NULL) AND deleted_news_id != deleted_comment_id)
 );
 
 CREATE TABLE ReasonsForReport (
@@ -188,6 +176,24 @@ CREATE TABLE ReasonsForReport (
 	comment_id INTEGER --pkey
 	CONSTRAINT reasons_for_report_attr CHECK ((news_id IS NULL OR comment_id IS NULL) AND news_id != comment_id)
 );
+
+CREATE TABLE DeletedItems (
+	news_id INTEGER NOT NULL,
+	user_id INTEGER NOT NULL,
+	comment_id INTEGER NOT NULL,
+	"date" TIMESTAMP WITH TIME zone DEFAULT now() NOT NULL,
+	brief TEXT
+);
+
+CREATE TABLE ReportedItems (
+	user_id INTEGER, -- pkey
+	news_id INTEGER, -- pkey
+	comment_id INTEGER, -- pkey
+	description text,
+	CONSTRAINT reported_items_attr CHECK ((news_id IS NULL OR comment_id IS NULL) AND news_id != comment_id)
+);
+
+
 
 -- PRIMARY KEYS AND UNIQUES
 
@@ -250,11 +256,11 @@ ALTER TABLE ONLY Follows
 ALTER TABLE ONLY UserInterests
 	ADD CONSTRAINT UserInterests_pkey PRIMARY KEY (user_id, section_id);
 
-ALTER TABLE ONLY DeletedItemsReason
-	ADD CONSTRAINT DeletedItemsReason_pkey PRIMARY KEY (deleted_news_id, deleted_comment_id, reason_id);
+ALTER TABLE ONLY ReasonsForDelete
+	ADD CONSTRAINT ReasonsForDelete_pkey PRIMARY KEY (deleted_news_id, deleted_comment_id, reason_id);
 
-ALTER TABLE ONLY NewsSource
-	ADD CONSTRAINT NewsSource_pkey PRIMARY KEY (news_id, source_id);
+ALTER TABLE ONLY NewsSources
+	ADD CONSTRAINT NewsSources_pkey PRIMARY KEY (news_id, source_id);
 
 ALTER TABLE ONLY Bans
 	ADD CONSTRAINT Bans_pkey PRIMARY KEY (banned_user_id);
@@ -330,14 +336,11 @@ ALTER TABLE ONLY UserInterests
 ALTER TABLE ONLY UserInterests
 	ADD CONSTRAINT UserInterests_section_id_fkey FOREIGN KEY (section_id) REFERENCES Sections ON DELETE CASCADE;
 
-ALTER TABLE ONLY DeletedItemsReason
-	ADD CONSTRAINT DeletedItemsReason_deleted_news_id_fkey FOREIGN KEY (deleted_news_id) REFERENCES DeletedItems ON DELETE CASCADE;
+ALTER TABLE ONLY ReasonsForDelete
+	ADD CONSTRAINT ReasonsForDelete_deleted_items_fkey FOREIGN KEY (deleted_news_id,deleted_comment_id) REFERENCES DeletedItems ON DELETE CASCADE;
 
-ALTER TABLE ONLY DeletedItemsReason
-	ADD CONSTRAINT DeletedItemsReason_deleted_comment_id_fkey FOREIGN KEY (deleted_comment_id) REFERENCES DeletedItems ON DELETE CASCADE;
-
-ALTER TABLE ONLY DeletedItemsReason
-	ADD CONSTRAINT DeletedItemsReason_reason_id_fkey FOREIGN KEY (reason_id) REFERENCES Reason;
+ALTER TABLE ONLY ReasonsForDelete
+	ADD CONSTRAINT ReasonsForDelete_reason_id_fkey FOREIGN KEY (reason_id) REFERENCES Reasons;
 
 ALTER TABLE ONLY NewsSources
 	ADD CONSTRAINT NewsSources_news_id_fkey FOREIGN KEY (news_id) REFERENCES News ON DELETE CASCADE;
