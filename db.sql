@@ -1,7 +1,3 @@
--- CREATE DOMAINS
-CREATE DOMAIN NotificationType TEXT CHECK (VALUE IN ('FollowMe','CommentMyPost', 'FollowedPublish', 'VoteMyPost'));
-
-
 -- DROP TABLES
 
 DROP TABLE IF EXISTS Users CASCADE;
@@ -119,13 +115,14 @@ CREATE TABLE Sections (
 CREATE TABLE Notifications (
    id SERIAL,
    "date" DATE NOT NULL DEFAULT now(),
-   type NotificationType NOT NULL,
+   type Text NOT NULL,
    target_user_id INTEGER,
    was_read BOOLEAN DEFAULT false,
    user_id INTEGER,
    news_id INTEGER,
-	 CONSTRAINT notification_type_attr CHECK ((type = 'FollowMe' AND news_id IS NULL) OR user_id IS NULL),
-	 CONSTRAINT notification_attr_null CHECK ((news_id IS NULL OR user_id IS NULL) AND news_id != user_id)
+   CONSTRAINT notification_type_attr CHECK ((type = 'FollowMe' AND news_id IS NULL) OR user_id IS NULL),
+   CONSTRAINT notification_attr_null CHECK ((news_id IS NULL OR user_id IS NULL) AND news_id != user_id),
+   CONSTRAINT notification_type CHECK (type = ANY(ARRAY['FollowMe','CommentMyPost', 'FollowedPublish', 'VoteMyPost']::text[]))
 );
 
 
