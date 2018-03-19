@@ -15,14 +15,12 @@ DROP TABLE IF EXISTS Vote CASCADE;
 DROP TABLE IF EXISTS Banned CASCADE;
 DROP TABLE IF EXISTS ReportItems CASCADE;
 DROP TABLE IF EXISTS ReasonsForReport CASCADE;
-DROP TABLE IF EXISTS DeletedComment CASCADE;
 DROP TABLE IF EXISTS Achievements CASCADE;
-DROP TABLE IF EXISTS DeletedNews CASCADE;
+DROP TABLE IF EXISTS DeletedItem CASCADE;
 DROP TABLE IF EXISTS Follows CASCADE;
 DROP TABLE IF EXISTS UserInterests CASCADE;
-DROP TABLE IF EXISTS DeletedNewsReason CASCADE;
+DROP TABLE IF EXISTS DeletedItemReason CASCADE;
 DROP TABLE IF EXISTS NewsSource CASCADE;
-DROP TABLE IF EXISTS DeletedCommentReason CASCADE;
 
 -- CREATE TABLES
 
@@ -135,9 +133,10 @@ CREATE TABLE Achievements (
 	badgesID INTEGER NOT NULL,
 	userID INTEGER NOT NULL
 );
-CREATE TABLE DeletedNews (
-	news INTEGER NOT NULL,
-	“user” INTEGER NOT NULL,
+CREATE TABLE DeletedItem (
+	newsID INTEGER NOT NULL,
+	userID INTEGER NOT NULL,
+	commentID INTEGER NOT NULL,
 	date TIMESTAMP WITH TIME zone DEFAULT now() NOT NULL,
 	brief TEXT
 );
@@ -149,19 +148,15 @@ CREATE TABLE UserInterests (
 	“user” INTEGER NOT NULL,
 	section INTEGER NOT NULL
 );
-CREATE TABLE DeletedNewsReason (
-	deleted INTEGER NOT NULL,
+CREATE TABLE DeletedItemReason (
+	deleted_newsID INTEGER NOT NULL,
+	deleted_commentID INTEGER NOT NULL,
 	reason INTEGER NOT NULL
 );
 CREATE TABLE NewsSource (
 	news INTEGER NOT NULL,
 	source INTEGER NOT NULL
 );
-CREATE TABLE DeletedCommentReason (
-	reason INTEGER NOT NULL,
-	comment INTEGER NOT NULL
-);
-
 
 CREATE TABLE Banned (
 	bannedID INTEGER,
@@ -184,13 +179,6 @@ CREATE TABLE ReasonsForReport (
 	commentID INTEGER
 );
 
-
-CREATE TABLE DeletedComment (
-	commentID INTEGER,
-	userID INTEGER NOT NULL,
-	"date" TIMESTAMP WITH TIME zone DEFAULT now() NOT NULL,
-	brief text
-);
 
 -- PRIMARY KEYS AND UNIQUES
 
@@ -244,8 +232,8 @@ ALTER TABLE ONLY Vote
 ALTER TABLE ONLY Achievements
 	ADD CONSTRAINT Achievements_pkey PRIMARY KEY (badgesID, userID);
 
-ALTER TABLE ONLY DeletedNews
-	ADD CONSTRAINT DeletedNews_pkey PRIMARY KEY (news);
+ALTER TABLE ONLY DeletedItem
+	ADD CONSTRAINT DeletedItem_pkey PRIMARY KEY (newsID,commentID);
     
 ALTER TABLE ONLY Follows
 	ADD CONSTRAINT Follows_pkey PRIMARY KEY (follower, followed);
@@ -253,14 +241,11 @@ ALTER TABLE ONLY Follows
 ALTER TABLE ONLY UserInterests
 	ADD CONSTRAINT UserInterests_pkey PRIMARY KEY (“user”, section);
 
-ALTER TABLE ONLY DeletedNewsReason
-	ADD CONSTRAINT DeletedNewsReason_pkey PRIMARY KEY (deleted, reason);
+ALTER TABLE ONLY DeletedItemReason
+	ADD CONSTRAINT DeletedItemReason_pkey PRIMARY KEY (newsID,commentID, reason);
     
 ALTER TABLE ONLY NewsSource
 	ADD CONSTRAINT NewsSource_pkey PRIMARY KEY (news, source);
-
-ALTER TABLE ONLY DeletedCommentReason
-	ADD CONSTRAINT DeletedCommentReason_pkey PRIMARY KEY (reason, comment);
 
 ALTER TABLE ONLY Banned
 	ADD CONSTRAINT Banned_bannedID_pkey PRIMARY KEY (bannedID);
@@ -270,10 +255,6 @@ ALTER TABLE ONLY ReportItems
 
 ALTER TABLE ONLY ReasonsForReport
 	ADD CONSTRAINT ReasonsForReport_reasonsForReporNewsID_pkey PRIMARY KEY (reasonID,userID,newsID,commentID);
-
-ALTER TABLE ONLY DeletedComment
-	ADD CONSTRAINT DeletedComment_commentID_pkey PRIMARY KEY (commentID);
-
 
 
 -- FOREIGN KEYS
@@ -320,11 +301,12 @@ ALTER TABLE ONLY Achievements
 ALTER TABLE ONLY Achievements
 	ADD CONSTRAINT Achievements_user_fkey FOREIGN KEY (userID) REFERENCES UserAccount(userID) ON DELETE CASCADE;
 
-ALTER TABLE ONLY DeletedNews
-	ADD CONSTRAINT DeletedNews_news_fkey FOREIGN KEY (news) REFERENCES News(newsID) ON DELETE CASCADE;
- 
-ALTER TABLE ONLY DeletedNews
-	ADD CONSTRAINT DeletedNews_user_fkey FOREIGN KEY (“user”) REFERENCES UserAccount(userID);
+ALTER TABLE ONLY DeletedItem
+	ADD CONSTRAINT DeletedItem_news_fkey FOREIGN KEY (news) REFERENCES News(newsID) ON DELETE CASCADE;
+ALTER TABLE ONLY DeletedItem
+	ADD CONSTRAINT DeletedItem_comment_fkey FOREIGN KEY (commentID) REFERENCES Comment(id) ON DELETE CASCADE;
+ALTER TABLE ONLY DeletedItem
+	ADD CONSTRAINT DeletedItem_user_fkey FOREIGN KEY (“user”) REFERENCES UserAccount(userID);
 
 ALTER TABLE ONLY Follows
 	ADD CONSTRAINT Follows_follower_fkey FOREIGN KEY (follower) REFERENCES UserAccount(userID) ON DELETE CASCADE;
@@ -338,11 +320,14 @@ ALTER TABLE ONLY UserInterests
 ALTER TABLE ONLY UserInterests
 	ADD CONSTRAINT UserInterests_section_fkey FOREIGN KEY (section) REFERENCES Section(sectionID) ON DELETE CASCADE;
 
-ALTER TABLE ONLY DeletedNewsReason
-	ADD CONSTRAINT DeletedNewsReason_deleted_fkey FOREIGN KEY (deleted) REFERENCES DeletedNews(news) ON DELETE CASCADE;
+ALTER TABLE ONLY DeletedItemReason
+	ADD CONSTRAINT DeletedItemReason_deletedNews_fkey FOREIGN KEY (deleted_NewsID) REFERENCES DeletedItems(newsID) ON DELETE CASCADE;
  
-ALTER TABLE ONLY DeletedNewsReason
-	ADD CONSTRAINT DeletedNewsReason_reason_fkey FOREIGN KEY (reason) REFERENCES Reason(reasonID);
+ALTER TABLE ONLY DeletedItemReason
+	ADD CONSTRAINT DeletedItemReason_deletedComments_fkey FOREIGN KEY (deleted_CommentsID) REFERENCES DeletedItems(commentsID) ON DELETE CASCADE;
+ 
+ALTER TABLE ONLY DeletedItemReason
+	ADD CONSTRAINT DeletedItemReason_reason_fkey FOREIGN KEY (reason) REFERENCES Reason(reasonID);
 
 
 ALTER TABLE ONLY NewsSource
@@ -350,12 +335,6 @@ ALTER TABLE ONLY NewsSource
  
 ALTER TABLE ONLY NewsSource
 	ADD CONSTRAINT NewsSource_source_fkey FOREIGN KEY (source) REFERENCES Source(sourceID) ON DELETE CASCADE;
-
-ALTER TABLE ONLY DeletedCommentReason
-	ADD CONSTRAINT DeletedCommentReason_reason_fkey FOREIGN KEY (reason) REFERENCES Reason(reasonID);
- 
-ALTER TABLE ONLY DeletedCommentReason
-	ADD CONSTRAINT DeletedCommentReason_comment_fkey FOREIGN KEY (comment) REFERENCES DeletedComment(commentID) ON DELETE CASCADE;
 
 ALTER TABLE ONLY Banned
 	ADD CONSTRAINT Banned_admin_fkey FOREIGN KEY (admin) REFERENCES UserAccount (userID);
@@ -372,6 +351,3 @@ ALTER TABLE ONLY ReasonsForReport
 ALTER TABLE ONLY ReasonsForReport
 	ADD CONSTRAINT ReasonsForReport_reportNewsID_fkey FOREIGN KEY (userID, newsID, commentID) REFERENCES ReportNews;
 
-ALTER TABLE ONLY DeletedComment
-	ADD CONSTRAINT DeletedComment_commentID_fkey FOREIGN KEY (commentID) REFERENCES Comment (commentID) ON DELETE CASCADE;
-ALTER TABLE ONLY DeletedComment
