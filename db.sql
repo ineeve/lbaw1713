@@ -71,7 +71,7 @@ CREATE TABLE ModeratorComments(
 	creator_user_id INTEGER NOT NULL,
 	news_id INTEGER,
 	comment_id INTEGER,
-	CONSTRAINT moderator_comment_attr_null CHECK (news_id NOT NULL OR comment_id NOT NULL)
+	CONSTRAINT moderator_comment_attr_null CHECK ((news_id IS NULL OR comment_id IS NULL) AND news_id != comment_id)
 );
 
 CREATE TABLE Badges(
@@ -82,7 +82,7 @@ CREATE TABLE Badges(
 	articles INTEGER,
 	comments INTEGER,
 	creator_user_id INTEGER NOT NULL,
-	CONSTRAINT notification_attr_null CHECK (votes NOT NULL OR articles NOT NULL OR comments NOT NULL)
+	CONSTRAINT notification_attr_null CHECK (votes IS NOT NULL OR articles IS NOT NULL OR comments IS NOT NULL)
 );
 
 CREATE TABLE FAQs (
@@ -111,7 +111,7 @@ CREATE TABLE Sections (
    icon TEXT NOT NULL
 );
 
-CREATE DOMAIN NotificationType text CHECK (VALUE IN (’FollowMe’,‘CommentMyPost’, ‘FollowedPublish’, ‘VoteMyPost’));
+CREATE DOMAIN NotificationType AS TEXT CHECK (VALUE IN (’FollowMe’,‘CommentMyPost’, ‘FollowedPublish’, ‘VoteMyPost’));
 
 CREATE TABLE Notifications (
    id SERIAL,
@@ -121,8 +121,8 @@ CREATE TABLE Notifications (
    was_read BOOLEAN DEFAULT false,
    user_id INTEGER,
    news_id INTEGER,
-	 CONSTRAINT notification_type_attr CHECK ((type = ’FollowMe’ AND news_id NULL)OR user_id NULL),
-	 CONSTRAINT notification_attr_null CHECK (news_id NOT NULL OR user_id NOT NULL)
+	 CONSTRAINT notification_type_attr CHECK ((type = ’FollowMe’ AND news_id IS NULL) OR user_id IS NULL),
+	 CONSTRAINT notification_attr_null CHECK ((news_id IS NULL OR user_id IS NULL) AND news_id != user_id)
 );
 
 
@@ -158,7 +158,7 @@ CREATE TABLE DeletedItemsReason (
 	deleted_comment_id INTEGER NOT NULL,
 	reason_id INTEGER NOT NULL,
 	CONSTAINT deleted_items_reason_null CHECK
-	( (deleted_news_id NULL OR deleted_comment_id NULL) AND deleted_news_id != deleted_comment_id)
+	( (deleted_news_id IS NULL OR deleted_comment_id IS NULL) AND deleted_news_id != deleted_comment_id)
 );
 CREATE TABLE NewsSources (
 	news_id INTEGER NOT NULL,
@@ -166,7 +166,7 @@ CREATE TABLE NewsSources (
 );
 
 CREATE TABLE Bans (
-	banned_user_id, -- primary key does not need NN
+	banned_user_id INTEGER, -- primary key does not need NN
 	admin_user_id INTEGER NOT NULL,
 	"date" TIMESTAMP WITH TIME zone DEFAULT now() NOT NULL,
 	reason text NOT NULL
@@ -178,7 +178,7 @@ CREATE TABLE ReportedItems (
 	news_id INTEGER, -- pkey
 	comment_id INTEGER, -- pkey
 	description text,
-	CONSTRAINT reported_items_attr CHECK ((news_id NULL OR comment_id NULL) AND news_id != comment_id)
+	CONSTRAINT reported_items_attr CHECK ((news_id IS NULL OR comment_id IS NULL) AND news_id != comment_id)
 );
 
 CREATE TABLE ReasonsForReport (
@@ -186,7 +186,7 @@ CREATE TABLE ReasonsForReport (
 	user_id INTEGER, -- pkey
 	news_id INTEGER, -- pkey
 	comment_id INTEGER --pkey
-	CONSTRAINT reasons_for_report_attr CHECK ((news_id NULL OR comment_id NULL) AND news_id != comment_id)
+	CONSTRAINT reasons_for_report_attr CHECK ((news_id IS NULL OR comment_id IS NULL) AND news_id != comment_id)
 );
 
 -- PRIMARY KEYS AND UNIQUES
