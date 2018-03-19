@@ -47,7 +47,7 @@ CREATE TABLE News (
 	"date" TIMESTAMP WITH TIME zone DEFAULT now() NOT NULL,
 	body text NOT NULL,
 	image text NOT NULL,
-	votes INTEGER NOT NULL,
+	votes INTEGER NOT NULL DEFAULT 0,
 	section_id INTEGER NOT NULL,
 	author_id INTEGER NOT NULL
 );
@@ -56,7 +56,7 @@ CREATE TABLE Comments(
 	id SERIAL,
 	“text” text NOT NULL,
 	“date” TIMESTAMP WITH TIME zone DEFAULT now() NOT NULL,
-	creator INTEGER NOT NULL,
+	creator_user_id INTEGER NOT NULL,
 	target_news_id INTEGER NOT NULL
 );
 
@@ -167,7 +167,7 @@ CREATE TABLE DeletedCommentReason (
 
 
 CREATE TABLE Bans (
-	banned_user_id INTEGER,
+	banned_user_id, -- primary key does not need NN
 	admin_user_id INTEGER NOT NULL,
 	"date" TIMESTAMP WITH TIME zone DEFAULT now() NOT NULL,
 	reason text NOT NULL
@@ -175,25 +175,19 @@ CREATE TABLE Bans (
 
 
 CREATE TABLE ReportedItems (
-	userID INTEGER,
-	newsID INTEGER,
-	commentID INTEGER,
-	description text
+	user_id INTEGER, -- pkey
+	news_id INTEGER, -- pkey
+	comment_id INTEGER, -- pkey
+	description text,
+	CONSTRAINT reported_items_attr CHECK (news_id NULL OR comment_id NULL),
 );
 
 CREATE TABLE ReasonsForReport (
-	reasonID INTEGER,
-	userID INTEGER,
-	newsID INTEGER,
-	commentID INTEGER
-);
-
-
-CREATE TABLE DeletedComment (
-	commentID INTEGER,
-	userID INTEGER NOT NULL,
-	"date" TIMESTAMP WITH TIME zone DEFAULT now() NOT NULL,
-	brief text
+	reason_id INTEGER, --pkey
+	user_id INTEGER, -- pkey
+	news_id INTEGER, -- pkey
+	comment_id INTEGER --pkey
+	CONSTRAINT reasons_for_report_attr CHECK (news_id NULL OR comment_id NULL),
 );
 
 -- PRIMARY KEYS AND UNIQUES
