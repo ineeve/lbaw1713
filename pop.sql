@@ -242,16 +242,16 @@ INSERT INTO Countries(name) VALUES
 
 --Sources
 
-INSERT INTO Sources(link, author, consultation_date) VALUES ('http://www.bbc.com/news/world-europe-43504396', 'Lawton Le Jean','2017-04-29'),
-('https://www.reuters.com/article/us-usa-china-trade-mofcom/china-blames-u-s-for-staggering-trade-surplus-as-tariffs-loom-idUSKBN1GX3DM','Vidovik Renshall','2017-04-26'),
-('https://www.afp.com/en/news/23/bale-nets-hat-trick-wales-smash-sorry-china-6-0-doc-12z9051', 'Wyatan Lindley','2018-02-22'),
-('https://www.upi.com/Top_News/US/2018/03/22/Police-find-bombing-target-list-suspects-family-devastated/4751521629599/?utm_source=fp&utm_campaign=ls&utm_medium=1', 'Betti Castellani','2017-04-01'),
-('https://www.reuters.com/article/us-facebook-cambridge-analytica-stocks/facebook-investors-fret-over-costs-as-zuckerberg-apologizes-idUSKBN1GY1GI', 'Berkly Durtnal','2017-08-11'),
-('http://www.bbc.com/news/world-us-canada-43497364', 'Mallory Lincey','2017-09-21'),
-('https://www.afp.com/en/news/23/russian-media-boycott-parliament-over-sex-scandal-doc-12z3jv2', 'Findlay Gawler','2017-08-08'),
-('https://www.upi.com/Entertainment_News/2018/03/22/Prince-Harry-Meghan-Markle-send-out-wedding-invitations/5991521731627/?utm_source=fp&utm_campaign=ts_en&utm_medium=7', 'Sayre Wildbore','2018-01-09'),
-('https://widerimage.reuters.com/story/journey-to-antarctica-seals-penguins-and-glacial-beauty?utm_campaign=web-app-launch&utm_medium=banner&utm_source=rcom&utm_content=ros', 'Agretha Oiseau','2017-10-19'),
-('http://www.bbc.com/news/av/world-africa-43487852/ghana-computer-teacher-s-chalkboard-microsoft-word-inspires', 'Ewart Puttrell','2017-12-11').
+INSERT INTO Sources(link, author, consultation_date) VALUES ('http://www.bbc.com/news/world-europe-43504396', 'Lawton Le Jean','2017-04-29');
+('https://www.reuters.com/article/us-usa-china-trade-mofcom/china-blames-u-s-for-staggering-trade-surplus-as-tariffs-loom-idUSKBN1GX3DM','Vidovik Renshall','2017-04-26');
+('https://www.afp.com/en/news/23/bale-nets-hat-trick-wales-smash-sorry-china-6-0-doc-12z9051', 'Wyatan Lindley','2018-02-22');
+('https://www.upi.com/Top_News/US/2018/03/22/Police-find-bombing-target-list-suspects-family-devastated/4751521629599/?utm_source=fp&utm_campaign=ls&utm_medium=1', 'Betti Castellani','2017-04-01');
+('https://www.reuters.com/article/us-facebook-cambridge-analytica-stocks/facebook-investors-fret-over-costs-as-zuckerberg-apologizes-idUSKBN1GY1GI', 'Berkly Durtnal','2017-08-11');
+('http://www.bbc.com/news/world-us-canada-43497364', 'Mallory Lincey','2017-09-21');
+('https://www.afp.com/en/news/23/russian-media-boycott-parliament-over-sex-scandal-doc-12z3jv2', 'Findlay Gawler','2017-08-08');
+('https://www.upi.com/Entertainment_News/2018/03/22/Prince-Harry-Meghan-Markle-send-out-wedding-invitations/5991521731627/?utm_source=fp&utm_campaign=ts_en&utm_medium=7', 'Sayre Wildbore','2018-01-09');
+('https://widerimage.reuters.com/story/journey-to-antarctica-seals-penguins-and-glacial-beauty?utm_campaign=web-app-launch&utm_medium=banner&utm_source=rcom&utm_content=ros', 'Agretha Oiseau','2017-10-19');
+('http://www.bbc.com/news/av/world-africa-43487852/ghana-computer-teacher-s-chalkboard-microsoft-word-inspires', 'Ewart Puttrell','2017-12-11');
 
 --Sections
 
@@ -659,7 +659,7 @@ INSERT INTO "Follows" (follower_user_id,followed_user_id) VALUES (85,37);
 INSERT INTO "Follows" (follower_user_id,followed_user_id) VALUES (69,12);
 INSERT INTO "Follows" (follower_user_id,followed_user_id) VALUES (89,12);
 
---Uswr interested
+--User interested
 
 INSERT INTO "UserInterests" (user_id,section_id) VALUES (84?4
 INSERT INTO "UserInterests" (user_id,section_id) VALUES (98,3);
