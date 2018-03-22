@@ -66,3 +66,7 @@ SELECT title, date, body, image, votes, Sections.name, Users.username
 SELECT title, date, body, image, votes, Sections.name, Users.username
   FROM News, Sections, Users
   WHERE MONTH(News.date) = MONTH(GETDATE()) AND Sections.id = News.section_id AND Users.id = News.author_id;
+--Obter os comentarios de uma noticia
+SELECT text, date, username
+ FROM Comments, Users
+ WHERE Comments.target_news_id = $newsID AND Comments.creator_user_id = Users.id;
