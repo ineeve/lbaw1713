@@ -7,15 +7,15 @@ INSERT INTO Reasons(name) VALUES ('Sexually Inappropiate');
 
 --Badges
 
-INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Enthusiast', 'Voted on 100 news', 100, 0, 0, admin);
-INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Disseminator!', 'Posted 100 news', 0, 100, 0, admin);
-INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Intervener', 'Made 200 comments', 0, 0, 200, admin);
-INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Active!', 'Voted on 500 news', 500, 0, 0, admin);
-INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Judge', 'Voted on 1000 news', 1000, 0, 0, admin);
-INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Explorer', 'Posted 5000 news', 0, 500, 0, admin);
-INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Nosy', 'Made 500 comments', 0, 0, 500, admin);
-INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Wise', 'Posted 2000 news', 0, 2000, 0, admin);
-INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Revolution', 'Made 1500 comments', 0, 0, 1500, admin);
+INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Enthusiast', 'Voted on 100 news', 100, 0, 0, 29);
+INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Disseminator!', 'Posted 100 news', 0, 100, 0, 57);
+INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Intervener', 'Made 200 comments', 0, 0, 200, 69);
+INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Active!', 'Voted on 500 news', 500, 0, 0, 29);
+INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Judge', 'Voted on 1000 news', 1000, 0, 0, 29);
+INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Explorer', 'Posted 5000 news', 0, 500, 0, 29);
+INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Nosy', 'Made 500 comments', 0, 0, 500, 57);
+INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Wise', 'Posted 2000 news', 0, 2000, 0, 69);
+INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Revolution', 'Made 1500 comments', 0, 0, 1500, 57);
 
 --FAQs
 
