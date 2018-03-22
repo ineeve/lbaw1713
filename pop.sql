@@ -19,7 +19,7 @@ INSERT INTO FAQs(question, answer) VALUES ('What does it mean to comment to an a
    your comment will be published through Facebook. Please be sure to review Facebook''s Privacy Policy here:https://www.facebook.com/note.php?note_id=%20322194465300.
     Please note that each comment will also appear on your Facebook wall unless you uncheck the "post to profile" or "also post on facebook" box for that comment.
      If you uncheck this box for a comment, it will not appear on your Facebook feed.');
-INSERT INTO FAQs(question, answer) VALUES (' I don\'t want to post through Facebook.', 'Due to changing trends in public communication, all article comments will
+INSERT INTO FAQs(question, answer) VALUES (' I don''t want to post through Facebook.', 'Due to changing trends in public communication, all article comments will
    be submitted through Facebook going forward. If you do not want your comment to appear on your Facebook wall, simply un-check "post to profile" or "also post to facebook"
     below the comment box. For more information, you can read about this change here:
 http://www.photonnews.com/otto-toth/were-moving-the-conversation_b_5423675.html');
