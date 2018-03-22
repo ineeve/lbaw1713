@@ -5,6 +5,7 @@ const NUM_USERS = 100;
 const NUM_NEWS = 1000;
 const NUM_COMMENTS = 10000;
 const NUM_SECTIONS = 13;
+const NUM_MODERATOR_COMMENTS = 100;
 
 var possibleUsernames  = [
     'WelshmanM','wsvrtativ','hemeanbeanX','rastejarrA','Dealer7L','mrexesz1','verpstas6K','eliteksouljafO','profizmus2L','JarovDl','xmyonly1xYR',
@@ -91,14 +92,7 @@ function getNewComment(){
     }
 }
 
-function getNewModComment(){
-    return {
-        text:null,
-        creator_user_id: null,
-        news_id: null,
-        comment_id: null,
-    }
-}
+
 
 function createUsers(){
     let usersArray = [];
@@ -152,13 +146,35 @@ function createComments(){
     }
     return commentsArray;
 }
+function getNewModComment(){
+    return {
+        text:null,
+        creator_user_id: null,
+        news_id: null,
+        comment_id: null,
+    }
+}
+
+var admins = [3,59,]
+var mods = [2,13,17,21,22,39,44,51,52,58,73,87,89];
 
 function createModeratorComments(){
     let moderatorCommentsArray = [];
     for (let i = 0; i < NUM_MODERATOR_COMMENTS; i++){
         let rndNum = Math.random();
         let modComment = getNewModComment();
+        modComment.text = moderatorComments[i % moderatorComments.length];
+        modComment.creator_user_id = mods[i % mods.length];
+        if (i%2 == 0){
+            modComment.news_id = Math.floor(rndNum * NUM_NEWS) + 1;
+            modComment.comment_id = 'NULL';
+        }else{
+            modComment.news_id = 'NULL';
+            modComment.comment_id = Math.floor(rndNum * NUM_COMMENTS) + 1;
+        }
+        moderatorCommentsArray.push(modComment);
     }
+    return moderatorCommentsArray;
 }
 
 function writeToFile(filename, outputString){
@@ -167,6 +183,19 @@ function writeToFile(filename, outputString){
         stream.write(outputString);
         stream.end();
     });
+}
+
+function createModeratorCommentsSQL(commentsArray){
+    let outputString = "";
+    commentsArray.forEach(comment => {
+        outputString += "INSERT INTO ModeratorComments (text, creator_user_id, news_id, comment_id) VALUES ("
+        + "'" + comment.text + "',"
+        + comment.creator_user_id + ","
+        + comment.news_id + ","
+        + comment.comment_id
+        + ");\n"
+    });
+    writeToFile("InsertModeratorComments.sql",outputString);
 }
 
 function printCommentsSQL(commentsArray){
@@ -214,5 +243,5 @@ function printUsersSQL(usersArray){
     writeToFile("InsertUsers.sql",outputString);
 }
 
-let newsArray = createNews();
-printNewsSql(newsArray);
+let commentsArray = createModeratorComments();
+createModeratorCommentsSQL(commentsArray);
