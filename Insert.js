@@ -53,16 +53,9 @@ var commentsText = [
 var moderatorComments = [
     "This article has been reported for racism, unsure if I should act on it.",
     "I do not see any reason as to how this is racism, it should be disregarded.",
-    
+
 ]
 
-
-let usersArray = createUsers();
-printUsersSQL(usersArray);
-let newsArray = createNews();
-printNewsSql(newsArray);
-let commentsArray = createComments();
-printCommentsSQL(commentsArray);
 
 function getNewUser(){
     return {

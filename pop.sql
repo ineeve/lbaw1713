@@ -1,5 +1,10 @@
 -- POPULATE TABLES
 
+--Reasons
+INSERT INTO Reasons(name) VALUES ('Rude or Abusive');
+INSERT INTO Reasons(name) VALUES ('Scam/Spam');
+INSERT INTO Reasons(name) VALUES ('Sexually Inappropiate');
+
 --Badges
 
 INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Enthusiast', 'Voted on 100 news', 100, 0, 0, admin);
