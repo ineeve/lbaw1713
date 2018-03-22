@@ -39,4 +39,5 @@ FROM Sections;
 -- Search for your listed interests
 SELECT title, "date", body, image, votes, Sections.name, Users.username
 FROM News INNER JOIN UserInterests ON (UserInterests.section_id = News.section_id AND UserInterests.username = $username)
+      INNER JOIN Sections ON (News.section_id = Sections.id)
       INNER JOIN Users ON (News.author_id = Users.id);
