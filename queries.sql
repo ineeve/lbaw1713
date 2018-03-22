@@ -62,6 +62,46 @@ SELECT title, date, body, image, votes, Sections.name, Users.username
   FROM News, Sections, Users
   WHERE MONTH(News.date) = MONTH(GETDATE()) AND Sections.id = News.section_id AND Users.id = News.author_id;
 --Obter os comentarios de uma noticia
-SELECT text, date, username
+SELECT text, date, Users.username
  FROM Comments, Users
  WHERE Comments.target_news_id = $newsID AND Comments.creator_user_id = Users.id;
+--Obter todos os reports a noticias
+SELECT Users.username, News.title, description
+ FROM ReportedItems, Users, News
+ WHERE ReportedItems.news_id IS NOT NULL AND ReportedItems.user_id = Users.id AND ReportedItems.news_id = News.id;
+--OU
+ SELECT Users.username, News.title AS newsTitle, ReportedItems.description
+  FROM ((ReportedItems
+    INNER JOIN Users ON  ReportedItems.user_id = Users.id) AS T
+    INNER JOIN News ON T.news_id = News.id)
+    WHERE ReportedItems.news_id IS NOT NULL;
+--Obter todos os reports a comentarios
+SELECT Users.username, ReportedItems.comment_id AS commentID, ReportedItems.description
+ FROM ReportedItems
+   INNER JOIN Users ON  ReportedItems.user_id = Users.id
+   WHERE commentID IS NOT NULL;
+--Obter noticias denunciadas de um utilizador
+SELECT Users.username AS username, News.id AS newsID, News.title AS newsTitle, ReportedItems.description AS description
+FROM News
+  INNER JOIN Users ON News.author_id = Users.id AND Users.username = $username
+  INNER JOIN ReportItems ON ReportItems.news_id = News.id
+  WHERE ReportedItems.news_id IS NOT NULL;
+--Obter os comentarios denunciadas de um utilizador
+CREATE VIEW ReportDescriptionForUserComment AS
+SELECT User.id AS userID, Users.username AS username, Comments.id AS commentID, ReportedItems.description AS description
+FROM Comments
+  INNER JOIN Users ON Comments.creator_user_id = Users.id AND Users.username = $username
+  INNER JOIN ReportItems ON ReportItems.comment_id = Comments.id
+  WHERE ReportedItems.comment_id IS NOT NULL;
+
+SELECT commentID, description
+FROM ReportDescriptionForUserComment
+WHERE ReportDescriptionForUserComment.username = $username;
+
+--Selecionar as razões fixas de um só comentario ($commentID)
+-- feito por um utilizador $username
+SELECT Reason.name
+FROM Reason
+  INNER JOIN ReasonForReport ON Reason.id = ReasonForReport.reason_id
+  INNER JOIN ReportDescriptionForUserComment ON ReasonForReport.(user_id, news_id,comment_id) = ReportDescriptionForUserComment.(userID, NULL, commentID)
+  WHERE ReportDescriptionForUserComment.commentID = &commentID;
