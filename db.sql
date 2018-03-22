@@ -66,8 +66,8 @@ CREATE TABLE Reasons(
 
 CREATE TABLE ModeratorComments(
 	id SERIAL,
-	“text” text NOT NULL,
-	“date” TIMESTAMP WITH TIME zone DEFAULT now() NOT NULL,
+	"text" text NOT NULL,
+	"date" TIMESTAMP WITH TIME zone DEFAULT now() NOT NULL,
 	creator_user_id INTEGER NOT NULL,
 	news_id INTEGER,
 	comment_id INTEGER,
