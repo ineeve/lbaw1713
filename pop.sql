@@ -260,7 +260,7 @@ INSERT INTO Sources(link, author, consultation_date) VALUES ('http://www.bbc.com
 
 --Sections
 
-INSERT INTO Sections(name, icon) VALUES ('Travel', 'fas fa-plane'),
+INSERT INTO sections(name, icon) VALUES ('Travel', 'fas fa-plane'),
 ('Sport', 'fas fa-basketball-ball'),
 ('Culture', 'fas fa-users'),
 ('Food', 'fas fa-utensils'),
@@ -272,7 +272,7 @@ INSERT INTO Sections(name, icon) VALUES ('Travel', 'fas fa-plane'),
 ('Music', 'fas fa-music'),
 ('Arts', 'fas fa-paint-brush'),
 ('Science', 'fas fa-flask'),
-('Health', 'fas fa-user-md').
+('Health', 'fas fa-user-md');
 
 -- Notifications
 
