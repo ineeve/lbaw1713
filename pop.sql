@@ -275,46 +275,46 @@ INSERT INTO sections(name, icon) VALUES ('Travel', 'fas fa-plane'),
 
 -- Notifications
 
-INSERT INTO Notifications ("date", type, target_user_id, was_read, user_id) VALUES (21/03/2018, 'FollowMe', 1, FALSE, 2);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'CommentMyPost', 1, FALSE, 1);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'CommentMyPost', 1, FALSE, 1);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'CommentMyPost', 1, FALSE, 1);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'CommentMyPost', 1, FALSE, 1);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'CommentMyPost', 1, FALSE, 1);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'CommentMyPost', 1, FALSE, 1);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'CommentMyPost', 1, FALSE, 1);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'CommentMyPost', 1, FALSE, 1);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'CommentMyPost', 1, FALSE, 1);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'CommentMyPost', 1, FALSE, 1);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'CommentMyPost', 1, FALSE, 1);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'CommentMyPost', 1, FALSE, 1);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'FollowedPublish', 1, FALSE, 1);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'VoteMyPost', 1, FALSE, 1);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, user_id) VALUES (21/03/2018, 'FollowMe', 1, FALSE, 3);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'CommentMyPost', 1, FALSE, 2);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'FollowedPublish', 1, FALSE, 2);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'VoteMyPost', 1, FALSE, 2);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, user_id) VALUES (21/03/2018, 'FollowMe', 2, FALSE, 1);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'CommentMyPost', 2, FALSE, 1);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'FollowedPublish', 2, FALSE, 1);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'VoteMyPost', 2, FALSE, 1);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, user_id) VALUES (21/03/2018, 'FollowMe', 3, FALSE, 2);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'CommentMyPost', 3, FALSE, 1);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'FollowedPublish', 3, FALSE, 1);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'VoteMyPost', 3, FALSE, 1);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, user_id) VALUES (21/03/2018, 'FollowMe', 3, FALSE, 4);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'CommentMyPost', 3, FALSE, 4);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'CommentMyPost', 3, FALSE, 4);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'CommentMyPost', 3, FALSE, 4);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'CommentMyPost', 3, FALSE, 4);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'CommentMyPost', 3, FALSE, 4);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'CommentMyPost', 3, FALSE, 4);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'FollowedPublish', 3, FALSE, 2);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'VoteMyPost', 3, FALSE, 4);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, user_id) VALUES (21/03/2018, 'FollowMe', 5, FALSE, 2);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'CommentMyPost', 5, FALSE, 4);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'FollowedPublish', 5, FALSE, 2);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'VoteMyPost', 5, FALSE, 1);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, user_id) VALUES ('21/03/2018', 'FollowMe', 1, FALSE, 2);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'CommentMyPost', 1, FALSE, 1);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'CommentMyPost', 1, FALSE, 1);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'CommentMyPost', 1, FALSE, 1);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'CommentMyPost', 1, FALSE, 1);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'CommentMyPost', 1, FALSE, 1);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'CommentMyPost', 1, FALSE, 1);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'CommentMyPost', 1, FALSE, 1);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'CommentMyPost', 1, FALSE, 1);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'CommentMyPost', 1, FALSE, 1);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'CommentMyPost', 1, FALSE, 1);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'CommentMyPost', 1, FALSE, 1);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'CommentMyPost', 1, FALSE, 1);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'FollowedPublish', 1, FALSE, 1);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'VoteMyPost', 1, FALSE, 1);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, user_id) VALUES ('21/03/2018', 'FollowMe', 1, FALSE, 3);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'CommentMyPost', 1, FALSE, 2);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'FollowedPublish', 1, FALSE, 2);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'VoteMyPost', 1, FALSE, 2);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, user_id) VALUES ('21/03/2018', 'FollowMe', 2, FALSE, 1);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'CommentMyPost', 2, FALSE, 1);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'FollowedPublish', 2, FALSE, 1);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'VoteMyPost', 2, FALSE, 1);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, user_id) VALUES ('21/03/2018', 'FollowMe', 3, FALSE, 2);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'CommentMyPost', 3, FALSE, 1);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'FollowedPublish', 3, FALSE, 1);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'VoteMyPost', 3, FALSE, 1);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, user_id) VALUES ('21/03/2018', 'FollowMe', 3, FALSE, 4);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'CommentMyPost', 3, FALSE, 4);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'CommentMyPost', 3, FALSE, 4);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'CommentMyPost', 3, FALSE, 4);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'CommentMyPost', 3, FALSE, 4);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'CommentMyPost', 3, FALSE, 4);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'CommentMyPost', 3, FALSE, 4);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'FollowedPublish', 3, FALSE, 2);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'VoteMyPost', 3, FALSE, 4);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, user_id) VALUES ('21/03/2018', 'FollowMe', 5, FALSE, 2);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'CommentMyPost', 5, FALSE, 4);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'FollowedPublish', 5, FALSE, 2);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'VoteMyPost', 5, FALSE, 1);
 
 -- Votes
 
@@ -387,13 +387,13 @@ INSERT INTO Votes (user_id, news_id, type) VALUES (13, 5, TRUE);
 
 -- Bans
 
-INSERT INTO Bans (banned_user_id, admin_user_id, "date", reason) VALUES (10, 1, 21/03/2018, 'Offensive');
-INSERT INTO Bans (banned_user_id, admin_user_id, "date", reason) VALUES (35, 1, 21/03/2018, 'Troll');
-INSERT INTO Bans (banned_user_id, admin_user_id, "date", reason) VALUES (45, 1, 21/03/2018, 'Offensive');
-INSERT INTO Bans (banned_user_id, admin_user_id, "date", reason) VALUES (69, 1, 21/03/2018, 'pineapples');
-INSERT INTO Bans (banned_user_id, admin_user_id, "date", reason) VALUES (70, 1, 21/03/2018, 'Scammer');
-INSERT INTO Bans (banned_user_id, admin_user_id, "date", reason) VALUES (101, 1, 21/03/2018, 'Scammer');
-INSERT INTO Bans (banned_user_id, admin_user_id, "date", reason) VALUES (103, 1, 21/03/2018, 'Offensive');
+INSERT INTO Bans (banned_user_id, admin_user_id, "date", reason) VALUES (10, 1, '21/03/2018', 'Offensive');
+INSERT INTO Bans (banned_user_id, admin_user_id, "date", reason) VALUES (35, 1, '21/03/2018', 'Troll');
+INSERT INTO Bans (banned_user_id, admin_user_id, "date", reason) VALUES (45, 1, '21/03/2018', 'Offensive');
+INSERT INTO Bans (banned_user_id, admin_user_id, "date", reason) VALUES (69, 1, '21/03/2018', 'pineapples');
+INSERT INTO Bans (banned_user_id, admin_user_id, "date", reason) VALUES (70, 1, '21/03/2018', 'Scammer');
+INSERT INTO Bans (banned_user_id, admin_user_id, "date", reason) VALUES (101, 1, '21/03/2018', 'Scammer');
+INSERT INTO Bans (banned_user_id, admin_user_id, "date", reason) VALUES (103, 1, '21/03/2018', 'Offensive');
 
 -- ReportedItems
 
