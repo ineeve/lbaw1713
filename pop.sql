@@ -5,43 +5,7 @@ INSERT INTO Reasons(name) VALUES ('Rude or Abusive');
 INSERT INTO Reasons(name) VALUES ('Scam/Spam');
 INSERT INTO Reasons(name) VALUES ('Sexually Inappropiate');
 
---Badges
-
-INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Enthusiast', 'Voted on 100 news', 100, 0, 0, 29);
-INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Disseminator!', 'Posted 100 news', 0, 100, 0, 57);
-INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Intervener', 'Made 200 comments', 0, 0, 200, 69);
-INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Active!', 'Voted on 500 news', 500, 0, 0, 29);
-INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Judge', 'Voted on 1000 news', 1000, 0, 0, 29);
-INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Explorer', 'Posted 5000 news', 0, 500, 0, 29);
-INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Nosy', 'Made 500 comments', 0, 0, 500, 57);
-INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Wise', 'Posted 2000 news', 0, 2000, 0, 69);
-INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Revolution', 'Made 1500 comments', 0, 0, 1500, 57);
-
---FAQs
-
-INSERT INTO FAQs(question, answer) VALUES ('Do I need an account on the Photon News?', 'No, to comment all you need is a Facebook account.');
-INSERT INTO FAQs(question, answer) VALUES ('What does it mean to comment to an article through Facebook?', 'When you comment on a Photon News article,
-   your comment will be published through Facebook. Please be sure to review Facebook''s Privacy Policy here:https://www.facebook.com/note.php?note_id=%20322194465300.
-    Please note that each comment will also appear on your Facebook wall unless you uncheck the "post to profile" or "also post on facebook" box for that comment.
-     If you uncheck this box for a comment, it will not appear on your Facebook feed.');
-INSERT INTO FAQs(question, answer) VALUES (' I don''t want to post through Facebook.', 'Due to changing trends in public communication, all article comments will
-   be submitted through Facebook going forward. If you do not want your comment to appear on your Facebook wall, simply un-check "post to profile" or "also post to facebook"
-    below the comment box. For more information, you can read about this change here:
-http://www.photonnews.com/otto-toth/were-moving-the-conversation_b_5423675.html');
-INSERT INTO FAQs(question, answer) VALUES ('I already have a Photon News account, what will happen to it?', 'You are still able to log in to your Photon News account to follow other
-   users and bloggers, and you will be able to view your post history for comments made prior to the move to Facebook comments. Comments left through the Facebook platform will not
-    be visible in your post history.');
-INSERT INTO FAQs(question, answer) VALUES ('Where can I create an account and login?', 'There is a login prompt at the top right corner of every page on the site, or visit:
-   http://www.photonnews.com/users/login/');
-INSERT INTO FAQs(question, answer) VALUES ('Where can I change my screen name?', 'Unfortunately, you cannot change your screen name once you have registered; nor can we.
-   Every screen name is associated with one email address. If you need help with an existing account, please reach out to us.');
-INSERT INTO FAQs(question, answer) VALUES ('Where can I change my password, personal information or biography?', 'Edit information on the preferences page: http://www.photonnews.com/users/preferences');
-INSERT INTO FAQs(question, answer) VALUES ('Can I include a link in my comment?', 'Yes. But any comment that contains a link to an inappropriate site may not be displayed on the Photon News site.');
-INSERT INTO FAQs(question, answer) VALUES ('What is the "Follow/Fan" link on Photon News user accounts?', 'When you find a user you like, you can press the Follow/Fan link in his profile page. This way you can keep track of the articles he posts.');
-INSERT INTO FAQs(question, answer) VALUES ('Where can I sign up for news alerts and other notifications?', 'http://www.phtonnews.com/signup');
-
 --Countries
-
 INSERT INTO Countries(name) VALUES
 ('Afghanistan'),
 ('Albania'),
@@ -244,6 +208,41 @@ INSERT INTO Countries(name) VALUES
 ('Yemen'),
 ('Zambia'),
 ('Zimbabwe');
+
+--Badges
+
+INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Enthusiast', 'Voted on 100 news', 100, 0, 0, 29);
+INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Disseminator!', 'Posted 100 news', 0, 100, 0, 57);
+INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Intervener', 'Made 200 comments', 0, 0, 200, 69);
+INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Active!', 'Voted on 500 news', 500, 0, 0, 29);
+INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Judge', 'Voted on 1000 news', 1000, 0, 0, 29);
+INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Explorer', 'Posted 5000 news', 0, 500, 0, 29);
+INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Nosy', 'Made 500 comments', 0, 0, 500, 57);
+INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Wise', 'Posted 2000 news', 0, 2000, 0, 69);
+INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Revolution', 'Made 1500 comments', 0, 0, 1500, 57);
+
+--FAQs
+
+INSERT INTO FAQs(question, answer) VALUES ('Do I need an account on the Photon News?', 'No, to comment all you need is a Facebook account.');
+INSERT INTO FAQs(question, answer) VALUES ('What does it mean to comment to an article through Facebook?', 'When you comment on a Photon News article,
+   your comment will be published through Facebook. Please be sure to review Facebook''s Privacy Policy here:https://www.facebook.com/note.php?note_id=%20322194465300.
+    Please note that each comment will also appear on your Facebook wall unless you uncheck the "post to profile" or "also post on facebook" box for that comment.
+     If you uncheck this box for a comment, it will not appear on your Facebook feed.');
+INSERT INTO FAQs(question, answer) VALUES (' I don''t want to post through Facebook.', 'Due to changing trends in public communication, all article comments will
+   be submitted through Facebook going forward. If you do not want your comment to appear on your Facebook wall, simply un-check "post to profile" or "also post to facebook"
+    below the comment box. For more information, you can read about this change here:
+http://www.photonnews.com/otto-toth/were-moving-the-conversation_b_5423675.html');
+INSERT INTO FAQs(question, answer) VALUES ('I already have a Photon News account, what will happen to it?', 'You are still able to log in to your Photon News account to follow other
+   users and bloggers, and you will be able to view your post history for comments made prior to the move to Facebook comments. Comments left through the Facebook platform will not
+    be visible in your post history.');
+INSERT INTO FAQs(question, answer) VALUES ('Where can I create an account and login?', 'There is a login prompt at the top right corner of every page on the site, or visit:
+   http://www.photonnews.com/users/login/');
+INSERT INTO FAQs(question, answer) VALUES ('Where can I change my screen name?', 'Unfortunately, you cannot change your screen name once you have registered; nor can we.
+   Every screen name is associated with one email address. If you need help with an existing account, please reach out to us.');
+INSERT INTO FAQs(question, answer) VALUES ('Where can I change my password, personal information or biography?', 'Edit information on the preferences page: http://www.photonnews.com/users/preferences');
+INSERT INTO FAQs(question, answer) VALUES ('Can I include a link in my comment?', 'Yes. But any comment that contains a link to an inappropriate site may not be displayed on the Photon News site.');
+INSERT INTO FAQs(question, answer) VALUES ('What is the "Follow/Fan" link on Photon News user accounts?', 'When you find a user you like, you can press the Follow/Fan link in his profile page. This way you can keep track of the articles he posts.');
+INSERT INTO FAQs(question, answer) VALUES ('Where can I sign up for news alerts and other notifications?', 'http://www.phtonnews.com/signup');
 
 --Sources
 
