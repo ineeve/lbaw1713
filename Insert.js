@@ -50,6 +50,12 @@ var commentsText = [
     "Google has no change against Photon News. Google should buy it."
 ]
 
+var moderatorComments = [
+    "This article has been reported for racism, unsure if I should act on it.",
+    "I do not see any reason as to how this is racism, it should be disregarded.",
+    
+]
+
 
 let usersArray = createUsers();
 printUsersSQL(usersArray);
@@ -138,7 +144,7 @@ function createComments(){
         let comment = getNewComment();
         comment.text = commentsText[Math.floor(rndNum * commentsText.length)];
         comment.creator_user_id = 1 + Math.floor(rndNum * NUM_USERS);
-        comment.target_news_id = 1 + Math.floor(rndNum * NUM_COMMENTS);
+        comment.target_news_id = 1 + Math.floor(rndNum * NUM_NEWS);
         commentsArray.push(comment);
     }
     return commentsArray;
