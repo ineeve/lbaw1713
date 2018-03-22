@@ -36,12 +36,7 @@ FROM News INNER JOIN Sections ON (News.section_id = Sections.id)
 SELECT Sections.name, icon
 FROM Sections;
 
-/* SELECT Sections.name
-FROM Sections INNER JOIN UserInterests ON (Sections.id = UserInterests.section_id)
-      INNER JOIN Users ON (Users.id = UserInterests.user_id)
-WHERE Users.username = $username; */
 -- Search for your listed interests
--- TODO: Unfinished
 SELECT title, "date", body, image, votes, Sections.name, Users.username
 FROM News INNER JOIN
       INNER JOIN Users ON (News.author_id = Users.id);

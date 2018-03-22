@@ -1,42 +1,11 @@
 -- POPULATE TABLES
 
---Badges
-
-INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Enthusiast', 'Voted on 100 news', 100, 0, 0, 29);
-INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Disseminator!', 'Posted 100 news', 0, 100, 0, 57);
-INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Intervener', 'Made 200 comments', 0, 0, 200, 69);
-INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Active!', 'Voted on 500 news', 500, 0, 0, 29);
-INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Judge', 'Voted on 1000 news', 1000, 0, 0, 29);
-INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Explorer', 'Posted 5000 news', 0, 500, 0, 29);
-INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Nosy', 'Made 500 comments', 0, 0, 500, 57);
-INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Wise', 'Posted 2000 news', 0, 2000, 0, 69);
-INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Revolution', 'Made 1500 comments', 0, 0, 1500, 57);
-
---FAQs
-
-INSERT INTO FAQs(question, answer) VALUES ('Do I need an account on the Photon News?', 'No, to comment all you need is a Facebook account.');
-INSERT INTO FAQs(question, answer) VALUES ('What does it mean to comment to an article through Facebook?', 'When you comment on a Photon News article,
-   your comment will be published through Facebook. Please be sure to review Facebook\'s Privacy Policy here:https://www.facebook.com/note.php?note_id=%20322194465300.
-    Please note that each comment will also appear on your Facebook wall unless you uncheck the "post to profile" or "also post on facebook" box for that comment.
-     If you uncheck this box for a comment, it will not appear on your Facebook feed.');
-INSERT INTO FAQs(question, answer) VALUES (' I don\'t want to post through Facebook.', 'Due to changing trends in public communication, all article comments will
-   be submitted through Facebook going forward. If you do not want your comment to appear on your Facebook wall, simply un-check "post to profile" or "also post to facebook"
-    below the comment box. For more information, you can read about this change here:
-http://www.photonnews.com/otto-toth/were-moving-the-conversation_b_5423675.html');
-INSERT INTO FAQs(question, answer) VALUES ('I already have a Photon News account, what will happen to it?', 'You are still able to log in to your Photon News account to follow other
-   users and bloggers, and you will be able to view your post history for comments made prior to the move to Facebook comments. Comments left through the Facebook platform will not
-    be visible in your post history.');
-INSERT INTO FAQs(question, answer) VALUES ('Where can I create an account and login?', 'There is a login prompt at the top right corner of every page on the site, or visit:
-   http://www.photonnews.com/users/login/');
-INSERT INTO FAQs(question, answer) VALUES ('Where can I change my screen name?', 'Unfortunately, you cannot change your screen name once you have registered; nor can we.
-   Every screen name is associated with one email address. If you need help with an existing account, please reach out to us.');
-INSERT INTO FAQs(question, answer) VALUES ('Where can I change my password, personal information or biography?', 'Edit information on the preferences page: http://www.photonnews.com/users/preferences');
-INSERT INTO FAQs(question, answer) VALUES ('Can I include a link in my comment?', 'Yes. But any comment that contains a link to an inappropriate site may not be displayed on the Photon News site.');
-INSERT INTO FAQs(question, answer) VALUES ('What is the "Follow/Fan" link on Photon News user accounts?', 'When you find a user you like, you can press the Follow/Fan link in his profile page. This way you can keep track of the articles he posts.');
-INSERT INTO FAQs(question, answer) VALUES ('Where can I sign up for news alerts and other notifications?', 'http://www.phtonnews.com/signup');
+--Reasons
+INSERT INTO Reasons(name) VALUES ('Rude or Abusive');
+INSERT INTO Reasons(name) VALUES ('Scam/Spam');
+INSERT INTO Reasons(name) VALUES ('Sexually Inappropiate');
 
 --Countries
-
 INSERT INTO Countries(name) VALUES
 ('Afghanistan'),
 ('Albania'),
@@ -240,6 +209,41 @@ INSERT INTO Countries(name) VALUES
 ('Zambia'),
 ('Zimbabwe');
 
+--Badges
+
+INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Enthusiast', 'Voted on 100 news', 100, 0, 0, 29);
+INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Disseminator!', 'Posted 100 news', 0, 100, 0, 57);
+INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Intervener', 'Made 200 comments', 0, 0, 200, 69);
+INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Active!', 'Voted on 500 news', 500, 0, 0, 29);
+INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Judge', 'Voted on 1000 news', 1000, 0, 0, 29);
+INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Explorer', 'Posted 5000 news', 0, 500, 0, 29);
+INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Nosy', 'Made 500 comments', 0, 0, 500, 57);
+INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Wise', 'Posted 2000 news', 0, 2000, 0, 69);
+INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALUES ('Revolution', 'Made 1500 comments', 0, 0, 1500, 57);
+
+--FAQs
+
+INSERT INTO FAQs(question, answer) VALUES ('Do I need an account on the Photon News?', 'No, to comment all you need is a Facebook account.');
+INSERT INTO FAQs(question, answer) VALUES ('What does it mean to comment to an article through Facebook?', 'When you comment on a Photon News article,
+   your comment will be published through Facebook. Please be sure to review Facebook''s Privacy Policy here:https://www.facebook.com/note.php?note_id=%20322194465300.
+    Please note that each comment will also appear on your Facebook wall unless you uncheck the "post to profile" or "also post on facebook" box for that comment.
+     If you uncheck this box for a comment, it will not appear on your Facebook feed.');
+INSERT INTO FAQs(question, answer) VALUES (' I don''t want to post through Facebook.', 'Due to changing trends in public communication, all article comments will
+   be submitted through Facebook going forward. If you do not want your comment to appear on your Facebook wall, simply un-check "post to profile" or "also post to facebook"
+    below the comment box. For more information, you can read about this change here:
+http://www.photonnews.com/otto-toth/were-moving-the-conversation_b_5423675.html');
+INSERT INTO FAQs(question, answer) VALUES ('I already have a Photon News account, what will happen to it?', 'You are still able to log in to your Photon News account to follow other
+   users and bloggers, and you will be able to view your post history for comments made prior to the move to Facebook comments. Comments left through the Facebook platform will not
+    be visible in your post history.');
+INSERT INTO FAQs(question, answer) VALUES ('Where can I create an account and login?', 'There is a login prompt at the top right corner of every page on the site, or visit:
+   http://www.photonnews.com/users/login/');
+INSERT INTO FAQs(question, answer) VALUES ('Where can I change my screen name?', 'Unfortunately, you cannot change your screen name once you have registered; nor can we.
+   Every screen name is associated with one email address. If you need help with an existing account, please reach out to us.');
+INSERT INTO FAQs(question, answer) VALUES ('Where can I change my password, personal information or biography?', 'Edit information on the preferences page: http://www.photonnews.com/users/preferences');
+INSERT INTO FAQs(question, answer) VALUES ('Can I include a link in my comment?', 'Yes. But any comment that contains a link to an inappropriate site may not be displayed on the Photon News site.');
+INSERT INTO FAQs(question, answer) VALUES ('What is the "Follow/Fan" link on Photon News user accounts?', 'When you find a user you like, you can press the Follow/Fan link in his profile page. This way you can keep track of the articles he posts.');
+INSERT INTO FAQs(question, answer) VALUES ('Where can I sign up for news alerts and other notifications?', 'http://www.phtonnews.com/signup');
+
 --Sources
 
 INSERT INTO Sources(link, author, consultation_date) VALUES ('http://www.bbc.com/news/world-europe-43504396', 'Lawton Le Jean','2017-04-29'),
@@ -251,11 +255,11 @@ INSERT INTO Sources(link, author, consultation_date) VALUES ('http://www.bbc.com
 ('https://www.afp.com/en/news/23/russian-media-boycott-parliament-over-sex-scandal-doc-12z3jv2', 'Findlay Gawler','2017-08-08'),
 ('https://www.upi.com/Entertainment_News/2018/03/22/Prince-Harry-Meghan-Markle-send-out-wedding-invitations/5991521731627/?utm_source=fp&utm_campaign=ts_en&utm_medium=7', 'Sayre Wildbore','2018-01-09'),
 ('https://widerimage.reuters.com/story/journey-to-antarctica-seals-penguins-and-glacial-beauty?utm_campaign=web-app-launch&utm_medium=banner&utm_source=rcom&utm_content=ros', 'Agretha Oiseau','2017-10-19'),
-('http://www.bbc.com/news/av/world-africa-43487852/ghana-computer-teacher-s-chalkboard-microsoft-word-inspires', 'Ewart Puttrell','2017-12-11').
+('http://www.bbc.com/news/av/world-africa-43487852/ghana-computer-teacher-s-chalkboard-microsoft-word-inspires', 'Ewart Puttrell','2017-12-11');
 
 --Sections
 
-INSERT INTO Sections(name, icon) VALUES ('Travel', 'fas fa-plane'),
+INSERT INTO sections(name, icon) VALUES ('Travel', 'fas fa-plane'),
 ('Sport', 'fas fa-basketball-ball'),
 ('Culture', 'fas fa-users'),
 ('Food', 'fas fa-utensils'),
@@ -267,50 +271,50 @@ INSERT INTO Sections(name, icon) VALUES ('Travel', 'fas fa-plane'),
 ('Music', 'fas fa-music'),
 ('Arts', 'fas fa-paint-brush'),
 ('Science', 'fas fa-flask'),
-('Health', 'fas fa-user-md').
+('Health', 'fas fa-user-md');
 
 -- Notifications
 
-INSERT INTO Notifications ("date", type, target_user_id, was_read, user_id) VALUES (21/03/2018, 'FollowMe', 1, FALSE, 2);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'CommentMyPost', 1, FALSE, 1);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'CommentMyPost', 1, FALSE, 1);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'CommentMyPost', 1, FALSE, 1);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'CommentMyPost', 1, FALSE, 1);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'CommentMyPost', 1, FALSE, 1);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'CommentMyPost', 1, FALSE, 1);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'CommentMyPost', 1, FALSE, 1);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'CommentMyPost', 1, FALSE, 1);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'CommentMyPost', 1, FALSE, 1);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'CommentMyPost', 1, FALSE, 1);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'CommentMyPost', 1, FALSE, 1);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'CommentMyPost', 1, FALSE, 1);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'FollowedPublish', 1, FALSE, 1);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'VoteMyPost', 1, FALSE, 1);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, user_id) VALUES (21/03/2018, 'FollowMe', 1, FALSE, 3);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'CommentMyPost', 1, FALSE, 2);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'FollowedPublish', 1, FALSE, 2);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'VoteMyPost', 1, FALSE, 2);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, user_id) VALUES (21/03/2018, 'FollowMe', 2, FALSE, 1);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'CommentMyPost', 2, FALSE, 1);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'FollowedPublish', 2, FALSE, 1);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'VoteMyPost', 2, FALSE, 1);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, user_id) VALUES (21/03/2018, 'FollowMe', 3, FALSE, 2);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'CommentMyPost', 3, FALSE, 1);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'FollowedPublish', 3, FALSE, 1);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'VoteMyPost', 3, FALSE, 1);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, user_id) VALUES (21/03/2018, 'FollowMe', 3, FALSE, 4);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'CommentMyPost', 3, FALSE, 4);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'CommentMyPost', 3, FALSE, 4);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'CommentMyPost', 3, FALSE, 4);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'CommentMyPost', 3, FALSE, 4);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'CommentMyPost', 3, FALSE, 4);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'CommentMyPost', 3, FALSE, 4);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'FollowedPublish', 3, FALSE, 2);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'VoteMyPost', 3, FALSE, 4);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, user_id) VALUES (21/03/2018, 'FollowMe', 5, FALSE, 2);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'CommentMyPost', 5, FALSE, 4);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'FollowedPublish', 5, FALSE, 2);
-INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES (21/03/2018, 'VoteMyPost', 5, FALSE, 1);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, user_id) VALUES ('21/03/2018', 'FollowMe', 1, FALSE, 2);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'CommentMyPost', 1, FALSE, 1);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'CommentMyPost', 1, FALSE, 1);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'CommentMyPost', 1, FALSE, 1);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'CommentMyPost', 1, FALSE, 1);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'CommentMyPost', 1, FALSE, 1);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'CommentMyPost', 1, FALSE, 1);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'CommentMyPost', 1, FALSE, 1);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'CommentMyPost', 1, FALSE, 1);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'CommentMyPost', 1, FALSE, 1);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'CommentMyPost', 1, FALSE, 1);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'CommentMyPost', 1, FALSE, 1);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'CommentMyPost', 1, FALSE, 1);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'FollowedPublish', 1, FALSE, 1);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'VoteMyPost', 1, FALSE, 1);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, user_id) VALUES ('21/03/2018', 'FollowMe', 1, FALSE, 3);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'CommentMyPost', 1, FALSE, 2);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'FollowedPublish', 1, FALSE, 2);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'VoteMyPost', 1, FALSE, 2);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, user_id) VALUES ('21/03/2018', 'FollowMe', 2, FALSE, 1);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'CommentMyPost', 2, FALSE, 1);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'FollowedPublish', 2, FALSE, 1);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'VoteMyPost', 2, FALSE, 1);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, user_id) VALUES ('21/03/2018', 'FollowMe', 3, FALSE, 2);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'CommentMyPost', 3, FALSE, 1);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'FollowedPublish', 3, FALSE, 1);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'VoteMyPost', 3, FALSE, 1);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, user_id) VALUES ('21/03/2018', 'FollowMe', 3, FALSE, 4);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'CommentMyPost', 3, FALSE, 4);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'CommentMyPost', 3, FALSE, 4);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'CommentMyPost', 3, FALSE, 4);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'CommentMyPost', 3, FALSE, 4);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'CommentMyPost', 3, FALSE, 4);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'CommentMyPost', 3, FALSE, 4);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'FollowedPublish', 3, FALSE, 2);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'VoteMyPost', 3, FALSE, 4);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, user_id) VALUES ('21/03/2018', 'FollowMe', 5, FALSE, 2);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'CommentMyPost', 5, FALSE, 4);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'FollowedPublish', 5, FALSE, 2);
+INSERT INTO Notifications ("date", type, target_user_id, was_read, news_id) VALUES ('21/03/2018', 'VoteMyPost', 5, FALSE, 1);
 
 -- Votes
 
@@ -383,13 +387,13 @@ INSERT INTO Votes (user_id, news_id, type) VALUES (13, 5, TRUE);
 
 -- Bans
 
-INSERT INTO Bans (banned_user_id, admin_user_id, "date", reason) VALUES (10, 1, 21/03/2018, 'Offensive');
-INSERT INTO Bans (banned_user_id, admin_user_id, "date", reason) VALUES (35, 1, 21/03/2018, 'Troll');
-INSERT INTO Bans (banned_user_id, admin_user_id, "date", reason) VALUES (45, 1, 21/03/2018, 'Offensive');
-INSERT INTO Bans (banned_user_id, admin_user_id, "date", reason) VALUES (69, 1, 21/03/2018, 'pineapples');
-INSERT INTO Bans (banned_user_id, admin_user_id, "date", reason) VALUES (70, 1, 21/03/2018, 'Scammer');
-INSERT INTO Bans (banned_user_id, admin_user_id, "date", reason) VALUES (101, 1, 21/03/2018, 'Scammer');
-INSERT INTO Bans (banned_user_id, admin_user_id, "date", reason) VALUES (103, 1, 21/03/2018, 'Offensive');
+INSERT INTO Bans (banned_user_id, admin_user_id, "date", reason) VALUES (10, 1, '21/03/2018', 'Offensive');
+INSERT INTO Bans (banned_user_id, admin_user_id, "date", reason) VALUES (35, 1, '21/03/2018', 'Troll');
+INSERT INTO Bans (banned_user_id, admin_user_id, "date", reason) VALUES (45, 1, '21/03/2018', 'Offensive');
+INSERT INTO Bans (banned_user_id, admin_user_id, "date", reason) VALUES (69, 1, '21/03/2018', 'pineapples');
+INSERT INTO Bans (banned_user_id, admin_user_id, "date", reason) VALUES (70, 1, '21/03/2018', 'Scammer');
+INSERT INTO Bans (banned_user_id, admin_user_id, "date", reason) VALUES (101, 1, '21/03/2018', 'Scammer');
+INSERT INTO Bans (banned_user_id, admin_user_id, "date", reason) VALUES (103, 1, '21/03/2018', 'Offensive');
 
 -- ReportedItems
 
@@ -659,9 +663,9 @@ INSERT INTO "Follows" (follower_user_id,followed_user_id) VALUES (85,37);
 INSERT INTO "Follows" (follower_user_id,followed_user_id) VALUES (69,12);
 INSERT INTO "Follows" (follower_user_id,followed_user_id) VALUES (89,12);
 
---Uswr interested
+--User interested
 
-INSERT INTO "UserInterests" (user_id,section_id) VALUES (84?4
+INSERT INTO "UserInterests" (user_id,section_id) VALUES (84,4);
 INSERT INTO "UserInterests" (user_id,section_id) VALUES (98,3);
 INSERT INTO "UserInterests" (user_id,section_id) VALUES (61,3);
 INSERT INTO "UserInterests" (user_id,section_id) VALUES (55,3);
