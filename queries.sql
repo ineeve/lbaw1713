@@ -38,6 +38,30 @@ FROM Sections;
 
 -- Search for your listed interests
 SELECT title, "date", body, image, votes, Sections.name, Users.username
-FROM News INNER JOIN UserInterests ON (UserInterests.section_id = News.section_id AND UserInterests.username = $username)
-      INNER JOIN Sections ON (News.section_id = Sections.id)
+FROM News INNER JOIN
       INNER JOIN Users ON (News.author_id = Users.id);
+
+--Obter uma noticia (seus conteudos)
+ SELECT title, date, body, image, votes, Sections.name, Users.username
+  FROM News, Sections, Users
+  WHERE News.id  = $newsID AND Sections.id = News.section_id AND Users.id = News.author_id;
+--Obter as noticias publicadas por um utilizador
+SELECT title, date, body, image, votes, Sections.name, Users.username
+  FROM News, Sections, Users
+  WHERE News.author_id = $userID AND Sections.id = News.section_id AND Users.id = News.author_id;
+--Obter as noticias de uma noticia de uma categoria especifica
+SELECT title, date, body, image, votes, Sections.name, Users.username
+  FROM News, Sections, Users
+  WHERE Sections.id = News.section_id AND Users.id = News.author_id AND Sections.name = $section;
+--Obter noticias entre duas datas
+SELECT title, date, body, image, votes, Sections.name, Users.username
+  FROM News, Sections, Users
+  WHERE Sections.id = News.section_id AND Users.id = News.author_id AND News.date BETWEEN $startDate AND $endDate;
+--Obter as noticias do ultimo mes
+SELECT title, date, body, image, votes, Sections.name, Users.username
+  FROM News, Sections, Users
+  WHERE MONTH(News.date) = MONTH(GETDATE()) AND Sections.id = News.section_id AND Users.id = News.author_id;
+--Obter os comentarios de uma noticia
+SELECT text, date, username
+ FROM Comments, Users
+ WHERE Comments.target_news_id = $newsID AND Comments.creator_user_id = Users.id;
