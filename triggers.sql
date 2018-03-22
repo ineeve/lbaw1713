@@ -2,6 +2,7 @@
 
 DROP TRIGGER IF EXISTS score_vote;
 DROP TRIGGER IF EXISTS score_vote_remove;
+DROP TRIGGER IF EXISTS notification_follow;
 
 CREATE TRIGGER score_vote
 AFTER INSERT ON Votes
@@ -11,11 +12,16 @@ CREATE TRIGGER score_vote_remove
 AFTER DELETE ON Votes
 EXECUTE PROCEDURE update_score_remove_vote;
 
+CREATE TRIGGER notification_follow
+AFTER INSERT ON Follows
+EXECUTE PROCEDURE create_notification_follow;
+
 
 -- FUNCTIONS
 
 DROP FUNCTION IF EXISTS update_score_add_vote;
 DROP FUNCTION IF EXISTS update_score_remove_vote;
+DROP FUNCTION IF EXISTS create_notification_follow;
 
 -- Increment/decrement news and news' author points when adding a Votes entry.
 CREATE FUNCTION update_score_add_vote()
@@ -60,5 +66,15 @@ BEGIN
 												FROM Users INNER JOIN News ON (Users.id = News.author_id)
 												WHERE NEW.news_id = News.id);
 	END IF;
+END;
+$BODY$
+
+-- Insert new notification for an user when someone else follows him.
+CREATE FUNCTION create_notification_follow()
+RETURNS trigger AS
+$BODY$
+BEGIN
+  INSERT INTO Notifications (type, target_user_id, user_id)
+    VALUES ('FollowMe', NEW.followed_user_id, follower_used_id);
 END;
 $BODY$
