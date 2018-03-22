@@ -1,7 +1,11 @@
 -- POPULATE TABLES
 
---Countries
+--Reasons
+INSERT INTO Reasons(name) VALUES ('Rude or Abusive');
+INSERT INTO Reasons(name) VALUES ('Scam/Spam');
+INSERT INTO Reasons(name) VALUES ('Sexually Inappropiate');
 
+--Countries
 INSERT INTO Countries(name) VALUES
 ('Afghanistan'),
 ('Albania'),
@@ -255,7 +259,7 @@ INSERT INTO Sources(link, author, consultation_date) VALUES ('http://www.bbc.com
 
 --Sections
 
-INSERT INTO Sections(name, icon) VALUES ('Travel', 'fas fa-plane'),
+INSERT INTO sections(name, icon) VALUES ('Travel', 'fas fa-plane'),
 ('Sport', 'fas fa-basketball-ball'),
 ('Culture', 'fas fa-users'),
 ('Food', 'fas fa-utensils'),
