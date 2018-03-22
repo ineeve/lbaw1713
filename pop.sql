@@ -16,7 +16,7 @@ INSERT INTO Badges(name, brief, votes, articles, comments, creator_user_id) VALU
 
 INSERT INTO FAQs(question, answer) VALUES ('Do I need an account on the Photon News?', 'No, to comment all you need is a Facebook account.');
 INSERT INTO FAQs(question, answer) VALUES ('What does it mean to comment to an article through Facebook?', 'When you comment on a Photon News article,
-   your comment will be published through Facebook. Please be sure to review Facebook\'s Privacy Policy here:https://www.facebook.com/note.php?note_id=%20322194465300.
+   your comment will be published through Facebook. Please be sure to review Facebook''s Privacy Policy here:https://www.facebook.com/note.php?note_id=%20322194465300.
     Please note that each comment will also appear on your Facebook wall unless you uncheck the "post to profile" or "also post on facebook" box for that comment.
      If you uncheck this box for a comment, it will not appear on your Facebook feed.');
 INSERT INTO FAQs(question, answer) VALUES (' I don\'t want to post through Facebook.', 'Due to changing trends in public communication, all article comments will
