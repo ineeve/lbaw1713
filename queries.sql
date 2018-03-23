@@ -2,10 +2,18 @@
 -- select user profile
 SELECT username,email,gender,Countries.name As country,picture,points,permission 
 FROM users NATURAL JOIN countries
-WHERE Users.id = $userId;
+WHERE users.id = $userId;
 -- SELECT02
 SELECT 
 
+
+-- UPDATE04
+UPDATE News
+SET title = $title, "date" = now(), body=$body, image=$image, section_id=$section_id
+WHERE id=$id;
+
+--INSERT05
+INSERT INTO comments ("text", creator_user_id, target_news_id) VALUES ($text,#user_id,$news_id);
 
 -- SELECT03
 -- select news title,date,body,image,votes,section,author
@@ -17,6 +25,10 @@ WHERE news.id = $newsId;
 SELECT news_id, source_id FROM NewsSources
 WHERE news_id = $newsId;
 
+-- UPDATE06
+UPDATE comments
+SET "text" = $text, "date" = now()
+WHERE id=$id;
 
 -- SELECT11
 SELECT *
