@@ -42,7 +42,7 @@ CREATE TABLE Users (
 CREATE TABLE News (
 	id SERIAL,
 	title text NOT NULL,
-	"date" TIMESTAMP WITH TIME zone DEFAULT now() NOT NULL,
+	date TIMESTAMP WITH TIME zone DEFAULT now() NOT NULL,
 	body text NOT NULL,
 	image text NOT NULL,
 	votes INTEGER NOT NULL DEFAULT 0,
@@ -53,7 +53,7 @@ CREATE TABLE News (
 CREATE TABLE Comments(
 	id SERIAL,
 	"text" text NOT NULL,
-	"date" TIMESTAMP WITH TIME zone DEFAULT now() NOT NULL,
+	date TIMESTAMP WITH TIME zone DEFAULT now() NOT NULL,
 	creator_user_id INTEGER NOT NULL,
 	target_news_id INTEGER NOT NULL
 );
@@ -67,7 +67,7 @@ CREATE TABLE Reasons(
 CREATE TABLE ModeratorComments(
 	id SERIAL,
 	"text" text NOT NULL,
-	"date" TIMESTAMP WITH TIME zone DEFAULT now() NOT NULL,
+	date TIMESTAMP WITH TIME zone DEFAULT now() NOT NULL,
 	creator_user_id INTEGER NOT NULL,
 	news_id INTEGER,
 	comment_id INTEGER,
@@ -114,7 +114,7 @@ CREATE TABLE Sections (
 
 CREATE TABLE Notifications (
    id SERIAL,
-   "date" DATE NOT NULL DEFAULT now(),
+   date DATE NOT NULL DEFAULT now(),
    type Text NOT NULL,
    target_user_id INTEGER,
    was_read BOOLEAN DEFAULT false,
@@ -154,32 +154,22 @@ CREATE TABLE NewsSources (
 CREATE TABLE Bans (
 	banned_user_id INTEGER, -- pkey
 	admin_user_id INTEGER NOT NULL,
-	"date" TIMESTAMP WITH TIME zone DEFAULT now() NOT NULL,
+	date TIMESTAMP WITH TIME zone DEFAULT now() NOT NULL,
 	reason text NOT NULL
 );
 
--- FIX FROM HERE DOWNWARDS
+-- FIX FROM HERE
 
 CREATE TABLE ReasonsForDelete (
 	id SERIAL,
-	deleted_news_id INTEGER, --fkey
-	deleted_comment_id INTEGER, --fkey
-	reason_id INTEGER NOT NULL, --fkey
-	CONSTRAINT deleted_items_reason_null CHECK
-	( (deleted_news_id IS NULL AND deleted_comment_id IS NOT NULL)
-	 OR (deleted_news_id IS NOT NULL AND deleted_comment_id IS NULL))
+	deleted_id INTEGER NOT NULL, --fkey
+	reason_id INTEGER NOT NULL --fkey
 );
 
 CREATE TABLE ReasonsForReport (
 	id SERIAL,
 	reason_id INTEGER NOT NULL, --fkey
-	user_id INTEGER NOT NULL, -- fkey
-	news_id INTEGER, -- fkey
-	comment_id INTEGER --fkey
-	CONSTRAINT reasons_for_report_attr CHECK (
-		(news_id IS NULL AND comment_id IS NOT NULL) OR 
-		(news_id IS NOT NULL AND comment_id IS NULL)
-		)
+	reported_item_id INTEGER -- fkey
 );
 
 CREATE TABLE DeletedItems (
@@ -264,7 +254,7 @@ ALTER TABLE ONLY Achievements
 ALTER TABLE ONLY DeletedItems
 	ADD CONSTRAINT DeletedItems_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY DeletedItems
-	ADD CONSRAINT DeletedItems_key UNIQUE (news_id,comment_id);
+	ADD CONSTRAINT DeletedItems_key UNIQUE (news_id,comment_id);
 
 ALTER TABLE ONLY Follows
 	ADD CONSTRAINT Follows_pkey PRIMARY KEY (follower_user_id, followed_user_id);
@@ -275,7 +265,7 @@ ALTER TABLE ONLY UserInterests
 ALTER TABLE ONLY ReasonsForDelete
 	ADD CONSTRAINT ReasonsForDelete_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY ReasonsForDelete
-	ADD CONSTRAINT ReasonsForDelete_key UNIQUE (deleted_news_id, deleted_comment_id, reason_id);
+	ADD CONSTRAINT ReasonsForDelete_key UNIQUE (deleted_id, reason_id);
 
 ALTER TABLE ONLY NewsSources
 	ADD CONSTRAINT NewsSources_pkey PRIMARY KEY (news_id, source_id);
@@ -287,12 +277,12 @@ ALTER TABLE ONLY Bans
 ALTER TABLE ONLY ReportedItems
 	ADD CONSTRAINT ReportedItems_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY ReportedItems
-	ADD CONSTRAINT ReportedItems_key PRIMARY KEY (user_id,news_id,comment_id)
+	ADD CONSTRAINT ReportedItems_key UNIQUE (user_id,news_id,comment_id);
 
 ALTER TABLE ONLY ReasonsForReport
 	ADD CONSTRAINT ReasonsForReport_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY ReasonsForReport
-	ADD CONSTAINT ReasonsForReport_key UNIQUE (reason_id,user_id,news_id,comment_id);
+	ADD CONSTRAINT ReasonsForReport_key UNIQUE (reason_id,reported_item_id);
 
 
 -- FOREIGN KEYS
@@ -359,7 +349,7 @@ ALTER TABLE ONLY UserInterests
 	ADD CONSTRAINT UserInterests_section_id_fkey FOREIGN KEY (section_id) REFERENCES Sections ON DELETE CASCADE;
 
 ALTER TABLE ONLY ReasonsForDelete
-	ADD CONSTRAINT ReasonsForDelete_deleted_items_fkey FOREIGN KEY (deleted_news_id,deleted_comment_id) REFERENCES DeletedItems ON DELETE CASCADE;
+	ADD CONSTRAINT ReasonsForDelete_deleted_items_fkey FOREIGN KEY (deleted_id) REFERENCES DeletedItems ON DELETE CASCADE;
 
 ALTER TABLE ONLY ReasonsForDelete
 	ADD CONSTRAINT ReasonsForDelete_reason_id_fkey FOREIGN KEY (reason_id) REFERENCES Reasons;
@@ -385,4 +375,4 @@ ALTER TABLE ONLY ReportedItems
 ALTER TABLE ONLY ReasonsForReport
 	ADD CONSTRAINT ReasonsForReport_reason_id_fkey FOREIGN KEY (reason_id) REFERENCES Reasons;
 ALTER TABLE ONLY ReasonsForReport
-	ADD CONSTRAINT ReasonsForReport_user_news_comment_fkey FOREIGN KEY (user_id, news_id, comment_id) REFERENCES ReportedItems;
+	ADD CONSTRAINT ReasonsForReport_reported_item_fkey FOREIGN KEY (reported_item_id) REFERENCES ReportedItems;
