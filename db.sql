@@ -152,42 +152,59 @@ CREATE TABLE NewsSources (
 );
 
 CREATE TABLE Bans (
-	banned_user_id INTEGER, -- primary key does not need NN
+	banned_user_id INTEGER, -- pkey
 	admin_user_id INTEGER NOT NULL,
 	"date" TIMESTAMP WITH TIME zone DEFAULT now() NOT NULL,
 	reason text NOT NULL
 );
 
+-- FIX FROM HERE DOWNWARDS
+
 CREATE TABLE ReasonsForDelete (
-	deleted_news_id INTEGER NOT NULL,
-	deleted_comment_id INTEGER NOT NULL,
-	reason_id INTEGER NOT NULL,
+	id SERIAL,
+	deleted_news_id INTEGER, --fkey
+	deleted_comment_id INTEGER, --fkey
+	reason_id INTEGER NOT NULL, --fkey
 	CONSTRAINT deleted_items_reason_null CHECK
-	( (deleted_news_id IS NULL OR deleted_comment_id IS NULL) AND deleted_news_id != deleted_comment_id)
+	( (deleted_news_id IS NULL AND deleted_comment_id IS NOT NULL)
+	 OR (deleted_news_id IS NOT NULL AND deleted_comment_id IS NULL))
 );
 
 CREATE TABLE ReasonsForReport (
-	reason_id INTEGER, --pkey
-	user_id INTEGER, -- pkey
-	news_id INTEGER, -- pkey
-	comment_id INTEGER --pkey
-	CONSTRAINT reasons_for_report_attr CHECK ((news_id IS NULL OR comment_id IS NULL) AND news_id != comment_id)
+	id SERIAL,
+	reason_id INTEGER NOT NULL, --fkey
+	user_id INTEGER NOT NULL, -- fkey
+	news_id INTEGER, -- fkey
+	comment_id INTEGER --fkey
+	CONSTRAINT reasons_for_report_attr CHECK (
+		(news_id IS NULL AND comment_id IS NOT NULL) OR 
+		(news_id IS NOT NULL AND comment_id IS NULL)
+		)
 );
 
 CREATE TABLE DeletedItems (
-	news_id INTEGER NOT NULL,
+	id SERIAL,
 	user_id INTEGER NOT NULL,
-	comment_id INTEGER NOT NULL,
-	"date" TIMESTAMP WITH TIME zone DEFAULT now() NOT NULL,
-	brief TEXT
+	news_id INTEGER,
+	comment_id INTEGER,
+	date TIMESTAMP WITH TIME zone DEFAULT now() NOT NULL,
+	brief TEXT,
+	CONSTRAINT deleted_items_attr CHECK (
+		(news_id IS NULL AND comment_id IS NOT NULL) OR 
+		(news_id IS NOT NULL AND comment_id IS NULL)
+		)
 );
 
 CREATE TABLE ReportedItems (
-	user_id INTEGER, -- pkey
-	news_id INTEGER, -- pkey
-	comment_id INTEGER, -- pkey
+	id SERIAL,
+	user_id INTEGER NOT NULL, -- fkey
+	news_id INTEGER, -- fkey
+	comment_id INTEGER, -- fkey
 	description text,
-	CONSTRAINT reported_items_attr CHECK ((news_id IS NULL OR comment_id IS NULL) AND news_id != comment_id)
+	CONSTRAINT reported_items_attr CHECK (
+		(news_id IS NULL AND comment_id IS NOT NULL) OR 
+		(news_id IS NOT NULL AND comment_id IS NULL)
+		)
 );
 
 
@@ -245,7 +262,9 @@ ALTER TABLE ONLY Achievements
 	ADD CONSTRAINT Achievements_pkey PRIMARY KEY (badge_id, user_id);
 
 ALTER TABLE ONLY DeletedItems
-	ADD CONSTRAINT DeletedItems_pkey PRIMARY KEY (news_id,comment_id);
+	ADD CONSTRAINT DeletedItems_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY DeletedItems
+	ADD CONSRAINT DeletedItems_key UNIQUE (news_id,comment_id);
 
 ALTER TABLE ONLY Follows
 	ADD CONSTRAINT Follows_pkey PRIMARY KEY (follower_user_id, followed_user_id);
@@ -254,7 +273,9 @@ ALTER TABLE ONLY UserInterests
 	ADD CONSTRAINT UserInterests_pkey PRIMARY KEY (user_id, section_id);
 
 ALTER TABLE ONLY ReasonsForDelete
-	ADD CONSTRAINT ReasonsForDelete_pkey PRIMARY KEY (deleted_news_id, deleted_comment_id, reason_id);
+	ADD CONSTRAINT ReasonsForDelete_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY ReasonsForDelete
+	ADD CONSTRAINT ReasonsForDelete_key UNIQUE (deleted_news_id, deleted_comment_id, reason_id);
 
 ALTER TABLE ONLY NewsSources
 	ADD CONSTRAINT NewsSources_pkey PRIMARY KEY (news_id, source_id);
@@ -264,10 +285,14 @@ ALTER TABLE ONLY Bans
 
 
 ALTER TABLE ONLY ReportedItems
-	ADD CONSTRAINT ReportedItems_pkey PRIMARY KEY (user_id,news_id,comment_id);
+	ADD CONSTRAINT ReportedItems_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY ReportedItems
+	ADD CONSTRAINT ReportedItems_key PRIMARY KEY (user_id,news_id,comment_id)
 
 ALTER TABLE ONLY ReasonsForReport
-	ADD CONSTRAINT ReasonsForReport_pkey PRIMARY KEY (reason_id,user_id,news_id,comment_id);
+	ADD CONSTRAINT ReasonsForReport_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY ReasonsForReport
+	ADD CONSTAINT ReasonsForReport_key UNIQUE (reason_id,user_id,news_id,comment_id);
 
 
 -- FOREIGN KEYS
