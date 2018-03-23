@@ -47,8 +47,9 @@ SELECT *
 FROM ReportedItems
 WHERE NOT EXISTS ( SELECT *
       FROM DeletedItems
-      WHERE ((ReportedItems.comment_id = DeletedItems.comment_id)
-      AND(ReportedItems.news_id=DeletedItems.news_id)));
+      WHERE (
+        ((ReportedItems.comment_id = DeletedItems.comment_id) AND (ReportedItems.news_id IS NULL) AND (DeletedItems.news_id IS NULL))
+        OR((ReportedItems.comment_id IS NULL) AND (DeletedItems.comment_id IS NULL) AND (ReportedItems.news_id = DeletedItems.news_id))));
 
 -- List badges
 SELECT name, brief, votes, articles, comments
@@ -64,7 +65,7 @@ WHERE NOT EXISTS (SELECT *
                   WHERE DeletedItems.news_id = News.id);
 
 -- List sections
-SELECT Sections.name, icon
+SELECT name, icon
 FROM Sections;
 
 -- Search for your listed interests
@@ -162,3 +163,25 @@ FROM Reason
   INNER JOIN ReasonForReport ON Reason.id = ReasonForReport.reason_id
   INNER JOIN ReportDescriptionForUserNews ON ReasonForReport.(user_id, news_id,comment_id) = ReportDescriptionForUserNews.(userID, newsID, NULL)
   WHERE ReportDescriptionForUserNews.newsID = &newsID;
+
+
+
+-- FREQUENT INSERTS / UPDATES / DELETES
+
+-- Create news report
+INSERT INTO ReportedItems (user_id, news_id, description)
+VALUES ($userId, $newsId, $description);
+
+-- Create comment report
+INSERT INTO ReportedItems (user_id, comment_id, description)
+VALUES ($userId, $commentId, $description);
+
+
+
+-- Delete news
+INSERT INTO DeletedItems (user_id, news_id, brief)
+VALUES ($userId, $newsId, $brief);
+
+-- Delete comment
+INSERT INTO DeletedItems (user_id, comment_id, brief)
+VALUES ($userId, $commentId, $brief);
