@@ -1,12 +1,17 @@
 -- TRIGGERS
 
-DROP TRIGGER IF EXISTS score_vote;
+DROP TRIGGER IF EXISTS score_vote_add;
+DROP TRIGGER IF EXISTS score_vote_change;
 DROP TRIGGER IF EXISTS score_vote_remove;
 DROP TRIGGER IF EXISTS notification_follow;
 
-CREATE TRIGGER score_vote
+CREATE TRIGGER score_vote_add
 AFTER INSERT ON Votes
 EXECUTE PROCEDURE update_score_add_vote;
+
+CREATE TRIGGER score_vote_change
+AFTER UPDATE ON Votes
+EXECUTE PROCEDURE update_score_change_vote;
 
 CREATE TRIGGER score_vote_remove
 AFTER DELETE ON Votes
@@ -36,6 +41,7 @@ WHERE News.id = NEW.news_id), NEW.user_id, NEW.news_id);
 -- FUNCTIONS
 
 DROP FUNCTION IF EXISTS update_score_add_vote;
+DROP FUNCTION IF EXISTS update_score_change_vote;
 DROP FUNCTION IF EXISTS update_score_remove_vote;
 DROP FUNCTION IF EXISTS create_notification_follow;
 
@@ -58,6 +64,30 @@ BEGIN
 			WHERE Users.id = (SELECT id
 												FROM Users INNER JOIN News ON (Users.id = News.author_id)
 												WHERE NEW.news_id = News.id);
+	END IF;
+END;
+$BODY$
+
+CREATE FUNCTION update_score_change_vote()
+RETURNS trigger AS
+$BODY$
+BEGIN
+	IF NEW.type IS TRUE AND OLD.type IS FALSE THEN -- changed downvote to upvote
+		UPDATE News SET votes = votes + 2
+			WHERE News.id = NEW.news_id;
+		UPDATE Users SET points = points + 2
+			WHERE Users.id = (SELECT id
+												FROM Users INNER JOIN News ON (Users.id = News.author_id)
+												WHERE NEW.news_id = News.id);
+	ELSE
+		IF NEW.type IS false AND OLD.type IS TRUE THEN -- changed upvote to downvote
+			UPDATE News SET votes = votes - 2
+			WHERE News.id = NEW.news_id;
+		UPDATE Users SET points = points - 2
+			WHERE Users.id = (SELECT id
+												FROM Users INNER JOIN News ON (Users.id = News.author_id)
+												WHERE NEW.news_id = News.id);
+		END IF;
 	END IF;
 END;
 $BODY$
@@ -94,6 +124,7 @@ BEGIN
     VALUES ('FollowMe', followed_user_id, follower_user_id);
 END;
 $BODY$
+
 --Notificacao de quando alguem comenta uma noticia minha
 CREATE OR REPLACE FUNCTION create_notification_comment(target_news_id integer)
 RETURNS trigger AS $$
