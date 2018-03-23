@@ -7,7 +7,7 @@ DROP TRIGGER IF EXISTS notification_follow;
 
 CREATE TRIGGER score_vote_add
 AFTER INSERT ON Votes
-EXECUTE PROCEDURE update_score_add_vote;
+EXECUTE PROCEDURE update_score_add_vote(NEW.type, NEW.news_id);
 
 CREATE TRIGGER score_vote_change
 AFTER UPDATE ON Votes
@@ -46,24 +46,24 @@ DROP FUNCTION IF EXISTS update_score_remove_vote;
 DROP FUNCTION IF EXISTS create_notification_follow;
 
 -- Increment/decrement news and news' author points when adding a Votes entry.
-CREATE FUNCTION update_score_add_vote()
+CREATE FUNCTION update_score_add_vote(type BOOLEAN, news_id INTEGER)
 RETURNS trigger AS
 $BODY$
 BEGIN
-	IF NEW.type IS TRUE THEN -- upvoted
+	IF type = TRUE THEN -- upvoted
 		UPDATE News SET votes = votes + 1
-			WHERE News.id = NEW.news_id;
+			WHERE News.id = news_id;
 		UPDATE Users SET points = points + 1
 			WHERE Users.id = (SELECT id
 												FROM Users INNER JOIN News ON (Users.id = News.author_id)
-												WHERE NEW.news_id = News.id);
+												WHERE news_id = News.id);
 	ELSE -- downvoted
 		UPDATE News SET votes = votes - 1
-			WHERE News.id = NEW.news_id;
+			WHERE News.id = news_id;
 		UPDATE Users SET points = points - 1
 			WHERE Users.id = (SELECT id
 												FROM Users INNER JOIN News ON (Users.id = News.author_id)
-												WHERE NEW.news_id = News.id);
+												WHERE news_id = News.id);
 	END IF;
 END;
 $BODY$
@@ -89,6 +89,7 @@ BEGIN
 												WHERE NEW.news_id = News.id);
 		END IF;
 	END IF;
+	RETURN NEW;
 END;
 $BODY$
 
@@ -112,6 +113,7 @@ BEGIN
 												FROM Users INNER JOIN News ON (Users.id = News.author_id)
 												WHERE NEW.news_id = News.id);
 	END IF;
+	RETURN NEW;
 END;
 $BODY$
 
@@ -122,6 +124,7 @@ $BODY$
 BEGIN
   INSERT INTO Notifications (type, target_user_id, user_id)
     VALUES ('FollowMe', followed_user_id, follower_user_id);
+	RETURN NEW;
 END;
 $BODY$
 
@@ -132,6 +135,7 @@ BEGIN
   INSERT INTO Notifications (type, target_user_id, news_id)
     VALUES ('CommentMyPost',
 			(SELECT author_id  FROM News WHERE id = target_news_id), target_news_id);
+	RETURN NEW;
 END;
 $$ LANGUAGE 'plpgsql';
 
@@ -141,6 +145,7 @@ RETURNS trigger AS $$
 BEGIN
   INSERT INTO Notifications (type, target_user_id, user_id, news_id)
     VALUES ('FollowedPublish', target, followed, news_id);
+	RETURN NEW;
 END;
 $$ LANGUAGE 'plpgsql';
 
@@ -150,5 +155,6 @@ RETURNS trigger AS $$
 BEGIN
   INSERT INTO Notifications (type, target_user_id, user_id, news_id)
     VALUES ('VoteMyPost', target, user_voted, news_id);
+	RETURN NEW;
 END;
 $$ LANGUAGE 'plpgsql';
