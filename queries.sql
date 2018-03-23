@@ -45,8 +45,9 @@ SELECT *
 FROM ReportedItems
 WHERE NOT EXISTS ( SELECT *
       FROM DeletedItems
-      WHERE ((ReportedItems.comment_id = DeletedItems.comment_id)
-      AND(ReportedItems.news_id=DeletedItems.news_id)));
+      WHERE (
+        ((ReportedItems.comment_id = DeletedItems.comment_id) AND (ReportedItems.news_id IS NULL) AND (DeletedItems.news_id IS NULL))
+        OR((ReportedItems.comment_id IS NULL) AND (DeletedItems.comment_id IS NULL) AND (ReportedItems.news_id = DeletedItems.news_id))));
 
 -- List badges
 SELECT name, brief, votes, articles, comments
