@@ -28,18 +28,24 @@ FROM Badges;
 
 -- List news
 -- TODO: Limit body to first characters/words
-SELECT title, "date", body, image, votes, Sections.name, Users.username
+SELECT title, date, body, image, votes, Sections.name, Users.username
 FROM News INNER JOIN Sections ON (News.section_id = Sections.id)
-      INNER JOIN Users ON (News.author_id = Users.id);
+      INNER JOIN Users ON (News.author_id = Users.id)
+WHERE NOT EXISTS (SELECT *
+                  FROM DeletedItems
+                  WHERE DeletedItems.news_id = News.id);
 
 -- List sections
 SELECT Sections.name, icon
 FROM Sections;
 
 -- Search for your listed interests
-SELECT title, "date", body, image, votes, Sections.name, Users.username
+SELECT title, date, body, image, votes, Sections.name, Users.username
 FROM News INNER JOIN
-      INNER JOIN Users ON (News.author_id = Users.id);
+      INNER JOIN Users ON (News.author_id = Users.id)
+WHERE NOT EXISTS (SELECT *
+                  FROM DeletedItems
+                  WHERE DeletedItems.news_id = News.id);
 
 --Obter uma noticia (seus conteudos)
  SELECT title, date, body, image, votes, Sections.name, Users.username
