@@ -1,6 +1,16 @@
 
+-- UPDATE04
+UPDATE News
+SET title = $title, "date" = now(), body=$body, image=$image, section_id=$section_id
+WHERE id=$id;
 
+--INSERT05
+INSERT INTO comments ("text", creator_user_id, target_news_id) VALUES ($text,#user_id,$news_id);
 
+-- UPDATE06
+UPDATE comments
+SET "text" = $text, "date" = now()
+WHERE id=$id;
 
 -- SELECT11
 SELECT *
