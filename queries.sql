@@ -80,12 +80,7 @@ SELECT Users.username, ReportedItems.comment_id AS commentID, ReportedItems.desc
  FROM ReportedItems
    INNER JOIN Users ON  ReportedItems.user_id = Users.id
    WHERE commentID IS NOT NULL;
---Obter noticias denunciadas de um utilizador
-SELECT Users.username AS username, News.id AS newsID, News.title AS newsTitle, ReportedItems.description AS description
-FROM News
-  INNER JOIN Users ON News.author_id = Users.id AND Users.username = $username
-  INNER JOIN ReportItems ON ReportItems.news_id = News.id
-  WHERE ReportedItems.news_id IS NOT NULL;
+
 --Obter os comentarios denunciadas de um utilizador
 CREATE VIEW ReportDescriptionForUserComment AS
 SELECT User.id AS userID, Users.username AS username, Comments.id AS commentID, ReportedItems.description AS description
@@ -98,10 +93,30 @@ SELECT commentID, description
 FROM ReportDescriptionForUserComment
 WHERE ReportDescriptionForUserComment.username = $username;
 
---Selecionar as razões fixas de um só comentario ($commentID)
+--Selecionar as razões fixas de denuncia de um só comentario ($commentID)
 -- feito por um utilizador $username
 SELECT Reason.name
 FROM Reason
   INNER JOIN ReasonForReport ON Reason.id = ReasonForReport.reason_id
   INNER JOIN ReportDescriptionForUserComment ON ReasonForReport.(user_id, news_id,comment_id) = ReportDescriptionForUserComment.(userID, NULL, commentID)
   WHERE ReportDescriptionForUserComment.commentID = &commentID;
+
+--Obter as noticias denunciadas de um utilizador
+CREATE VIEW ReportDescriptionForUserNews AS
+SELECT User.id AS userID, Users.username AS username, News.id AS newsID, News.title AS newsTitle, ReportedItems.description AS description
+FROM News
+  INNER JOIN Users ON News.author_id = Users.id AND Users.username = $username
+  INNER JOIN ReportItems ON ReportItems.news_id = News.id
+  WHERE ReportedItems.news_id IS NOT NULL;
+
+SELECT newsTitle, description
+FROM ReportDescriptionForUserNews
+WHERE ReportDescriptionForUserNews.username = $username;
+
+--Selecionar as razões fixas de denuncia de uma só noticia ($newsID)
+-- feito por um utilizador $username
+SELECT Reason.name
+FROM Reason
+  INNER JOIN ReasonForReport ON Reason.id = ReasonForReport.reason_id
+  INNER JOIN ReportDescriptionForUserNews ON ReasonForReport.(user_id, news_id,comment_id) = ReportDescriptionForUserNews.(userID, newsID, NULL)
+  WHERE ReportDescriptionForUserNews.newsID = &newsID;
