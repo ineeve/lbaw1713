@@ -1,15 +1,17 @@
 -- SELECT01
 -- select user profile
 SELECT username,email,gender,Countries.name As country,picture,points,permission 
-FROM Users NATURAL JOIN Countries
+FROM users NATURAL JOIN countries
 WHERE Users.id = $userId;
 -- SELECT02
+SELECT 
+
 
 -- SELECT03
 -- select news title,date,body,image,votes,section,author
-SELECT title,date,body,image,votes,Sections.name as section_name,Sections.icon as section_icon , Users.username as author
-FROM News NATURAL JOIN Sections NATURAL JOIN Users JOIN NewsSources ON News.id = NewsSources.id
-WHERE News.id = $newsId
+SELECT title,date,image,votes,Sections.name as section_name,Sections.icon as section_icon , Users.username as author, body
+FROM news NATURAL JOIN sections NATURAL JOIN users JOIN newssources ON news.id = newsSources.news_id
+WHERE news.id = $newsId;
 
 -- select news sources
 SELECT news_id, source_id FROM NewsSources
