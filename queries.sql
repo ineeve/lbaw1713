@@ -107,7 +107,7 @@ AND EXTRACT(YEAR FROM cast(News.date AS DATE)) = EXTRACT(YEAR FROM now())
 SELECT text, date, Users.username
  FROM Comments, Users
  WHERE Comments.target_news_id = $newsID AND Comments.creator_user_id = Users.id
- AND Comments.id NOT IN (SELECT DeletedItems.comment_id FROM DeletedItems);
+ AND NOT EXISTS (SELECT DeletedItems.comment_id FROM DeletedItems WHERE DeletedItems.comment_id = Comments.id);;
 --Obter todos os reports a noticias
 SELECT Users.username, News.title, description
  FROM ReportedItems, Users, News
@@ -124,12 +124,15 @@ SELECT Users.username, ReportedItems.comment_id AS commentID, ReportedItems.desc
    INNER JOIN Users ON  ReportedItems.user_id = Users.id
    WHERE commentID IS NOT NULL;
 
---Obter os comentarios denunciadas de um utilizador
+--Obter os comentarios denunciados de um utilizador
+--Nota: usar 'YstumtueniP' como exemplo de $username
+DROP VIEW IF EXISTS ReportDescriptionForUserComment;
+
 CREATE VIEW ReportDescriptionForUserComment AS
-SELECT User.id AS userID, Users.username AS username, Comments.id AS commentID, ReportedItems.description AS description
+SELECT Users.username AS username, Comments.id AS commentID, ReportedItems.description AS description, ReportedItems.id itemID
 FROM Comments
   INNER JOIN Users ON Comments.creator_user_id = Users.id AND Users.username = $username
-  INNER JOIN ReportItems ON ReportItems.comment_id = Comments.id
+  INNER JOIN ReportedItems ON ReportedItems.comment_id = Comments.id
   WHERE ReportedItems.comment_id IS NOT NULL;
 
 SELECT commentID, description
@@ -138,11 +141,12 @@ WHERE ReportDescriptionForUserComment.username = $username;
 
 --Selecionar as razões fixas de denuncia de um só comentario ($commentID)
 -- feito por um utilizador $username
-SELECT Reason.name
-FROM Reason
-  INNER JOIN ReasonForReport ON Reason.id = ReasonForReport.reason_id
-  INNER JOIN ReportDescriptionForUserComment ON ReasonForReport.(user_id, news_id,comment_id) = ReportDescriptionForUserComment.(userID, NULL, commentID)
-  WHERE ReportDescriptionForUserComment.commentID = &commentID;
+--Nota: usar 1440 como exemplo de $commentID
+SELECT Reasons.name
+FROM Reasons
+  INNER JOIN ReasonsForReport ON Reasons.id = ReasonsForReport.reason_id
+  INNER JOIN ReportDescriptionForUserComment ON ReasonsForReport.reported_item_id = ReportDescriptionForUserComment.itemID
+  WHERE ReportDescriptionForUserComment.commentID = $commentID;
 
 --Obter as noticias denunciadas de um utilizador
 CREATE VIEW ReportDescriptionForUserNews AS
