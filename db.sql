@@ -52,8 +52,8 @@ CREATE TABLE News (
 
 CREATE TABLE Comments(
 	id SERIAL,
-	“text” text NOT NULL,
-	“date” TIMESTAMP WITH TIME zone DEFAULT now() NOT NULL,
+	"text" text NOT NULL,
+	"date" TIMESTAMP WITH TIME zone DEFAULT now() NOT NULL,
 	creator_user_id INTEGER NOT NULL,
 	target_news_id INTEGER NOT NULL
 );
