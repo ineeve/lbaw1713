@@ -1,8 +1,10 @@
 -- SELECT01
 -- select user profile
-SELECT username,email,gender,Countries.name As country,picture,points,permission 
+SELECT username,email,gender,Countries.name As country,picture,points,permission
 FROM users NATURAL JOIN countries
 WHERE users.id = $userId;
+-- SELECT02
+SELECT
 
 -- SELECT02
 SELECT title,author_id
@@ -49,8 +51,9 @@ SELECT *
 FROM ReportedItems
 WHERE NOT EXISTS ( SELECT *
       FROM DeletedItems
-      WHERE ((ReportedItems.comment_id = DeletedItems.comment_id)
-      AND(ReportedItems.news_id=DeletedItems.news_id)));
+      WHERE (
+        ((ReportedItems.comment_id = DeletedItems.comment_id) AND (ReportedItems.news_id IS NULL) AND (DeletedItems.news_id IS NULL))
+        OR((ReportedItems.comment_id IS NULL) AND (DeletedItems.comment_id IS NULL) AND (ReportedItems.news_id = DeletedItems.news_id))));
 
 -- List badges
 SELECT name, brief, votes, articles, comments
@@ -66,42 +69,45 @@ WHERE NOT EXISTS (SELECT *
                   WHERE DeletedItems.news_id = News.id);
 
 -- List sections
-SELECT Sections.name, icon
+SELECT name, icon
 FROM Sections;
 
 -- Search for your listed interests
 SELECT title, date, body, image, votes, Sections.name, Users.username
-FROM News INNER JOIN
+FROM News INNER JOIN UserInterests ON (News.section_id = UserInterests.section_id
+                                        AND $userId = UserInterests.user_id)
       INNER JOIN Users ON (News.author_id = Users.id)
 WHERE NOT EXISTS (SELECT *
                   FROM DeletedItems
                   WHERE DeletedItems.news_id = News.id);
 
 --Obter uma noticia (seus conteudos)
- SELECT title, date, body, image, votes, Sections.name, Users.username
-  FROM News, Sections, Users
-  WHERE News.id  = $newsID AND Sections.id = News.section_id AND Users.id = News.author_id
-  AND News.id NOT IN (SELECT DeletedItems.news_id FROM DeletedItems);
+SELECT title, date, body, image, votes, Sections.name, Users.username
+ FROM News, Sections, Users
+ WHERE News.id  = $newsID AND Sections.id = News.section_id AND Users.id = News.author_id
+ AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE DeletedItems.news_id = News.id);
 --Obter as noticias publicadas por um utilizador
 SELECT title, date, body, image, votes, Sections.name, Users.username
   FROM News, Sections, Users
   WHERE News.author_id = $userID AND Sections.id = News.section_id AND Users.id = News.author_id
-  AND News.id NOT IN (SELECT DeletedItems.news_id FROM DeletedItems);
+  AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE DeletedItems.news_id = News.id);
 --Obter as noticias de uma noticia de uma categoria especifica
 SELECT title, date, body, image, votes, Sections.name, Users.username
   FROM News, Sections, Users
   WHERE Sections.id = News.section_id AND Users.id = News.author_id AND Sections.name = $section
-  AND News.id NOT IN (SELECT DeletedItems.news_id FROM DeletedItems);
+  AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE News.id = DeletedItems.news_id);
 --Obter noticias entre duas datas
 SELECT title, date, body, image, votes, Sections.name, Users.username
   FROM News, Sections, Users
-  WHERE Sections.id = News.section_id AND Users.id = News.author_id AND News.date BETWEEN $startDate AND $endDate
-  AND News.id NOT IN (SELECT DeletedItems.news_id FROM DeletedItems);
+  WHERE Sections.id = News.section_id AND Users.id = News.author_id AND cast(News.date AS DATE) BETWEEN $startDate AND $endDate
+  AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE DeletedItems.news_id = News.id);
 --Obter as noticias do ultimo mes
 SELECT title, date, body, image, votes, Sections.name, Users.username
   FROM News, Sections, Users
-  WHERE MONTH(News.date) = MONTH(GETDATE()) AND Sections.id = News.section_id AND Users.id = News.author_id
-  AND News.id NOT IN (SELECT DeletedItems.news_id FROM DeletedItems);
+  WHERE EXTRACT(MONTH FROM cast(News.date AS DATE)) = EXTRACT(MONTH FROM now())
+AND EXTRACT(YEAR FROM cast(News.date AS DATE)) = EXTRACT(YEAR FROM now())
+ AND Sections.id = News.section_id AND Users.id = News.author_id
+  AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE DeletedItems.news_id = News.id);
 --Obter os comentarios de uma noticia
 SELECT text, date, Users.username
  FROM Comments, Users
@@ -162,3 +168,25 @@ FROM Reason
   INNER JOIN ReasonForReport ON Reason.id = ReasonForReport.reason_id
   INNER JOIN ReportDescriptionForUserNews ON ReasonForReport.(user_id, news_id,comment_id) = ReportDescriptionForUserNews.(userID, newsID, NULL)
   WHERE ReportDescriptionForUserNews.newsID = &newsID;
+
+
+
+-- FREQUENT INSERTS / UPDATES / DELETES
+
+-- Create news report
+INSERT INTO ReportedItems (user_id, news_id, description)
+VALUES ($userId, $newsId, $description);
+
+-- Create comment report
+INSERT INTO ReportedItems (user_id, comment_id, description)
+VALUES ($userId, $commentId, $description);
+
+
+
+-- Delete news
+INSERT INTO DeletedItems (user_id, news_id, brief)
+VALUES ($userId, $newsId, $brief);
+
+-- Delete comment
+INSERT INTO DeletedItems (user_id, comment_id, brief)
+VALUES ($userId, $commentId, $brief);
