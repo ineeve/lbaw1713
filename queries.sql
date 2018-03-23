@@ -42,43 +42,55 @@ FROM Badges;
 
 -- List news
 -- TODO: Limit body to first characters/words
-SELECT title, "date", body, image, votes, Sections.name, Users.username
+SELECT title, date, body, image, votes, Sections.name, Users.username
 FROM News INNER JOIN Sections ON (News.section_id = Sections.id)
-      INNER JOIN Users ON (News.author_id = Users.id);
+      INNER JOIN Users ON (News.author_id = Users.id)
+WHERE NOT EXISTS (SELECT *
+                  FROM DeletedItems
+                  WHERE DeletedItems.news_id = News.id);
 
 -- List sections
 SELECT Sections.name, icon
 FROM Sections;
 
 -- Search for your listed interests
-SELECT title, "date", body, image, votes, Sections.name, Users.username
+SELECT title, date, body, image, votes, Sections.name, Users.username
 FROM News INNER JOIN
-      INNER JOIN Users ON (News.author_id = Users.id);
+      INNER JOIN Users ON (News.author_id = Users.id)
+WHERE NOT EXISTS (SELECT *
+                  FROM DeletedItems
+                  WHERE DeletedItems.news_id = News.id);
 
 --Obter uma noticia (seus conteudos)
  SELECT title, date, body, image, votes, Sections.name, Users.username
   FROM News, Sections, Users
-  WHERE News.id  = $newsID AND Sections.id = News.section_id AND Users.id = News.author_id;
+  WHERE News.id  = $newsID AND Sections.id = News.section_id AND Users.id = News.author_id
+  AND News.id NOT IN (SELECT DeletedItems.news_id FROM DeletedItems);
 --Obter as noticias publicadas por um utilizador
 SELECT title, date, body, image, votes, Sections.name, Users.username
   FROM News, Sections, Users
-  WHERE News.author_id = $userID AND Sections.id = News.section_id AND Users.id = News.author_id;
+  WHERE News.author_id = $userID AND Sections.id = News.section_id AND Users.id = News.author_id
+  AND News.id NOT IN (SELECT DeletedItems.news_id FROM DeletedItems);
 --Obter as noticias de uma noticia de uma categoria especifica
 SELECT title, date, body, image, votes, Sections.name, Users.username
   FROM News, Sections, Users
-  WHERE Sections.id = News.section_id AND Users.id = News.author_id AND Sections.name = $section;
+  WHERE Sections.id = News.section_id AND Users.id = News.author_id AND Sections.name = $section
+  AND News.id NOT IN (SELECT DeletedItems.news_id FROM DeletedItems);
 --Obter noticias entre duas datas
 SELECT title, date, body, image, votes, Sections.name, Users.username
   FROM News, Sections, Users
-  WHERE Sections.id = News.section_id AND Users.id = News.author_id AND News.date BETWEEN $startDate AND $endDate;
+  WHERE Sections.id = News.section_id AND Users.id = News.author_id AND News.date BETWEEN $startDate AND $endDate
+  AND News.id NOT IN (SELECT DeletedItems.news_id FROM DeletedItems);
 --Obter as noticias do ultimo mes
 SELECT title, date, body, image, votes, Sections.name, Users.username
   FROM News, Sections, Users
-  WHERE MONTH(News.date) = MONTH(GETDATE()) AND Sections.id = News.section_id AND Users.id = News.author_id;
+  WHERE MONTH(News.date) = MONTH(GETDATE()) AND Sections.id = News.section_id AND Users.id = News.author_id
+  AND News.id NOT IN (SELECT DeletedItems.news_id FROM DeletedItems);
 --Obter os comentarios de uma noticia
 SELECT text, date, Users.username
  FROM Comments, Users
- WHERE Comments.target_news_id = $newsID AND Comments.creator_user_id = Users.id;
+ WHERE Comments.target_news_id = $newsID AND Comments.creator_user_id = Users.id
+ AND Comments.id NOT IN (SELECT DeletedItems.comment_id FROM DeletedItems);
 --Obter todos os reports a noticias
 SELECT Users.username, News.title, description
  FROM ReportedItems, Users, News
