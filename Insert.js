@@ -144,7 +144,7 @@ function createComments(){
         let comment = getNewComment();
         comment.text = commentsText[Math.floor(rndNum * commentsText.length)];
         comment.creator_user_id = 1 + Math.floor(rndNum * NUM_USERS);
-        comment.target_news_id = 1 + Math.floor(rndNum * NUM_NEWS);
+        comment.target_news_id = 1 + Math.floor(Math.random() * NUM_NEWS);
         commentsArray.push(comment);
     }
     return commentsArray;
@@ -246,8 +246,11 @@ function printUsersSQL(usersArray){
     writeToFile("InsertUsers.sql",outputString);
 }
 
-let newsArray = createNews();
-printNewsSql(newsArray);
+/*let newsArray = createNews();
+printNewsSql(newsArray);*/
+
+let commentsArray = createComments();
+printCommentsSQL(commentsArray);
 
 /*let commentsArray = createModeratorComments();
 createModeratorCommentsSQL(commentsArray);*/
