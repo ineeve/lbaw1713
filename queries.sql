@@ -1,6 +1,34 @@
+-- SELECT01
+-- select user profile
+SELECT username,email,gender,Countries.name As country,picture,points,permission 
+FROM users NATURAL JOIN countries
+WHERE users.id = $userId;
+-- SELECT02
+SELECT 
 
 
+-- UPDATE04
+UPDATE News
+SET title = $title, "date" = now(), body=$body, image=$image, section_id=$section_id
+WHERE id=$id;
 
+--INSERT05
+INSERT INTO comments ("text", creator_user_id, target_news_id) VALUES ($text,#user_id,$news_id);
+
+-- SELECT03
+-- select news title,date,body,image,votes,section,author
+SELECT title,date,image,votes,Sections.name as section_name,Sections.icon as section_icon , Users.username as author, body
+FROM news NATURAL JOIN sections NATURAL JOIN users JOIN newssources ON news.id = newsSources.news_id
+WHERE news.id = $newsId;
+
+-- select news sources
+SELECT news_id, source_id FROM NewsSources
+WHERE news_id = $newsId;
+
+-- UPDATE06
+UPDATE comments
+SET "text" = $text, "date" = now()
+WHERE id=$id;
 
 -- SELECT11
 SELECT *
@@ -28,18 +56,24 @@ FROM Badges;
 
 -- List news
 -- TODO: Limit body to first characters/words
-SELECT title, "date", body, image, votes, Sections.name, Users.username
+SELECT title, date, body, image, votes, Sections.name, Users.username
 FROM News INNER JOIN Sections ON (News.section_id = Sections.id)
-      INNER JOIN Users ON (News.author_id = Users.id);
+      INNER JOIN Users ON (News.author_id = Users.id)
+WHERE NOT EXISTS (SELECT *
+                  FROM DeletedItems
+                  WHERE DeletedItems.news_id = News.id);
 
 -- List sections
 SELECT Sections.name, icon
 FROM Sections;
 
 -- Search for your listed interests
-SELECT title, "date", body, image, votes, Sections.name, Users.username
+SELECT title, date, body, image, votes, Sections.name, Users.username
 FROM News INNER JOIN
-      INNER JOIN Users ON (News.author_id = Users.id);
+      INNER JOIN Users ON (News.author_id = Users.id)
+WHERE NOT EXISTS (SELECT *
+                  FROM DeletedItems
+                  WHERE DeletedItems.news_id = News.id);
 
 --Obter uma noticia (seus conteudos)
  SELECT title, date, body, image, votes, Sections.name, Users.username
