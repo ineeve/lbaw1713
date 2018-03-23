@@ -1,9 +1,11 @@
 -- SELECT01
 -- select user profile
-SELECT username,email,gender,Countries.name As country,picture,points,permission
-FROM Users NATURAL JOIN Countries
-WHERE Users.id = $userId;
+SELECT username,email,gender,Countries.name As country,picture,points,permission 
+FROM users NATURAL JOIN countries
+WHERE users.id = $userId;
 -- SELECT02
+SELECT 
+
 
 -- UPDATE04
 UPDATE News
@@ -15,9 +17,9 @@ INSERT INTO comments ("text", creator_user_id, target_news_id) VALUES ($text,#us
 
 -- SELECT03
 -- select news title,date,body,image,votes,section,author
-SELECT title,date,body,image,votes,Sections.name as section_name,Sections.icon as section_icon , Users.username as author
-FROM News NATURAL JOIN Sections NATURAL JOIN Users JOIN NewsSources ON News.id = NewsSources.id
-WHERE News.id = $newsId
+SELECT title,date,image,votes,Sections.name as section_name,Sections.icon as section_icon , Users.username as author, body
+FROM news NATURAL JOIN sections NATURAL JOIN users JOIN newssources ON news.id = newsSources.news_id
+WHERE news.id = $newsId;
 
 -- select news sources
 SELECT news_id, source_id FROM NewsSources
@@ -63,7 +65,7 @@ WHERE NOT EXISTS (SELECT *
                   WHERE DeletedItems.news_id = News.id);
 
 -- List sections
-SELECT Sections.name, icon
+SELECT name, icon
 FROM Sections;
 
 -- Search for your listed interests
@@ -159,3 +161,25 @@ FROM Reason
   INNER JOIN ReasonForReport ON Reason.id = ReasonForReport.reason_id
   INNER JOIN ReportDescriptionForUserNews ON ReasonForReport.(user_id, news_id,comment_id) = ReportDescriptionForUserNews.(userID, newsID, NULL)
   WHERE ReportDescriptionForUserNews.newsID = &newsID;
+
+
+
+-- FREQUENT INSERTS / UPDATES / DELETES
+
+-- Create news report
+INSERT INTO ReportedItems (user_id, news_id, description)
+VALUES ($userId, $newsId, $description);
+
+-- Create comment report
+INSERT INTO ReportedItems (user_id, comment_id, description)
+VALUES ($userId, $commentId, $description);
+
+
+
+-- Delete news
+INSERT INTO DeletedItems (user_id, news_id, brief)
+VALUES ($userId, $newsId, $brief);
+
+-- Delete comment
+INSERT INTO DeletedItems (user_id, comment_id, brief)
+VALUES ($userId, $commentId, $brief);
