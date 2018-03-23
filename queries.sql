@@ -3,9 +3,11 @@
 SELECT username,email,gender,Countries.name As country,picture,points,permission 
 FROM users NATURAL JOIN countries
 WHERE users.id = $userId;
--- SELECT02
-SELECT 
 
+-- SELECT02
+SELECT title,author_id
+FROM news WHERE textsearchable_index_col @@ to_tsquery('gold')
+LIMIT 10;
 
 -- UPDATE04
 UPDATE News
