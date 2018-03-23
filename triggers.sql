@@ -13,9 +13,25 @@ AFTER DELETE ON Votes
 EXECUTE PROCEDURE update_score_remove_vote;
 
 CREATE TRIGGER notification_follow
-AFTER INSERT ON Follows
-EXECUTE PROCEDURE create_notification_follow;
+	AFTER INSERT ON Follows
+	EXECUTE PROCEDURE create_notification_follow(NEW.follower_user_id, NEW.followed_user_id);
 
+CREATE TRIGGER notification_comment
+  AFTER INSERT ON Comments
+  EXECUTE PROCEDURE create_notification_comment(NEW.id);
+
+CREATE TRIGGER notification_followed_publish
+  AFTER INSERT ON News
+	FOR EACH ROW
+  EXECUTE PROCEDURE create_notification_followed_publish((SELECT Users.id FROM Users
+	INNER JOIN Follows ON Users.id = Follows.follower_user_id
+WHERE Follows.followed_user_id = NEW.author_id), NEW.author_id, NEW.id);
+
+CREATE TRIGGER notification_vote_my_post
+  AFTER INSERT ON Votes
+	EXECUTE PROCEDURE create_notification_vote_my_post((SELECT Users.id FROM Users
+	INNER JOIN News ON Users.id = News.author_id
+WHERE News.id = NEW.news_id), NEW.user_id, NEW.news_id);
 
 -- FUNCTIONS
 
@@ -70,11 +86,38 @@ END;
 $BODY$
 
 -- Insert new notification for an user when someone else follows him.
-CREATE FUNCTION create_notification_follow()
+CREATE FUNCTION create_notification_follow(follower_user_id integer, followed_user_id integer)
 RETURNS trigger AS
 $BODY$
 BEGIN
   INSERT INTO Notifications (type, target_user_id, user_id)
-    VALUES ('FollowMe', NEW.followed_user_id, follower_used_id);
+    VALUES ('FollowMe', followed_user_id, follower_user_id);
 END;
 $BODY$
+--Notificacao de quando alguem comenta uma noticia minha
+CREATE OR REPLACE FUNCTION create_notification_comment(target_news_id integer)
+RETURNS trigger AS $$
+BEGIN
+  INSERT INTO Notifications (type, target_user_id, news_id)
+    VALUES ('CommentMyPost',
+			(SELECT author_id  FROM News WHERE id = target_news_id), target_news_id);
+END;
+$$ LANGUAGE 'plpgsql';
+
+--Notificacao de quando alguem que seguimos publica uma noticia
+CREATE OR REPLACE FUNCTION create_notification_followed_publish(target integer, followed integer, new_id integer)
+RETURNS trigger AS $$
+BEGIN
+  INSERT INTO Notifications (type, target_user_id, user_id, news_id)
+    VALUES ('FollowedPublish', target, followed, news_id);
+END;
+$$ LANGUAGE 'plpgsql';
+
+--Notificacao de quando alguem que seguimos publica uma noticia
+CREATE OR REPLACE FUNCTION create_notification_followed_publish(target integer, user_voted integer, new_id integer)
+RETURNS trigger AS $$
+BEGIN
+  INSERT INTO Notifications (type, target_user_id, user_id, news_id)
+    VALUES ('VoteMyPost', target, user_voted, news_id);
+END;
+$$ LANGUAGE 'plpgsql';

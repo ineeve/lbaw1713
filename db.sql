@@ -47,7 +47,8 @@ CREATE TABLE News (
 	image text NOT NULL,
 	votes INTEGER NOT NULL DEFAULT 0,
 	section_id INTEGER NOT NULL,
-	author_id INTEGER NOT NULL
+	author_id INTEGER NOT NULL,
+	
 );
 
 CREATE TABLE Comments(
