@@ -51,7 +51,7 @@ var commentsText = [
     "I expect F1 to have a great season <3",
     "Those scientists are really crazy. A salt cloud? ahahaha",
     "Really? I have 2 neutron stars in my garage. How can I merge them to make some gold?",
-    "Google has no change against Photon News. Google should buy it."
+    "Google has no chance against Photon News. Google should buy it."
 ]
 
 var moderatorComments = [
