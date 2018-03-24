@@ -7,7 +7,7 @@ DROP TRIGGER IF EXISTS notification_follow;
 
 CREATE TRIGGER score_vote_add
 AFTER INSERT ON Votes
-EXECUTE PROCEDURE update_score_add_vote(NEW.type, NEW.news_id);
+FOR EACH ROW EXECUTE PROCEDURE update_score_add_vote(NEW.type, NEW.news_id);
 
 CREATE TRIGGER score_vote_change
 AFTER UPDATE ON Votes
@@ -48,7 +48,7 @@ DROP FUNCTION IF EXISTS create_notification_follow;
 -- Increment/decrement news and news' author points when adding a Votes entry.
 CREATE FUNCTION update_score_add_vote(type BOOLEAN, news_id INTEGER)
 RETURNS trigger AS
-$BODY$
+$score_vote_add$
 BEGIN
 	IF type = TRUE THEN -- upvoted
 		UPDATE News SET votes = votes + 1
@@ -66,7 +66,7 @@ BEGIN
 												WHERE news_id = News.id);
 	END IF;
 END;
-$BODY$
+$score_vote_add$ LANGUAGE plpgsql;
 
 CREATE FUNCTION update_score_change_vote()
 RETURNS trigger AS
