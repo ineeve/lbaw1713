@@ -114,20 +114,16 @@ SELECT text, date, Users.username
  WHERE Comments.target_news_id = $newsID AND Comments.creator_user_id = Users.id
  AND NOT EXISTS (SELECT DeletedItems.comment_id FROM DeletedItems WHERE DeletedItems.comment_id = Comments.id);;
 --Obter todos os reports a noticias
-SELECT Users.username, News.title, description
- FROM ReportedItems, Users, News
- WHERE ReportedItems.news_id IS NOT NULL AND ReportedItems.user_id = Users.id AND ReportedItems.news_id = News.id;
---OU
- SELECT Users.username, News.title AS newsTitle, ReportedItems.description
-  FROM ((ReportedItems
-    INNER JOIN Users ON  ReportedItems.user_id = Users.id) AS T
-    INNER JOIN News ON T.news_id = News.id)
+SELECT Users.username, News.title AS newsTitle, ReportedItems.description
+  FROM ReportedItems
+    INNER JOIN Users ON  ReportedItems.user_id = Users.id
+    INNER JOIN News ON ReportedItems.news_id = News.id
     WHERE ReportedItems.news_id IS NOT NULL;
 --Obter todos os reports a comentarios
 SELECT Users.username, ReportedItems.comment_id AS commentID, ReportedItems.description
  FROM ReportedItems
    INNER JOIN Users ON  ReportedItems.user_id = Users.id
-   WHERE commentID IS NOT NULL;
+   WHERE ReportedItems.comment_id IS NOT NULL;
 
 --Obter os comentarios denunciados de um utilizador
 --Nota: usar 'YstumtueniP' como exemplo de $username
