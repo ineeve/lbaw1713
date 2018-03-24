@@ -158,3 +158,26 @@ BEGIN
 	RETURN NEW;
 END;
 $$ LANGUAGE 'plpgsql';
+
+
+--Teste
+
+DROP TRIGGER IF EXISTS notification_follow ON Follows;
+
+CREATE TRIGGER notification_follow
+	AFTER INSERT ON Follows
+	EXECUTE PROCEDURE create_notification_follow(NEW.follower_user_id, NEW.followed_user_id);
+
+CREATE FUNCTION create_notification_follow(follower_user_id integer, followed_user_id integer)
+RETURNS trigger AS
+$BODY$
+BEGIN
+  INSERT INTO Notifications (type, target_user_id, user_id)
+    VALUES ('FollowMe', followed_user_id, follower_user_id);
+	RETURN NEW;
+END;
+$BODY$
+
+INSERT INTO Follows(follower_user_id, followed_user_id) VALUES (2, 1);
+
+SELECT * FROM Notifications WHERE Notifications.target_user_id = 1;
