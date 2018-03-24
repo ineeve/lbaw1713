@@ -7,15 +7,15 @@ DROP TRIGGER IF EXISTS notification_follow;
 
 CREATE TRIGGER score_vote_add
 AFTER INSERT ON Votes
-FOR EACH ROW EXECUTE PROCEDURE update_score_add_vote(NEW.type, NEW.news_id);
+FOR EACH ROW EXECUTE PROCEDURE update_score_add_vote();
 
 CREATE TRIGGER score_vote_change
 AFTER UPDATE ON Votes
-EXECUTE PROCEDURE update_score_change_vote;
+EXECUTE PROCEDURE update_score_change_vote();
 
 CREATE TRIGGER score_vote_remove
 AFTER DELETE ON Votes
-EXECUTE PROCEDURE update_score_remove_vote;
+EXECUTE PROCEDURE update_score_remove_vote();
 
 CREATE TRIGGER notification_follow
 	AFTER INSERT ON Follows
@@ -46,24 +46,24 @@ DROP FUNCTION IF EXISTS update_score_remove_vote;
 DROP FUNCTION IF EXISTS create_notification_follow;
 
 -- Increment/decrement news and news' author points when adding a Votes entry.
-CREATE FUNCTION update_score_add_vote(type BOOLEAN, news_id INTEGER)
+CREATE FUNCTION update_score_add_vote()
 RETURNS trigger AS
 $score_vote_add$
 BEGIN
-	IF type = TRUE THEN -- upvoted
+	IF NEW.type = TRUE THEN -- upvoted
 		UPDATE News SET votes = votes + 1
-			WHERE News.id = news_id;
+			WHERE News.id = NEW.news_id;
 		UPDATE Users SET points = points + 1
 			WHERE Users.id = (SELECT id
 												FROM Users INNER JOIN News ON (Users.id = News.author_id)
-												WHERE news_id = News.id);
+												WHERE NEW.news_id = News.id);
 	ELSE -- downvoted
 		UPDATE News SET votes = votes - 1
 			WHERE News.id = news_id;
 		UPDATE Users SET points = points - 1
 			WHERE Users.id = (SELECT id
 												FROM Users INNER JOIN News ON (Users.id = News.author_id)
-												WHERE news_id = News.id);
+												WHERE NEW.news_id = News.id);
 	END IF;
 END;
 $score_vote_add$ LANGUAGE plpgsql;
@@ -91,7 +91,7 @@ BEGIN
 	END IF;
 	RETURN NEW;
 END;
-$BODY$
+$BODY$ LANGUAGE plpgsql;
 
 -- Increment/decrement news and news' author points when removing a Votes entry.
 CREATE FUNCTION update_score_remove_vote()
@@ -115,7 +115,7 @@ BEGIN
 	END IF;
 	RETURN NEW;
 END;
-$BODY$
+$BODY$ LANGUAGE plpgsql;
 
 -- Insert new notification for an user when someone else follows him.
 CREATE FUNCTION create_notification_follow(follower_user_id integer, followed_user_id integer)
