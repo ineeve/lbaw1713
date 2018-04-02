@@ -1,3 +1,35 @@
+
+DROP TRIGGER IF EXISTS score_vote_change ON Votes;
+DROP FUNCTION IF EXISTS update_score_change_vote();
+
+CREATE FUNCTION update_score_change_vote()
+RETURNS trigger AS
+$score_vote_change$
+BEGIN
+	IF NEW.type IS TRUE AND OLD.type IS FALSE THEN -- changed downvote to upvote
+		UPDATE News SET votes = votes + 2
+			WHERE News.id = NEW.news_id;
+		UPDATE Users SET points = points + 2
+			WHERE Users.id = (SELECT id
+												FROM Users INNER JOIN News ON (Users.id = News.author_id)
+												WHERE NEW.news_id = News.id);
+	ELSE
+		IF NEW.type IS false AND OLD.type IS TRUE THEN -- changed upvote to downvote
+			UPDATE News SET votes = votes - 2
+			WHERE News.id = NEW.news_id;
+		UPDATE Users SET points = points - 2
+			WHERE Users.id = (SELECT id
+												FROM Users INNER JOIN News ON (Users.id = News.author_id)
+												WHERE NEW.news_id = News.id);
+		END IF;
+	END IF;
+	RETURN NEW;
+END;
+$score_vote_change$ LANGUAGE plpgsql;
+CREATE TRIGGER score_vote_change
+AFTER UPDATE ON Votes
+EXECUTE PROCEDURE update_score_change_vote();
+
 --FUNCIONA--------------------------------------------------
 
 DROP TRIGGER IF EXISTS notification_follow ON Follows;
@@ -51,16 +83,13 @@ FOR EACH ROW EXECUTE PROCEDURE update_score_add_vote();
 
 --END    FUNCIONA_-------------------------------------------------
 
-DROP TRIGGER IF EXISTS score_vote_change ON Votes;
 DROP TRIGGER IF EXISTS score_vote_remove ON Votes;
-DROP FUNCTION IF EXISTS update_score_change_vote();
+
 DROP FUNCTION IF EXISTS update_score_remove_vote();
 
 
 
-CREATE TRIGGER score_vote_change
-AFTER UPDATE ON Votes
-EXECUTE PROCEDURE update_score_change_vote();
+
 
 CREATE TRIGGER score_vote_remove
 AFTER DELETE ON Votes
@@ -86,36 +115,6 @@ CREATE TRIGGER notification_vote_my_post
 WHERE News.id = NEW.news_id), NEW.user_id, NEW.news_id);
 
 -- FUNCTIONS
-
-
-
--- Increment/decrement news and news' author points when adding a Votes entry.
-
-
-CREATE FUNCTION update_score_change_vote()
-RETURNS trigger AS
-$BODY$
-BEGIN
-	IF NEW.type IS TRUE AND OLD.type IS FALSE THEN -- changed downvote to upvote
-		UPDATE News SET votes = votes + 2
-			WHERE News.id = NEW.news_id;
-		UPDATE Users SET points = points + 2
-			WHERE Users.id = (SELECT id
-												FROM Users INNER JOIN News ON (Users.id = News.author_id)
-												WHERE NEW.news_id = News.id);
-	ELSE
-		IF NEW.type IS false AND OLD.type IS TRUE THEN -- changed upvote to downvote
-			UPDATE News SET votes = votes - 2
-			WHERE News.id = NEW.news_id;
-		UPDATE Users SET points = points - 2
-			WHERE Users.id = (SELECT id
-												FROM Users INNER JOIN News ON (Users.id = News.author_id)
-												WHERE NEW.news_id = News.id);
-		END IF;
-	END IF;
-	RETURN NEW;
-END;
-$BODY$ LANGUAGE plpgsql;
 
 -- Increment/decrement news and news' author points when removing a Votes entry.
 CREATE FUNCTION update_score_remove_vote()
