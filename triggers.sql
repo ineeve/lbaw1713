@@ -1,13 +1,62 @@
--- TRIGGERS
+--FUNCIONA--------------------------------------------------
 
-DROP TRIGGER IF EXISTS score_vote_add;
-DROP TRIGGER IF EXISTS score_vote_change;
-DROP TRIGGER IF EXISTS score_vote_remove;
-DROP TRIGGER IF EXISTS notification_follow;
+DROP TRIGGER IF EXISTS notification_follow ON Follows;
+DROP FUNCTION IF EXISTS create_notification_follow();
+
+CREATE FUNCTION create_notification_follow()
+RETURNS trigger AS
+$notification_follow$
+BEGIN
+INSERT INTO Notifications (type, target_user_id, user_id)
+VALUES ('FollowMe', NEW.followed_user_id, NEW.follower_user_id);
+RETURN NEW;
+END;
+$notification_follow$ LANGUAGE plpgsql;
+
+CREATE TRIGGER notification_follow
+AFTER INSERT ON Follows
+FOR EACH ROW EXECUTE PROCEDURE create_notification_follow();
+
+
+DROP TRIGGER IF EXISTS score_vote_add ON Votes;
+
+DROP FUNCTION IF EXISTS update_score_add_vote();
+
+CREATE FUNCTION update_score_add_vote()
+RETURNS trigger AS
+$score_vote_add$
+BEGIN
+IF NEW.type = TRUE THEN -- upvoted
+UPDATE News SET votes = votes + 1
+WHERE News.id = NEW.news_id;
+UPDATE Users SET points = points + 1
+WHERE Users.id = (SELECT Users.id
+	FROM Users INNER JOIN News ON (Users.id = News.author_id)
+	WHERE  NEW.news_id = News.id);
+	ELSE -- downvoted
+	UPDATE News SET votes = votes - 1
+	WHERE News.id =  NEW.news_id;
+	UPDATE Users SET points = points - 1
+	WHERE Users.id = (SELECT Users.id
+		FROM Users INNER JOIN News ON (Users.id = News.author_id)
+		WHERE  NEW.news_id = News.id);
+		END IF;
+		RETURN NEW;
+		END;
+		$score_vote_add$ LANGUAGE plpgsql;
 
 CREATE TRIGGER score_vote_add
 AFTER INSERT ON Votes
 FOR EACH ROW EXECUTE PROCEDURE update_score_add_vote();
+
+--END    FUNCIONA_-------------------------------------------------
+
+DROP TRIGGER IF EXISTS score_vote_change ON Votes;
+DROP TRIGGER IF EXISTS score_vote_remove ON Votes;
+DROP FUNCTION IF EXISTS update_score_change_vote();
+DROP FUNCTION IF EXISTS update_score_remove_vote();
+
+
 
 CREATE TRIGGER score_vote_change
 AFTER UPDATE ON Votes
@@ -17,9 +66,7 @@ CREATE TRIGGER score_vote_remove
 AFTER DELETE ON Votes
 EXECUTE PROCEDURE update_score_remove_vote();
 
-CREATE TRIGGER notification_follow
-	AFTER INSERT ON Follows
-	EXECUTE PROCEDURE create_notification_follow(NEW.follower_user_id, NEW.followed_user_id);
+
 
 CREATE TRIGGER notification_comment
   AFTER INSERT ON Comments
@@ -40,33 +87,10 @@ WHERE News.id = NEW.news_id), NEW.user_id, NEW.news_id);
 
 -- FUNCTIONS
 
-DROP FUNCTION IF EXISTS update_score_add_vote;
-DROP FUNCTION IF EXISTS update_score_change_vote;
-DROP FUNCTION IF EXISTS update_score_remove_vote;
-DROP FUNCTION IF EXISTS create_notification_follow;
+
 
 -- Increment/decrement news and news' author points when adding a Votes entry.
-CREATE FUNCTION update_score_add_vote()
-RETURNS trigger AS
-$score_vote_add$
-BEGIN
-	IF NEW.type = TRUE THEN -- upvoted
-		UPDATE News SET votes = votes + 1
-			WHERE News.id = NEW.news_id;
-		UPDATE Users SET points = points + 1
-			WHERE Users.id = (SELECT id
-												FROM Users INNER JOIN News ON (Users.id = News.author_id)
-												WHERE NEW.news_id = News.id);
-	ELSE -- downvoted
-		UPDATE News SET votes = votes - 1
-			WHERE News.id = news_id;
-		UPDATE Users SET points = points - 1
-			WHERE Users.id = (SELECT id
-												FROM Users INNER JOIN News ON (Users.id = News.author_id)
-												WHERE NEW.news_id = News.id);
-	END IF;
-END;
-$score_vote_add$ LANGUAGE plpgsql;
+
 
 CREATE FUNCTION update_score_change_vote()
 RETURNS trigger AS
@@ -117,16 +141,7 @@ BEGIN
 END;
 $BODY$ LANGUAGE plpgsql;
 
--- Insert new notification for an user when someone else follows him.
-CREATE FUNCTION create_notification_follow(follower_user_id integer, followed_user_id integer)
-RETURNS trigger AS
-$BODY$
-BEGIN
-  INSERT INTO Notifications (type, target_user_id, user_id)
-    VALUES ('FollowMe', followed_user_id, follower_user_id);
-	RETURN NEW;
-END;
-$BODY$
+
 
 --Notificacao de quando alguem comenta uma noticia minha
 CREATE OR REPLACE FUNCTION create_notification_comment(target_news_id integer)
