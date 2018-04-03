@@ -54,9 +54,16 @@ CREATE TRIGGER notification_comment
 -- SELECT * FROM Notifications WHERE Notifications.target_user_id = 1;
 
 --TRIGGER03
-DROP TRIGGER IF EXISTS notification_followed_publish ON Follows;
-DROP FUNCTION IF EXISTS create_notification_followed_publish();
+DROP TRIGGER IF EXISTS notification_followed_publish ON Follows CASCADE;
+DROP FUNCTION IF EXISTS create_notification_followed_publish() CASCADE;
 
+
+-- TESTAR:
+-- 2 segue 1
+-- Inserir notícia de 1
+--- INSERT INTO news (title,body,image,votes,section_id,author_id) VALUES ('title','body','32.png',0,1,1);
+-- Ver notificações de 2
+--- SELECT * FROM Notifications WHERE Notifications.target_user_id = 2;
 --Notificacao de quando alguem que seguimos publica uma noticia
 --TODO quando é seguido por mais de uma pessoa?
 CREATE OR REPLACE FUNCTION create_notification_followed_publish()
@@ -64,9 +71,9 @@ RETURNS trigger AS
 $$
 BEGIN
   INSERT INTO Notifications (type, target_user_id, user_id, news_id)
-    VALUES ('FollowedPublish', (SELECT Users.id FROM Users
-		INNER JOIN Follows ON Users.id = Follows.follower_user_id
-	WHERE Follows.followed_user_id = NEW.author_id), NEW.author_id, NEW.id);
+    SELECT 'FollowedPublish', Users.id, NEW.author_id, NEW.id FROM Users
+			INNER JOIN Follows ON Users.id = Follows.follower_user_id
+			WHERE Follows.followed_user_id = NEW.author_id;
 	RETURN NEW;
 END
 $$ LANGUAGE 'plpgsql';
