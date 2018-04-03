@@ -1,3 +1,5 @@
+--TRGGER05 encontra-se no run.sql
+
 --FUNCIONA--------------------------------------------------
 --TRIGGER01
 DROP TRIGGER IF EXISTS notification_follow ON Follows;
