@@ -110,23 +110,10 @@ FOR EACH ROW EXECUTE PROCEDURE update_score_add_vote();
 
 --END    FUNCIONA_-------------------------------------------------
 
-DROP TRIGGER IF EXISTS score_vote_remove ON Votes;
-
-DROP FUNCTION IF EXISTS update_score_remove_vote();
-
-CREATE TRIGGER score_vote_remove
-AFTER DELETE ON Votes
-EXECUTE PROCEDURE update_score_remove_vote();
-
-CREATE TRIGGER notification_vote_my_post
-  AFTER INSERT ON Votes
-	EXECUTE PROCEDURE create_notification_vote_my_post((SELECT Users.id FROM Users
-	INNER JOIN News ON Users.id = News.author_id
-WHERE News.id = NEW.news_id), NEW.user_id, NEW.news_id);
-
--- FUNCTIONS
-
+--TRIGGER06
 -- Increment/decrement news and news' author points when removing a Votes entry.
+DROP TRIGGER IF EXISTS score_vote_remove ON Votes;
+DROP FUNCTION IF EXISTS update_score_remove_vote();
 CREATE FUNCTION update_score_remove_vote()
 RETURNS trigger AS
 $BODY$
@@ -149,3 +136,14 @@ BEGIN
 	RETURN NEW;
 END;
 $BODY$ LANGUAGE plpgsql;
+CREATE TRIGGER score_vote_remove
+AFTER DELETE ON Votes
+EXECUTE PROCEDURE update_score_remove_vote();
+
+
+--TRIGGER07
+CREATE TRIGGER notification_vote_my_post
+  AFTER INSERT ON Votes
+	EXECUTE PROCEDURE create_notification_vote_my_post((SELECT Users.id FROM Users
+	INNER JOIN News ON Users.id = News.author_id
+WHERE News.id = NEW.news_id), NEW.user_id, NEW.news_id);
