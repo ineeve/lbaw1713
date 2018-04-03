@@ -5,12 +5,9 @@ FROM users NATURAL JOIN countries
 WHERE users.id = $userId;
 
 -- SELECT02
-SELECT
-
--- SELECT02
 -- select news data to show on preview
-SELECT title,users.username As author,date,votes,image, substring(body from '[A-Z]\w*\.') as body_preview
-FROM news NATURAL JOIN users WHERE textsearchable_index_col @@ to_tsquery('gold')
+SELECT title,users.username As author,date,votes,image, substring(body, '(?:<p>)[^<>]*\.(?:<\/p>)') as body_preview
+FROM news NATURAL JOIN users WHERE textsearchable_index_col @@ to_tsquery('mapped')
 LIMIT 100 OFFSET 0;
 
 -- SELECT03
@@ -18,6 +15,19 @@ LIMIT 100 OFFSET 0;
 SELECT title,date,votes,Sections.name as section_name,Sections.icon as section_icon , Users.username as author, body
 FROM news NATURAL JOIN sections NATURAL JOIN users JOIN newssources ON news.id = newsSources.news_id
 WHERE news.id = $newsId;
+
+-- UPDATE01
+-- atualizar info de um utilizador
+UPDATE user
+SET email=$email, gender=$gender, country_id=$country_id, picture=$picture
+
+-- INSERT02
+-- Criar um user
+INSERT INTO user (username, email, gender, country_id, picture, password, points, permission)
+VALUES ($username, $email, $gender, $country_id, $picture, $password, 0, 'normal');
+
+-- INSERT03
+-- Criar uma notícia
 
 -- UPDATE04
 UPDATE News
