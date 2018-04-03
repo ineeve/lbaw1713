@@ -57,23 +57,28 @@ WHERE NOT EXISTS ( SELECT *
         ((ReportedItems.comment_id = DeletedItems.comment_id) AND (ReportedItems.news_id IS NULL) AND (DeletedItems.news_id IS NULL))
         OR((ReportedItems.comment_id IS NULL) AND (DeletedItems.comment_id IS NULL) AND (ReportedItems.news_id = DeletedItems.news_id))));
 
+-- SELECT07
 -- List badges
 SELECT name, brief, votes, articles, comments
 FROM Badges;
 
--- List news
+-- SELECT08
+-- List news of an user
 -- TODO: Limit body to first characters/words
 SELECT title, date, body, image, votes, Sections.name, Users.username
 FROM News INNER JOIN Sections ON (News.section_id = Sections.id)
       INNER JOIN Users ON (News.author_id = Users.id)
 WHERE NOT EXISTS (SELECT *
                   FROM DeletedItems
-                  WHERE DeletedItems.news_id = News.id);
+                  WHERE DeletedItems.news_id = News.id)
+  AND $userId = News.author_id;
 
+-- SELECT09
 -- List sections
 SELECT name, icon
 FROM Sections;
 
+-- SELECT10
 -- Search for your listed interests
 SELECT title, date, body, image, votes, Sections.name, Users.username
 FROM News INNER JOIN UserInterests ON (News.section_id = UserInterests.section_id
