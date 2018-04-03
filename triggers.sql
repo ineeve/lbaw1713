@@ -14,7 +14,7 @@ BEGIN
 INSERT INTO Notifications (type, target_user_id, user_id)
 VALUES ('FollowMe', NEW.followed_user_id, NEW.follower_user_id);
 RETURN NEW;
-END;
+END
 $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER notification_follow
@@ -38,7 +38,7 @@ BEGIN
     VALUES ('CommentMyPost',
 			(SELECT author_id  FROM News WHERE id = NEW.target_news_id), NEW.target_news_id);
 	RETURN NEW;
-END;
+END
 $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER notification_comment
@@ -63,7 +63,7 @@ BEGIN
 		INNER JOIN Follows ON Users.id = Follows.follower_user_id
 	WHERE Follows.followed_user_id = NEW.author_id), NEW.author_id, NEW.id);
 	RETURN NEW;
-END;
+END
 $$ LANGUAGE 'plpgsql';
 
 CREATE TRIGGER notification_followed_publish
@@ -82,24 +82,24 @@ CREATE FUNCTION update_score_add_vote()
 RETURNS trigger AS
 $score_vote_add$
 BEGIN
-IF NEW.type = TRUE THEN -- upvoted
-UPDATE News SET votes = votes + 1
-WHERE News.id = NEW.news_id;
-UPDATE Users SET points = points + 1
-WHERE Users.id = (SELECT Users.id
-	FROM Users INNER JOIN News ON (Users.id = News.author_id)
-	WHERE  NEW.news_id = News.id);
+	IF NEW.type = TRUE THEN -- upvoted
+		UPDATE News SET votes = votes + 1
+			WHERE News.id = NEW.news_id;
+		UPDATE Users SET points = points + 1
+			WHERE Users.id = (SELECT Users.id
+												FROM Users INNER JOIN News ON (Users.id = News.author_id)
+												WHERE  NEW.news_id = News.id);
 	ELSE -- downvoted
-	UPDATE News SET votes = votes - 1
-	WHERE News.id =  NEW.news_id;
-	UPDATE Users SET points = points - 1
-	WHERE Users.id = (SELECT Users.id
-		FROM Users INNER JOIN News ON (Users.id = News.author_id)
-		WHERE  NEW.news_id = News.id);
-		END IF;
-		RETURN NEW;
-		END;
-		$score_vote_add$ LANGUAGE plpgsql;
+		UPDATE News SET votes = votes - 1
+			WHERE News.id =  NEW.news_id;
+		UPDATE Users SET points = points - 1
+			WHERE Users.id = (SELECT Users.id
+												FROM Users INNER JOIN News ON (Users.id = News.author_id)
+												WHERE  NEW.news_id = News.id);
+	END IF;
+	RETURN NEW;
+END
+$score_vote_add$ LANGUAGE plpgsql;
 
 CREATE TRIGGER score_vote_add
 AFTER INSERT ON Votes
