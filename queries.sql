@@ -29,8 +29,8 @@ VALUES ($username, $email, $gender, $country_id, $picture, $password);
 
 -- INSERT03
 -- Criar uma notícia
-INSERT INTO news (title, date, body, image, section_id, author_id)
-VALUES ($title, date = now(), body=$body, image=$image, section_id=$section_id, author_id=$author_id);
+INSERT INTO news (title, body, image, section_id, author_id)
+VALUES ($title, body=$body, image=$image, section_id=$section_id, author_id=$author_id);
 
 -- UPDATE04
 UPDATE news
