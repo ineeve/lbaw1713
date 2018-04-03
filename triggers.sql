@@ -2,8 +2,8 @@
 
 --FUNCIONA--------------------------------------------------
 --TRIGGER01
-DROP TRIGGER IF EXISTS notification_follow ON Follows;
-DROP FUNCTION IF EXISTS create_notification_follow();
+DROP TRIGGER IF EXISTS notification_follow ON Follows CASCADE;
+DROP FUNCTION IF EXISTS create_notification_follow() CASCADE;
 
 --Notificacao de quando alguem comenta uma noticia minha
 
@@ -64,8 +64,8 @@ DROP FUNCTION IF EXISTS create_notification_followed_publish() CASCADE;
 --- INSERT INTO news (title,body,image,votes,section_id,author_id) VALUES ('title','body','32.png',0,1,1);
 -- Ver notificações de 2
 --- SELECT * FROM Notifications WHERE Notifications.target_user_id = 2;
+
 --Notificacao de quando alguem que seguimos publica uma noticia
---TODO quando é seguido por mais de uma pessoa?
 CREATE OR REPLACE FUNCTION create_notification_followed_publish()
 RETURNS trigger AS
 $$
@@ -89,8 +89,8 @@ CREATE TRIGGER notification_followed_publish
 
 --TRIGGER04
 
-DROP TRIGGER IF EXISTS score_vote_add ON Votes;
-DROP FUNCTION IF EXISTS update_score_add_vote();
+DROP TRIGGER IF EXISTS score_vote_add ON Votes CASCADE;
+DROP FUNCTION IF EXISTS update_score_add_vote() CASCADE;
 
 CREATE FUNCTION update_score_add_vote()
 RETURNS trigger AS
