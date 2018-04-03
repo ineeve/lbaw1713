@@ -16,7 +16,6 @@ SELECT title,date,votes,Sections.name as section_name,Sections.icon as section_i
 FROM news NATURAL JOIN sections NATURAL JOIN users JOIN newssources ON news.id = newsSources.news_id
 WHERE news.id = $newsId;
 
---TODO PUT others here
 
 -- SELECT07
 -- List badges
@@ -70,30 +69,36 @@ WHERE NOT EXISTS ( SELECT *
                           ((ReportedItems.comment_id = DeletedItems.comment_id) AND (ReportedItems.news_id IS NULL) AND (DeletedItems.news_id IS NULL))
                           OR((ReportedItems.comment_id IS NULL) AND (DeletedItems.comment_id IS NULL) AND (ReportedItems.news_id = DeletedItems.news_id))));
 
---TODO Which select is
 -- select news sources
 SELECT news_id, source_id FROM NewsSources
 WHERE news_id = $newsId;
+
+--SELECT04
 --Obter uma noticia (seus conteudos)
 SELECT title, date, body, image, votes, Sections.name, Users.username
  FROM News, Sections, Users
  WHERE News.id  = $newsID AND Sections.id = News.section_id AND Users.id = News.author_id
  AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE DeletedItems.news_id = News.id);
+
 --Obter as noticias publicadas por um utilizador
 SELECT title, date, body, image, votes, Sections.name, Users.username
   FROM News, Sections, Users
   WHERE News.author_id = $userID AND Sections.id = News.section_id AND Users.id = News.author_id
   AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE DeletedItems.news_id = News.id);
+
+--SELECT05
 --Obter as noticias de uma noticia de uma categoria especifica
 SELECT title, date, body, image, votes, Sections.name, Users.username
   FROM News, Sections, Users
   WHERE Sections.id = News.section_id AND Users.id = News.author_id AND Sections.name = $section
   AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE News.id = DeletedItems.news_id);
+--SELECT06
 --Obter noticias entre duas datas
 SELECT title, date, body, image, votes, Sections.name, Users.username
   FROM News, Sections, Users
   WHERE Sections.id = News.section_id AND Users.id = News.author_id AND cast(News.date AS DATE) BETWEEN $startDate AND $endDate
   AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE DeletedItems.news_id = News.id);
+--SELECT15
 --Obter as noticias do ultimo mes
 SELECT title, date, body, image, votes, Sections.name, Users.username
   FROM News, Sections, Users
@@ -101,6 +106,7 @@ SELECT title, date, body, image, votes, Sections.name, Users.username
 AND EXTRACT(YEAR FROM cast(News.date AS DATE)) = EXTRACT(YEAR FROM now())
  AND Sections.id = News.section_id AND Users.id = News.author_id
   AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE DeletedItems.news_id = News.id);
+--SELECT16
 --Obter os comentarios de uma noticia
 SELECT text, date, Users.username
  FROM Comments, Users
@@ -196,8 +202,6 @@ INSERT INTO comments ("text", creator_user_id, target_news_id) VALUES ($text,#us
 UPDATE comments
 SET "text" = $text, "date" = now()
 WHERE id=$id;
-
--- TODO  FIND OTHERS
 
 -- INSERT10
 -- Create news report
