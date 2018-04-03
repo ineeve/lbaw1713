@@ -1,11 +1,9 @@
 
 
 --FUNCIONA--------------------------------------------------
-
+--TRIGGER 01
 DROP TRIGGER IF EXISTS notification_follow ON Follows;
 DROP FUNCTION IF EXISTS create_notification_follow();
-
---Notificacao de quando alguem comenta uma noticia minha
 
 CREATE FUNCTION create_notification_follow()
 RETURNS trigger AS
