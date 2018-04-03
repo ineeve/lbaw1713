@@ -32,11 +32,11 @@ CREATE TABLE Users (
 	country_id INTEGER,
 	picture text,
 	password text NOT NULL,
-	points INTEGER NOT NULL,
-	permission text NOT NULL,
+	points INTEGER NOT NULL DEFAULT 0,
+	permission text NOT NULL DEFAULT 'normal'],
 	CONSTRAINT gender CHECK (gender = ANY(ARRAY['Male', 'Female', 'Other']::text[])),
 	CONSTRAINT points CHECK (points >= 0),
-	CONSTRAINT permission CHECK (permission = ANY (ARRAY['Admin','Moderator','Normal']::text[]))
+	CONSTRAINT permission CHECK (permission = ANY (ARRAY['admin','moderator','normal']::text[]))
 );
 
 CREATE TABLE News (

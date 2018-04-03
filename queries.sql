@@ -20,18 +20,21 @@ WHERE news.id = $newsId;
 -- atualizar info de um utilizador
 UPDATE user
 SET email=$email, gender=$gender, country_id=$country_id, picture=$picture
+WHERE id=$id;
 
 -- INSERT02
 -- Criar um user
-INSERT INTO user (username, email, gender, country_id, picture, password, points, permission)
-VALUES ($username, $email, $gender, $country_id, $picture, $password, 0, 'normal');
+INSERT INTO user (username, email, gender, country_id, picture, password)
+VALUES ($username, $email, $gender, $country_id, $picture, $password);
 
 -- INSERT03
 -- Criar uma notícia
+INSERT INTO news (title, date, body, image, section_id, author_id)
+VALUES ($title, date = now(), body=$body, image=$image, section_id=$section_id, author_id=$author_id);
 
 -- UPDATE04
-UPDATE News
-SET title = $title, "date" = now(), body=$body, image=$image, section_id=$section_id
+UPDATE news
+SET title = $title, date = now(), body=$body, image=$image, section_id=$section_id
 WHERE id=$id;
 
 --INSERT05
