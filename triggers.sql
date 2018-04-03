@@ -5,7 +5,7 @@
 DROP TRIGGER IF EXISTS notification_follow ON Follows CASCADE;
 DROP FUNCTION IF EXISTS create_notification_follow() CASCADE;
 
---Notificacao de quando alguem comenta uma noticia minha
+--Notificacao de quando alguem me segue
 
 -- CONFIRMED WORKING
 CREATE FUNCTION create_notification_follow()
@@ -171,11 +171,30 @@ EXECUTE PROCEDURE update_score_remove_vote();
 
 
 --TRIGGER07
+
+-- TESTE:
+-- INSERT INTO Votes (user_id, news_id, type) VALUES (2, 1006, TRUE);
+-- SELECT * FROM Notifications WHERE target_user_id = 1 AND news_id = 1006;
+
+-- Notificacao de votos numa publicacao minha
+DROP TRIGGER IF EXISTS notification_vote_my_post ON Votes CASCADE;
+DROP FUNCTION IF EXISTS create_notification_vote_my_post() CASCADE;
+
+CREATE FUNCTION create_notification_vote_my_post()
+RETURNS trigger AS
+$BODY$
+BEGIN
+	INSERT INTO Notifications (type, target_user_id, news_id)
+	SELECT 'VoteMyPost', Users.id, NEW.news_id
+		FROM Users INNER JOIN News ON Users.id = News.author_id
+		WHERE News.id = NEW.news_id;
+	RETURN NEW;
+END
+$BODY$ LANGUAGE plpgsql;
+
 CREATE TRIGGER notification_vote_my_post
-  AFTER INSERT ON Votes
-	EXECUTE PROCEDURE create_notification_vote_my_post((SELECT Users.id FROM Users
-	INNER JOIN News ON Users.id = News.author_id
-WHERE News.id = NEW.news_id), NEW.user_id, NEW.news_id);
+AFTER INSERT ON Votes
+FOR EACH ROW EXECUTE PROCEDURE create_notification_vote_my_post();
 
 
 --TRIGGER08
@@ -212,7 +231,7 @@ BEGIN
 		END IF;
 	END IF;
 	RETURN NEW;
-END;
+END
 $BODY$ LANGUAGE plpgsql;
 
 CREATE TRIGGER score_vote_change
