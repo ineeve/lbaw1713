@@ -32,6 +32,7 @@ DROP FUNCTION IF EXISTS create_notification_comment() CASCADE;
 
 --Notificacao de quando alguem comenta uma noticia minha
 
+-- CONFIRMED WORKING
 CREATE OR REPLACE FUNCTION create_notification_comment()
 RETURNS trigger AS
 $$
@@ -43,6 +44,7 @@ BEGIN
 END
 $$ LANGUAGE plpgsql;
 
+-- CONFIRMED WORKING
 CREATE TRIGGER notification_comment
   AFTER INSERT ON Comments
   FOR EACH ROW EXECUTE PROCEDURE create_notification_comment();
