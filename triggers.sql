@@ -1,7 +1,5 @@
-
-
 --FUNCIONA--------------------------------------------------
-
+--TRIGGER01
 DROP TRIGGER IF EXISTS notification_follow ON Follows;
 DROP FUNCTION IF EXISTS create_notification_follow();
 
@@ -51,11 +49,12 @@ CREATE TRIGGER notification_comment
 -- INSERT INTO Follows(follower_user_id, followed_user_id) VALUES (2, 1);
 -- SELECT * FROM Notifications WHERE Notifications.target_user_id = 1;
 
+--TRIGGER03
 DROP TRIGGER IF EXISTS notification_followed_publish ON Follows;
 DROP FUNCTION IF EXISTS create_notification_followed_publish();
 
 --Notificacao de quando alguem que seguimos publica uma noticia
-
+--TODO quando é seguido por mais de uma pessoa?
 CREATE OR REPLACE FUNCTION create_notification_followed_publish()
 RETURNS trigger AS
 $$
@@ -76,6 +75,8 @@ CREATE TRIGGER notification_followed_publish
 -- TESTE:
 -- INSERT INTO News(title, body, image, section_id, author_id) VALUES ('A dusting of salt could cool the planet', '', 'teste1.png', 8, 36);
 -- SELECT * FROM Notifications WHERE Notifications.target_user_id = 9;
+
+--TRIGGER04
 
 DROP TRIGGER IF EXISTS score_vote_add ON Votes;
 DROP FUNCTION IF EXISTS update_score_add_vote();
