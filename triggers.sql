@@ -5,6 +5,9 @@
 DROP TRIGGER IF EXISTS notification_follow ON Follows;
 DROP FUNCTION IF EXISTS create_notification_follow();
 
+--Notificacao de quando alguem comenta uma noticia minha
+
+-- CONFIRMED WORKING
 CREATE FUNCTION create_notification_follow()
 RETURNS trigger AS
 $$
@@ -15,6 +18,7 @@ RETURN NEW;
 END
 $$ LANGUAGE plpgsql;
 
+-- CONFIRMED WORKING
 CREATE TRIGGER notification_follow
 AFTER INSERT ON Follows
 FOR EACH ROW EXECUTE PROCEDURE create_notification_follow();
@@ -23,10 +27,8 @@ FOR EACH ROW EXECUTE PROCEDURE create_notification_follow();
 -- INSERT INTO Comments(text, creator_user_id, target_news_id) VALUES ('ola', 2, 1);
 -- SELECT * FROM Notifications WHERE Notifications.target_user_id = 56;
 
-
---TRIGGER02
-DROP TRIGGER IF EXISTS notification_comment ON Follows;
-DROP FUNCTION IF EXISTS create_notification_comment();
+DROP TRIGGER IF EXISTS notification_comment ON Follows CASCADE;
+DROP FUNCTION IF EXISTS create_notification_comment() CASCADE;
 
 --Notificacao de quando alguem comenta uma noticia minha
 
@@ -34,9 +36,9 @@ CREATE OR REPLACE FUNCTION create_notification_comment()
 RETURNS trigger AS
 $$
 BEGIN
-  INSERT INTO Notifications (type, target_user_id, news_id)
+  INSERT INTO Notifications (type, target_user_id, user_id, news_id)
     VALUES ('CommentMyPost',
-			(SELECT author_id  FROM News WHERE id = NEW.target_news_id), NEW.target_news_id);
+			(SELECT author_id  FROM News WHERE id = NEW.target_news_id), NEW.creator_user_id, NEW.target_news_id);
 	RETURN NEW;
 END
 $$ LANGUAGE plpgsql;
