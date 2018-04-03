@@ -183,20 +183,22 @@ FROM Reasons
 
 -- FREQUENT INSERTS / UPDATES / DELETES
 
+-- INSERT10
 -- Create news report
 INSERT INTO ReportedItems (user_id, news_id, description)
 VALUES ($userId, $newsId, $description);
 
+-- INSERT11
 -- Create comment report
 INSERT INTO ReportedItems (user_id, comment_id, description)
 VALUES ($userId, $commentId, $description);
 
-
-
+-- INSERT12
 -- Delete news
 INSERT INTO DeletedItems (user_id, news_id, brief)
 VALUES ($userId, $newsId, $brief);
 
+-- INSERT13
 -- Delete comment
 INSERT INTO DeletedItems (user_id, comment_id, brief)
 VALUES ($userId, $commentId, $brief);
