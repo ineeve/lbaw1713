@@ -65,6 +65,7 @@ DROP FUNCTION IF EXISTS create_notification_followed_publish() CASCADE;
 -- Ver notificações de 2
 --- SELECT * FROM Notifications WHERE Notifications.target_user_id = 2;
 
+-- CONFIRMED WORKING
 --Notificacao de quando alguem que seguimos publica uma noticia
 CREATE OR REPLACE FUNCTION create_notification_followed_publish()
 RETURNS trigger AS
@@ -78,6 +79,7 @@ BEGIN
 END
 $$ LANGUAGE 'plpgsql';
 
+-- CONFIRMED WORKING
 CREATE TRIGGER notification_followed_publish
   AFTER INSERT ON News
 	FOR EACH ROW
@@ -89,9 +91,14 @@ CREATE TRIGGER notification_followed_publish
 
 --TRIGGER04
 
+-- TESTE:
+-- INSERT INTO Votes (user_id, news_id, type) VALUES (1, 1006, TRUE);
+-- SELECT * FROM News WHERE id = 1006;
+
 DROP TRIGGER IF EXISTS score_vote_add ON Votes CASCADE;
 DROP FUNCTION IF EXISTS update_score_add_vote() CASCADE;
 
+-- CONFIRMED WORKING
 CREATE FUNCTION update_score_add_vote()
 RETURNS trigger AS
 $score_vote_add$
@@ -115,40 +122,51 @@ BEGIN
 END
 $score_vote_add$ LANGUAGE plpgsql;
 
+-- CONFIRMED WORKING
 CREATE TRIGGER score_vote_add
 AFTER INSERT ON Votes
 FOR EACH ROW EXECUTE PROCEDURE update_score_add_vote();
 
 --END    FUNCIONA_-------------------------------------------------
 
+
+
 --TRIGGER06
+
+-- TESTE:
+-- DELETE FROM Votes WHERE user_id = 1 AND news_id = 1006;
+-- SELECT * FROM News WHERE id = 1006;
+
 -- Increment/decrement news and news' author points when removing a Votes entry.
-DROP TRIGGER IF EXISTS score_vote_remove ON Votes;
-DROP FUNCTION IF EXISTS update_score_remove_vote();
+DROP TRIGGER IF EXISTS score_vote_remove ON Votes CASCADE;
+DROP FUNCTION IF EXISTS update_score_remove_vote() CASCADE;
+
 CREATE FUNCTION update_score_remove_vote()
 RETURNS trigger AS
 $BODY$
 BEGIN
 	IF OLD.type IS TRUE THEN -- removed upvote
 		UPDATE News SET votes = votes - 1
-			WHERE News.id = NEW.news_id;
+			WHERE News.id = OLD.news_id;
 		UPDATE Users SET points = points - 1
-			WHERE Users.id = (SELECT id
+			WHERE Users.id = (SELECT Users.id
 												FROM Users INNER JOIN News ON (Users.id = News.author_id)
-												WHERE NEW.news_id = News.id);
+												WHERE OLD.news_id = News.id);
 	ELSE -- removed downvote
 		UPDATE News SET votes = votes + 1
-			WHERE News.id = NEW.news_id;
+			WHERE News.id = OLD.news_id;
 		UPDATE Users SET points = points + 1
-			WHERE Users.id = (SELECT id
+			WHERE Users.id = (SELECT Users.id
 												FROM Users INNER JOIN News ON (Users.id = News.author_id)
-												WHERE NEW.news_id = News.id);
+												WHERE OLD.news_id = News.id);
 	END IF;
-	RETURN NEW;
-END;
+	RETURN OLD;
+END
 $BODY$ LANGUAGE plpgsql;
+
 CREATE TRIGGER score_vote_remove
 AFTER DELETE ON Votes
+FOR EACH ROW
 EXECUTE PROCEDURE update_score_remove_vote();
 
 
