@@ -16,6 +16,19 @@ SELECT title,date,votes,Sections.name as section_name,Sections.icon as section_i
 FROM news NATURAL JOIN sections NATURAL JOIN users JOIN newssources ON news.id = newsSources.news_id
 WHERE news.id = $newsId;
 
+-- UPDATE01
+-- atualizar info de um utilizador
+UPDATE user
+SET email=$email, gender=$gender, country_id=$country_id, picture=$picture
+
+-- INSERT02
+-- Criar um user
+INSERT INTO user (username, email, gender, country_id, picture, password, points, permission)
+VALUES ($username, $email, $gender, $country_id, $picture, $password, 0, 'normal');
+
+-- INSERT03
+-- Criar uma notícia
+
 -- UPDATE04
 UPDATE News
 SET title = $title, "date" = now(), body=$body, image=$image, section_id=$section_id
