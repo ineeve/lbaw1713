@@ -3,12 +3,6 @@
 SELECT username,email,gender,Countries.name As country,picture,points,permission
 FROM users NATURAL JOIN countries
 WHERE users.id = $userId;
-<<<<<<< HEAD
-=======
-
--- SELECT02
-SELECT
->>>>>>> fc7cc72c0f2b7ff17845072f0e9b72a98e6e51ac
 
 -- SELECT02
 -- select news data to show on preview
