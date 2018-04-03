@@ -7,7 +7,7 @@ WHERE users.id = $userId;
 -- SELECT02
 -- select news data to show on preview
 SELECT title,users.username As author,date,votes,image, substring(body, '(?:<p>)[^<>]*\.(?:<\/p>)') as body_preview
-FROM news NATURAL JOIN users WHERE textsearchable_index_col @@ to_tsquery('mapped')
+FROM news NATURAL JOIN users WHERE textsearchable_index_col @@ to_tsquery($search_string)
 LIMIT 100 OFFSET 0;
 
 -- SELECT03
