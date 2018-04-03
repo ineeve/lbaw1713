@@ -1,7 +1,5 @@
-
-
 --FUNCIONA--------------------------------------------------
---TRIGGER 01
+--TRIGGER01
 DROP TRIGGER IF EXISTS notification_follow ON Follows;
 DROP FUNCTION IF EXISTS create_notification_follow();
 
@@ -23,6 +21,8 @@ FOR EACH ROW EXECUTE PROCEDURE create_notification_follow();
 -- INSERT INTO Comments(text, creator_user_id, target_news_id) VALUES ('ola', 2, 1);
 -- SELECT * FROM Notifications WHERE Notifications.target_user_id = 56;
 
+
+--TRIGGER02
 DROP TRIGGER IF EXISTS notification_comment ON Follows;
 DROP FUNCTION IF EXISTS create_notification_comment();
 
@@ -47,6 +47,7 @@ CREATE TRIGGER notification_comment
 -- INSERT INTO Follows(follower_user_id, followed_user_id) VALUES (2, 1);
 -- SELECT * FROM Notifications WHERE Notifications.target_user_id = 1;
 
+--TRIGGER03
 DROP TRIGGER IF EXISTS notification_followed_publish ON Follows;
 DROP FUNCTION IF EXISTS create_notification_followed_publish();
 
