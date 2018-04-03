@@ -3,36 +3,51 @@
 SELECT username,email,gender,Countries.name As country,picture,points,permission
 FROM users NATURAL JOIN countries
 WHERE users.id = $userId;
--- SELECT02
-SELECT
 
 -- SELECT02
-SELECT title,author_id
-FROM news WHERE textsearchable_index_col @@ to_tsquery('gold')
-LIMIT 10;
-
--- UPDATE04
-UPDATE News
-SET title = $title, "date" = now(), body=$body, image=$image, section_id=$section_id
-WHERE id=$id;
-
---INSERT05
-INSERT INTO comments ("text", creator_user_id, target_news_id) VALUES ($text,#user_id,$news_id);
+-- select news data to show on preview
+SELECT title,users.username As author,date,votes,image, substring(body, '(?:<p>)[^<>]*\.(?:<\/p>)') as body_preview
+FROM news NATURAL JOIN users WHERE textsearchable_index_col @@ to_tsquery('mapped')
+LIMIT 100 OFFSET 0;
 
 -- SELECT03
 -- select news title,date,body,image,votes,section,author
-SELECT title,date,image,votes,Sections.name as section_name,Sections.icon as section_icon , Users.username as author, body
+SELECT title,date,votes,Sections.name as section_name,Sections.icon as section_icon , Users.username as author, body
 FROM news NATURAL JOIN sections NATURAL JOIN users JOIN newssources ON news.id = newsSources.news_id
 WHERE news.id = $newsId;
 
--- select news sources
-SELECT news_id, source_id FROM NewsSources
-WHERE news_id = $newsId;
+--TODO PUT others here
 
--- UPDATE06
-UPDATE comments
-SET "text" = $text, "date" = now()
-WHERE id=$id;
+-- SELECT07
+-- List badges
+SELECT name, brief, votes, articles, comments
+FROM Badges;
+
+-- SELECT08
+-- List news of an user
+-- TODO: Limit body to first characters/words
+SELECT title, date, body, image, votes, Sections.name, Users.username
+FROM News INNER JOIN Sections ON (News.section_id = Sections.id)
+      INNER JOIN Users ON (News.author_id = Users.id)
+WHERE NOT EXISTS (SELECT *
+                  FROM DeletedItems
+                  WHERE DeletedItems.news_id = News.id)
+  AND $userId = News.author_id;
+
+-- SELECT09
+-- List sections
+SELECT name, icon
+FROM Sections;
+
+-- SELECT10
+-- Search for your listed interests
+SELECT title, date, body, image, votes, Sections.name, Users.username
+FROM News INNER JOIN UserInterests ON (News.section_id = UserInterests.section_id AND $user_id = UserInterests.user_id)
+      INNER JOIN Sections ON (News.section_id = Sections.id)
+      INNER JOIN Users ON (News.author_id = Users.id)
+WHERE NOT EXISTS (SELECT *
+                  FROM DeletedItems
+                  WHERE DeletedItems.news_id = News.id);
 
 -- SELECT11
 SELECT *
@@ -50,37 +65,15 @@ WHERE ModeratorComments.comment_id = $commentId;
 SELECT *
 FROM ReportedItems
 WHERE NOT EXISTS ( SELECT *
-      FROM DeletedItems
-      WHERE (
-        ((ReportedItems.comment_id = DeletedItems.comment_id) AND (ReportedItems.news_id IS NULL) AND (DeletedItems.news_id IS NULL))
-        OR((ReportedItems.comment_id IS NULL) AND (DeletedItems.comment_id IS NULL) AND (ReportedItems.news_id = DeletedItems.news_id))));
+                   FROM DeletedItems
+                   WHERE (
+                          ((ReportedItems.comment_id = DeletedItems.comment_id) AND (ReportedItems.news_id IS NULL) AND (DeletedItems.news_id IS NULL))
+                          OR((ReportedItems.comment_id IS NULL) AND (DeletedItems.comment_id IS NULL) AND (ReportedItems.news_id = DeletedItems.news_id))));
 
--- List badges
-SELECT name, brief, votes, articles, comments
-FROM Badges;
-
--- List news
--- TODO: Limit body to first characters/words
-SELECT title, date, body, image, votes, Sections.name, Users.username
-FROM News INNER JOIN Sections ON (News.section_id = Sections.id)
-      INNER JOIN Users ON (News.author_id = Users.id)
-WHERE NOT EXISTS (SELECT *
-                  FROM DeletedItems
-                  WHERE DeletedItems.news_id = News.id);
-
--- List sections
-SELECT name, icon
-FROM Sections;
-
--- Search for your listed interests
-SELECT title, date, body, image, votes, Sections.name, Users.username
-FROM News INNER JOIN UserInterests ON (News.section_id = UserInterests.section_id
-                                        AND $userId = UserInterests.user_id)
-      INNER JOIN Users ON (News.author_id = Users.id)
-WHERE NOT EXISTS (SELECT *
-                  FROM DeletedItems
-                  WHERE DeletedItems.news_id = News.id);
-
+--TODO Which select is
+-- select news sources
+SELECT news_id, source_id FROM NewsSources
+WHERE news_id = $newsId;
 --Obter uma noticia (seus conteudos)
 SELECT title, date, body, image, votes, Sections.name, Users.username
  FROM News, Sections, Users
@@ -173,22 +166,55 @@ FROM Reasons
 
 
 
--- FREQUENT INSERTS / UPDATES / DELETES
+-- SELECTS UPDATES DELETES
 
+-- UPDATE01
+-- atualizar info de um utilizador
+UPDATE user
+SET email=$email, gender=$gender, country_id=$country_id, picture=$picture
+WHERE id=$id;
+
+-- INSERT02
+-- Criar um user
+INSERT INTO user (username, email, gender, country_id, picture, password)
+VALUES ($username, $email, $gender, $country_id, $picture, $password);
+
+-- INSERT03
+-- Criar uma notícia
+INSERT INTO news (title, body, image, section_id, author_id)
+VALUES ($title, body=$body, image=$image, section_id=$section_id, author_id=$author_id);
+
+-- UPDATE04
+UPDATE news
+SET title = $title, date = now(), body=$body, image=$image, section_id=$section_id
+WHERE id=$id;
+
+--INSERT05
+INSERT INTO comments ("text", creator_user_id, target_news_id) VALUES ($text,#user_id,$news_id);
+
+-- UPDATE06
+UPDATE comments
+SET "text" = $text, "date" = now()
+WHERE id=$id;
+
+-- TODO  FIND OTHERS
+
+-- INSERT10
 -- Create news report
 INSERT INTO ReportedItems (user_id, news_id, description)
 VALUES ($userId, $newsId, $description);
 
+-- INSERT11
 -- Create comment report
 INSERT INTO ReportedItems (user_id, comment_id, description)
 VALUES ($userId, $commentId, $description);
 
-
-
+-- INSERT12
 -- Delete news
 INSERT INTO DeletedItems (user_id, news_id, brief)
 VALUES ($userId, $newsId, $brief);
 
+-- INSERT13
 -- Delete comment
 INSERT INTO DeletedItems (user_id, comment_id, brief)
 VALUES ($userId, $commentId, $brief);
