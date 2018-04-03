@@ -16,59 +16,7 @@ SELECT title,date,votes,Sections.name as section_name,Sections.icon as section_i
 FROM news NATURAL JOIN sections NATURAL JOIN users JOIN newssources ON news.id = newsSources.news_id
 WHERE news.id = $newsId;
 
--- UPDATE01
--- atualizar info de um utilizador
-UPDATE user
-SET email=$email, gender=$gender, country_id=$country_id, picture=$picture
-WHERE id=$id;
-
--- INSERT02
--- Criar um user
-INSERT INTO user (username, email, gender, country_id, picture, password)
-VALUES ($username, $email, $gender, $country_id, $picture, $password);
-
--- INSERT03
--- Criar uma notícia
-INSERT INTO news (title, body, image, section_id, author_id)
-VALUES ($title, body=$body, image=$image, section_id=$section_id, author_id=$author_id);
-
--- UPDATE04
-UPDATE news
-SET title = $title, date = now(), body=$body, image=$image, section_id=$section_id
-WHERE id=$id;
-
---INSERT05
-INSERT INTO comments ("text", creator_user_id, target_news_id) VALUES ($text,#user_id,$news_id);
-
--- select news sources
-SELECT news_id, source_id FROM NewsSources
-WHERE news_id = $newsId;
-
--- UPDATE06
-UPDATE comments
-SET "text" = $text, "date" = now()
-WHERE id=$id;
-
--- SELECT11
-SELECT *
-FROM Notifications
-WHERE Notifications.target_user_id = $userId;
--- SELECT12
-SELECT *
-FROM ModeratorComments
-WHERE ModeratorComments.news_id = $newsId;
--- SELECT13
-SELECT *
-FROM ModeratorComments
-WHERE ModeratorComments.comment_id = $commentId;
--- SELECT14
-SELECT *
-FROM ReportedItems
-WHERE NOT EXISTS ( SELECT *
-      FROM DeletedItems
-      WHERE (
-        ((ReportedItems.comment_id = DeletedItems.comment_id) AND (ReportedItems.news_id IS NULL) AND (DeletedItems.news_id IS NULL))
-        OR((ReportedItems.comment_id IS NULL) AND (DeletedItems.comment_id IS NULL) AND (ReportedItems.news_id = DeletedItems.news_id))));
+--TODO PUT others here
 
 -- SELECT07
 -- List badges
@@ -94,14 +42,38 @@ FROM Sections;
 -- SELECT10
 -- Search for your listed interests
 SELECT title, date, body, image, votes, Sections.name, Users.username
-FROM News INNER JOIN UserInterests ON (News.section_id = UserInterests.section_id
-                                        AND $user_id = UserInterests.user_id)
+FROM News INNER JOIN UserInterests ON (News.section_id = UserInterests.section_id AND $user_id = UserInterests.user_id)
       INNER JOIN Sections ON (News.section_id = Sections.id)
       INNER JOIN Users ON (News.author_id = Users.id)
 WHERE NOT EXISTS (SELECT *
                   FROM DeletedItems
                   WHERE DeletedItems.news_id = News.id);
 
+-- SELECT11
+SELECT *
+FROM Notifications
+WHERE Notifications.target_user_id = $userId;
+-- SELECT12
+SELECT *
+FROM ModeratorComments
+WHERE ModeratorComments.news_id = $newsId;
+-- SELECT13
+SELECT *
+FROM ModeratorComments
+WHERE ModeratorComments.comment_id = $commentId;
+-- SELECT14
+SELECT *
+FROM ReportedItems
+WHERE NOT EXISTS ( SELECT *
+                   FROM DeletedItems
+                   WHERE (
+                          ((ReportedItems.comment_id = DeletedItems.comment_id) AND (ReportedItems.news_id IS NULL) AND (DeletedItems.news_id IS NULL))
+                          OR((ReportedItems.comment_id IS NULL) AND (DeletedItems.comment_id IS NULL) AND (ReportedItems.news_id = DeletedItems.news_id))));
+
+--TODO Which select is
+-- select news sources
+SELECT news_id, source_id FROM NewsSources
+WHERE news_id = $newsId;
 --Obter uma noticia (seus conteudos)
 SELECT title, date, body, image, votes, Sections.name, Users.username
  FROM News, Sections, Users
@@ -194,7 +166,38 @@ FROM Reasons
 
 
 
--- FREQUENT INSERTS / UPDATES / DELETES
+-- SELECTS UPDATES DELETES
+
+-- UPDATE01
+-- atualizar info de um utilizador
+UPDATE user
+SET email=$email, gender=$gender, country_id=$country_id, picture=$picture
+WHERE id=$id;
+
+-- INSERT02
+-- Criar um user
+INSERT INTO user (username, email, gender, country_id, picture, password)
+VALUES ($username, $email, $gender, $country_id, $picture, $password);
+
+-- INSERT03
+-- Criar uma notícia
+INSERT INTO news (title, body, image, section_id, author_id)
+VALUES ($title, body=$body, image=$image, section_id=$section_id, author_id=$author_id);
+
+-- UPDATE04
+UPDATE news
+SET title = $title, date = now(), body=$body, image=$image, section_id=$section_id
+WHERE id=$id;
+
+--INSERT05
+INSERT INTO comments ("text", creator_user_id, target_news_id) VALUES ($text,#user_id,$news_id);
+
+-- UPDATE06
+UPDATE comments
+SET "text" = $text, "date" = now()
+WHERE id=$id;
+
+-- TODO  FIND OTHERS
 
 -- INSERT10
 -- Create news report
