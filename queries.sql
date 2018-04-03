@@ -3,6 +3,12 @@
 SELECT username,email,gender,Countries.name As country,picture,points,permission
 FROM users NATURAL JOIN countries
 WHERE users.id = $userId;
+<<<<<<< HEAD
+=======
+
+-- SELECT02
+SELECT
+>>>>>>> fc7cc72c0f2b7ff17845072f0e9b72a98e6e51ac
 
 -- SELECT02
 -- select news data to show on preview
@@ -54,27 +60,33 @@ WHERE NOT EXISTS ( SELECT *
         ((ReportedItems.comment_id = DeletedItems.comment_id) AND (ReportedItems.news_id IS NULL) AND (DeletedItems.news_id IS NULL))
         OR((ReportedItems.comment_id IS NULL) AND (DeletedItems.comment_id IS NULL) AND (ReportedItems.news_id = DeletedItems.news_id))));
 
+-- SELECT07
 -- List badges
 SELECT name, brief, votes, articles, comments
 FROM Badges;
 
--- List news
+-- SELECT08
+-- List news of an user
 -- TODO: Limit body to first characters/words
 SELECT title, date, body, image, votes, Sections.name, Users.username
 FROM News INNER JOIN Sections ON (News.section_id = Sections.id)
       INNER JOIN Users ON (News.author_id = Users.id)
 WHERE NOT EXISTS (SELECT *
                   FROM DeletedItems
-                  WHERE DeletedItems.news_id = News.id);
+                  WHERE DeletedItems.news_id = News.id)
+  AND $userId = News.author_id;
 
+-- SELECT09
 -- List sections
 SELECT name, icon
 FROM Sections;
 
+-- SELECT10
 -- Search for your listed interests
 SELECT title, date, body, image, votes, Sections.name, Users.username
 FROM News INNER JOIN UserInterests ON (News.section_id = UserInterests.section_id
-                                        AND $userId = UserInterests.user_id)
+                                        AND $user_id = UserInterests.user_id)
+      INNER JOIN Sections ON (News.section_id = Sections.id)
       INNER JOIN Users ON (News.author_id = Users.id)
 WHERE NOT EXISTS (SELECT *
                   FROM DeletedItems
@@ -174,20 +186,22 @@ FROM Reasons
 
 -- FREQUENT INSERTS / UPDATES / DELETES
 
+-- INSERT10
 -- Create news report
 INSERT INTO ReportedItems (user_id, news_id, description)
 VALUES ($userId, $newsId, $description);
 
+-- INSERT11
 -- Create comment report
 INSERT INTO ReportedItems (user_id, comment_id, description)
 VALUES ($userId, $commentId, $description);
 
-
-
+-- INSERT12
 -- Delete news
 INSERT INTO DeletedItems (user_id, news_id, brief)
 VALUES ($userId, $newsId, $brief);
 
+-- INSERT13
 -- Delete comment
 INSERT INTO DeletedItems (user_id, comment_id, brief)
 VALUES ($userId, $commentId, $brief);
