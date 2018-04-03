@@ -48,7 +48,7 @@ CREATE TABLE News (
 	votes INTEGER NOT NULL DEFAULT 0,
 	section_id INTEGER NOT NULL,
 	author_id INTEGER NOT NULL,
-	
+
 );
 
 CREATE TABLE Comments(
@@ -121,8 +121,9 @@ CREATE TABLE Notifications (
    was_read BOOLEAN DEFAULT false,
    user_id INTEGER,
    news_id INTEGER,
-   CONSTRAINT notification_type_attr CHECK ((type = 'FollowMe' AND news_id IS NULL) OR user_id IS NULL),
-   CONSTRAINT notification_attr_null CHECK ((news_id IS NULL OR user_id IS NULL) AND news_id != user_id),
+   CONSTRAINT notification_type_attr CHECK ((type = 'FollowMe' AND news_id IS NULL AND user_id IS NOT NULL) OR
+	 																					(type = 'VoteMyPost' AND news_id IS NOT NULL AND user_id IS NULL) OR
+																						((type = 'CommentMyPost' OR type = 'FollowedPublish') AND news_id IS NOT NULL AND user_id IS NOT NULL)),
    CONSTRAINT notification_type CHECK (type = ANY(ARRAY['FollowMe','CommentMyPost', 'FollowedPublish', 'VoteMyPost']::text[]))
 );
 
@@ -181,7 +182,7 @@ CREATE TABLE DeletedItems (
 	date TIMESTAMP WITH TIME zone DEFAULT now() NOT NULL,
 	brief TEXT,
 	CONSTRAINT deleted_items_attr CHECK (
-		(news_id IS NULL AND comment_id IS NOT NULL) OR 
+		(news_id IS NULL AND comment_id IS NOT NULL) OR
 		(news_id IS NOT NULL AND comment_id IS NULL)
 		)
 );
@@ -193,7 +194,7 @@ CREATE TABLE ReportedItems (
 	comment_id INTEGER, -- fkey
 	description text,
 	CONSTRAINT reported_items_attr CHECK (
-		(news_id IS NULL AND comment_id IS NOT NULL) OR 
+		(news_id IS NULL AND comment_id IS NOT NULL) OR
 		(news_id IS NOT NULL AND comment_id IS NULL)
 		)
 );
