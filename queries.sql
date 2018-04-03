@@ -3,13 +3,19 @@
 SELECT username,email,gender,Countries.name As country,picture,points,permission
 FROM users NATURAL JOIN countries
 WHERE users.id = $userId;
--- SELECT02
-SELECT
 
 -- SELECT02
-SELECT title,author_id
-FROM news WHERE textsearchable_index_col @@ to_tsquery('gold')
-LIMIT 10;
+SELECT title,users.username As author,date,votes,image, substring(body from '[A-Z]\w*\.') as body_preview
+FROM news NATURAL JOIN users WHERE textsearchable_index_col @@ to_tsquery('gold')
+LIMIT 100 OFFSET 0;
+
+-- SELECT03
+-- select news title,date,body,image,votes,section,author
+SELECT title,date,votes,Sections.name as section_name,Sections.icon as section_icon , Users.username as author, body
+FROM news NATURAL JOIN sections NATURAL JOIN users JOIN newssources ON news.id = newsSources.news_id
+WHERE news.id = $newsId;
+
+
 
 -- UPDATE04
 UPDATE News
@@ -19,11 +25,6 @@ WHERE id=$id;
 --INSERT05
 INSERT INTO comments ("text", creator_user_id, target_news_id) VALUES ($text,#user_id,$news_id);
 
--- SELECT03
--- select news title,date,body,image,votes,section,author
-SELECT title,date,image,votes,Sections.name as section_name,Sections.icon as section_icon , Users.username as author, body
-FROM news NATURAL JOIN sections NATURAL JOIN users JOIN newssources ON news.id = newsSources.news_id
-WHERE news.id = $newsId;
 
 -- select news sources
 SELECT news_id, source_id FROM NewsSources

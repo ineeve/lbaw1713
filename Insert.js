@@ -128,7 +128,7 @@ function createNews(){
         let news = getNewNews();
         news.title = newsTitles[i%numNewsTitles];
         news.body = newsBody[i%numNewsBodies];
-        news.image = i + ".png";
+        news.image = (i+1) + ".png";
         news.votes = Math.floor(rndNum * 150 - 50);
         news.section_id = 1 + Math.floor(rndNum * NUM_SECTIONS);
         news.author_id = 1 + Math.floor(rndNum * NUM_USERS);
