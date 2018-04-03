@@ -176,3 +176,45 @@ CREATE TRIGGER notification_vote_my_post
 	EXECUTE PROCEDURE create_notification_vote_my_post((SELECT Users.id FROM Users
 	INNER JOIN News ON Users.id = News.author_id
 WHERE News.id = NEW.news_id), NEW.user_id, NEW.news_id);
+
+
+--TRIGGER08
+
+-- TESTE:
+-- INSERT INTO Votes (user_id, news_id, type) VALUES (1, 1006, TRUE);
+-- UPDATE Votes SET type = FALSE WHERE user_id = 1 AND news_id = 1006;
+-- SELECT * FROM Users WHERE id = 1;
+-- SELECT * FROM News WHERE id = 1006;
+
+-- Update by +2/-2 news and news' author points when updating a Votes entry.
+DROP TRIGGER IF EXISTS score_vote_change ON Votes CASCADE;
+DROP FUNCTION IF EXISTS update_score_change_vote() CASCADE;
+
+CREATE FUNCTION update_score_change_vote()
+RETURNS trigger AS
+$BODY$
+BEGIN
+	IF NEW.type IS TRUE AND OLD.type IS FALSE THEN -- changed downvote to upvote
+		UPDATE News SET votes = votes + 2
+			WHERE News.id = NEW.news_id;
+		UPDATE Users SET points = points + 2
+			WHERE Users.id = (SELECT Users.id
+												FROM Users INNER JOIN News ON (Users.id = News.author_id)
+												WHERE NEW.news_id = News.id);
+	ELSE
+		IF NEW.type IS FALSE AND OLD.type IS TRUE THEN -- changed upvote to downvote
+			UPDATE News SET votes = votes - 2
+			WHERE News.id = NEW.news_id;
+		UPDATE Users SET points = points - 2
+			WHERE Users.id = (SELECT Users.id
+												FROM Users INNER JOIN News ON (Users.id = News.author_id)
+												WHERE NEW.news_id = News.id);
+		END IF;
+	END IF;
+	RETURN NEW;
+END;
+$BODY$ LANGUAGE plpgsql;
+
+CREATE TRIGGER score_vote_change
+AFTER UPDATE ON Votes
+FOR EACH ROW EXECUTE PROCEDURE update_score_change_vote();
