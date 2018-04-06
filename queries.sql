@@ -149,10 +149,9 @@ WHERE ReportDescriptionForUserComment.username = $username LIMIT 10 OFFSET $offs
 --Selecionar as razões fixas de denuncia de um só comentario ($commentID)
 -- feito por um utilizador $username
 --Nota: usar 1440 como exemplo de $commentID
-SELECT Reasons.name
-FROM Reasons
-  INNER JOIN ReasonsForReport ON Reasons.id = ReasonsForReport.reason_id
-  INNER JOIN ReportDescriptionForUserComment ON ReasonsForReport.reported_item_id = ReportDescriptionForUserComment.itemID
+SELECT reason
+  FROM ReasonsForReport INNER JOIN ReportDescriptionForUserComment
+  ON ReasonsForReport.reported_item_id = ReportDescriptionForUserComment.itemID
   WHERE ReportDescriptionForUserComment.commentID = $commentID;
 
 -- SELECT21
@@ -173,10 +172,9 @@ WHERE ReportDescriptionForUserNews.username = $username LIMIT 10 OFFSET $offset;
 -- SELECT22
 --Selecionar as razões fixas de denuncia de uma só noticia ($newsID)
 -- feito por um utilizador $username
-SELECT Reasons.name
-FROM Reasons
-  INNER JOIN ReasonsForReport ON Reasons.id = ReasonsForReport.reason_id
-  INNER JOIN ReportDescriptionForUserNews ON ReasonForReport.reported_item_id = ReportDescriptionForUserNews.itemID
+SELECT reason FROM
+  ReasonsForReport INNER JOIN ReportDescriptionForUserNews 
+  ON ReasonsForReport.reported_item_id = ReportDescriptionForUserNews.itemID
   WHERE ReportDescriptionForUserNews.newsID = $newsID LIMIT 10 OFFSET $offset;
 
 -- SELECT23
