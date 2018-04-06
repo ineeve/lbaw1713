@@ -92,13 +92,13 @@ SELECT title, date, body, image, votes, Sections.name, Users.username
 --Obter noticias entre duas datas
 SELECT title, date, body, image, votes, Sections.name, Users.username
   FROM News, Sections, Users
-  WHERE Sections.id = News.section_id AND Users.id = News.author_id AND cast(News.date AS DATE) BETWEEN $startDate AND $endDate
+  WHERE Sections.id = News.section_id AND Users.id = News.author_id AND News.date BETWEEN $startdate AND $enddate
   AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE DeletedItems.news_id = News.id);
 --Obter as noticias do ultimo mes
 SELECT title, date, body, image, votes, Sections.name, Users.username
   FROM News, Sections, Users
-  WHERE EXTRACT(MONTH FROM cast(News.date AS DATE)) = EXTRACT(MONTH FROM now())
-AND EXTRACT(YEAR FROM cast(News.date AS DATE)) = EXTRACT(YEAR FROM now())
+  WHERE EXTRACT(MONTH FROM News.date) = EXTRACT(MONTH FROM now())
+AND EXTRACT(YEAR FROM News.date) = EXTRACT(YEAR FROM now())
  AND Sections.id = News.section_id AND Users.id = News.author_id
   AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE DeletedItems.news_id = News.id);
 --Obter os comentarios de uma noticia
