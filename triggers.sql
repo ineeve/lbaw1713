@@ -1,5 +1,3 @@
---TRGGER05 encontra-se no run.sql
-
 --FUNCIONA--------------------------------------------------
 --TRIGGER01
 DROP TRIGGER IF EXISTS notification_follow ON Follows CASCADE;
@@ -27,6 +25,7 @@ FOR EACH ROW EXECUTE PROCEDURE create_notification_follow();
 -- INSERT INTO Comments(text, creator_user_id, target_news_id) VALUES ('ola', 2, 1);
 -- SELECT * FROM Notifications WHERE Notifications.target_user_id = 56;
 
+-- TRIGGER02
 DROP TRIGGER IF EXISTS notification_comment ON Follows CASCADE;
 DROP FUNCTION IF EXISTS create_notification_comment() CASCADE;
 
@@ -128,6 +127,13 @@ AFTER INSERT ON Votes
 FOR EACH ROW EXECUTE PROCEDURE update_score_add_vote();
 
 --END    FUNCIONA_-------------------------------------------------
+
+
+--TRIGGER05
+
+CREATE TRIGGER tsvectorupdate BEFORE INSERT OR UPDATE
+ON news FOR EACH ROW EXECUTE PROCEDURE
+tsvector_update_trigger(textsearchable_index_col, 'pg_catalog.english', title, body);
 
 
 
