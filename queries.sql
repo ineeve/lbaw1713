@@ -1,8 +1,8 @@
 -- SELECT01
 -- select user profile
-SELECT username,email,gender,Countries.name As country,picture,points,permission
+SELECT users.id,username,email,gender,Countries.name As country,picture,points,permission
 FROM users NATURAL JOIN countries
-WHERE users.id = $userId;
+WHERE users.username = $username;
 
 -- SELECT02
 -- select news data to show on preview
