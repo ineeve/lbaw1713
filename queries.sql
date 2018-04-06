@@ -163,9 +163,13 @@ FROM Reasons
   INNER JOIN ReportDescriptionForUserNews ON ReasonForReport.reported_item_id = ReportDescriptionForUserNews.itemID
   WHERE ReportDescriptionForUserNews.newsID = &newsID;
 
+-- SELECT23
+-- Obter achievements/badges de um utilizador
+SELECT badges.id as badge_id, name, brief, votes, comments, articles FROM badges JOIN achievements ON badges.id = achievements.badge_id
+WHERE achievements.user_id = 1; 
 
 
--- SELECTS UPDATES DELETES
+-- UPDATES INSERTS DELETES
 
 -- UPDATE01
 -- atualizar info de um utilizador
