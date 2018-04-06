@@ -166,7 +166,7 @@ FROM Reasons
 -- SELECT23
 -- Obter achievements/badges de um utilizador
 SELECT badges.id as badge_id, name, brief, votes, comments, articles FROM badges JOIN achievements ON badges.id = achievements.badge_id
-WHERE achievements.user_id = 1; 
+WHERE achievements.user_id = $user_id; 
 
 
 -- UPDATES INSERTS DELETES
