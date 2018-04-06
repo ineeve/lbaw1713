@@ -97,8 +97,7 @@ SELECT title, date, body, image, votes, Sections.name, Users.username
 --Obter as noticias do ultimo mes
 SELECT title, date, body, image, votes, Sections.name, Users.username
   FROM News, Sections, Users
-  WHERE EXTRACT(MONTH FROM News.date) = EXTRACT(MONTH FROM now())
-AND EXTRACT(YEAR FROM News.date) = EXTRACT(YEAR FROM now())
+  WHERE News.date > CURRENT_DATE - INTERVAL '30 days'
  AND Sections.id = News.section_id AND Users.id = News.author_id
   AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE DeletedItems.news_id = News.id);
 --Obter os comentarios de uma noticia
