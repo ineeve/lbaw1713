@@ -95,54 +95,16 @@ WHERE NOT EXISTS ( SELECT *
                           OR((ReportedItems.comment_id IS NULL) AND (DeletedItems.comment_id IS NULL) AND (ReportedItems.news_id = DeletedItems.news_id))))
                           ORDER BY date DESC LIMIT 10 OFFSET $offset;
 
-<<<<<<< HEAD
--- select news sources
-SELECT news_id, source_id FROM NewsSources
-WHERE news_id = $newsId;
-
---SELECT04
---Obter uma noticia (seus conteudos)
-SELECT title, date, body, image, votes, Sections.name, Users.username
- FROM News, Sections, Users
- WHERE News.id  = $newsID AND Sections.id = News.section_id AND Users.id = News.author_id
- AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE DeletedItems.news_id = News.id);
-
---Obter as noticias publicadas por um utilizador
-SELECT title, date, body, image, votes, Sections.name, Users.username
-  FROM News, Sections, Users
-  WHERE News.author_id = $userID AND Sections.id = News.section_id AND Users.id = News.author_id
-  AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE DeletedItems.news_id = News.id);
-
---SELECT05
---Obter as noticias de uma noticia de uma categoria especifica
-SELECT title, date, body, image, votes, Sections.name, Users.username
-  FROM News, Sections, Users
-  WHERE Sections.id = News.section_id AND Users.id = News.author_id AND Sections.name = $section
-  AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE News.id = DeletedItems.news_id);
---SELECT06
---Obter noticias entre duas datas
-SELECT title, date, body, image, votes, Sections.name, Users.username
-  FROM News, Sections, Users
-  WHERE Sections.id = News.section_id AND Users.id = News.author_id AND cast(News.date AS DATE) BETWEEN $startDate AND $endDate
-  AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE DeletedItems.news_id = News.id);
---SELECT15
-=======
 -- SELECT15
->>>>>>> 1a56861b1280b67b4d1dd99c9bf22a426958ac83
 --Obter as noticias do ultimo mes
 SELECT title, date, body, image, votes, Sections.name, Users.username
   FROM News, Sections, Users
   WHERE News.date > CURRENT_DATE - INTERVAL '30 days'
  AND Sections.id = News.section_id AND Users.id = News.author_id
-<<<<<<< HEAD
-  AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE DeletedItems.news_id = News.id);
---SELECT16
-=======
   AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE DeletedItems.news_id = News.id)
   ORDER BY date DESC LIMIT 10 OFFSET $offset; 
 
 -- SELECT16
->>>>>>> 1a56861b1280b67b4d1dd99c9bf22a426958ac83
 --Obter os comentarios de uma noticia
 SELECT text, date, Users.username
   FROM Comments, Users
