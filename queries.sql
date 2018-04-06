@@ -50,9 +50,9 @@ WHERE NOT EXISTS (SELECT *
                   WHERE DeletedItems.news_id = News.id);
 
 -- SELECT11
-SELECT *
-FROM Notifications
-WHERE Notifications.target_user_id = $userId;
+SELECT date, type, was_read, user_id, news_id, users.username
+FROM notifications, users
+WHERE notifications.target_user_id = 1 AND (user_id = users.id OR user_id IS NULL) ORDER BY notifications.date DESC LIMIT 10 OFFSET 0;
 -- SELECT12
 SELECT *
 FROM ModeratorComments
