@@ -71,9 +71,13 @@ WHERE NOT EXISTS (
 
 
 -- SELECT11
-SELECT date, type, was_read, user_id, news_id, users.username
-FROM notifications, users
-WHERE notifications.target_user_id = $target_user_id AND (user_id = users.id OR user_id IS NULL) ORDER BY date DESC LIMIT 10 OFFSET 0;
+SELECT date, notifications.type, was_read, user_id, news_id, users.username
+FROM notifications, users, settingsnotifications
+WHERE notifications.target_user_id = $target_user_id AND
+      settingsnotifications.user_id = notifications.target_user_id AND
+      settingsnotifications.type = notifications.type AND
+      (user_id = users.id OR user_id IS NULL)
+      ORDER BY date DESC LIMIT 10 OFFSET 0;
 
 -- SELECT12
 SELECT *
