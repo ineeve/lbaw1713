@@ -45,7 +45,7 @@ After the steps above you will have updated your repository with the required la
 You will be using _PostgreSQL_ to implement this project. We've created a _docker-compose_ file that
 sets up _PostgreSQL_ and _pgadmin 4_ locally. From the project root issue the following command:
 
-    docker-compose up
+    sudo docker-compose up
 
 This will start the database and _pgadmin_. The database's username is `postgres` and the password
 `pg!fcp`. You can access http://localhost:5050 to access _pgadmin 4_ and manage your database. On the
