@@ -70,7 +70,7 @@
           <div class="navbar-collapse collapse show" id="navbar">
             @if (Auth::check())
             <a class="button" href="{{ url('/logout') }}"> Logout </a>
-            <span>{{ Auth::user()->name }}</span>
+            <span>{{ Auth::user()->username }}</span>
             <ul class="navbar-nav ml-auto">
               <!-- Publish -->
               <li class="nav-item">
@@ -137,7 +137,8 @@
                 </a>
                 <!-- DROPDOWN FOR SIGN IN -->
                 <div class="dropdown-menu dropdown-menu-right position-absolute mt-0">
-                  <form class="px-4 py-3">
+                  <form class="px-4 py-3" method="POST" action="login">
+                    <!-- TODO: ver action -->
                     <div class="form-group">
                       <label for="dropdownFormEmail">Email address</label>
                       <input type="email" class="form-control" id="dropdownFormEmail" placeholder="email@example.com">
@@ -155,7 +156,7 @@
                     <button onclick="signIn()" type="submit" class="btn btn-primary">Sign in</button>
                   </form>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="create_profile.html">New around here? Sign up</a>
+                  <a class="dropdown-item" href="register">New around here? Sign up</a>
                   <a class="dropdown-item" href="#">Forgot password?</a>
                 </div>
               </li>
