@@ -119,7 +119,7 @@
                     <i class="fas fa-cog">
                     </i> Settings
                   </a>
-                  <a class="dropdown-item" href="index.html">
+                  <a class="dropdown-item" href="logout">
                     <i class="fas fa-sign-out-alt">
                     </i> Log out
                   </a>
