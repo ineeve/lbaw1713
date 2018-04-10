@@ -17,9 +17,9 @@ class NewsController extends Controller
         return view('pages.news');
     }
 
-    public function create(Request $request)
-    {
-      $card = new Card();
-      return $card;
-    }
+    // public function create(Request $request)
+    // {
+    //   $card = new Card();
+    //   return $card;
+    // }
 }
