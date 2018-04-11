@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
@@ -39,6 +40,12 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    public function showRegistrationForm()
+    {
+      $countries = DB::select('SELECT name FROM countries');
+      return view('auth.register', ['countries' => $countries]);
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -51,6 +58,8 @@ class RegisterController extends Controller
             'username' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'country' => 'string',
+            'gender' => 'string'
         ]);
     }
 
@@ -67,6 +76,8 @@ class RegisterController extends Controller
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'country' => $data['country'],
+            'gender' => $data['gender']
         ]);
     }
 }
