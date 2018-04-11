@@ -31,6 +31,9 @@ class NewsController extends Controller
       FROM News, Sections, Users
       WHERE News.id  = ? AND Sections.id = News.section_id AND Users.id = News.author_id AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE DeletedItems.news_id = News.id)',[$id]);
 
+      //TODO: check if exists;
+      $news = $news[0];
+
       return view('pages.news_item', ['news' => $news]);
     }
 
