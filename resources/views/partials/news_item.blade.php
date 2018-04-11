@@ -1,21 +1,19 @@
 <div class="news_box border container ml-0 my-2">
     <div class="row" style="position:relative;">
         <div class="col col-sm-auto my-2">
-            <img src="images/fry.jpg" width="100px" height="100px" alt="Icon">
+            <img src="{{ asset('img/'.$item->image) }}" width="100px" height="100px" alt="Icon">
         </div>
         <div class="col">
             <div class="row">
-                <a class="nounderline" style="color:inherit;" href="news_user_owns.html">
-                    <h3 class="font-weight-normal">Stephen Fry has prostate cancer surgery</h3>
-                </a>
+                <a class="nounderline" style="color:inherit;" href="notDone">
+                    <h3 class="font-weight-normal">{{ $item->title }}</a>
             </div>
             <div class="row">
                 <p>
-                    <span class="font-weight-bold">101 points</span> &middot; NadiaKhomami &middot; 19:01 24/02/2018</p>
+                    <span class="font-weight-bold">{{ $item->votes }} votes</span> &middot; {{ $item->author }} &middot; {{ $item->date }}</p>
             </div>
             <div class="row">
-                <p>Stephen Fry has announced that he has prostate cancer. The actor and TV presenter underwent an operation
-                    in January to have his prostate and 11 lymph nodes removed.</p>
+                <p>{{ $item->body_preview }}</p>
             </div>
         </div>
     </div>
