@@ -24,9 +24,12 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('register', 'Auth\RegisterController@register');
 
+// News
 
 
-Route::get('news', 'NewsController@show');
+Route::get('news', 'NewsController@list');
+
+Route::get('news/{id}', 'NewsController@show');
 
 // // Cards
 // Route::get('cards', 'CardController@list');

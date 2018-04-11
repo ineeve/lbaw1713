@@ -39,7 +39,7 @@
           </div>
           <div class="d-flex flex-column">
             <div>
-              @each('partials.news_item', $news, 'item')
+              @each('partials.news_item_preview', $news, 'item')
               <!-- <h1>ESTOU AQUI</h1> -->
             </div>
             <div class="row">
