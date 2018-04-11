@@ -66,10 +66,10 @@
           
         <div class="form-group">
           <label for="country">Country:</label>
-          <select id="country" name="country" class="form-control">
+          <select id="country" name="country_id" class="form-control">
               <option value="" disabled selected>Select your country</option>
               @foreach ($countries as $country)
-                <option value={{$country->name}}> {{$country->name}} </option>
+                <option value={{$country->id}}> {{$country->name}} </option>
               @endforeach
           </select>
         </div>
