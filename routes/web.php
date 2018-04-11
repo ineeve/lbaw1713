@@ -27,7 +27,9 @@ Route::post('register', 'Auth\RegisterController@register');
 //Create news
 Route::get('news/create', 'CreateNewsController@show')->name('create_news'); 
 
-Route::get('news', 'NewsController@show');
+Route::get('news', 'NewsController@list');
+
+Route::get('news/{id}', 'NewsController@show');
 
 // // Cards
 // Route::get('cards', 'CardController@list');
