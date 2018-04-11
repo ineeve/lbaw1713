@@ -24,7 +24,8 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('register', 'Auth\RegisterController@register');
 
-
+//Create news
+Route::get('news/create', 'CreateNewsController@show')->name('create_news'); 
 
 Route::get('news', 'NewsController@show');
 
