@@ -1,4 +1,4 @@
-
+<script src="{{ asset('js/scroolComment.js') }}" defer></script>
   <div id="myTabContent" class="tab-content">
     <div class="tab-pane fade active show" id="article">
       <div class="container-fluid">
@@ -41,7 +41,7 @@
               <!-- TODO: add comments -->
               <div class="row">
                 <div class="col">
-                  <a href="#" class="loadMore" style="text-decoration: none;">Show More</a>
+                  <a id="scroolComment" href="#" class="loadMore" style="text-decoration: none;">Show More</a>
                 </div>
                 <div class="col text-right">
                   <p class="totop">

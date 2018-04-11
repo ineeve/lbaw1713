@@ -31,6 +31,8 @@ Route::get('news', 'NewsController@list');
 
 Route::get('news/{id}', 'NewsController@show');
 
+Route::get('api/news/{news_id}/comments/scroll','AjaxController@scrollOfComments');
+
 // // Cards
 // Route::get('cards', 'CardController@list');
 // Route::get('cards/{id}', 'CardController@show');
