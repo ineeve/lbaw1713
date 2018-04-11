@@ -1,0 +1,59 @@
+.article-options .clickable-btn {
+    opacity: 0.7;
+}
+
+.article-options .clickable-btn:hover {
+    opacity: 1;
+    transition: opacity;
+}
+
+#btnGroupDrop1 {
+  border: 0;
+  background: transparent;
+
+}
+
+div.section-div {
+  border-bottom: 4px solid #E0E0E0;
+}
+
+.scrollable {
+  max-height: 70vh;
+  overflow: auto;
+}
+
+a.nounderline {
+  text-decoration: none;
+}
+
+.no-display {
+  display: none;
+}
+
+@media (min-width: 768px){
+  .dropdown-menu-right {
+    right: 0;
+    left: auto;
+  }
+}
+/* TODO: why did we have this? - Anabela */
+/* div.news_box {
+  display: none; 
+} */
+
+#loadMore {
+  transition: all 600ms ease-in-out;
+  -webkit-transition: all 600ms ease-in-out;
+  -moz-transition: all 600ms ease-in-out;
+  -o-transition: all 600ms ease-in-out;
+}
+
+p.totop a {
+  display: none;
+}
+
+@media screen and (width: 768px) {
+  #sections_list {
+      display: none;
+  }
+}
