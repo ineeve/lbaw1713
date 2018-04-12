@@ -11,11 +11,12 @@
 |
 */
 
+// Homepage
 Route::get('/', function () {
     return redirect('news');
-});
+})->name('homepage');
 
-// // Authentication
+// Authentication
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login'); 
 // TODO: apagar GET LOGIN
 Route::post('login', 'Auth\LoginController@login');

@@ -54,7 +54,7 @@
       <!-- NAVBAR -->
       <nav class="row navbar navbar-expand-lg navbar-dark bg-primary mx-0">
         <div class="col-12 col-md-3">
-          <a class="navbar-brand" href="index.html">Photon News</a>
+          <a class="navbar-brand" href="{{ route('homepage') }}">Photon News</a>
         </div>
         <div class="col-12 col-md-5">
           <div class="container ml-0 d-flex flex-column px-0">
