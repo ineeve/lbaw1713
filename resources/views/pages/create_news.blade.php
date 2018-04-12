@@ -22,10 +22,10 @@
       "searchreplace wordcount visualblocks visualchars code fullscreen",
       "insertdatetime media nonbreaking save table contextmenu directionality",
       "emoticons template paste textcolor colorpicker textpattern codesample",
-      "fullpage toc tinymcespellchecker imagetools help"
+      "fullpage toc imagetools help"
     ],
     toolbar: "insertfile undo redo | styleselect | bold italic strikethrough | alignleft aligncenter alignright alignjustify | ltr rtl | bullist numlist outdent indent removeformat formatselect| link image media | emoticons charmap | code codesample | forecolor backcolor",
-    external_plugins: { "nanospell": "http://localhost:8000/js/tinymce/js/tinymce/plugins/nanospell/plugin.js" },
+    //external_plugins: { "nanospell": "{{asset('js/tinymce/js/tinymce/plugins/nanospell/plugin.js')}}" },
     nanospell_server:"php",
     browser_spellcheck: true,
     relative_urls: false,
