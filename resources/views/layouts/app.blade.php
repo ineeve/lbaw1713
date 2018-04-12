@@ -43,7 +43,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
     <!-- END OUR -->
-    
+
   @yield('text_editor')
 
 </head>
@@ -76,7 +76,7 @@
               <!-- Publish -->
               <li class="nav-item">
                 <button class="btn btn-outline-light my-2 my-sm-0 rounded">
-                  <a href="create_news.html" style="color:inherit; text-decoration:none">
+                  <a href="{{ route('create_news') }}" style="color:inherit; text-decoration:none">
                     Publish
                   </a>
                 </button>
