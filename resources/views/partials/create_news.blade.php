@@ -1,6 +1,7 @@
 <div class="container my-5">
       <h3 class="text-primary">Post a news story!</h3>
-      <form method="POST" action="news">
+      <form method="POST" action="{{ route('news') }}">
+        {{ csrf_field() }}
         <fieldset class="form-group">
           <label for="newsTitle">Title</label>
           <input type="text" name="title" class="form-control" id="newsTitle" placeholder="Insert the title here">

@@ -35,15 +35,10 @@ class NewsController extends Controller
       return view('pages.news_item', ['news' => $news]);
     }
 
-    public function create(array $data) {
-      return News::create([
-        'title' => $data['title'],
-        'section_id' => $data['section_id'],
-        'image' => bcrypt($data['image']),
-        'body' => $data['body'],
-        'gender' => $data['gender'],
-        'picture' => $data['picture'] //TODO: Sources
-    ]);
+    public function create(Request $request) {
+      $news = News::create($request->all());
+      
+      return Redirect::to('/news/$news->id');
     }
 
 }
