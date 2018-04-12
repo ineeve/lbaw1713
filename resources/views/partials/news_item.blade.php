@@ -38,7 +38,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Post</button>
               </form>
-              <!-- TODO: add comments -->
+              <span id="placeComments"><span>
               <div class="row">
                 <div class="col">
                   <a id="scroolComment" href="#" class="loadMore" style="text-decoration: none;">Show More</a>
