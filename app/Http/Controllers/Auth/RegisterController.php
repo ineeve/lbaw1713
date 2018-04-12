@@ -42,7 +42,7 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
-      $countries = DB::select('SELECT name FROM countries');
+      $countries = DB::select('SELECT * FROM countries');
       return view('auth.register', ['countries' => $countries]);
     }
 
@@ -59,7 +59,8 @@ class RegisterController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
             'country' => 'string',
-            'gender' => 'string'
+            'gender' => 'string',
+            'picture' => 'string'
         ]);
     }
 
@@ -71,13 +72,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        echo "CHEGUEI";
+        echo "Creating user";
         return User::create([
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'country' => $data['country'],
-            'gender' => $data['gender']
+            'country_id' => $data['country_id'],
+            'gender' => $data['gender'],
+            'picture' => $data['picture']
         ]);
     }
 }
