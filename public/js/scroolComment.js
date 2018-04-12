@@ -17,6 +17,8 @@ jQuery(document).ready(function () {
             },
             success: function (result) {
                 console.log(result);
+                //console.log(response.view);
+                $('#placeComments').append(result.view);
             }
         });
     });

@@ -43,7 +43,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
     <!-- END OUR -->
-    
+
   @yield('text_editor')
 
 </head>
@@ -69,14 +69,16 @@
         </div>
         <div class="col-12 col-md-4">
           <div class="navbar-collapse collapse show" id="navbar">
-            @if (Auth::check())
-            <a class="button" href="{{ url('/logout') }}"> Logout </a>
-            <span>{{ Auth::user()->username }}</span>
+            
             <ul class="navbar-nav ml-auto">
+            <li class="nav-item" style="vertical-align:middle;">
+              @if (Auth::check())
+              <span class="mx-2 align-middle" style="color:white;">{{ Auth::user()->username }}</span>
+            </li>
               <!-- Publish -->
               <li class="nav-item">
                 <button class="btn btn-outline-light my-2 my-sm-0 rounded">
-                  <a href="create_news.html" style="color:inherit; text-decoration:none">
+                  <a href="{{ route('create_news') }}" style="color:inherit; text-decoration:none">
                     Publish
                   </a>
                 </button>
