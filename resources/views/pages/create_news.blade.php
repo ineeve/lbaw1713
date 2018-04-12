@@ -3,10 +3,17 @@
 <!-- <h1>HELLO WORLD!! IS IT ME???</h1> -->
 @section('title', "HELLO WORLD!!")
 @section('text_editor')
-<script src="{{asset('js/tinymce/jquery.tinymce.min.js')}}"></script>
-<script src="{{asset('js/tinymce/tinymce.min.js')}}"></script>
+<script src="{{asset('js/tinymce/js/tinymce/jquery.tinymce.min.js')}}"></script>
+<script src="{{asset('js/tinymce/js/tinymce/tinymce.min.js')}}"></script>
 
-<script>
+  <!-- Tiny MCE -->
+  <!-- <script src="tinymce/tinymce.min.js"></script> -->
+  <!-- End Of Tiny MCE -->
+  <!-- <script src="resources/assets/js/createNews.js" defer></script> -->
+@endsection
+@section('content')
+  @include('partials.create_news')
+  <script>
   var editor_config = {
     path_absolute : "/",
     selector: "textarea.editor",
@@ -15,10 +22,10 @@
       "searchreplace wordcount visualblocks visualchars code fullscreen",
       "insertdatetime media nonbreaking save table contextmenu directionality",
       "emoticons template paste textcolor colorpicker textpattern codesample",
-      "fullpage toc tinymcespellchecker imagetools help"
+      "fullpage toc imagetools help"
     ],
     toolbar: "insertfile undo redo | styleselect | bold italic strikethrough | alignleft aligncenter alignright alignjustify | ltr rtl | bullist numlist outdent indent removeformat formatselect| link image media | emoticons charmap | code codesample | forecolor backcolor",
-    external_plugins: { "nanospell": "http://YOUR_DOMAIN.COM/js/tinymce/plugins/nanospell/plugin.js" },
+    //external_plugins: { "nanospell": "{{asset('js/tinymce/js/tinymce/plugins/nanospell/plugin.js')}}" },
     nanospell_server:"php",
     browser_spellcheck: true,
     relative_urls: false,
@@ -53,11 +60,4 @@
 <script>
   {!! \File::get(base_path('vendor/barryvdh/laravel-elfinder/resources/assets/js/standalonepopup.min.js')) !!}
 </script>
-  <!-- Tiny MCE -->
-  <!-- <script src="tinymce/tinymce.min.js"></script> -->
-  <!-- End Of Tiny MCE -->
-  <!-- <script src="resources/assets/js/createNews.js" defer></script> -->
-@endsection
-@section('content')
-  @include('partials.create_news')
 @endsection

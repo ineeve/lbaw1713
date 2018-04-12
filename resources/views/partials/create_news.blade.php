@@ -21,7 +21,7 @@
         </fieldset>
         <fieldset class="form-group">
           <label for="newsBody">Body</label>
-          <textarea id="newsBody"></textarea>
+          <textarea class="form-control editor"></textarea>
         </fieldset>
         <fieldset class="form-group">
           <label for="sources">Sources</label>
