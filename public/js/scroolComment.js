@@ -4,11 +4,11 @@ jQuery(document).ready(function () {
     let offset = 0; 
     jQuery('#scroolComment').click(function (e) {
         e.preventDefault();
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-            }
-        });
+            $.ajaxSetup({
+                headers: {
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+              });
         jQuery.ajax({
             url: "/api/news/21/comments/scroll", //TODO: change
             method: 'post',
@@ -17,6 +17,8 @@ jQuery(document).ready(function () {
             },
             success: function (result) {
                 console.log(result);
+                //console.log(response.view);
+                $('#placeComments').append(result.view);
             }
         });
     });
