@@ -48,9 +48,10 @@ a.nounderline {
   -o-transition: all 600ms ease-in-out;
 }
 
-p.totop a {
+/* TODO: why did we have this? - Anabela */
+/* p.totop a {
   display: none;
-}
+} */
 
 @media screen and (width: 768px) {
   #sections_list {

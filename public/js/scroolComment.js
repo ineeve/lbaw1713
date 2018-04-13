@@ -19,10 +19,10 @@ jQuery(document).ready(function () {
                 if(result.next == 0){
                     $('#placeComments').append("<div class=\"alert alert-dismissible alert-secondary\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Sorry!</strong> No more comments at the moment!</div>");
                 }
-                offset += result.next;
                 $('#placeComments').append(result.view);
                 offset += result.next;
             }
         });
     });
+    jQuery('#scroolComment').trigger('click');
 });

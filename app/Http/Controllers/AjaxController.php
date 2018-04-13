@@ -32,6 +32,49 @@ public function scrollComments(Request $request, $news_id) {
     ];
 
     return Response::json($data, $status_code);
-    return response()->json($comments, $status_code);
+    
  }
+
+ public function changeToSectionAll(Request $request) {
+
+    $news =  DB::select('SELECT title, date, body, image, votes, Sections.name, Users.username
+                        FROM News, Sections, Users
+                        WHERE Sections.id = News.section_id AND Users.id = News.author_id
+                        AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE News.id = DeletedItems.news_id)
+                        ORDER BY date DESC LIMIT 10 OFFSET 0;');
+
+    $sections = DB::select('SELECT icon, name FROM Sections');
+
+    $status_code = 200; // TODO: change if not found!
+    $data = [
+        'view' => View::make('partials.news')
+            ->with('news', $news)
+            ->with('sections', $sections)
+            ->render()
+    ];
+
+    return Response::json($data, $status_code);
+    
+ }
+
+ public function changeSection(Request $request, $section) {
+
+    $news =  DB::select('SELECT title, date, body, image, votes, Sections.name, Users.username
+    FROM News, Sections, Users
+    WHERE Sections.id = News.section_id AND Users.id = News.author_id AND Sections.name = $section
+    AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE News.id = DeletedItems.news_id)
+    ORDER BY date DESC LIMIT 10 OFFSET 0;', [$section]);
+
+    $status_code = 200; // TODO: change if not found!
+    $data = [
+        'view' => View::make('partials.section')
+            ->with('section', $news)
+            ->render()
+    ];
+
+    return Response::json($data, $status_code);
+    
+ }
+
+
 }

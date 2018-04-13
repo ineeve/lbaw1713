@@ -6,15 +6,26 @@
           <!-- ARTICLE OPTIONS -->
           <div class="col-1 pr-0">
             <div class="d-flex mt-5 justify-content-end">
+              <div class="container-fluid">
+              </div>
+              
               <div class="position-relative mr-2 mt-1 d-flex flex-column justify-content-between align-items-end">
                 <span> {{ $news->votes }}</span>
-                <span class="position-absolute" style="bottom: -4px;">Report</span>
               </div>
               <div class="d-flex flex-column article-options">
                 <i class="fas fa-arrow-alt-circle-up clickable-btn"></i>
                 <i class="fas fa-arrow-alt-circle-down mt-2 clickable-btn"></i>
-                <i class="fas fa-ban mt-2 clickable-btn" data-toggle="modal" data-target="#reportModal"></i>
-                <!-- Report -->
+                @if (Auth::user()->id == $news->author_id)
+                  <!-- Edit -->
+                  <a href="edit_news.html" style="color: inherit;">
+                    Edit <i class="fas fa-edit clickable-btn mt-2"></i>
+                  </a>
+                  <!-- Delete -->
+                  Delete <i class="fas fa-times mt-2 clickable-btn mt-2"></i>
+                @else
+                  <!-- Report -->
+                  Report <i class="fas fa-ban mt-2 clickable-btn" data-toggle="modal" data-target="#reportModal"></i>
+                @endif
               </div>
             </div>
           </div>
@@ -31,7 +42,7 @@
               <div class="body">
                   {!! $news->body !!}
               </div>
-              <h4>Source</h4>
+              <h4>Sources</h4>
                 @foreach ($sources as $source)
                   <a href="{{ $source->link }}">{{ $source->link }}</a>
                 @endforeach
@@ -45,7 +56,7 @@
               <div class="row" id="placeComments">
               </div>
               <div class="row">
-                <div class="col">
+              <div class="col">
                   <a id="scroolComment" href="#" class="loadMore" style="text-decoration: none;">Show More</a>
                 </div>
                 <div class="col text-right">
