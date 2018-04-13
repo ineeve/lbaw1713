@@ -69,12 +69,12 @@
         </div>
         <div class="col-12 col-md-4">
           <div class="navbar-collapse collapse show" id="navbar">
-            
+          @if (Auth::check())
             <ul class="navbar-nav ml-auto">
-            <li class="nav-item" style="vertical-align:middle;">
-              @if (Auth::check())
-              <span class="mx-2 align-middle" style="color:white;">{{ Auth::user()->username }}</span>
-            </li>
+          <!--  <li class="nav-item d-flex align-items-center">
+              
+              <span class="mx-2" style="color:white;">{{ Auth::user()->username }}</span>
+            </li> -->
               <!-- Publish -->
               <li class="nav-item">
                 <button class="btn btn-outline-light my-2 my-sm-0 rounded">
@@ -107,8 +107,7 @@
               <!-- Account -->
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
-                  <i class="fas fa-user-circle">
-                  </i> Account</a>
+                  <i class="fas fa-user-circle"></i>{{ Auth::user()->username }}</a>
                 <div class="dropdown-menu dropdown-menu-right position-absolute" x-placement="bottom-start">
                   <a class="dropdown-item" href="profile.html">
                     <i class="fas fa-user">
