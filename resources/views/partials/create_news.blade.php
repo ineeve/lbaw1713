@@ -6,14 +6,11 @@
           <label for="newsTitle">Title</label>
           <input type="text" name="title" class="form-control" id="newsTitle" placeholder="Insert the title here">
           <label for="list_categories" class="mt-2">Select category</label>
-          <input list="list_categories" name="section_id" placeholder="Category" class="form-control">
-          <datalist id="list_categories">
-            <option value="Sports">
-            <option value="Politics">
-            <option value="Business">
-            <option value="Technology">
-            <option value="Science">
-          </datalist>
+          <select name="section_id" placeholder="Category" class="form-control">
+            @foreach ($sections as $section)
+              <option value={{$section->id}}> {{$section->name}} </option>
+            @endforeach
+          </select>
           <label for="previewImage" class="mt-2">Preview image</label>
           <div class="custom-file">
             <input type="file" name="image" class="custom-file-input" id="previewImage">
