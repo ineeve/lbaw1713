@@ -36,4 +36,10 @@ class User extends Authenticatable
      public function cards() {
       return $this->hasMany('App\Card');
     }
+        /**
+     * The notification of this user.
+     */
+    public function notifications() {
+        return $this->hasMany('App\Notification', 'target_user_id','id');
+    }
 }
