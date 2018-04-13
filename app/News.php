@@ -15,7 +15,7 @@ class News extends Model {
      * @var array
      */
     protected $fillable = [
-        'title', 'date', 'body', 'image', 'section_id'
+        'title', 'date', 'body', 'image', 'section_id', 'author_id'
     ];
 
     public function comments() {

@@ -11,7 +11,9 @@ class CreateNewsController extends Controller
   
     public function show()
     {
-      return view('pages.create_news');
+      $sections = DB::select('SELECT * FROM Sections');
+
+      return view('pages.create_news', ['sections' => $sections]);
     }
 
 }

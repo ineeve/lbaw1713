@@ -2,17 +2,15 @@
 
 <!-- <h1>HELLO WORLD!! IS IT ME???</h1> -->
 @section('title', "HELLO WORLD!!")
-@section('text_editor')
-<script src="{{asset('js/tinymce/js/tinymce/jquery.tinymce.min.js')}}"></script>
-<script src="{{asset('js/tinymce/js/tinymce/tinymce.min.js')}}"></script>
 
-  <!-- Tiny MCE -->
-  <!-- <script src="tinymce/tinymce.min.js"></script> -->
-  <!-- End Of Tiny MCE -->
-  <!-- <script src="resources/assets/js/createNews.js" defer></script> -->
+@section('text_editor')
+  <script src="{{asset('js/tinymce/js/tinymce/jquery.tinymce.min.js')}}"></script>
+  <script src="{{asset('js/tinymce/js/tinymce/tinymce.min.js')}}"></script>
 @endsection
+
 @section('content')
   @include('partials.create_news')
+
   <script>
   var editor_config = {
     path_absolute : "/",
