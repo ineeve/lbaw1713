@@ -29,7 +29,7 @@
               <img class="img-fluid mx-auto my-3 d-block" src="{{ asset('img/'.$news->image) }}" alt="TODO ADD "
                width="460" height="345">
               <div class="body">
-                  {{ $news->body }}
+                  {!! $news->body !!}
               </div>
               <h4>Source</h4>
               <!-- TODO: add sources -->

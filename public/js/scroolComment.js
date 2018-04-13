@@ -10,14 +10,16 @@ jQuery(document).ready(function () {
                 }
               });
         jQuery.ajax({
-            url: "/api/news/"+news_id+"/comments/scroll", //TODO: change
+            url: "/api/news/"+news_id+"/comments/scroll",
             method: 'post',
             data: {
                 next_comment: offset
             },
             success: function (result) {
-                console.log(result);
-                //console.log(response.view);
+                if(result.next == 0){
+                    $('#placeComments').append("<div class=\"alert alert-dismissible alert-secondary\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Sorry!</strong> No more comments at the moment!</div>");
+                }
+                offset += result.next;
                 $('#placeComments').append(result.view);
                 offset += result.next;
             }
