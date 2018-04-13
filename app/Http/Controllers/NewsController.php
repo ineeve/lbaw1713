@@ -16,7 +16,7 @@ class NewsController extends Controller
     {
       //$this->authorize('list', News::class);
 
-      $news = DB::select('SELECT news.id AS idOf, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview FROM news JOIN users ON news.author_id = users.id
+      $news = DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview FROM news JOIN users ON news.author_id = users.id
       -- WHERE textsearchable_body_and_title_index_col @@ to_tsquery(title) 
       LIMIT 10 OFFSET 0'
       );
