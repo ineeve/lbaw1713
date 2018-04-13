@@ -19,10 +19,12 @@ class NewsController extends Controller
 
       $news = DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview FROM news JOIN users ON news.author_id = users.id
       -- WHERE textsearchable_body_and_title_index_col @@ to_tsquery(title) 
-      LIMIT 10 OFFSET 0'
-      );
+      LIMIT 10 OFFSET 0');
+
+      $sections = DB::select('SELECT icon, name FROM Sections');
+
       //TODO: alter query
-      return view('pages.news', ['news' => $news]);
+      return view('pages.news', ['news' => $news, 'sections' => $sections]);
     }
 
     public function list_section($section_id)
