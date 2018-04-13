@@ -14,8 +14,9 @@ class AjaxController extends Controller {
       return response()->json(array('msg'=> $msg), 200);
    }
 
-   public function scrollComments(Request $request, $news_id) {
+public function scrollComments(Request $request, $news_id) {
 
+    // echo "ECHOING NEWS ID: ".$news_id;
     $comments =  DB::select('SELECT text, date, Users.username AS commentator
         FROM Comments, Users
         WHERE Comments.target_news_id = ? AND Comments.creator_user_id = Users.id
@@ -26,7 +27,8 @@ class AjaxController extends Controller {
     $data = [
         'view' => View::make('partials.comment')
             ->with('comments', $comments)
-            ->render()
+            ->render(),
+        'next' => count($comments)
     ];
 
     return Response::json($data, $status_code);

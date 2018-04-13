@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return redirect('news');
-});
+})->name('homepage');
 
 // // Authentication
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login'); 
@@ -27,11 +27,15 @@ Route::post('register', 'Auth\RegisterController@register');
 //Create news
 Route::get('news/create', 'CreateNewsController@show')->name('create_news'); 
 
-Route::get('news', 'NewsController@list');
+Route::get('news', 'NewsController@list');Route::post('news', 'NewsController@create')->name('news');
+
+Route::get('news/{section_id}', 'NewsController@list');
 
 Route::get('news/{id}', 'NewsController@show');
 
 Route::post('api/news/{news_id}/comments/scroll','AjaxController@scrollComments');
+
+Route::post('api/news/{section_id}','AjaxController@changeSection');
 
 // // Cards
 // Route::get('cards', 'CardController@list');

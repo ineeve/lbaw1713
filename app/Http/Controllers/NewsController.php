@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 
+
+use App\News as News;
+
 class NewsController extends Controller
 {
   
@@ -22,17 +25,42 @@ class NewsController extends Controller
       return view('pages.news', ['news' => $news]);
     }
 
+    public function list_section($section_id)
+    {
+      //$this->authorize('list', News::class);
+
+      $news =  DB::select('SELECT title, date, body, image, votes, Sections.name, Users.username
+    FROM News, Sections, Users
+    WHERE Sections.id = News.section_id AND Users.id = News.author_id AND Sections.name = $section
+    AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE News.id = DeletedItems.news_id)
+    ORDER BY date DESC LIMIT 10 OFFSET $offset;',[$section, $request->input('next_comment')]);
+      //TODO: alter query
+      return view('pages.news', ['news' => $news]);
+    }
+
     public function show($id)
     {
 
-      $news = DB::select('SELECT title, date, body, image, votes, Sections.name AS section, Users.username AS author
+      $news = DB::select('SELECT News.id AS id, title, date, body, image, votes, Sections.name AS section, Users.username AS author
       FROM News, Sections, Users
       WHERE News.id  = ? AND Sections.id = News.section_id AND Users.id = News.author_id AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE DeletedItems.news_id = News.id)',[$id]);
 
       //TODO: check if exists;
       $news = $news[0];
 
-      return view('pages.news_item', ['news' => $news]);
+      $sources = DB::select('SELECT *
+                              FROM Sources
+                                INNER JOIN NewsSources ON Sources.id = NewsSources.source_id
+                              WHERE NewsSources.news_id = ?', [$news->id]);
+
+      return view('pages.news_item', ['news' => $news, 'sources' => $sources]);
+    }
+
+    public function create(Request $request) {
+      $request['author_id'] = Auth::user()->id;
+      $news = News::create($request->all());
+      
+      return redirect('news/'.$news->id);
     }
 
 }

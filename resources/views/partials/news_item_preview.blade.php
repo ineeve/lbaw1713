@@ -5,7 +5,7 @@
         </div>
         <div class="col">
             <div class="row">
-                <a class="nounderline" style="color:inherit;" href="news/{{ $item->id }}">
+                <a class="nounderline" style="color:inherit;" href="{{ url('news/'.$item->id) }}">
                     <h3 class="font-weight-normal">{{ $item->title }}</a>
             </div>
             <div class="row">
@@ -13,7 +13,7 @@
                     <span class="font-weight-bold">{{ $item->votes }} votes</span> &middot; {{ $item->author }} &middot; {{ $item->date }}</p>
             </div>
             <div class="row">
-                <p>{{ $item->body_preview }}</p>
+                <p>{!! $item->body_preview !!}</p>
             </div>
         </div>
     </div>

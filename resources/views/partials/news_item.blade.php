@@ -20,17 +20,21 @@
           </div>
           <!-- ARTICLE -->
           <div class="col-11 col-lg-10 mt-3 article">
+          <script type="text/javascript">
+	 	var news_id = "{{ $news->id }}";//TODO get from route
+	</script>
             <h6 class="category"> {{ $news->section }}</h6>
               <h2 class="title"> {{ $news->title }}</h2>
               <h6 class="author"> {{ $news->author }} &middot; {{ $news->date }}</h6>
               <img class="img-fluid mx-auto my-3 d-block" src="{{ asset('img/'.$news->image) }}" alt="TODO ADD "
                width="460" height="345">
               <div class="body">
-                  {{ $news->body }}
+                  {!! $news->body !!}
               </div>
-              <h4>Source</h4>
-              <!-- TODO: add sources -->
-              <a href="https://www.buzzfeed.com/davidmack/fox-news-deletes-anti-diversity-winter-olympics-op-ed?utm_term=.pbarWObP7#.tdkAg8ZlJ">BuzzFeedNews</a>
+              <h4>Sources</h4>
+                @foreach ($sources as $source)
+                  <a href="{{ $source->link }}">{{ $source->link }}</a>
+                @endforeach
               <h3 class="mt-4">Comments</h3>
               <form class="mt-3 mb-4">
                 <div class="form-group">
@@ -38,9 +42,10 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Post</button>
               </form>
-              <span id="placeComments"><span>
+              <div class="row" id="placeComments">
+              </div>
               <div class="row">
-                <div class="col">
+              <div class="col">
                   <a id="scroolComment" href="#" class="loadMore" style="text-decoration: none;">Show More</a>
                 </div>
                 <div class="col text-right">

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<form class="profile_item container p-2 mx-auto mt-5" method="POST" action="{{ route('register') }}">
+<form class="profile_item container p-2 mx-auto mt-5" enctype="multipart/form-data" method="POST" action="{{ route('register') }}">
     {{ csrf_field() }}
     <div class="row">
       <div class="col-md-6">
