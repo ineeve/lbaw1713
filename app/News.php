@@ -18,4 +18,7 @@ class News extends Model {
         'title', 'date', 'body', 'image', 'section_id'
     ];
 
+    public function comments() {
+        return $this->hasMany('App\Comment');
+    }
 }

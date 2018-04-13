@@ -10,7 +10,7 @@ jQuery(document).ready(function () {
                 }
               });
         jQuery.ajax({
-            url: "/api/news/21/comments/scroll", //TODO: change
+            url: "/api/news/"+news_id+"/comments/scroll", //TODO: change
             method: 'post',
             data: {
                 next_comment: offset
@@ -19,6 +19,7 @@ jQuery(document).ready(function () {
                 console.log(result);
                 //console.log(response.view);
                 $('#placeComments').append(result.view);
+                offset += result.next;
             }
         });
     });
