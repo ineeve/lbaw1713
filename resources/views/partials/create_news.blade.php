@@ -6,9 +6,10 @@
           <label for="newsTitle">Title</label>
           <input type="text" name="title" class="form-control" id="newsTitle" placeholder="Insert the title here">
           <label for="list_categories" class="mt-2">Select category</label>
-          <select name="section_id" placeholder="Category" class="form-control">
+          <select name="section_id" class="form-control">
+            <option value="" disabled selected>Select category</option>
             @foreach ($sections as $section)
-              <option value={{$section->id}}> {{$section->name}} </option>
+              <option value={{$section->id}}>{{$section->name}}</option>
             @endforeach
           </select>
           <label for="previewImage" class="mt-2">Preview image</label>
