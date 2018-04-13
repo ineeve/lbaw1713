@@ -34,7 +34,12 @@ class NewsController extends Controller
       //TODO: check if exists;
       $news = $news[0];
 
-      return view('pages.news_item', ['news' => $news]);
+      $sources = DB::select('SELECT *
+                              FROM Sources
+                                INNER JOIN NewsSources ON Sources.id = NewsSources.source_id
+                              WHERE NewsSources.news_id = ?', [$news->id]);
+
+      return view('pages.news_item', ['news' => $news, 'sources' => $sources]);
     }
 
     public function create(Request $request) {

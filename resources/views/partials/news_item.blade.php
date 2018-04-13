@@ -32,8 +32,9 @@
                   {{ $news->body }}
               </div>
               <h4>Source</h4>
-              <!-- TODO: add sources -->
-              <a href="https://www.buzzfeed.com/davidmack/fox-news-deletes-anti-diversity-winter-olympics-op-ed?utm_term=.pbarWObP7#.tdkAg8ZlJ">BuzzFeedNews</a>
+                @foreach ($sources as $source)
+                  <a href="{{ $source->link }}">{{ $source->link }}</a>
+                @endforeach
               <h3 class="mt-4">Comments</h3>
               <form class="mt-3 mb-4">
                 <div class="form-group">
