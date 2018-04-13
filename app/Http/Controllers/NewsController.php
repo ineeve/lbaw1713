@@ -41,7 +41,7 @@ class NewsController extends Controller
       $request['author_id'] = Auth::user()->id;
       $news = News::create($request->all());
       
-      return view('pages.news_item', ['news' => $news]);
+      return redirect('news/'.$news->id);
     }
 
 }
