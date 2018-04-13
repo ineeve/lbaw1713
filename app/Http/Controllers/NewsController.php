@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 
+
 use App\News as News;
 
 class NewsController extends Controller
@@ -21,6 +22,19 @@ class NewsController extends Controller
                           -- WHERE textsearchable_body_and_title_index_col @@ to_tsquery(title) 
                           LIMIT 10 OFFSET 0'
       );
+      //TODO: alter query
+      return view('pages.news', ['news' => $news]);
+    }
+
+    public function list_section($section_id)
+    {
+      //$this->authorize('list', News::class);
+
+      $news =  DB::select('SELECT title, date, body, image, votes, Sections.name, Users.username
+    FROM News, Sections, Users
+    WHERE Sections.id = News.section_id AND Users.id = News.author_id AND Sections.name = $section
+    AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE News.id = DeletedItems.news_id)
+    ORDER BY date DESC LIMIT 10 OFFSET $offset;',[$section, $request->input('next_comment')]);
       //TODO: alter query
       return view('pages.news', ['news' => $news]);
     }
