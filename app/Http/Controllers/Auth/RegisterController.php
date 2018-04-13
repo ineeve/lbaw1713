@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use Storage;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
@@ -58,9 +59,9 @@ class RegisterController extends Controller
             'username' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
-            'country' => 'string',
-            'gender' => 'string',
-            'picture' => 'string'
+            'country' => 'string|nullable',
+            'gender' => 'string|nullable',
+            'picture' => 'nullable'
         ]);
     }
 
@@ -73,13 +74,24 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         echo "Creating user";
-        return User::create([
+        $user = User::create([
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'country_id' => $data['country_id'],
             'gender' => $data['gender'],
-            'picture' => $data['picture']
         ]);
+        $picture = $data['picture'];
+        $user->picture = $user->id;
+        $user->save();
+        
+
+        Storage::put(
+            'users/'.$user->id,
+            file_get_contents($picture->getRealPath())
+        );
+
+        
+        return $user;
     }
 }
