@@ -24,4 +24,5 @@ jQuery(document).ready(function () {
             }
         });
     });
+    jQuery('#scroolComment').trigger('click');
 });
