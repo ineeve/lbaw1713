@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 
+use App\News as News;
+
 class NewsController extends Controller
 {
   
