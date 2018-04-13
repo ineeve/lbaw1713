@@ -86,8 +86,8 @@ class RegisterController extends Controller
         $user->save();
         
 
-        Storage::put(
-            'users/'.$user->id,
+        Storage::disk('users')->put(
+            $user->id,
             file_get_contents($picture->getRealPath())
         );
 
