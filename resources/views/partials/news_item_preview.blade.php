@@ -13,7 +13,7 @@
                     <span class="font-weight-bold">{{ $item->votes }} votes</span> &middot; {{ $item->author }} &middot; {{ $item->date }}</p>
             </div>
             <div class="row">
-                <p>{{ $item->body_preview }}</p>
+                <p>{!! $item->body_preview !!}</p>
             </div>
         </div>
     </div>

@@ -54,7 +54,7 @@
               <div class="row" id="placeComments">
               </div>
               <div class="row">
-                <div class="col">
+              <div class="col">
                   <a id="scroolComment" href="#" class="loadMore" style="text-decoration: none;">Show More</a>
                 </div>
                 <div class="col text-right">
