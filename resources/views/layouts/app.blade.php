@@ -86,18 +86,7 @@
                   <i class="fas fa-bell">
                   </i> Notifications</a>
                 <div class="dropdown-menu dropdown-menu-right position-absolute" x-placement="bottom-start">
-                  <a class="dropdown-item" href="#">
-                    <i class="fas fa-user-circle">
-                    </i> User1 is following you
-                  </a>
-                  <a class="dropdown-item" href="#">
-                    <i class="fas fa-user-circle">
-                    </i> User2 published an article
-                  </a>
-                  <a class="dropdown-item" href="#">
-                    <i class="fas fa-user-circle">
-                    </i> User3 commented on your news
-                  </a>
+                  @each('partials.notification', Auth::user()->notifications()->orderBy('date')->get(), 'notification')
                 </div>
               </li>
               <!-- Account -->
