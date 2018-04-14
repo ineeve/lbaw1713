@@ -60,8 +60,8 @@ a.nounderline {
 }
 
 #upvote:hover{
-  color:green;
+  color:#428bca;
 }
 #downvote:hover{
-  color:red;
+  color:#428bca;
 }

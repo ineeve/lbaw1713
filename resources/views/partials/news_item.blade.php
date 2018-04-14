@@ -1,4 +1,8 @@
-@include('partials/report_modal')
+if(Auth::check)
+  @include('partials/report_modal')
+@else
+  @include('partials/register_modal')
+@endif
 <script src="{{ asset('js/scroolComment.js') }}" defer></script>
   <div id="myTabContent" class="tab-content">
     <div class="tab-pane fade active show" id="article">
@@ -10,8 +14,13 @@
             <div class="d-flex flex-row justify-content-end">
               <span class="mt-2 mr-2"> {{ $news->votes }}</span>
               <div class="d-flex flex-column">
-                <i class="fas fa-arrow-alt-circle-up clickable-btn" id="upvote"></i>
-                <i class="fas fa-arrow-alt-circle-down mt-2 clickable-btn" id="downvote"></i> 
+                @if (Auth::check())
+                <i class="fas fa-arrow-alt-circle-up clickable-btn" id="upvote" onclick="upvote({{Auth::user()->id}},{{$news->id}})"></i>
+                <i class="fas fa-arrow-alt-circle-down mt-2 clickable-btn" id="downvote" onclick="downvote({{Auth::user()->id}},{{$news->id}})"></i>
+                @else
+                <i class="fas fa-arrow-alt-circle-up clickable-btn" id="upvote" data-toggle="modal" data-target="#reportModal"></i>
+                <i class="fas fa-arrow-alt-circle-down mt-2 clickable-btn" id="downvote" data-toggle="modal" data-target="#reportModal"></i>
+                @endif
               </div>
             </div>
             <div class="d-flex flex-row justify-content-end mt-2"> 
@@ -36,9 +45,12 @@
                       </form>
                     </div>
                   </div>
-              @else
+              @endif
+              @if (Auth::check())
                   <!-- Report -->
                   <span class="mt-1 mr-2">Report</span> <i class="fas fa-ban mt-2 clickable-btn" data-toggle="modal" data-target="#reportModal"></i>
+              @else
+
               @endif
             </div>              
             </div>

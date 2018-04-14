@@ -65,7 +65,20 @@ function listSectionHandler() {
      // $('#placeComments').append("<div class=\"alert alert-dismissible alert-secondary\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Sorry!</strong> No more comments at the moment!</div>");
     }
     document.getElementById('news_item_preview_list').innerHTML += response['news'];
-    }
+  }
+
+  function voteHandler(e){
+
+    sendAjaxRequest("post","/api/news/")
+  }
+
+  function downvote(user_id,news_id){
+    console.log(event);
+  }
+
+  function upvote(user_id,news_id){
+    console.log(event);
+  }
   
 addEventListeners();
 
