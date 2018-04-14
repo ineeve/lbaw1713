@@ -58,6 +58,12 @@ first usage you will need to add the connection to the database using the follow
 Hostname is _postgres_ instead of _localhost_ since _docker composer_ creates an internal _DNS_ entry to
 facilitate connection between linked containers.
 
+## CREATE A SYMBOLIC LINK FOR IMAGE ASSETS
+
+    # Create a symbolic link in folder public pointing to storage/app/public
+    php artisan storage:link
+    # Assets should be placed in the folder storage/app/public
+
 ## Developing the project
 
 You're all set up to start developing the project. In the provided skeleton you will already find
