@@ -55,7 +55,6 @@ class NewsController extends Controller
       return redirect('news/'.$news->id);
     }
 
-    // TODO
     public function edit(Request $request, $id) {
       $article = News::find($id);
       $this->authorize('update', $article);
@@ -71,7 +70,7 @@ class NewsController extends Controller
     }
 
 
-    ///////////////////// EDITOR
+    ///////////////////// EDITOR BELOW
 
     public function createArticle() {
       $sections = Section::pluck('name', 'id');
