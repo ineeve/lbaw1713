@@ -72,6 +72,11 @@
                 <option value={{$country->id}}> {{$country->name}} </option>
               @endforeach
           </select>
+          @if ($errors->has('country_id'))
+            <span class="error">
+                {{ $errors->first('country_id') }}
+            </span>
+          @endif
         </div>
           
           
