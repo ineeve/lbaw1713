@@ -33,7 +33,9 @@ class NewsController extends Controller
       FROM News, Sections, Users
       WHERE News.id  = ? AND Sections.id = News.section_id AND Users.id = News.author_id AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE DeletedItems.news_id = News.id)',[$id]);
 
-      //TODO: check if exists;
+      if(count($news)==0) {
+        return redirect('/error/404');
+      }
       $news = $news[0];
 
       $sources = DB::select('SELECT *
