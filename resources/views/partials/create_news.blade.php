@@ -1,33 +1,36 @@
 <div class="container my-5">
-      <h3 class="text-primary">Post a news story!</h3>
-      <form method="POST" action="{{ route('news') }}">
-        {{ csrf_field() }}
-        <fieldset class="form-group">
-          <label for="newsTitle">Title</label>
-          <input type="text" name="title" class="form-control" id="newsTitle" placeholder="Insert the title here">
-          <label for="list_categories" class="mt-2">Select category</label>
-          <select name="section_id" class="form-control">
-            <option value="" disabled selected>Select category</option>
-            @foreach ($sections as $section)
-              <option value={{$section->id}}>{{$section->name}}</option>
-            @endforeach
-          </select>
-          <label for="previewImage" class="mt-2">Preview image</label>
-          <div class="custom-file">
-            <input type="file" name="image" class="custom-file-input" id="previewImage">
-            <label class="custom-file-label" for="previewImage">Upload preview image</label>
-          </div>
-        </fieldset>
-        <fieldset class="form-group">
-          <label for="newsBody">Body</label>
-          <textarea class="form-control editor" name="body"></textarea>
-        </fieldset>
-        <fieldset class="form-group">
-          <label for="sources">Sources</label>
-          <input id="sources " class="form-control" type="text" placeholder="Insert links to source, separated by comma">
-        </fieldset>
+  <h3 class="text-primary">Post a news story!</h3>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
+  @if (isset($article))
+    {{ Form::model($article, ['route' => ['news', $article->id], 'method' => 'post', 'files' => true]) }}
+  @else
+    {{ Form::open(['route' => 'news', 'files' => true]) }}
+  @endif
 
-    </div>
+  <fieldset class="form-group">
+    {{ Form::label('title', 'Title') }}
+    {{ Form::text('title', isset($article) ? null : 'Insert title here', ['class' => 'form-control']) }}
+
+    {{ Form::label('section_id', 'Category') }}
+    {{ Form::select('section_id', $sections, null, ['class' => 'form-control']) }}
+
+    
+    {{ Form::label('image', 'Preview image') }}
+    {{ Form::file('image', ['class' => 'form-control']) }}
+  </fieldset>
+
+  <fieldset class="form-group">
+    {{ Form::label('body', 'Body') }}
+    {{ Form::textarea('body', null, ['class' => 'form-control editor']) }}
+  </fieldset>
+
+  <fieldset class="form-group">
+    {{ Form::label('sources', 'Sources') }}
+    {{ Form::text('sources', isset($article) ? null : 'Insert links to source, separated by comma', ['class' => 'form-control']) }}
+  </fieldset>
+
+  {{ Form::submit('Submit', ['name' => 'submit', 'class' => 'btn btn-primary']) }}
+
+  {{ Form::close() }}
+
+</div>

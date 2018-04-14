@@ -34,6 +34,10 @@ Route::post('news', 'NewsController@create')->name('news');
 
 Route::get('news/{id}', 'NewsController@show');
 
+//Edit news
+Route::get('news/{id}/edit', 'CreateNewsController@editCurrent');
+Route::patch('news/{id}', 'NewsController@edit');
+
 Route::post('api/news/{news_id}/comments/scroll','AjaxController@scrollComments');
 
 

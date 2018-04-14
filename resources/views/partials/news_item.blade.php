@@ -14,7 +14,7 @@
                 <i class="fas fa-arrow-alt-circle-down mt-2 clickable-btn"></i>
                 @if (Auth::check() && Auth::user()->id == $news->author_id)
                   <!-- Edit -->
-                  <a href="edit_news.html" style="color: inherit;">
+                  <a href="{{ url('news/'.$news->id.'/edit') }}" style="color: inherit;">
                     Edit <i class="fas fa-edit clickable-btn mt-2"></i>
                   </a>
                   <!-- Delete -->

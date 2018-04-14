@@ -59,4 +59,10 @@ class NewsController extends Controller
       return redirect('news/'.$news->id);
     }
 
+    // TODO
+    public function edit($id) {
+      $article = News::find($id);
+      // TODO: Authorize
+      return View::make('create_news')->with('article', $article);
+    }
 }
