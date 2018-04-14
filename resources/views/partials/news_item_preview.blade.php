@@ -10,7 +10,7 @@
             </div>
             <div class="row">
                 <p>
-                    <span class="font-weight-bold">{{ $item->votes }} votes</span> &middot; {{ $item->author }} &middot; {{ $item->date }}</p>
+                    <span class="font-weight-bold">{{ $item->votes }} votes</span> &middot; {{ $item->author }} &middot; {{ date('d-m-Y', strtotime($item->date))  }}</p>
             </div>
             <div class="row">
                 <p>{!! $item->body_preview !!}</p>
