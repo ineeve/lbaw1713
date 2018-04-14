@@ -3,7 +3,6 @@
 
   @if (isset($article))
     {{ Form::model($article, ['route' => ['update_news', $article->id], 'method' => 'PATCH', 'files' => true]) }}
-    {{ Form::hidden($article->id) }}
   @else
     {{ Form::open(['route' => 'news', 'files' => true]) }}
   @endif
