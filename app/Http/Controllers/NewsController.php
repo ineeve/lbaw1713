@@ -12,12 +12,6 @@ use App\News as News;
 
 class NewsController extends Controller
 {
-  
-    public function prettify_date($news_array){
-      foreach($news_array as $news){
-        $news->date = date("F jS, Y \a\\t H:i", strtotime($news->date));
-      }
-    }
 
     public function list()
     {
@@ -29,8 +23,6 @@ class NewsController extends Controller
 
       $sections = DB::select('SELECT icon, name FROM Sections');
 
-      $this->prettify_date($news);
-      //TODO: alter query
       return view('pages.news', ['news' => $news, 'sections' => $sections]);
     }
 

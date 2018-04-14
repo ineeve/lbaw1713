@@ -34,7 +34,8 @@
             <h6 class="category"> {{ $news->section }}</h6>
               <h2 class="title"> {{ $news->title }}</h2>
               <h6 class="author"> {{ $news->author }} &middot; {{ $news->date }}</h6>
-              <img class="img-fluid mx-auto my-3 d-block" src="{{ asset('img/'.$news->image) }}" alt="TODO ADD "
+              <!-- TODO: change alt -->
+              <img class="img-fluid mx-auto my-3 d-block" src="{{ asset('storage/news/'.$news->image) }}" alt="{{$news->image}}"
                width="460" height="345">
               <div class="body">
                   {!! $news->body !!}
