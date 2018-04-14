@@ -32,6 +32,7 @@ function sendSelectSection(event) {
   let section_name = event.target.name;
   document.querySelector('.current_section').innerHTML = event.target.innerHTML;
   sendAjaxRequest('post', '/api/news/section/' + section_name, null, listSectionHandler);
+  console.log("offset = "+previews_offset);
 }
 
 function listSectionHandler() {
@@ -51,6 +52,7 @@ function listSectionHandler() {
     } else {
       sendAjaxRequest('post', '/api/news/section/' + section_name + '/scroll', {next_preview: previews_offset}, showMorePreviewsHandler);
     }
+    console.log("offset = "+previews_offset);
   }
   
   function showMorePreviewsHandler() {
@@ -61,7 +63,7 @@ function listSectionHandler() {
      // $('#placeComments').append("<div class=\"alert alert-dismissible alert-secondary\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Sorry!</strong> No more comments at the moment!</div>");
     }
     document.getElementById('news_item_preview_list').innerHTML += response['news'];
-    offset += 10;
+    previews_offset += 10;
     }
   
 addEventListeners();
