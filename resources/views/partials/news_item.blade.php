@@ -5,25 +5,27 @@
         <div class="row">
           <!-- ARTICLE OPTIONS -->
           <div class="col-1 pr-0">
-            <div class="d-flex mt-5 justify-content-end">              
-              <div class="position-relative mr-2 mt-1 d-flex flex-column justify-content-between align-items-end">
-                <span> {{ $news->votes }}</span>
-              </div>
-              <div class="d-flex flex-column article-options">
+            <div class="d-flex flex-column mt-5 justify-content-end">
+            <div class="d-flex flex-row justify-content-end">
+              <span class="mt-2 mr-2"> {{ $news->votes }}</span>
+              <div class="d-flex flex-column">
                 <i class="fas fa-arrow-alt-circle-up clickable-btn"></i>
-                <i class="fas fa-arrow-alt-circle-down mt-2 clickable-btn"></i>
-                @if (Auth::check() && Auth::user()->id == $news->author_id)
+                <i class="fas fa-arrow-alt-circle-down mt-2 clickable-btn"></i> 
+              </div>
+            </div>
+            <div class="d-flex flex-row justify-content-end mt-2"> 
+              @if (Auth::check() && Auth::user()->id == $news->author_id)
                   <!-- Edit -->
                   <a href="edit_news.html" style="color: inherit;">
-                    Edit <i class="fas fa-edit clickable-btn mt-2"></i>
+                    <span class="mt-1 mr-2">Edit</span> <i class="fas fa-edit clickable-btn"></i>
                   </a>
                   <!-- Delete -->
-                  Delete <i class="fas fa-times mt-2 clickable-btn mt-2"></i>
-                @else
+                  <span class="mt-1 mr-2">Delete</span> <i class="fas fa-times mt-2 clickable-btn"></i>
+              @else
                   <!-- Report -->
-                  Report <i class="fas fa-ban mt-2 clickable-btn" data-toggle="modal" data-target="#reportModal"></i>
-                @endif
-              </div>
+                  <span class="mt-1 mr-2">Report</span> <i class="fas fa-ban mt-2 clickable-btn" data-toggle="modal" data-target="#reportModal"></i>
+              @endif
+            </div>              
             </div>
           </div>
           <!-- ARTICLE -->
