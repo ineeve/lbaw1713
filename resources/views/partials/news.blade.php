@@ -42,7 +42,7 @@
             </div>
             <div class="row">
               <div class="col">
-                <a href="#" class="loadMore" style="text-decoration: none;">Show More</a>
+                <a id="scrollNewsPreview" href="#scrollNewsPreview" class="loadMore" style="text-decoration: none;">Show More</a>
               </div>
               <div class="col text-right">
                 <p class="totop">

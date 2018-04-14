@@ -21,11 +21,20 @@
                     <div class="d-flex flex-row justify-content-end">
                       <a href="{{ url('news/'.$news->id.'/edit') }}" style="color: inherit;">
                         <span class="mr-2">Edit</span> 
+                        <i class="fas fa-edit clickable-btn mt-1"></i>
                       </a>
-                      <i class="fas fa-edit clickable-btn mt-1"></i>
                     </div>
                     <!-- Delete -->
-                    <div class="d-flex flex-row justify-content-end"><span class="mt-1 mr-2">Delete</span> <i class="fas fa-times mt-2 clickable-btn"></i></div>
+                    <div class="d-flex flex-row justify-content-end">
+                      <form action="{{ route('delete_news', $news->id) }}" method="post">
+                        {{ method_field('delete') }}
+                        {{ csrf_field() }}
+                        <button type="submit">
+                          <span class="mt-1 mr-2">Delete</span>
+                          <i class="fas fa-times mt-2 clickable-btn"></i>
+                        </button>
+                      </form>
+                    </div>
                   </div>
               @else
                   <!-- Report -->

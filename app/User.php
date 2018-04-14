@@ -33,9 +33,15 @@ class User extends Authenticatable
     /**
      * The cards this user owns.
      */
-     public function cards() {
-      return $this->hasMany('App\Card');
-    }
+    public function cards() {
+        return $this->hasMany('App\Card');
+      }
+      /**
+     * The news this user owns.
+     */
+     public function news() {
+        return $this->hasMany('App\News');
+      }
         /**
      * The notification of this user.
      */

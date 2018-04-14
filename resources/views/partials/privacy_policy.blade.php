@@ -98,7 +98,4 @@
 
 
 <h2>Contact Us</h2>
-<p>If you have any questions about this Privacy Policy, please contact us:</p>
-<ul>
-          
-        </ul>
+<p>If you have any questions about this Privacy Policy, please contact us.</p>

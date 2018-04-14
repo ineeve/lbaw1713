@@ -26,7 +26,7 @@ Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('re
 Route::post('register', 'Auth\RegisterController@register');
 
 //Create news
-Route::get('news/create', 'EditorController@createArticle')->name('create_news'); 
+Route::get('news/create', 'NewsController@createArticle')->name('create_news'); 
 
 Route::get('news', 'NewsController@list');
 Route::post('news', 'NewsController@create')->name('news');
@@ -36,8 +36,11 @@ Route::post('news', 'NewsController@create')->name('news');
 Route::get('news/{id}', 'NewsController@show');
 
 //Edit news
-Route::get('news/{id}/edit', 'EditorController@editArticle');
-Route::patch('news/{id}', 'NewsController@edit');
+// TODO: Alterar Editor
+Route::get('news/{id}/edit', 'NewsController@editArticle');
+Route::patch('news/{id}', 'NewsController@edit')->name('update_news');
+//Delete News
+Route::delete('news/{id}', 'NewsController@destroy')->name('delete_news');
 
 Route::post('api/news/{news_id}/comments/scroll','AjaxController@scrollComments');
 
@@ -48,3 +51,5 @@ Route::post('api/news/section/All','AjaxController@changeToSectionAll');
 Route::post('api/news/section/{section_id}','AjaxController@changeSection');
 
 Route::get('privacy_policy','PrivacyPolicy@show');
+Route::post('api/news/section/All/scroll','AjaxController@showMorePreviewsOfAll');
+Route::post('api/news/section/{section_id}/scroll','AjaxController@showMorePreviews');
