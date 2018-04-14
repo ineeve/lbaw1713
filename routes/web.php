@@ -41,15 +41,3 @@ Route::post('api/news/','AjaxController@changeToSectionAll');
 
 Route::post('api/news/section/All','AjaxController@changeToSectionAll');
 Route::post('api/news/section/{section_id}','AjaxController@changeSection');
-
-// // Cards
-// Route::get('cards', 'CardController@list');
-// Route::get('cards/{id}', 'CardController@show');
-//
-// // API
-// Route::put('api/cards', 'CardController@create');
-// Route::delete('api/cards/{card_id}', 'CardController@delete');
-// Route::put('api/cards/{card_id}/', 'ItemController@create');
-// Route::post('api/item/{id}', 'ItemController@update');
-// Route::delete('api/item/{id}', 'ItemController@delete');
-//
