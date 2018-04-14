@@ -63,7 +63,6 @@ function listSectionHandler() {
      // $('#placeComments').append("<div class=\"alert alert-dismissible alert-secondary\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Sorry!</strong> No more comments at the moment!</div>");
     }
     document.getElementById('news_item_preview_list').innerHTML += response['news'];
-    previews_offset += 10;
     }
   
 addEventListeners();
