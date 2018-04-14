@@ -15,7 +15,7 @@
               <div class="d-flex flex-column article-options">
                 <i class="fas fa-arrow-alt-circle-up clickable-btn"></i>
                 <i class="fas fa-arrow-alt-circle-down mt-2 clickable-btn"></i>
-                @if (Auth::user()->id == $news->author_id)
+                @if (Auth::check() && Auth::user()->id == $news->author_id)
                   <!-- Edit -->
                   <a href="edit_news.html" style="color: inherit;">
                     Edit <i class="fas fa-edit clickable-btn mt-2"></i>
