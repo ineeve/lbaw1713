@@ -46,3 +46,5 @@ Route::post('api/news/','AjaxController@changeToSectionAll');
 
 Route::post('api/news/section/All','AjaxController@changeToSectionAll');
 Route::post('api/news/section/{section_id}','AjaxController@changeSection');
+
+Route::get('privacy_policy','PrivacyPolicy@show');
