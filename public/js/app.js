@@ -1,3 +1,5 @@
+console.log('app.js included');
+
 function addEventListeners() {
   let itemCheckers = document.querySelectorAll('article.card li.item input[type=checkbox]');
   [].forEach.call(itemCheckers, function(checker) {
@@ -26,7 +28,7 @@ function addEventListeners() {
   //NOSSO CODIGO
   let availableSections = document.querySelectorAll('.section_specific');
   [].forEach.call(availableSections, function(section) {
-    section.addEventListener('click', sendSelectSepcificSection);
+    section.addEventListener('click', sendSelectSpecificSection);
   });
 }
 
@@ -186,12 +188,13 @@ function createItem(item) {
 
 function sendSelectSpecificSection(event) {
   let section_name = this.text();
-
-  sendAjaxRequest('post', '/api/news/' + section_name, null, listSpecificSectiondHandler);
+  console.log("section name:" + event.target);
+  sendAjaxRequest('post', '/api/news/section' + section_name, null, listSpecificSectiondHandler);
 }
 
 
 function listSpecificSectiondHandler() {
+  console.log(this.responseText);
  // let item = JSON.parse(this.responseText);
  // let element = document.querySelector('li.item[data-id="' + item.id + '"]');
  // let input = element.querySelector('input[type=checkbox]');
