@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Response;
 
 class AjaxController extends Controller {
-    use NewsTrait;
    public function index(){
       $msg = "This is a simple message.";
       return response()->json(array('msg'=> $msg), 200);
@@ -41,7 +40,6 @@ class AjaxController extends Controller {
     $news = DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview 
     FROM news JOIN users ON news.author_id = users.id WHERE NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE News.id = DeletedItems.news_id)
     ORDER BY date DESC LIMIT 10 OFFSET 0');
-    $this->prettify_date($news);
     $status_code = 200; // TODO: change if not found!
     $view = View::make('partials.news_item_preview_list')->with('news', $news)->render();
     $data = ['news' => $view];
@@ -55,7 +53,6 @@ class AjaxController extends Controller {
     FROM news JOIN users ON news.author_id = users.id JOIN sections ON sections.id = news.section_id
     WHERE sections.name = ? AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE News.id = DeletedItems.news_id)
     ORDER BY date DESC LIMIT 10 OFFSET 0', [$section]);
-    $this->prettify_date($news);
     $status_code = 200; // TODO: change if not found!
     $view = View::make('partials.news_item_preview_list')->with('news', $news)->render();
     $data = ['news' => $view];
