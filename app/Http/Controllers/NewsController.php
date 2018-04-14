@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\View;
 
 
 use App\News as News;
-
 use App\Section as Section;
 
 class NewsController extends Controller

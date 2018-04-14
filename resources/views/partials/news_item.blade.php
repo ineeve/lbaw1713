@@ -66,9 +66,10 @@
                   <a href="{{ $source->link }}">{{ $source->link }}</a>
                 @endforeach
               <h3 class="mt-4">Comments</h3>
-              <form class="mt-3 mb-4">
+              <form class="mt-3 mb-4" method="POST" action="{{ route('comments.store', $news->id) }}">
+                {{ csrf_field() }}
                 <div class="form-group">
-                  <textarea class="form-control" id="self-comment" rows="3" placeholder="Comment"></textarea>
+                  <textarea class="form-control" name="text" id="text" rows="3" placeholder="Comment"></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Post</button>
               </form>
