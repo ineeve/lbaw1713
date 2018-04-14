@@ -2,6 +2,7 @@
     <div class="row" style="position:relative;">
         <div class="col col-sm-auto my-2">
             <img src="{{ asset('storage/news/'.$item->image) }}" width="100px" height="100px" alt="Icon">
+        
         </div>
         <div class="col">
             <div class="row">
