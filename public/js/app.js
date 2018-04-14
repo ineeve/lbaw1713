@@ -46,11 +46,6 @@ function listSpecificSectiondHandler() {
     news_preview_div.removeChild(news_preview_div.lastChild);
   }
   news_preview_div.innerHTML = response['news'];
-
-   // let item = JSON.parse(this.responseText);
- // let element = document.querySelector('li.item[data-id="' + item.id + '"]');
- // let input = element.querySelector('input[type=checkbox]');
- // element.checked = item.done == "true";
   }
 
 
