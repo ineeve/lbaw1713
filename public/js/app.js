@@ -187,7 +187,7 @@ function createItem(item) {
 function sendSelectSpecificSection(event) {
   let section_name = this.text();
 
-  sendAjaxRequest('post', '/api/news/' + section_name, null, listSpecificSectiondHandler);
+  sendAjaxRequest('post', '/api/news/section/' + section_name, null, listSpecificSectiondHandler);
 }
 
 
