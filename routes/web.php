@@ -46,3 +46,5 @@ Route::post('api/news/','AjaxController@changeToSectionAll');
 
 Route::post('api/news/section/All','AjaxController@changeToSectionAll');
 Route::post('api/news/section/{section_id}','AjaxController@changeSection');
+
+Route::post('api/news/section/{section_id}/scroll','AjaxController@showMorePreviews');
