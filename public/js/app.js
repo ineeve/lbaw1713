@@ -27,10 +27,11 @@ function sendAjaxRequest(method, url, data, handler) {
 function sendSelectSection(event) {
 
   let section_name = event.target.name;
-  sendAjaxRequest('post', '/api/news/section/' + section_name, null, listSpecificSectionHandler);
+  document.querySelector('.current_section').innerHTML = event.target.innerHTML;
+  sendAjaxRequest('post', '/api/news/section/' + section_name, null, listSectionHandler);
 }
 
-function listSpecificSectionHandler() {
+function listSectionHandler() {
   let response = JSON.parse(this.responseText);
   let news_preview_div = document.getElementById('news_item_preview_list');
   while (news_preview_div.hasChildNodes()) {
