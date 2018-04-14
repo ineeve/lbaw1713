@@ -46,7 +46,11 @@ function listSectionHandler() {
   function sendShowMorePreviews(event) {
     previews_offset += 10;
     let section_name = document.querySelector('.current_section').innerText.trim();
-    sendAjaxRequest('post', '/api/news/section/' + section_name + '/scroll', {next_preview: previews_offset}, showMorePreviewsHandler);
+    if(section_name == "All") {
+      sendAjaxRequest('post', '/api/news/section/All/scroll', {next_preview: previews_offset}, showMorePreviewsHandler);
+    } else {
+      sendAjaxRequest('post', '/api/news/section/' + section_name + '/scroll', {next_preview: previews_offset}, showMorePreviewsHandler);
+    }
   }
   
   function showMorePreviewsHandler() {
@@ -56,7 +60,7 @@ function listSectionHandler() {
       console.log("There's no more news to load.");
      // $('#placeComments').append("<div class=\"alert alert-dismissible alert-secondary\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Sorry!</strong> No more comments at the moment!</div>");
     }
-    document.getElementById('news_item_preview_list').append(response['news']);
+    document.getElementById('news_item_preview_list').innerHTML += response['news'];
     offset += 10;
     }
   

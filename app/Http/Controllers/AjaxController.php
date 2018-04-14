@@ -56,6 +56,8 @@ class AjaxController extends Controller {
     $status_code = 200; // TODO: change if not found!
     $view = View::make('partials.news_item_preview_list')->with('news', $news)->render();
     $data = ['news' => $view];
+
+
     return Response::json($data, $status_code);
     
  }
@@ -66,10 +68,19 @@ class AjaxController extends Controller {
     WHERE sections.name = ? AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE News.id = DeletedItems.news_id)
     ORDER BY date DESC LIMIT 10 OFFSET ?',[$section, $request->input('next_preview')]);
 
+    $status_code = 200; // TODO: change if not found!
+    $view = View::make('partials.news_item_preview_list')->with('news', $news)->render();
+    $data = ['news' => $view];
 
-alert($request->input('next_preview'));
+    return Response::json($data, $status_code);
+    
+ }
 
+ public function showMorePreviewsOfAll(Request $request) {
 
+    $news = DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview 
+    FROM news JOIN users ON news.author_id = users.id WHERE NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE News.id = DeletedItems.news_id)
+    ORDER BY date DESC LIMIT 10 OFFSET ?',[$request->input('next_preview')]);
     $status_code = 200; // TODO: change if not found!
     $view = View::make('partials.news_item_preview_list')->with('news', $news)->render();
     $data = ['news' => $view];
