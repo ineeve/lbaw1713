@@ -1,6 +1,6 @@
 @include('partials/report_modal')
 
-<script src="{{ asset('js/scroolComment.js') }}" defer></script>
+<script src="{{ asset('js/scrollComment.js') }}" defer></script>
   <div id="myTabContent" class="tab-content">
     <div class="tab-pane fade active show" id="article">
       <div class="container-fluid">
@@ -76,7 +76,7 @@
               </div>
               <div class="row">
               <div class="col">
-                  <a id="scroolComment" href="#" class="loadMore" style="text-decoration: none;">Show More</a>
+                  <a id="scrollComment" href="#" class="loadMore" style="text-decoration: none;">Show More</a>
                 </div>
                 <div class="col text-right">
                   <p class="totop">
