@@ -15,12 +15,17 @@
             </div>
             <div class="d-flex flex-row justify-content-end mt-2"> 
               @if (Auth::check() && Auth::user()->id == $news->author_id)
-                  <!-- Edit -->
-                  <a href="{{ url('news/'.$news->id.'/edit') }}" style="color: inherit;">
-                    <span class="mt-1 mr-2">Edit</span> <i class="fas fa-edit clickable-btn"></i>
-                  </a>
-                  <!-- Delete -->
-                  <span class="mt-1 mr-2">Delete</span> <i class="fas fa-times mt-2 clickable-btn"></i>
+                  <div class="d-flex flex-column justify-content-end">
+                    <!-- Edit -->
+                    <div class="d-flex flex-row justify-content-end">
+                      <a href="{{ url('news/'.$news->id.'/edit') }}" style="color: inherit;">
+                        <span class="mr-2">Edit</span> 
+                      </a>
+                      <i class="fas fa-edit clickable-btn mt-1"></i>
+                    </div>
+                    <!-- Delete -->
+                    <div class="d-flex flex-row justify-content-end"><span class="mt-1 mr-2">Delete</span> <i class="fas fa-times mt-2 clickable-btn"></i></div>
+                  </div>
               @else
                   <!-- Report -->
                   <span class="mt-1 mr-2">Report</span> <i class="fas fa-ban mt-2 clickable-btn" data-toggle="modal" data-target="#reportModal"></i>
