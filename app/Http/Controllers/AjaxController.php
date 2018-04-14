@@ -63,13 +63,16 @@ public function scrollComments(Request $request, $news_id) {
     FROM News, Sections, Users
     WHERE Sections.id = News.section_id AND Users.id = News.author_id AND Sections.name = $section
     AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE News.id = DeletedItems.news_id)
-    ORDER BY date DESC LIMIT 10 OFFSET 0;', [$section]);
+    ORDER BY date DESC LIMIT 10 OFFSET 0;');
+
+    $sections = DB::select('SELECT icon, name FROM Sections');
 
     $status_code = 200; // TODO: change if not found!
     $data = [
-        'view' => View::make('partials.section')
-            ->with('section', $news)
-            ->render()
+        'view' => View::make('partials.news')
+        ->with('news', $news)
+        ->with('sections', $sections)
+        ->render()
     ];
 
     return Response::json($data, $status_code);
