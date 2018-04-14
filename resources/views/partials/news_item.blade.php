@@ -37,10 +37,10 @@
           <div class="col-11 col-lg-10 mt-3 article">
           <script type="text/javascript">
 	 	var news_id = "{{ $news->id }}";//TODO get from route
-	</script>
+	</script> 
             <h6 class="category"> {{ $news->section }}</h6>
               <h2 class="title"> {{ $news->title }}</h2>
-              <h6 class="author"> {{ $news->author }} &middot; {{ $news->date }}</h6>
+              <h6 class="author"> {{ $news->author }} &middot; {{ date("F jS, Y \a\\t H:i", strtotime($news->date)) }}</h6>
               <!-- TODO: change alt -->
               <img class="img-fluid mx-auto my-3 d-block" src="{{ asset('storage/news/'.$news->image) }}" alt="{{$news->image}}"
                width="460" height="345">
