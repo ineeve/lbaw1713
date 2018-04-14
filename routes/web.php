@@ -39,7 +39,7 @@ Route::post('api/news/{news_id}/comments/scroll','AjaxController@scrollComments'
 
 Route::post('api/news/','AjaxController@changeToSectionAll');
 
-Route::post('api/news/{section_id}','AjaxController@changeSection');
+Route::post('api/news/section/{section_id}','AjaxController@changeSection');
 
 // // Cards
 // Route::get('cards', 'CardController@list');

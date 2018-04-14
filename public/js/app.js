@@ -26,7 +26,7 @@ function addEventListeners() {
   //NOSSO CODIGO
   let availableSections = document.querySelectorAll('.section_specific');
   [].forEach.call(availableSections, function(section) {
-    section.addEventListener('click', sendSelectSepcificSection);
+    section.addEventListener('click', sendSelectSpecificSection);
   });
 }
 
