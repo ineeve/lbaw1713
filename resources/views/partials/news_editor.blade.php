@@ -2,7 +2,7 @@
   <h3 class="text-primary">Post a news story!</h3>
 
   @if (isset($article))
-    {{ Form::model($article, ['route' => ['news', $article->id], 'method' => 'PATCH', 'files' => true]) }}
+    {{ Form::model($article, ['route' => ['update_news', $article->id], 'method' => 'PATCH', 'files' => true]) }}
     {{ Form::hidden($article->id) }}
   @else
     {{ Form::open(['route' => 'news', 'files' => true]) }}
