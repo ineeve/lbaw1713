@@ -37,7 +37,7 @@ public function scrollComments(Request $request, $news_id) {
 
  public function changeToSectionAll(Request $request) {
 
-    $news =  DB::select('SELECT title, date, body, image, votes, Sections.name, Users.username
+    $news =  DB::select('SELECT title, date, body, image, votes, Sections.name AS name, Users.username AS author
                         FROM News, Sections, Users
                         WHERE Sections.id = News.section_id AND Users.id = News.author_id
                         AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE News.id = DeletedItems.news_id)
@@ -59,7 +59,7 @@ public function scrollComments(Request $request, $news_id) {
 
  public function changeSection(Request $request, $section) {
 
-    $news =  DB::select('SELECT title, date, body, image, votes, Sections.name, Users.username
+    $news =  DB::select('SELECT title, date, body, image, votes, Sections.name AS name , Users.username AS author
     FROM News, Sections, Users
     WHERE Sections.id = News.section_id AND Users.id = News.author_id AND Sections.name = $section
     AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE News.id = DeletedItems.news_id)
