@@ -6,8 +6,10 @@ function addEventListeners() {
   [].forEach.call(availableSections, function(section) {
     section.addEventListener('click', sendSelectSection);
   });
-
-  document.querySelector('#scrollNewsPreview').addEventListener('click', sendShowMorePreviews);
+  let scrollNews = document.querySelector('#scrollNewsPreview')
+  if (scrollNews != null){
+    document.querySelector('#scrollNewsPreview').addEventListener('click', sendShowMorePreviews);
+  }
 }
 
 function encodeForAjax(data) {
