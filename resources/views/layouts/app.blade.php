@@ -34,7 +34,6 @@
   <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
   <!-- Optional JavaScript -->
-  <script src="{{ asset('js/app.js') }}" defer></script>
 
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -46,8 +45,13 @@
 
     <!-- event handler script -->
     <script type="text/javascript" src={{ asset( 'js/app.js') }} defer>
+<<<<<<< HEAD
   </script>
   
+=======
+  </script> 
+
+>>>>>>> 11f002339e1d649d872275c941d31b89ee0e3b4f
   <!-- END OUR -->
 
   @yield('text_editor')
