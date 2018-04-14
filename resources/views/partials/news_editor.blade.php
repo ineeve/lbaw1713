@@ -3,11 +3,10 @@
 
   @if (isset($article))
     {{ Form::model($article, ['route' => ['news', $article->id], 'method' => 'PATCH', 'files' => true]) }}
+    {{ Form::hidden($article->id) }}
   @else
     {{ Form::open(['route' => 'news', 'files' => true]) }}
   @endif
-
-  {{ Form::hidden($article->id) }}
 
   <fieldset class="form-group">
     {{ Form::label('title', 'Title') }}
