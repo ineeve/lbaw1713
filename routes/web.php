@@ -44,7 +44,7 @@ Route::delete('news/{id}', 'NewsController@destroy')->name('delete_news');
 
 Route::post('api/news/{news_id}/comments/scroll','AjaxController@scrollComments');
 
-
+Route::post('api/news/{news_id}/vote','AjaxController@createVote');
 Route::post('api/news/','AjaxController@changeToSectionAll');
 
 Route::post('api/news/section/All','AjaxController@changeToSectionAll');

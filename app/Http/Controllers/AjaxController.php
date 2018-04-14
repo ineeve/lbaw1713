@@ -89,5 +89,9 @@ class AjaxController extends Controller {
     
  }
 
+ public function createVote(Request $request){
+    DB::select('INSERT INTO Votes (user_id, news_id, type) VALUES ($userId, $newsId, $type);');
+ }
+
 
 }

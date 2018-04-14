@@ -6,10 +6,10 @@
         </div>
         <div class="col-12 col-md-5">
           <div class="container ml-0 d-flex flex-column px-0">
-            <form class="form-inline" action="advanced_search.html" method="post">
+            <form class="form-inline" action="#" method="post">
               <input class="form-control mr-sm-2 rounded" type="search" placeholder="Search" aria-label="Search">
               <button class="btn btn-outline-light my-2 my-sm-0 rounded" type="submit">
-                <a href="advanced_search.html" style="color:inherit; text-decoration:none">Search</a>
+                <a href="#" style="color:inherit; text-decoration:none">Search</a>
               </button>
             </form>
             <a class="small" data-toggle="modal" style="color:white;" href="#searchModal">advanced search</a>
@@ -93,7 +93,7 @@
                   <div class="dropdown-divider"></div>
                   <div class="px-4 fb-login-button" scope="public_profile,email" onlogin="checkLoginState()" data-max-rows="1" data-size="medium" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="register">New around here? Sign up</a>
+                  <a class="dropdown-item" href="/register">New around here? Sign up</a>
                   <a class="dropdown-item" href="#">Forgot password?</a>
                   
                 </div>

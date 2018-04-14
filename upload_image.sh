@@ -3,7 +3,7 @@
 # Stop execution if a step fails
 set -e
 
-DOCKER_USERNAME=joao611 # Replace by your docker hub username
+DOCKER_USERNAME=ineeve # Replace by your docker hub username
 IMAGE_NAME=lbaw1713
 
 # Ensure that dependencies are available
