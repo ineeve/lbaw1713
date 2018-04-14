@@ -2,7 +2,7 @@
 
 jQuery(document).ready(function () {
     let offset = 0; 
-    jQuery('#scroolComment').click(function (e) {
+    jQuery('#scrollComment').click(function (e) {
         e.preventDefault();
             $.ajaxSetup({
                 headers: {
@@ -24,5 +24,5 @@ jQuery(document).ready(function () {
             }
         });
     });
-    jQuery('#scroolComment').trigger('click');
+    jQuery('#scrollComment').trigger('click');
 });

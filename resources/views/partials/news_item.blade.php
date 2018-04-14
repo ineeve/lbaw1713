@@ -47,10 +47,16 @@ if(Auth::check)
                   </div>
               @endif
               @if (Auth::check())
-                  <!-- Report -->
-                  <span class="mt-1 mr-2">Report</span> <i class="fas fa-ban mt-2 clickable-btn" data-toggle="modal" data-target="#reportModal"></i>
+                <!-- Report -->
+                <span data-toggle="modal" data-target="#reportModal">
+                  <span class="mt-1 mr-2">Report</span>
+                  <i class="fas fa-ban mt-2 clickable-btn" data-toggle="modal" data-target="#reportModal"></i>
+                </span>
               @else
-
+              <span data-toggle="modal" data-target="#registerModal">
+                  <span class="mt-1 mr-2">Report</span>
+                  <i class="fas fa-ban mt-2 clickable-btn" data-toggle="modal" data-target="#registerModal"></i>
+              </span>
               @endif
             </div>              
             </div>
@@ -84,7 +90,7 @@ if(Auth::check)
               </div>
               <div class="row">
               <div class="col">
-                  <a id="scroolComment" href="#" class="loadMore" style="text-decoration: none;">Show More</a>
+                  <a id="scrollComment" href="#" class="loadMore" style="text-decoration: none;">Show More</a>
                 </div>
                 <div class="col text-right">
                   <p class="totop">
