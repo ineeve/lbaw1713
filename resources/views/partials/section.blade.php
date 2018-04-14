@@ -10,7 +10,7 @@
             </li>
             @foreach ($sections as $section)
               <li class="nav-item">
-                <a href="#allNews" role="button" data-toggle="tab" class="nav-link section_specific">
+                <a href="#" name= {{ $section->name }} role="button" data-toggle="tab" class="nav-link section_specific">
                   <i class="{{ $section->icon }}"></i> {{ $section->name }}</a>
               </li>
             @endforeach

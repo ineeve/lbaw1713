@@ -1,4 +1,3 @@
-<script src="{{ asset('js/changeSection.js') }}" defer></script>
 <div class="container-fluid">
   <!-- SECOND ROW -->
   <div class="row mt-2">

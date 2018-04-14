@@ -1,4 +1,4 @@
-'use strict';
+/*'use strict';
 
 jQuery(document).ready(function () {
     let offset = 0; 
@@ -36,5 +36,5 @@ jQuery(document).ready(function () {
                 $('content').add(result.view);
             }
         });
-    });*/
-});
+    });
+});*/
