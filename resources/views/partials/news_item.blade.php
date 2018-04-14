@@ -1,4 +1,5 @@
 @include('partials/report_modal')
+
 <script src="{{ asset('js/scroolComment.js') }}" defer></script>
   <div id="myTabContent" class="tab-content">
     <div class="tab-pane fade active show" id="article">
