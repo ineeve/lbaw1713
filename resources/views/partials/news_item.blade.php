@@ -39,7 +39,10 @@
                   </div>
               @else
                   <!-- Report -->
-                  <span class="mt-1 mr-2">Report</span> <i class="fas fa-ban mt-2 clickable-btn" data-toggle="modal" data-target="#reportModal"></i>
+                  <span data-toggle="modal" data-target="#reportModal">
+                    <span class="mt-1 mr-2">Report</span>
+                    <i class="fas fa-ban mt-2 clickable-btn" data-toggle="modal" data-target="#reportModal"></i>
+                  </span>
               @endif
             </div>              
             </div>
