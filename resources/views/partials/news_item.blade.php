@@ -3,7 +3,7 @@
 @else
   @include('partials/register_modal')
 @endif
-<script src="{{ asset('js/scroolComment.js') }}" defer></script>
+<script src="{{ asset('js/scrollComment.js') }}" defer></script>
   <div id="myTabContent" class="tab-content">
     <div class="tab-pane fade active show" id="article">
       <div class="container-fluid">
