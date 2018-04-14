@@ -5,10 +5,7 @@
         <div class="row">
           <!-- ARTICLE OPTIONS -->
           <div class="col-1 pr-0">
-            <div class="d-flex mt-5 justify-content-end">
-              <div class="container-fluid">
-              </div>
-              
+            <div class="d-flex mt-5 justify-content-end">              
               <div class="position-relative mr-2 mt-1 d-flex flex-column justify-content-between align-items-end">
                 <span> {{ $news->votes }}</span>
               </div>
