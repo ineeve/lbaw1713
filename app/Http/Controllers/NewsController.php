@@ -55,8 +55,9 @@ class NewsController extends Controller
 
     // TODO
     public function edit(array $data) {
-      $article = News::find($data[]);
+      $article = News::find($data['id']);
       // TODO: Authorize
-      return View::make('create_news')->with('article', $article);
+      $article->update($data);
+      return View::make('news_item')->with('article', $article);
     }
 }
