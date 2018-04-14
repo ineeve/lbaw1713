@@ -130,7 +130,6 @@
                 <!-- DROPDOWN FOR SIGN IN -->
                 <div class="dropdown-menu dropdown-menu-right position-absolute mt-0">
                   <form class="px-4 py-3" method="POST" action="/login">
-                    <!-- TODO: ver action -->
                     {{ csrf_field() }}
                     <div class="form-group">
                       <label for="dropdownFormEmail">Email address</label>
