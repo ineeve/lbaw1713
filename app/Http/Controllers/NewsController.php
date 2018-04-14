@@ -27,19 +27,6 @@ class NewsController extends Controller
       return view('pages.news', ['news' => $news, 'sections' => $sections]);
     }
 
-    public function list_section($section_id)
-    {
-      //$this->authorize('list', News::class);
-
-      $news =  DB::select('SELECT title, date, body, image, votes, Sections.name, Users.username
-    FROM News, Sections, Users
-    WHERE Sections.id = News.section_id AND Users.id = News.author_id AND Sections.name = $section
-    AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE News.id = DeletedItems.news_id)
-    ORDER BY date DESC LIMIT 10 OFFSET $offset;',[$section, $request->input('next_comment')]);
-      //TODO: alter query
-      return view('pages.news', ['news' => $news]);
-    }
-
     public function show($id)
     {
 

@@ -22,6 +22,12 @@ function addEventListeners() {
   let cardCreator = document.querySelector('article.card form.new_card');
   if (cardCreator != null)
     cardCreator.addEventListener('submit', sendCreateCardRequest);
+
+  //NOSSO CODIGO
+  let availableSections = document.querySelectorAll('.section_specific');
+  [].forEach.call(availableSections, function(section) {
+    section.addEventListener('click', sendSelectSepcificSection);
+  });
 }
 
 function encodeForAjax(data) {
@@ -175,6 +181,21 @@ function createItem(item) {
   new_item.querySelector('a.delete').addEventListener('click', sendDeleteItemRequest);
 
   return new_item;
+}
+//NOSSO CODIGO
+
+function sendSelectSpecificSection(event) {
+  let section_name = this.text();
+
+  sendAjaxRequest('post', '/api/news/' + section_name, null, listSpecificSectiondHandler);
+}
+
+
+function listSpecificSectiondHandler() {
+ // let item = JSON.parse(this.responseText);
+ // let element = document.querySelector('li.item[data-id="' + item.id + '"]');
+ // let input = element.querySelector('input[type=checkbox]');
+ // element.checked = item.done == "true";
 }
 
 addEventListeners();

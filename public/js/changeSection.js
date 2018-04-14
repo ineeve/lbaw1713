@@ -19,7 +19,7 @@ jQuery(document).ready(function () {
         });
     });
 
-    jQuery('.section_speciwfic').click(function (e) {
+    jQuery('.section_specific').click(function (e) {
         e.preventDefault();
             $.ajaxSetup({
                 headers: {
