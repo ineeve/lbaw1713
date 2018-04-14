@@ -14,6 +14,7 @@
 Route::get('/', function () {
     return redirect('news');
 })->name('homepage');
+Route::get('error/404', 'Controller@errorNotFound');
 
 // // Authentication
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login'); 
@@ -34,23 +35,14 @@ Route::post('news', 'NewsController@create')->name('news');
 
 Route::get('news/{id}', 'NewsController@show');
 
+//Edit news
+Route::get('news/{id}/edit', 'CreateNewsController@editCurrent');
+Route::patch('news/{id}', 'NewsController@edit');
+
 Route::post('api/news/{news_id}/comments/scroll','AjaxController@scrollComments');
 
 
 Route::post('api/news/','AjaxController@changeToSectionAll');
 
+Route::post('api/news/section/All','AjaxController@changeToSectionAll');
 Route::post('api/news/section/{section_id}','AjaxController@changeSection');
-
-Route::post('api/news/section','AjaxController@changeToSectionAll');
-
-// // Cards
-// Route::get('cards', 'CardController@list');
-// Route::get('cards/{id}', 'CardController@show');
-//
-// // API
-// Route::put('api/cards', 'CardController@create');
-// Route::delete('api/cards/{card_id}', 'CardController@delete');
-// Route::put('api/cards/{card_id}/', 'ItemController@create');
-// Route::post('api/item/{id}', 'ItemController@update');
-// Route::delete('api/item/{id}', 'ItemController@delete');
-//

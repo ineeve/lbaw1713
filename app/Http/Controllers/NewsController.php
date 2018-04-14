@@ -12,12 +12,6 @@ use App\News as News;
 
 class NewsController extends Controller
 {
-  
-    public function prettify_date($news_array){
-      foreach($news_array as $news){
-        $news->date = date("F jS, Y \a\\t H:i", strtotime($news->date));
-      }
-    }
 
     public function list()
     {
@@ -29,8 +23,6 @@ class NewsController extends Controller
 
       $sections = DB::select('SELECT icon, name FROM Sections');
 
-      $this->prettify_date($news);
-      //TODO: alter query
       return view('pages.news', ['news' => $news, 'sections' => $sections]);
     }
 
@@ -41,7 +33,9 @@ class NewsController extends Controller
       FROM News, Sections, Users
       WHERE News.id  = ? AND Sections.id = News.section_id AND Users.id = News.author_id AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE DeletedItems.news_id = News.id)',[$id]);
 
-      //TODO: check if exists;
+      if(count($news)==0) {
+        return redirect('/error/404');
+      }
       $news = $news[0];
 
       $sources = DB::select('SELECT *
@@ -59,4 +53,10 @@ class NewsController extends Controller
       return redirect('news/'.$news->id);
     }
 
+    // TODO
+    public function edit($id) {
+      $article = News::find($id);
+      // TODO: Authorize
+      return View::make('create_news')->with('article', $article);
+    }
 }

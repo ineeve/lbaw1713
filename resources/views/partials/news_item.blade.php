@@ -16,7 +16,7 @@
             <div class="d-flex flex-row justify-content-end mt-2"> 
               @if (Auth::check() && Auth::user()->id == $news->author_id)
                   <!-- Edit -->
-                  <a href="edit_news.html" style="color: inherit;">
+                  <a href="{{ url('news/'.$news->id.'/edit') }}" style="color: inherit;">
                     <span class="mt-1 mr-2">Edit</span> <i class="fas fa-edit clickable-btn"></i>
                   </a>
                   <!-- Delete -->
@@ -36,7 +36,8 @@
             <h6 class="category"> {{ $news->section }}</h6>
               <h2 class="title"> {{ $news->title }}</h2>
               <h6 class="author"> {{ $news->author }} &middot; {{ $news->date }}</h6>
-              <img class="img-fluid mx-auto my-3 d-block" src="{{ asset('img/'.$news->image) }}" alt="TODO ADD "
+              <!-- TODO: change alt -->
+              <img class="img-fluid mx-auto my-3 d-block" src="{{ asset('storage/news/'.$news->image) }}" alt="{{$news->image}}"
                width="460" height="345">
               <div class="body">
                   {!! $news->body !!}
