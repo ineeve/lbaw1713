@@ -1,3 +1,4 @@
+@include('partials/report_modal')
 <script src="{{ asset('js/scroolComment.js') }}" defer></script>
   <div id="myTabContent" class="tab-content">
     <div class="tab-pane fade active show" id="article">
@@ -15,12 +16,17 @@
             </div>
             <div class="d-flex flex-row justify-content-end mt-2"> 
               @if (Auth::check() && Auth::user()->id == $news->author_id)
-                  <!-- Edit -->
-                  <a href="{{ url('news/'.$news->id.'/edit') }}" style="color: inherit;">
-                    <span class="mt-1 mr-2">Edit</span> <i class="fas fa-edit clickable-btn"></i>
-                  </a>
-                  <!-- Delete -->
-                  <span class="mt-1 mr-2">Delete</span> <i class="fas fa-times mt-2 clickable-btn"></i>
+                  <div class="d-flex flex-column justify-content-end">
+                    <!-- Edit -->
+                    <div class="d-flex flex-row justify-content-end">
+                      <a href="{{ url('news/'.$news->id.'/edit') }}" style="color: inherit;">
+                        <span class="mr-2">Edit</span> 
+                      </a>
+                      <i class="fas fa-edit clickable-btn mt-1"></i>
+                    </div>
+                    <!-- Delete -->
+                    <div class="d-flex flex-row justify-content-end"><span class="mt-1 mr-2">Delete</span> <i class="fas fa-times mt-2 clickable-btn"></i></div>
+                  </div>
               @else
                   <!-- Report -->
                   <span class="mt-1 mr-2">Report</span> <i class="fas fa-ban mt-2 clickable-btn" data-toggle="modal" data-target="#reportModal"></i>
@@ -32,10 +38,10 @@
           <div class="col-11 col-lg-10 mt-3 article">
           <script type="text/javascript">
 	 	var news_id = "{{ $news->id }}";//TODO get from route
-	</script>
+	</script> 
             <h6 class="category"> {{ $news->section }}</h6>
               <h2 class="title"> {{ $news->title }}</h2>
-              <h6 class="author"> {{ $news->author }} &middot; {{ $news->date }}</h6>
+              <h6 class="author"> {{ $news->author }} &middot; {{ date("F jS, Y \a\\t H:i", strtotime($news->date)) }}</h6>
               <!-- TODO: change alt -->
               <img class="img-fluid mx-auto my-3 d-block" src="{{ asset('storage/news/'.$news->image) }}" alt="{{$news->image}}"
                width="460" height="345">
