@@ -41,6 +41,8 @@ Route::post('api/news/','AjaxController@changeToSectionAll');
 
 Route::post('api/news/section/{section_id}','AjaxController@changeSection');
 
+Route::post('api/news/section','AjaxController@changeToSectionAll');
+
 // // Cards
 // Route::get('cards', 'CardController@list');
 // Route::get('cards/{id}', 'CardController@show');

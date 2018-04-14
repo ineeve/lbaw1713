@@ -1,11 +1,13 @@
 console.log('app.js included');
 
 function addEventListeners() {
-  //NOSSO CODIGO
   let availableSections = document.querySelectorAll('.section_specific');
   [].forEach.call(availableSections, function(section) {
     section.addEventListener('click', sendSelectSpecificSection);
   });
+
+  let sectionAll = document.querySelector('.section_all');
+  sectionAll.addEventListener('click', sendSelectSectionAll);
 }
 
 function encodeForAjax(data) {
@@ -25,8 +27,6 @@ function sendAjaxRequest(method, url, data, handler) {
   request.send(encodeForAjax(data));
 }
 
-//NOSSO CODIGO
-
 function sendSelectSpecificSection(event) {
 
 /*
@@ -35,11 +35,22 @@ function sendSelectSpecificSection(event) {
 */
   let section_name = event.target.name;
   document.querySelector('.current_section').innerHTML = event.target.innerHTML;
-  sendAjaxRequest('post', '/api/news/section/' + section_name, null, listSpecificSectiondHandler);
+  sendAjaxRequest('post', '/api/news/section/' + section_name, null, listSpecificSectionHandler);
+}
+
+function sendSelectSectionAll(event) {
+
+  /*
+    let section_name = this.innerText.trim();
+    console.log("section name = "+section_name)
+  */
+    let section_name = event.target.name;
+    document.querySelector('.current_section').innerHTML = event.target.innerHTML;
+    sendAjaxRequest('post', '/api/news/section', null, listAllSectionsHandler);
 }
 
 
-function listSpecificSectiondHandler() {
+function listSpecificSectionHandler() {
   let response = JSON.parse(this.responseText);
   let news_preview_div = document.getElementById('news_item_preview_list');
   while (news_preview_div.hasChildNodes()) {
@@ -48,6 +59,13 @@ function listSpecificSectiondHandler() {
   news_preview_div.innerHTML = response['news'];
   }
 
-
+  function listAllSectionsHandler() {
+    let response = JSON.parse(this.responseText);
+    let news_preview_div = document.getElementById('news_item_preview_list');
+    while (news_preview_div.hasChildNodes()) {
+      news_preview_div.removeChild(news_preview_div.lastChild);
+    }
+    news_preview_div.innerHTML = response['news'];
+    }
 
 addEventListeners();

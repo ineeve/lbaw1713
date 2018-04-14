@@ -37,21 +37,15 @@ public function scrollComments(Request $request, $news_id) {
 
  public function changeToSectionAll(Request $request) {
 
-    $news =  DB::select('SELECT title, date, body, image, votes, Sections.name AS name, Users.username AS author
+    $news =  DB::select('SELECT news.id, title, Users.username AS author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
                         FROM News, Sections, Users
                         WHERE Sections.id = News.section_id AND Users.id = News.author_id
                         AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE News.id = DeletedItems.news_id)
                         ORDER BY date DESC LIMIT 10 OFFSET 0;');
 
-    $sections = DB::select('SELECT icon, name FROM Sections');
-
     $status_code = 200; // TODO: change if not found!
-    $data = [
-        'view' => View::make('partials.news')
-            ->with('news', $news)
-            ->with('sections', $sections)
-            ->render()
-    ];
+    $view = View::make('partials.news_item_preview_list')->with('news', $news)->render();
+    $data = $data = ['news' => $view];
 
     return Response::json($data, $status_code);
     
