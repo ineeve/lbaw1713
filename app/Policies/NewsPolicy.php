@@ -42,7 +42,7 @@ class NewsPolicy
      */
     public function update(User $user, News $news)
     {
-        return $user->id == $news->user_id;        
+        return $user->id == $news->author_id;        
     }
 
     /**

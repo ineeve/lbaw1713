@@ -57,7 +57,7 @@ class NewsController extends Controller
     public function edit(Request $request, $id) {
       $article = News::find($id);
       // TODO: Authorize
-      $this->authorize('edit', News::class);
+      // $this->authorize('edit', News::class);
       $article->update($request->all());
       return redirect('news/'.$id);
     }
