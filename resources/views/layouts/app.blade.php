@@ -172,7 +172,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <form class="" action="advanced_search.html" method="post">
+            <form>
               <div class="form-group">
                 <input type="text" class="form-control" placeholder="Search">
               </div>
