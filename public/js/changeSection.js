@@ -19,7 +19,7 @@ jQuery(document).ready(function () {
         });
     });
 
-    jQuery('.section_specific').click(function (e) {
+    /*jQuery('.section_specific').click(function (e) {
         e.preventDefault();
             $.ajaxSetup({
                 headers: {
@@ -36,5 +36,5 @@ jQuery(document).ready(function () {
                 $('content').add(result.view);
             }
         });
-    });
+    });*/
 });
