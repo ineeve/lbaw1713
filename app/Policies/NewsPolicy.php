@@ -54,7 +54,7 @@ class NewsPolicy
      */
     public function editArticle(User $user, News $news)
     {
-        return $user->id != $news->author_id;        
+        return $user->id == $news->author_id;        
     }
 
     /**
@@ -66,6 +66,6 @@ class NewsPolicy
      */
     public function delete(User $user, News $news)
     {
-        //
+        return true;
     }
 }

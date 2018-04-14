@@ -21,16 +21,6 @@ class EditorPolicy
         //
     }
 
-        /**
-     * Determine whether the user can update the news.
-     *
-     * @param  \App\User  $user
-     * @param  \App\News  $news
-     * @return mixed
-     */
-    public function editArticle(User $user, News $news)
-    {
-        return $user->id == $news->author_id;        
-    }
+        
 
 }

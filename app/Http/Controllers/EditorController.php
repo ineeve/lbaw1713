@@ -12,18 +12,6 @@ use App\Section as Section;
 class EditorController extends Controller
 {
   
-    public function createArticle() {
-      $sections = Section::pluck('name', 'id');
-
-      return view('pages.news_editor', ['sections' => $sections]);
-    }
-
-    public function editArticle($id) {
-      $sections = Section::pluck('name', 'id');
-      $article = News::find($id);
-      $this->authorize('editArticle', $article);
-      // TODO; autorize
-      return view('pages.news_editor', ['sections' => $sections, 'article' => $article]);
-    }
+    
 
 }

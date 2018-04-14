@@ -5,6 +5,9 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
+use App\News;
+use App\Policies\NewsPolicy;
+
 class AuthServiceProvider extends ServiceProvider
 {
     /**
@@ -15,7 +18,7 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
       'App\Card' => 'App\Policies\CardPolicy',
       'App\Item' => 'App\Policies\ItemPolicy',
-      'App\News' => 'App\Policies\EditorPolicy'
+      News::class => NewsPolicy::class
     ];
 
     /**

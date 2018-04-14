@@ -26,7 +26,7 @@ Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('re
 Route::post('register', 'Auth\RegisterController@register');
 
 //Create news
-Route::get('news/create', 'EditorController@createArticle')->name('create_news'); 
+Route::get('news/create', 'NewsController@createArticle')->name('create_news'); 
 
 Route::get('news', 'NewsController@list');
 Route::post('news', 'NewsController@create')->name('news');
@@ -37,7 +37,7 @@ Route::get('news/{id}', 'NewsController@show');
 
 //Edit news
 // TODO: Alterar Editor
-Route::get('news/{id}/edit', 'EditorController@editArticle');
+Route::get('news/{id}/edit', 'NewsController@editArticle');
 Route::patch('news/{id}', 'NewsController@edit')->name('update_news');
 //Delete News
 Route::delete('news/{id}', 'NewsController@destroy')->name('delete_news');

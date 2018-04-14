@@ -58,22 +58,31 @@ class NewsController extends Controller
     // TODO
     public function edit(Request $request, $id) {
       $article = News::find($id);
-      // TODO: Authorize
-      // $this->authorize('edit', News::class);
+      $this->authorize('update', $article);
       $article->update($request->all());
       return redirect('news/'.$id);
+    }
+    
+    public function destroy($id) {
+      $article = News::find($id);
+      $this->authorize('delete', $article);
+      News::destroy($id);
+      return back();
+    }
+
+
+    ///////////////////// EDITOR
+
+    public function createArticle() {
+      $sections = Section::pluck('name', 'id');
+
+      return view('pages.news_editor', ['sections' => $sections]);
     }
 
     public function editArticle($id) {
       $sections = Section::pluck('name', 'id');
       $article = News::find($id);
-      $this->authorize('editArticle', News::class);
+      $this->authorize('editArticle', $article);
       return view('pages.news_editor', ['sections' => $sections, 'article' => $article]);
-    }
-
-    public function destroy($id) {
-     // $this->authorize('delete', News::class);
-      News::destroy($id);
-      return back();
     }
 }

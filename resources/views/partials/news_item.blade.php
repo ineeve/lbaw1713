@@ -26,10 +26,14 @@
                     </div>
                     <!-- Delete -->
                     <div class="d-flex flex-row justify-content-end">
-                      <a href="{{ route('delete_news', $news->id) }}" style="color: inherit;">
-                        <span class="mt-1 mr-2">Delete</span>
-                        <i class="fas fa-times mt-2 clickable-btn"></i>
-                      </a>
+                      <form action="{{ route('delete_news', $news->id) }}" method="post">
+                        {{ method_field('delete') }}
+                        {{ csrf_field() }}
+                        <button type="submit">
+                          <span class="mt-1 mr-2">Delete</span>
+                          <i class="fas fa-times mt-2 clickable-btn"></i>
+                        </button>
+                      </form>
                     </div>
                   </div>
               @else
