@@ -10,8 +10,8 @@
             <div class="d-flex flex-row justify-content-end">
               <span class="mt-2 mr-2"> {{ $news->votes }}</span>
               <div class="d-flex flex-column">
-                <i class="fas fa-arrow-alt-circle-up clickable-btn"></i>
-                <i class="fas fa-arrow-alt-circle-down mt-2 clickable-btn"></i> 
+                <i class="fas fa-arrow-alt-circle-up clickable-btn" id="upvote"></i>
+                <i class="fas fa-arrow-alt-circle-down mt-2 clickable-btn" id="downvote"></i> 
               </div>
             </div>
             <div class="d-flex flex-row justify-content-end mt-2"> 

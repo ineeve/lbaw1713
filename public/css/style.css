@@ -58,3 +58,10 @@ a.nounderline {
       display: none;
   }
 }
+
+#upvote:hover{
+  color:green;
+}
+#downvote:hover{
+  color:red;
+}
