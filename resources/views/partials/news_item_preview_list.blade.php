@@ -1,0 +1,1 @@
+@each('partials.news_item_preview', $news, 'item')

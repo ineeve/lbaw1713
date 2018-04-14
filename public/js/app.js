@@ -34,11 +34,19 @@ function sendSelectSpecificSection(event) {
 
 
 function listSpecificSectiondHandler() {
-  console.log(this.responseText);
- // let item = JSON.parse(this.responseText);
+  let response = JSON.parse(this.responseText);
+  let news_preview_div = document.getElementById('news_item_preview_list');
+  while (news_preview_div.hasChildNodes()) {
+    news_preview_div.removeChild(news_preview_div.lastChild);
+  }
+  news_preview_div.innerHTML = response['news'];
+
+   // let item = JSON.parse(this.responseText);
  // let element = document.querySelector('li.item[data-id="' + item.id + '"]');
  // let input = element.querySelector('input[type=checkbox]');
  // element.checked = item.done == "true";
-}
+  }
+
+
 
 addEventListeners();

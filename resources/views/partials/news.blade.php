@@ -37,9 +37,8 @@
 
           </div>
           <div class="d-flex flex-column">
-            <div>
-              @each('partials.news_item_preview', $news, 'item')
-              <!-- <h1>ESTOU AQUI</h1> -->
+            <div id="news_item_preview_list">
+            @include('partials.news_item_preview_list',$news)
             </div>
             <div class="row">
               <div class="col">
