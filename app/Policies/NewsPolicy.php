@@ -19,7 +19,7 @@ class NewsPolicy
      */
     public function view(User $user, News $news)
     {
-        //
+        return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class NewsPolicy
      */
     public function create(User $user)
     {
-        //
+        return Auth::check();
     }
 
     /**
@@ -66,6 +66,6 @@ class NewsPolicy
      */
     public function delete(User $user, News $news)
     {
-        return true;
+        return $user->id == $news->author_id;
     }
 }
