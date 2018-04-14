@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\View;
 
 use App\News as News;
 
+use App\Section as Section;
+
 class NewsController extends Controller
 {
 
@@ -60,5 +62,13 @@ class NewsController extends Controller
       // $this->authorize('edit', News::class);
       $article->update($request->all());
       return redirect('news/'.$id);
+    }
+
+
+    public function editArticle($id) {
+      $sections = Section::pluck('name', 'id');
+      $article = News::find($id);
+      $this->authorize('editArticle', News::class);
+      return view('pages.news_editor', ['sections' => $sections, 'article' => $article]);
     }
 }

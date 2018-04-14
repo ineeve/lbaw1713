@@ -21,7 +21,8 @@ class EditorController extends Controller
     public function editArticle($id) {
       $sections = Section::pluck('name', 'id');
       $article = News::find($id);
-      // $this->authorize('edit', News::class);
+      $this->authorize('editArticle', $article);
+      // TODO; autorize
       return view('pages.news_editor', ['sections' => $sections, 'article' => $article]);
     }
 
