@@ -12,7 +12,7 @@
           <!-- News Header -->
           <div class="row">
             <div class="container ml-0 d-flex justify-content-between">
-              <h1>
+              <h1 class="current_section">
                 <i class="fa fa-bullseye"></i> All</h1>
               <!-- Sort News Dropdown -->
               <div class="btn-group" role="group">
