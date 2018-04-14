@@ -73,25 +73,27 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        echo "Creating user";
+        $flag = FALSE;
         $user = User::create([
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'country_id' => $data['country_id'],
             'gender' => $data['gender'],
         ]);
-        $picture = $data['picture'];
-        $user->picture = $user->id;
-        $user->save();
-        
-
-        Storage::disk('users')->put(
-            $user->id,
-            file_get_contents($picture->getRealPath())
-        );
-
-        
+        if (array_key_exists('picture',$data)){
+            $flag = TRUE;
+            $user->picture = $user->id;
+            $picture = $data['picture'];
+            Storage::disk('users')->put($user->id, file_get_contents($picture->getRealPath()));
+        }
+        if (array_key_exists('country_id',$data)){
+            $flag = TRUE;
+            $user->country_id = $data['country_id'];
+        }
+        if ($flag == TRUE){
+            $user->save();
+        }
+                
         return $user;
     }
 }
