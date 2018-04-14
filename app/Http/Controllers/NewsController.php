@@ -64,11 +64,16 @@ class NewsController extends Controller
       return redirect('news/'.$id);
     }
 
-
     public function editArticle($id) {
       $sections = Section::pluck('name', 'id');
       $article = News::find($id);
       $this->authorize('editArticle', News::class);
       return view('pages.news_editor', ['sections' => $sections, 'article' => $article]);
+    }
+
+    public function destroy($id) {
+     // $this->authorize('delete', News::class);
+      News::destroy($id);
+      return back();
     }
 }
