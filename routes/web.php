@@ -25,7 +25,7 @@ Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('re
 Route::post('register', 'Auth\RegisterController@register');
 
 //Create news
-Route::get('news/create', 'CreateNewsController@show')->name('create_news'); 
+Route::get('news/create', 'EditorController@createArticle')->name('create_news'); 
 
 Route::get('news', 'NewsController@list');
 Route::post('news', 'NewsController@create')->name('news');
@@ -35,7 +35,7 @@ Route::post('news', 'NewsController@create')->name('news');
 Route::get('news/{id}', 'NewsController@show');
 
 //Edit news
-Route::get('news/{id}/edit', 'CreateNewsController@editCurrent');
+Route::get('news/{id}/edit', 'EditorController@editArticle');
 Route::patch('news/{id}', 'NewsController@edit');
 
 Route::post('api/news/{news_id}/comments/scroll','AjaxController@scrollComments');

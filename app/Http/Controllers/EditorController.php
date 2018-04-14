@@ -9,20 +9,20 @@ use Illuminate\Support\Facades\Auth;
 use App\News as News;
 use App\Section as Section;
 
-class CreateNewsController extends Controller
+class EditorController extends Controller
 {
   
-    public function show() {
+    public function createArticle() {
       $sections = Section::pluck('name', 'id');
 
-      return view('pages.create_news', ['sections' => $sections]);
+      return view('pages.news_editor', ['sections' => $sections]);
     }
 
-    public function editCurrent($id) {
+    public function editArticle($id) {
       $sections = Section::pluck('name', 'id');
       $article = News::find($id);
       // TODO: Authorize
-      return view('pages.create_news', ['sections' => $sections, 'article' => $article]);
+      return view('pages.news_editor', ['sections' => $sections, 'article' => $article]);
     }
 
 }

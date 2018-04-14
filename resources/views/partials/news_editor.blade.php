@@ -2,10 +2,12 @@
   <h3 class="text-primary">Post a news story!</h3>
 
   @if (isset($article))
-    {{ Form::model($article, ['route' => ['news', $article->id], 'method' => 'post', 'files' => true]) }}
+    {{ Form::model($article, ['route' => ['news', $article->id], 'method' => 'PATCH', 'files' => true]) }}
   @else
     {{ Form::open(['route' => 'news', 'files' => true]) }}
   @endif
+
+  {{ Form::hidden($article->id) }}
 
   <fieldset class="form-group">
     {{ Form::label('title', 'Title') }}

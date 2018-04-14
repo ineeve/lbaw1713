@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-  @include('partials.create_news')
+  @include('partials.news_editor')
 
   <script>
   var editor_config = {
