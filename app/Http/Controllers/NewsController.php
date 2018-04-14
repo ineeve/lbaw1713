@@ -12,12 +12,7 @@ use App\News as News;
 
 class NewsController extends Controller
 {
-  
-    public function prettify_date($news_array){
-      foreach($news_array as $news){
-        $news->date = date("F jS, Y \a\\t H:i", strtotime($news->date));
-      }
-    }
+  use NewsTrait;
 
     public function list()
     {

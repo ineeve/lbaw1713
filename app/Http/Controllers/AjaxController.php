@@ -1,20 +1,21 @@
 <?php
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
-
 use Illuminate\Support\Facades\Response;
 
 class AjaxController extends Controller {
+    use NewsTrait;
    public function index(){
       $msg = "This is a simple message.";
       return response()->json(array('msg'=> $msg), 200);
    }
 
-public function scrollComments(Request $request, $news_id) {
+    public function scrollComments(Request $request, $news_id) {
 
     // echo "ECHOING NEWS ID: ".$news_id;
     $comments =  DB::select('SELECT text, date, Users.username AS commentator
@@ -37,21 +38,13 @@ public function scrollComments(Request $request, $news_id) {
 
  public function changeToSectionAll(Request $request) {
 
-    $news =  DB::select('SELECT title, date, body, image, votes, Sections.name AS name, Users.username AS author
-                        FROM News, Sections, Users
-                        WHERE Sections.id = News.section_id AND Users.id = News.author_id
-                        AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE News.id = DeletedItems.news_id)
-                        ORDER BY date DESC LIMIT 10 OFFSET 0;');
-
-    $sections = DB::select('SELECT icon, name FROM Sections');
-
+    $news = DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview 
+    FROM news JOIN users ON news.author_id = users.id WHERE NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE News.id = DeletedItems.news_id)
+    ORDER BY date DESC LIMIT 10 OFFSET 0');
+    $this->prettify_date($news);
     $status_code = 200; // TODO: change if not found!
-    $data = [
-        'view' => View::make('partials.news')
-            ->with('news', $news)
-            ->with('sections', $sections)
-            ->render()
-    ];
+    $view = View::make('partials.news_item_preview_list')->with('news', $news)->render();
+    $data = ['news' => $view];
 
     return Response::json($data, $status_code);
     
@@ -62,7 +55,7 @@ public function scrollComments(Request $request, $news_id) {
     FROM news JOIN users ON news.author_id = users.id JOIN sections ON sections.id = news.section_id
     WHERE sections.name = ? AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE News.id = DeletedItems.news_id)
     ORDER BY date DESC LIMIT 10 OFFSET 0', [$section]);
-
+    $this->prettify_date($news);
     $status_code = 200; // TODO: change if not found!
     $view = View::make('partials.news_item_preview_list')->with('news', $news)->render();
     $data = ['news' => $view];
