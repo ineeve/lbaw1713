@@ -34,6 +34,7 @@ function sendSelectSpecificSection(event) {
   console.log("section name = "+section_name)
 */
   let section_name = event.target.name;
+  document.querySelector('.current_section').innerHTML = event.target.innerHTML;
   sendAjaxRequest('post', '/api/news/section/' + section_name, null, listSpecificSectiondHandler);
 }
 
