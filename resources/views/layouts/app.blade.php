@@ -46,8 +46,8 @@
 
     <!-- event handler script -->
     <script type="text/javascript" src={{ asset( 'js/app.js') }} defer>
-  </script> -->
-  
+  </script> 
+
   <!-- END OUR -->
 
   @yield('text_editor')
