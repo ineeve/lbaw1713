@@ -82,7 +82,7 @@ function listSectionHandler() {
       if (e.target.responseText != null){
         let response = JSON.parse(e.target.responseText);
         console.log(response);
-        if (response != 'null'){
+        if (response['type'] != 'null'){
           if (response['type']){
             document.getElementById('upvote').style.color = 'red';
           }else{
@@ -94,20 +94,47 @@ function listSectionHandler() {
   }
   
   function voteHandler(e){
-    console.log(e.target.responseText);
+    let highlight_color = 'red';
+    let upvoteElement = document.getElementById('upvote');
+    let downvoteElement = document.getElementById('downvote');
+    let votesCounter = document.getElementById('votesCounter');
+    if (e.target != null){
+      if (e.target.responseText != null){
+        console.log(e.target.responseText);
+        let response = JSON.parse(e.target.responseText);
+        let selectedElement = upvoteElement;
+        let notSelectedElement = downvoteElement;
+        let action = response['action'];
+        votesCounter.innerHTML = response['votes'];
+        if (response['value'] == 'down'){
+          selectedElement = downvoteElement;
+          notSelectedElement = upvoteElement;
+        }
+        if (action == 'insert'){
+          selectedElement.style.color = highlight_color;
+        }else if (action == 'update'){
+          selectedElement.style.color = 'red';
+          notSelectedElement.style.color = 'inherit';
+        }else if (action == 'delete'){
+          selectedElement.style.color = 'inherit';
+        }else if (action == 'none'){
+          alert('You cannot vote on your own news');
+        }
+      }
+    }
+    
   }
 
   function downvote(newsId){
     let data = {
-      user_id: userId,
-      type: true
+      type: 'false'
     }
     sendAjaxRequest("post","/api/news/"+newsId+"/vote",data,voteHandler);
   }
 
   function upvote(newsId){
     let data = {
-      type: false
+      type: 'true'
     }
     sendAjaxRequest("post","/api/news/"+newsId+"/vote",data,voteHandler);
   }
