@@ -36,28 +36,34 @@
                     </div>
                     <!-- Delete -->
                     <div class="d-flex flex-row justify-content-end">
-                      <form action="{{ route('delete_news', $news->id) }}" method="post">
+                      <form action="{{ route('delete_news', $news->id) }}" method="post" class="delete-news">
                         {{ method_field('delete') }}
                         {{ csrf_field() }}
-                        <button type="submit">
+                        <span class="delete-news">
                           <span class="mt-1 mr-2">Delete</span>
                           <i class="fas fa-times mt-2 clickable-btn"></i>
-                        </button>
+                        </span>
+                        <script>
+                          $('span.delete-news').click(function() {
+                            $('form.delete-news').submit();
+                          })
+                        </script>
                       </form>
                     </div>
                   </div>
-              @endif
-              @if (Auth::check())
-                <!-- Report -->
-                <span data-toggle="modal" data-target="#reportModal">
-                  <span class="mt-1 mr-2">Report</span>
-                  <i class="fas fa-ban mt-2 clickable-btn" data-toggle="modal" data-target="#reportModal"></i>
-                </span>
               @else
-              <span data-toggle="modal" data-target="#registerModal">
-                  <span class="mt-1 mr-2">Report</span>
-                  <i class="fas fa-ban mt-2 clickable-btn" data-toggle="modal" data-target="#registerModal"></i>
-              </span>
+                @if (Auth::check())
+                  <!-- Report -->
+                  <span data-toggle="modal" data-target="#reportModal">
+                    <span class="mt-1 mr-2">Report</span>
+                    <i class="fas fa-ban mt-2 clickable-btn" data-toggle="modal" data-target="#reportModal"></i>
+                  </span>
+                @else
+                <span data-toggle="modal" data-target="#registerModal">
+                    <span class="mt-1 mr-2">Report</span>
+                    <i class="fas fa-ban mt-2 clickable-btn" data-toggle="modal" data-target="#registerModal"></i>
+                </span>
+                @endif
               @endif
             </div>              
             </div>
