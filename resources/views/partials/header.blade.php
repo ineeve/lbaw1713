@@ -54,10 +54,13 @@
                     <i class="fas fa-cog">
                     </i> Settings
                   </a>
-                  <a class="dropdown-item" href="/logout">
-                    <i class="fas fa-sign-out-alt">
-                    </i> Log out
-                  </a>
+                  <form class="dropdown-item" method="POST" action="/logout">
+                    <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
+                    <button type="submit">
+                      <i class="fas fa-sign-out-alt">
+                      </i> Log out
+                    </span>
+                  </form>
                 </div>
               </li>
             </ul>
