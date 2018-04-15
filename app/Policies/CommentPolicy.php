@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\User;
+use Auth;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class CommentPolicy

@@ -18,7 +18,7 @@ class CommentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store($news_id, Request $request) {
-        $this->authorize('store');
+        $this->authorize('store', Comment::class);
         $request['creator_user_id'] = Auth::user()->id;
         $request['target_news_id'] = $news_id;
         Comment::create($request->all());

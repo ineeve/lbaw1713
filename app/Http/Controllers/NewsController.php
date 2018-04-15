@@ -72,7 +72,7 @@ class NewsController extends Controller
     ///////////////////// EDITOR BELOW
 
     public function createArticle() {
-      $this->authorize('createArticle');
+      $this->authorize('createArticle', News::class);
       $sections = Section::pluck('name', 'id');
       return view('pages.news_editor', ['sections' => $sections]);
     }
