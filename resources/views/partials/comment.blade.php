@@ -8,7 +8,7 @@
       </div>
       <div>
         <div class="owner"> {{ $comment->commentator }}</div>
-        <time class="date"> {{ $comment->date }}</time>
+        <time class="date"> {{ date("F jS, Y \a\\t H:i", strtotime($comment->date)) }}</time>
       </div>
       <div class="ml-auto">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
