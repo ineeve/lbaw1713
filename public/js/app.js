@@ -94,7 +94,7 @@ function listSectionHandler() {
   }
   
   function voteHandler(e){
-    let highlight_color = 'red';
+    let highlight_color = '#428bca';
     let upvoteElement = document.getElementById('upvote');
     let downvoteElement = document.getElementById('downvote');
     let votesCounter = document.getElementById('votesCounter');
@@ -113,7 +113,7 @@ function listSectionHandler() {
         if (action == 'insert'){
           selectedElement.style.color = highlight_color;
         }else if (action == 'update'){
-          selectedElement.style.color = 'red';
+          selectedElement.style.color = highlight_color;
           notSelectedElement.style.color = 'inherit';
         }else if (action == 'delete'){
           selectedElement.style.color = 'inherit';
