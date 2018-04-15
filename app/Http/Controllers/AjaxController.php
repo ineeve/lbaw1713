@@ -111,16 +111,18 @@ class AjaxController extends Controller {
     //Check if user has voted before
     $return['sucess'] = false;
     if ($this->userOwnsNews($news_id,$user_id)){
-        echo 'Cannot vote';
+        $return['action'] = 'none';
     }else{
         $previousVote = DB::select('SELECT type from votes WHERE user_id = ? AND news_id = ?',[$user_id,$news_id]);
         if (empty($previousVote)){
             DB::select('INSERT INTO Votes (user_id, news_id, type) VALUES (?, ?, ?);',[$user_id,$news_id,$request->input('type')]);
             $return['sucess'] = true;
+            $return['action'] = 'insert';
         }else{
             DB::select('UPDATE Votes SET type=? WHERE user_id=? AND news_id=?',[$request->input('type'),$user_id,$news_id]);
             echo 'UPDATED';
             $return['sucess'] = true;
+            $return['action'] = 'update';
         }
     }
     echo json_encode($return);
