@@ -67,21 +67,53 @@ function listSectionHandler() {
     document.getElementById('news_item_preview_list').innerHTML += response['news'];
   }
 
+  function getUserVote(){
+    let meta_tag = document.querySelector('meta[name="news_id"]');
+    if (meta_tag != null){
+      let news_id = meta_tag.content;
+      if (news_id != null){
+        sendAjaxRequest("get","/api/news/"+news_id+"/vote",null,getVoteHandler);
+      }
+    }   
+  }
+
+  function getVoteHandler(e){
+    if (e.target != null){
+      if (e.target.responseText != null){
+        let response = JSON.parse(e.target.responseText);
+        console.log(response);
+        if (response != 'null'){
+          if (response['type']){
+            document.getElementById('upvote').style.color = 'red';
+          }else{
+            document.getElementById('downvote').style.color = 'red';
+          }
+        }
+      }
+    }
+  }
+  
   function voteHandler(e){
-
-    sendAjaxRequest("post","/api/news/")
+    console.log(e.target.responseText);
   }
 
-  function downvote(user_id,news_id){
-    console.log(event);
+  function downvote(newsId){
+    let data = {
+      user_id: userId,
+      type: true
+    }
+    sendAjaxRequest("post","/api/news/"+newsId+"/vote",data,voteHandler);
   }
 
-  function upvote(user_id,news_id){
-    console.log(event);
+  function upvote(newsId){
+    let data = {
+      type: false
+    }
+    sendAjaxRequest("post","/api/news/"+newsId+"/vote",data,voteHandler);
   }
   
 addEventListeners();
-
+getUserVote();
 
 window.fbAsyncInit = function() {
   FB.init({

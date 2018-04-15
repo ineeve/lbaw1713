@@ -73,7 +73,6 @@ class AjaxController extends Controller {
     $data = ['news' => $view];
 
     return Response::json($data, $status_code);
-    
  }
 
  public function showMorePreviewsOfAll(Request $request) {
@@ -88,10 +87,46 @@ class AjaxController extends Controller {
     return Response::json($data, $status_code);
     
  }
-
- public function createVote(Request $request){
-    DB::select('INSERT INTO Votes (user_id, news_id, type) VALUES ($userId, $newsId, $type);');
+ public function userOwnsNews($news_id,$user_id){
+    $result = DB::select('SELECT * FROM news WHERE id = ? AND author_id = ?',[$news_id,$user_id]);
+    return !empty($result);
  }
+
+ public function getUserVote(Request $request,$news_id){
+    $auth_user = \Auth::user();
+    if ($auth_user != null){
+        $user_id = $auth_user->id;
+        $previousVote = DB::select('SELECT type from votes WHERE user_id = ? AND news_id = ?',[$user_id,$news_id])[0];
+        echo json_encode($previousVote);
+    }else{
+        echo 'null';
+    }    
+ }
+
+ public function createVote(Request $request, $news_id){
+    $user_id = \Auth::user()->id;
+    echo 'user: '.$user_id;
+    echo 'news: '.$news_id;
+    //Check user does not own the news
+    //Check if user has voted before
+    $return['sucess'] = false;
+    if ($this->userOwnsNews($news_id,$user_id)){
+        echo 'Cannot vote';
+    }else{
+        $previousVote = DB::select('SELECT type from votes WHERE user_id = ? AND news_id = ?',[$user_id,$news_id]);
+        if (empty($previousVote)){
+            DB::select('INSERT INTO Votes (user_id, news_id, type) VALUES (?, ?, ?);',[$user_id,$news_id,$request->input('type')]);
+            $return['sucess'] = true;
+        }else{
+            DB::select('UPDATE Votes SET type=? WHERE user_id=? AND news_id=?',[$request->input('type'),$user_id,$news_id]);
+            echo 'UPDATED';
+            $return['sucess'] = true;
+        }
+    }
+    echo json_encode($return);
+ }
+
+
 
 
 }

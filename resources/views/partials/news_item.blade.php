@@ -1,5 +1,6 @@
 @if(Auth::check())
   @include('partials/report_modal')
+  <meta name="news_id" content="{{$news->id}}">
 @else
   @include('partials/register_modal')
 @endif
@@ -15,8 +16,8 @@
               <span class="mt-2 mr-2"> {{ $news->votes }}</span>
               <div class="d-flex flex-column">
                 @if (Auth::check())
-                <i class="fas fa-arrow-alt-circle-up clickable-btn" id="upvote" onclick="upvote({{Auth::user()->id}},{{$news->id}})"></i>
-                <i class="fas fa-arrow-alt-circle-down mt-2 clickable-btn" id="downvote" onclick="downvote({{Auth::user()->id}},{{$news->id}})"></i>
+                <i class="fas fa-arrow-alt-circle-up clickable-btn" id="upvote" onclick="upvote({{$news->id}})"></i>
+                <i class="fas fa-arrow-alt-circle-down mt-2 clickable-btn" id="downvote" onclick="downvote({{$news->id}})"></i>
                 @else
                 <i class="fas fa-arrow-alt-circle-up clickable-btn" id="upvote" data-toggle="modal" data-target="#registerModal"></i>
                 <i class="fas fa-arrow-alt-circle-down mt-2 clickable-btn" id="downvote" data-toggle="modal" data-target="#registerModal"></i>
