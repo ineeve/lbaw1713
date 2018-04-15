@@ -94,36 +94,46 @@ class AjaxController extends Controller {
 
  public function getUserVote(Request $request,$news_id){
     $auth_user = \Auth::user();
+    $return['type']='null';
     if ($auth_user != null){
         $user_id = $auth_user->id;
-        $previousVote = DB::select('SELECT type from votes WHERE user_id = ? AND news_id = ?',[$user_id,$news_id])[0];
-        echo json_encode($previousVote);
-    }else{
-        echo 'null';
-    }    
+        $previousVote = DB::select('SELECT type from votes WHERE user_id = ? AND news_id = ?',[$user_id,$news_id]);
+        if (is_array($previousVote) && !empty($previousVote)){
+            $return['type']= $previousVote[0]->type;
+        }
+    }
+    echo json_encode($return);  
  }
 
  public function createVote(Request $request, $news_id){
     $user_id = \Auth::user()->id;
-    echo 'user: '.$user_id;
-    echo 'news: '.$news_id;
-    //Check user does not own the news
-    //Check if user has voted before
+    $request_vote_type = ($request->input('type') == 'true' ? TRUE : FALSE);
+    
     $return['sucess'] = false;
+    //Check user does not own the news
     if ($this->userOwnsNews($news_id,$user_id)){
         $return['action'] = 'none';
     }else{
+        //Check if user has voted before
         $previousVote = DB::select('SELECT type from votes WHERE user_id = ? AND news_id = ?',[$user_id,$news_id]);
         if (empty($previousVote)){
-            DB::select('INSERT INTO Votes (user_id, news_id, type) VALUES (?, ?, ?);',[$user_id,$news_id,$request->input('type')]);
-            $return['sucess'] = true;
+            DB::select('INSERT INTO Votes (user_id, news_id, type) VALUES (?, ?, ?);',[$user_id,$news_id,$request_vote_type]);
             $return['action'] = 'insert';
         }else{
-            DB::select('UPDATE Votes SET type=? WHERE user_id=? AND news_id=?',[$request->input('type'),$user_id,$news_id]);
-            echo 'UPDATED';
-            $return['sucess'] = true;
-            $return['action'] = 'update';
+            //vote already exists
+            $previousVote = $previousVote[0]->type;
+            if($previousVote == $request_vote_type){
+                DB::select('DELETE FROM votes WHERE user_id=? AND news_id=?',[$user_id,$news_id]);
+                $return['action'] = 'delete';
+            }else{
+                DB::select('UPDATE Votes SET type=? WHERE user_id=? AND news_id=?',[$request_vote_type,$user_id,$news_id]);
+                $return['action'] = 'update';    
+            }
+                    
         }
+        $return['value'] = ($request_vote_type) ? 'up' : 'down';    
+        $return['sucess'] = true;
+        $return['votes'] = DB::select('SELECT votes FROM news WHERE id = ?', [$news_id])[0]->votes;
     }
     echo json_encode($return);
  }

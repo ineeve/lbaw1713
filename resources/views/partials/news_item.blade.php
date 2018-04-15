@@ -13,7 +13,7 @@
           <div class="col-1 pr-0">
             <div class="d-flex flex-column mt-5 justify-content-end">
             <div class="d-flex flex-row justify-content-end">
-              <span class="mt-2 mr-2"> {{ $news->votes }}</span>
+              <span id="votesCounter" class="mt-2 mr-2"> {{ $news->votes }}</span>
               <div class="d-flex flex-column">
                 @if (Auth::check())
                 <i class="fas fa-arrow-alt-circle-up clickable-btn" id="upvote" onclick="upvote({{$news->id}})"></i>
