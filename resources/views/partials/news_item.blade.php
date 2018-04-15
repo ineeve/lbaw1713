@@ -4,7 +4,7 @@
 @else
   @include('partials/register_modal')
 @endif
-<script src="{{ asset('js/scroolComment.js') }}" defer></script>
+<script src="{{ asset('js/scrollComment.js') }}" defer></script>
   <div id="myTabContent" class="tab-content">
     <div class="tab-pane fade active show" id="article">
       <div class="container-fluid">
@@ -65,8 +65,8 @@
           <!-- ARTICLE -->
           <div class="col-11 col-lg-10 mt-3 article">
           <script type="text/javascript">
-	 	var news_id = "{{ $news->id }}";//TODO get from route
-	</script> 
+            var news_id = "{{ $news->id }}";//TODO get from route
+          </script> 
             <h6 class="category"> {{ $news->section }}</h6>
               <h2 class="title"> {{ $news->title }}</h2>
               <h6 class="author"> {{ $news->author }} &middot; {{ date("F jS, Y \a\\t H:i", strtotime($news->date)) }}</h6>
@@ -81,9 +81,10 @@
                   <a href="{{ $source->link }}">{{ $source->link }}</a>
                 @endforeach
               <h3 class="mt-4">Comments</h3>
-              <form class="mt-3 mb-4">
+              <form class="mt-3 mb-4" method="POST" action="{{ route('comments.store', $news->id) }}">
+                {{ csrf_field() }}
                 <div class="form-group">
-                  <textarea class="form-control" id="self-comment" rows="3" placeholder="Comment"></textarea>
+                  <textarea class="form-control" name="text" id="text" rows="3" placeholder="Comment"></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Post</button>
               </form>

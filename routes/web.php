@@ -55,3 +55,8 @@ Route::post('api/news/section/{section_id}','AjaxController@changeSection');
 Route::get('privacy_policy','PrivacyPolicy@show');
 Route::post('api/news/section/All/scroll','AjaxController@showMorePreviewsOfAll');
 Route::post('api/news/section/{section_id}/scroll','AjaxController@showMorePreviews');
+
+// Comments - TODO: Add more methods once they're implemented
+Route::resource('news/{id}/comments', 'CommentController')->only([
+    'store'
+]);

@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\View;
 
 
 use App\News as News;
-
 use App\Section as Section;
 
 class NewsController extends Controller
@@ -73,8 +72,8 @@ class NewsController extends Controller
     ///////////////////// EDITOR BELOW
 
     public function createArticle() {
+      $this->authorize('createArticle');
       $sections = Section::pluck('name', 'id');
-
       return view('pages.news_editor', ['sections' => $sections]);
     }
 
