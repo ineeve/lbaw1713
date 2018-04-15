@@ -17,8 +17,6 @@ Route::get('/', function () {
 Route::get('error/404', 'Controller@errorNotFound');
 
 // // Authentication
-Route::get('login', 'Auth\LoginController@showLoginForm')->name('login'); 
-// TODO: apagar GET LOGIN
 Route::post('login', 'Auth\LoginController@login');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
