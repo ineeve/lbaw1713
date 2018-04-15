@@ -7,6 +7,8 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 
 use App\News;
 use App\Policies\NewsPolicy;
+use App\Comment;
+use App\Policies\CommentPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
