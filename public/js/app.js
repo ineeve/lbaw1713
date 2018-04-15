@@ -78,15 +78,16 @@ function listSectionHandler() {
   }
 
   function getVoteHandler(e){
+    let highlight_color = '#428bca';
     if (e.target != null){
       if (e.target.responseText != null){
         let response = JSON.parse(e.target.responseText);
         console.log(response);
-        if (response['type'] != 'null'){
-          if (response['type']){
-            document.getElementById('upvote').style.color = 'red';
+        if (response['value'] != 'null'){
+          if (response['value'] == 'up'){
+            document.getElementById('upvote').style.color = highlight_color;
           }else{
-            document.getElementById('downvote').style.color = 'red';
+            document.getElementById('downvote').style.color = highlight_color;
           }
         }
       }

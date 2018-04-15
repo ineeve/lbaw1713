@@ -94,12 +94,12 @@ class AjaxController extends Controller {
 
  public function getUserVote(Request $request,$news_id){
     $auth_user = \Auth::user();
-    $return['type']='null';
+    $return['value']='null';
     if ($auth_user != null){
         $user_id = $auth_user->id;
         $previousVote = DB::select('SELECT type from votes WHERE user_id = ? AND news_id = ?',[$user_id,$news_id]);
         if (is_array($previousVote) && !empty($previousVote)){
-            $return['type']= $previousVote[0]->type;
+            $return['value']= $previousVote[0]->type ? 'up' : 'down';;
         }
     }
     echo json_encode($return);  
@@ -109,7 +109,6 @@ class AjaxController extends Controller {
     $user_id = \Auth::user()->id;
     $request_vote_type = ($request->input('type') == 'true' ? TRUE : FALSE);
     
-    $return['sucess'] = false;
     //Check user does not own the news
     if ($this->userOwnsNews($news_id,$user_id)){
         $return['action'] = 'none';
@@ -132,7 +131,6 @@ class AjaxController extends Controller {
                     
         }
         $return['value'] = ($request_vote_type) ? 'up' : 'down';    
-        $return['sucess'] = true;
         $return['votes'] = DB::select('SELECT votes FROM news WHERE id = ?', [$news_id])[0]->votes;
     }
     echo json_encode($return);
