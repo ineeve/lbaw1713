@@ -22,14 +22,14 @@
                     <i class="fas fa-chevron-down ml-2 mt-1"></i>
                   </div>
                 </button>
-                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                <div class="dropdown-menu order" aria-labelledby="btnGroupDrop1">
                   <a class="dropdown-item" href="#">Most Popular</a>
                   <a class="dropdown-item" href="#">Most Voted</a>
                   <a class="dropdown-item" href="#">Most Recent</a>
                 </div>
               </div>
               <script>
-                $(".dropdown-item").click(function (event) {
+                $(".order .dropdown-item").click(function (event) {
                   $(".sort-option").html($(this).text());
                 });
               </script>
