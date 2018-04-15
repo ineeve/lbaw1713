@@ -17,6 +17,7 @@ Route::get('/', function () {
 Route::get('error/404', 'Controller@errorNotFound');
 
 // // Authentication
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login'); //TODO: Why does this need to be here?
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
