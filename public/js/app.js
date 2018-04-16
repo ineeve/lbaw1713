@@ -31,8 +31,8 @@ function sendAjaxRequest(method, url, data, handler) {
 
 function sendSelectSection(event) {
   previews_offset = 0;
-  let section_name = event.target.name;
-  document.querySelector('.current_section').innerHTML = event.target.innerHTML;
+  let section_name = event.currentTarget.name;
+  document.querySelector('.current_section').innerHTML = event.currentTarget.innerHTML;
   sendAjaxRequest('post', '/api/news/section/' + section_name, null, listSectionHandler);
   console.log("offset = "+previews_offset);
 }
