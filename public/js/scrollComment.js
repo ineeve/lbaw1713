@@ -4,11 +4,11 @@ jQuery(document).ready(function () {
     let offset = 0; 
     jQuery('#scrollComment').click(function (e) {
         e.preventDefault();
-            $.ajaxSetup({
-                headers: {
-                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-              });
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
         jQuery.ajax({
             url: "/api/news/"+news_id+"/comments/scroll",
             method: 'post',
@@ -21,7 +21,7 @@ jQuery(document).ready(function () {
                 }
                 $('#placeComments').append(result.view);
                 offset += result.next;
-                onScroolComments();
+                onScrollComments();
             }
         });
     });

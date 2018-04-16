@@ -173,7 +173,7 @@ function statusChangeCallback(response) {
   console.log(response);
 }
 
-function onScroolComments() {
+function onScrollComments() {
   
   jQuery('.deleteComment').click(function (e) {
     e.preventDefault();

@@ -60,7 +60,7 @@ Route::post('api/news/section/All','AjaxController@changeToSectionAll');
 /*Change to selected section */
 Route::post('api/news/section/{section_id}','AjaxController@changeSection');
 /*Page that informs the user of our privacy policies*/
-Route::get('privacy_policy','PrivacyPolicy@show');
+Route::get('privacy_policy','PrivacyPolicyController@show');
 /*Infinite scroll for news of section 'All' */
 Route::post('api/news/section/All/scroll','AjaxController@showMorePreviewsOfAll');
 /*Infinite scroll for news of a selected section */
