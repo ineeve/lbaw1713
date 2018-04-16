@@ -69,3 +69,5 @@ Route::post('api/news/section/{section_id}/scroll','AjaxController@showMorePrevi
 Route::resource('news/{id}/comments', 'CommentController')->only([
     'store'
 ]);
+
+Route::delete('api/news/{news_id}/comments/{id}', 'CommentController@delete');

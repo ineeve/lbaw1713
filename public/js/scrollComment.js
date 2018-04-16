@@ -21,6 +21,7 @@ jQuery(document).ready(function () {
                 }
                 $('#placeComments').append(result.view);
                 offset += result.next;
+                onScroolComments();
             }
         });
     });
