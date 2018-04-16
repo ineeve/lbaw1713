@@ -23,7 +23,7 @@ class NewsController extends Controller
                           FROM news JOIN users ON news.author_id = users.id
                           WHERE NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
                           -- WHERE textsearchable_body_and_title_index_col @@ to_tsquery(title) 
-                          LIMIT 10 OFFSET 0');
+                          ORDER BY date DESC LIMIT 10 OFFSET 0');
 
       $sections = DB::select('SELECT icon, name FROM Sections');
 
