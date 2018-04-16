@@ -6,14 +6,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
-
+use Illuminate\Support\Facades\Validator;
+use Storage;
 
 use App\News as News;
 use App\Section as Section;
 
 class NewsController extends Controller
 {
-
+    CONST DEFAULT_IMAGE_NAME = 'default';
     public function list()
     {
       //$this->authorize('list', News::class);
@@ -47,10 +48,48 @@ class NewsController extends Controller
       return view('pages.news_item', ['news' => $news, 'sources' => $sources]);
     }
 
+    /**
+     * Get a validator for an incoming news creation;
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'title' => 'required|string|max:255',
+            'section_id' => 'required|integer',
+            'image' => 'nullable|image',
+            'author_id' => 'integer',
+            'body' => 'string'
+        ]);
+    }
+
+
     public function create(Request $request) {
-      $request['author_id'] = Auth::user()->id;
-      $news = News::create($request->all());
       
+      $validator = $this->validator($request->all());
+      if ($validator->fails()) {
+        return redirect('/news/create')
+                    ->withErrors($validator)
+                    ->withInput();
+      }
+      $news = News::create([
+          'title' => $request->title,
+          'body' => $request->body,
+          'section_id' => $request->section_id,
+          'author_id' => Auth::user()->id,
+          'image' => self::DEFAULT_IMAGE_NAME
+      ]);
+
+      if ($request->image != NULL){
+        Storage::disk('news')->put(
+          $news->id,
+          file_get_contents($request->image->getRealPath())
+        );
+        $news->image = $news->id;
+        $news->save();
+      }
       return redirect('news/'.$news->id);
     }
 
