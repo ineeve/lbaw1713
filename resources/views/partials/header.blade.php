@@ -32,7 +32,7 @@
                   <i class="fas fa-bell">
                   </i> Notifications</a>
                 <div class="dropdown-menu dropdown-menu-right position-absolute" x-placement="bottom-start">
-                  @each('partials.notification', Auth::user()->notifications()->orderBy('date')->get(), 'notification')
+                  @each('partials.notification', Auth::user()->notifications()->where('was_read', FALSE)->orderBy('date')->get(), 'notification')
                 </div>
               </li>
               <!-- Account -->

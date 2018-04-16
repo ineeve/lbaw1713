@@ -16,6 +16,7 @@ Route::get('/', function () {
 })->name('homepage');
 Route::get('error/404', 'Controller@errorNotFound');
 Route::get('error/403', 'Controller@errorUnauthorizedAction');
+
 // // Authentication
 
 /*Action of login*/
@@ -71,3 +72,7 @@ Route::resource('news/{id}/comments', 'CommentController')->only([
 ]);
 
 Route::delete('api/news/{news_id}/comments/{id}', 'CommentController@delete');
+
+
+// Click on a notification
+Route::get('notifications/{id}', 'NotificationController@process');
