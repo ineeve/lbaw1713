@@ -21,7 +21,7 @@ class NewsController extends Controller
 
       $news = DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
                           FROM news JOIN users ON news.author_id = users.id
-                          WHERE NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE DeletedItems.news_id = News.id)
+                          WHERE NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
                           -- WHERE textsearchable_body_and_title_index_col @@ to_tsquery(title) 
                           LIMIT 10 OFFSET 0');
 
@@ -106,7 +106,7 @@ class NewsController extends Controller
       $article = News::find($id);
       $this->authorize('delete', $article);
       $this->markDeleted($article);
-      return back();
+      return redirect('news');
     }
 
 
@@ -132,7 +132,7 @@ class NewsController extends Controller
      * Inserts article in the DeletedItems table rather than actually deleting it.
      */
     private function markDeleted($article) {
-      $deletedItems = DB::table('DeletedItems')->where('news_id', $article->id);
+      $deletedItems = DB::table('deleteditems')->where('news_id', $article->id)->get();
       if (count($deletedItems) > 0) {
         // item was already deleted
         return;
