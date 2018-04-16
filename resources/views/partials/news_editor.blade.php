@@ -9,7 +9,7 @@
 
   <fieldset class="form-group">
     {{ Form::label('title', 'Title') }}
-    {{ Form::text('title', isset($article) ? null : 'Insert title here', ['class' => 'form-control']) }}
+    {{ Form::text('title', null, ['class' => 'form-control', 'placeholder' => 'Insert title here']) }}
 
     {{ Form::label('section_id', 'Category') }}
     {{ Form::select('section_id', $sections, null, ['class' => 'form-control']) }}
@@ -26,7 +26,7 @@
 
   <fieldset class="form-group">
     {{ Form::label('sources', 'Sources') }}
-    {{ Form::text('sources', isset($article) ? null : 'Insert links to source, separated by comma', ['class' => 'form-control']) }}
+    {{ Form::text('sources', null, ['class' => 'form-control', 'placeholder' => 'Insert links to source, separated by comma']) }}
   </fieldset>
 
   {{ Form::submit('Submit', ['name' => 'submit', 'class' => 'btn btn-primary']) }}
