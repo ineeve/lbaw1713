@@ -21,11 +21,9 @@
             <ul class="navbar-nav ml-auto">
               <!-- Publish -->
               <li class="nav-item">
-                <button class="btn btn-outline-light my-2 my-sm-0 rounded">
-                  <a href="{{ route('create_news') }}" style="color:inherit; text-decoration:none">
-                    Publish
-                  </a>
-                </button>
+                <a class="btn btn-outline-light my-2 my-sm-0 rounded" href="{{ route('create_news') }}" style="text-decoration:none">
+                  <span style="color: inherit">Publish</span>
+                </a>
               </li>
 
               <!-- Notifications -->
