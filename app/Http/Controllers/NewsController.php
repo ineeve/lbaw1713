@@ -19,7 +19,9 @@ class NewsController extends Controller
     {
       //$this->authorize('list', News::class);
 
-      $news = DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview FROM news JOIN users ON news.author_id = users.id
+      $news = DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
+                          FROM news JOIN users ON news.author_id = users.id
+                          WHERE NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE DeletedItems.news_id = News.id)
                           -- WHERE textsearchable_body_and_title_index_col @@ to_tsquery(title) 
                           LIMIT 10 OFFSET 0');
 
@@ -103,7 +105,7 @@ class NewsController extends Controller
     public function destroy($id) {
       $article = News::find($id);
       $this->authorize('delete', $article);
-      News::destroy($id);
+      $this->markDeleted($article);
       return back();
     }
 
@@ -111,7 +113,7 @@ class NewsController extends Controller
     ///////////////////// EDITOR BELOW
 
     public function createArticle() {
-      $this->authorize('createArticle', News::class);
+      $this->authorize('create', News::class);
       $sections = Section::pluck('name', 'id');
       return view('pages.news_editor', ['sections' => $sections]);
     }
@@ -121,5 +123,20 @@ class NewsController extends Controller
       $article = News::find($id);
       $this->authorize('editArticle', $article);
       return view('pages.news_editor', ['sections' => $sections, 'article' => $article]);
+    }
+
+    //////////////////// EDITOR ABOVE
+
+
+    /**
+     * Inserts article in the DeletedItems table rather than actually deleting it.
+     */
+    private function markDeleted($article) {
+      $deletedItems = DB::table('DeletedItems')->where('news_id', $article->id);
+      if (count($deletedItems) > 0) {
+        // item was already deleted
+        return;
+      }
+      DB::insert('INSERT INTO DeletedItems (user_id, news_id) VALUES (?, ?);', [Auth::user()->id, $article->id]);
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\Response;
 use App\Comment;
 
 class CommentController extends Controller
@@ -24,4 +25,13 @@ class CommentController extends Controller
         Comment::create($request->all());
         return back();
     }
+    public function delete($news_id, $id) {
+        $comment = Comment::find($id);
+        $this->authorize('delete', $comment);
+        Comment::destroy($id);
+        // TODO: see if happened
+        $status_code = 200; 
+        return Response::json($id, $status_code);
+      }  
+
 }

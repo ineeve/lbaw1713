@@ -24,17 +24,6 @@ class NewsPolicy
     }
 
     /**
-     * Determine whether the user can get the form to create news.
-     *
-     * @param  \App\User  $user
-     * @return mixed
-     */
-    public function createArticle(User $user)
-    {
-        return Auth::check();
-    }
-
-    /**
      * Determine whether the user can create news.
      *
      * @param  \App\User  $user
