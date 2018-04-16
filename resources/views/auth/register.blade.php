@@ -83,9 +83,8 @@
       </div>
     
 
-    <button type="submit">
+    <button class="btn btn-primary ml-3" type="submit">
       Register
     </button>
-    <a class="button button-outline" href="{{ route('login') }}">Login</a>
 </form>
 @endsection

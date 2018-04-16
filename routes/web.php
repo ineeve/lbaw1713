@@ -17,7 +17,7 @@ Route::get('/', function () {
 Route::get('error/404', 'Controller@errorNotFound');
 
 // // Authentication
-Route::get('login', 'Auth\LoginController@showLoginForm')->name('login'); //NOT USING?
+
 /*Action of login*/
 Route::post('login', 'Auth\LoginController@login');
 /*Action of logout*/

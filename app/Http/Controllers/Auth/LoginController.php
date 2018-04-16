@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
+use App\User;
+use Illuminate\Support\Facades\Lang;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+
+
 
 class LoginController extends Controller
 {
@@ -26,6 +31,34 @@ class LoginController extends Controller
      * @var string
      */
     protected $redirectTo = '/news';
+
+    /*
+     * Method override to send correct error messages
+     * Get the failed login response instance.
+     *
+     * @param \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    
+    protected function sendFailedLoginResponse(Request $request)
+    {
+
+        if ( ! User::where('email', $request->email)->first() ) {
+            return redirect()->back()
+                ->withInput($request->only($this->username(), 'remember'))
+                ->withErrors([
+                    $this->username() => Lang::get('auth.email'),
+                ]);
+        }
+
+        if ( ! User::where('email', $request->email)->where('password', bcrypt($request->password))->first() ) {
+            return redirect()->back()
+                ->withInput($request->only($this->username(), 'remember'))
+                ->withErrors([
+                    'password' => Lang::get('auth.password'),
+                ]);
+        }
+    }
 
     /**
      * Create a new controller instance.
