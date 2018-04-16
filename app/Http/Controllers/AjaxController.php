@@ -17,7 +17,7 @@ class AjaxController extends Controller {
     public function scrollComments(Request $request, $news_id) {
 
     // echo "ECHOING NEWS ID: ".$news_id;
-    $comments =  DB::select('SELECT text, date, Users.username AS commentator, Users.picture AS commentator_picture
+    $comments =  DB::select('SELECT comments.id AS id, text, date, Users.username AS commentator, Users.picture AS commentator_picture
         FROM Comments, Users
         WHERE Comments.target_news_id = ? AND Comments.creator_user_id = Users.id
         AND NOT EXISTS (SELECT DeletedItems.comment_id FROM DeletedItems WHERE DeletedItems.comment_id = Comments.id)
@@ -27,6 +27,7 @@ class AjaxController extends Controller {
     $data = [
         'view' => View::make('partials.comment')
             ->with('comments', $comments)
+            ->with('news_id', $news_id)
             ->render(),
         'next' => count($comments)
     ];

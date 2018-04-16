@@ -15,8 +15,17 @@
           <!-- <i class="fa fa-angle-down" ></i> -->
         </a>
         <div class="dropdown-menu" x-placement="bottom-start">
-          <a class="dropdown-item" href="#">You need to be registered in our website
+        @if(Auth::check())
+@if(Auth::user()->username == $comment->commentator)
+  <!-- TODO: mandar por method delete -->
+  <a class="dropdown-item" href="/api/news/{{$news_id}}/comments/{{ $comment->id}}">Delete</a>
+@else
+        <a class="dropdown-item" href="#">Report</a>
+        @endif
+        @else
+          <a class="dropdown-item" href="register">You need to be registered in our website
             <br> to report this comment</a>
+        @endif
         </div>
       </div>
     </div>
