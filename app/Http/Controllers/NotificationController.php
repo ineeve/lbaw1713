@@ -15,6 +15,8 @@ class NotificationController extends Controller
     public function process($id) {
         $notification = Notification::find($id);
         $this->authorize('process', $notification);
+        $notification->was_read = true;
+        $notification->save();
         switch ($notification->type) {
             case self::FOLLOW:
                 return redirect('users/'.$notification->user_id);
