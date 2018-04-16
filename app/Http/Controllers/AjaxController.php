@@ -113,6 +113,7 @@ class AjaxController extends Controller {
     //Check user does not own the news
     if ($this->userOwnsNews($news_id,$user_id)){
         $return['action'] = 'none';
+        $return['votes'] = DB::select('SELECT votes FROM news WHERE id = ?', [$news_id])[0]->votes;
     }else{
         //Check if user has voted before
         $previousVote = DB::select('SELECT type from votes WHERE user_id = ? AND news_id = ?',[$user_id,$news_id]);
