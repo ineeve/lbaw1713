@@ -6,19 +6,22 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
-
+use Illuminate\Support\Facades\Validator;
+use Storage;
 
 use App\News as News;
 use App\Section as Section;
 
 class NewsController extends Controller
 {
-
+    CONST DEFAULT_IMAGE_NAME = 'default';
     public function list()
     {
       //$this->authorize('list', News::class);
 
-      $news = DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview FROM news JOIN users ON news.author_id = users.id
+      $news = DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
+                          FROM news JOIN users ON news.author_id = users.id
+                          WHERE NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE DeletedItems.news_id = News.id)
                           -- WHERE textsearchable_body_and_title_index_col @@ to_tsquery(title) 
                           LIMIT 10 OFFSET 0');
 
@@ -47,10 +50,48 @@ class NewsController extends Controller
       return view('pages.news_item', ['news' => $news, 'sources' => $sources]);
     }
 
+    /**
+     * Get a validator for an incoming news creation;
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'title' => 'required|string|max:255',
+            'section_id' => 'required|integer',
+            'image' => 'nullable|image',
+            'author_id' => 'integer',
+            'body' => 'string'
+        ]);
+    }
+
+
     public function create(Request $request) {
-      $request['author_id'] = Auth::user()->id;
-      $news = News::create($request->all());
       
+      $validator = $this->validator($request->all());
+      if ($validator->fails()) {
+        return redirect('/news/create')
+                    ->withErrors($validator)
+                    ->withInput();
+      }
+      $news = News::create([
+          'title' => $request->title,
+          'body' => $request->body,
+          'section_id' => $request->section_id,
+          'author_id' => Auth::user()->id,
+          'image' => self::DEFAULT_IMAGE_NAME
+      ]);
+
+      if ($request->image != NULL){
+        Storage::disk('news')->put(
+          $news->id,
+          file_get_contents($request->image->getRealPath())
+        );
+        $news->image = $news->id;
+        $news->save();
+      }
       return redirect('news/'.$news->id);
     }
 
@@ -64,7 +105,7 @@ class NewsController extends Controller
     public function destroy($id) {
       $article = News::find($id);
       $this->authorize('delete', $article);
-      News::destroy($id);
+      $this->markDeleted($article);
       return back();
     }
 
@@ -72,7 +113,7 @@ class NewsController extends Controller
     ///////////////////// EDITOR BELOW
 
     public function createArticle() {
-      $this->authorize('createArticle', News::class);
+      $this->authorize('create', News::class);
       $sections = Section::pluck('name', 'id');
       return view('pages.news_editor', ['sections' => $sections]);
     }
@@ -82,5 +123,20 @@ class NewsController extends Controller
       $article = News::find($id);
       $this->authorize('editArticle', $article);
       return view('pages.news_editor', ['sections' => $sections, 'article' => $article]);
+    }
+
+    //////////////////// EDITOR ABOVE
+
+
+    /**
+     * Inserts article in the DeletedItems table rather than actually deleting it.
+     */
+    private function markDeleted($article) {
+      $deletedItems = DB::table('DeletedItems')->where('news_id', $article->id);
+      if (count($deletedItems) > 0) {
+        // item was already deleted
+        return;
+      }
+      DB::insert('INSERT INTO DeletedItems (user_id, news_id) VALUES (?, ?);', [Auth::user()->id, $article->id]);
     }
 }

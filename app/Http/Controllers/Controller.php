@@ -13,5 +13,7 @@ class Controller extends BaseController
 
     public function errorNotFound() {
         return view('pages.errorNotFound');  
+    } public function errorUnauthorizedAction() {
+        return view('pages.errorUnauthorizedAction');  
     }
 }

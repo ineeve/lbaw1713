@@ -15,7 +15,7 @@ Route::get('/', function () {
     return redirect('news');
 })->name('homepage');
 Route::get('error/404', 'Controller@errorNotFound');
-
+Route::get('error/403', 'Controller@errorUnauthorizedAction');
 // // Authentication
 
 /*Action of login*/
@@ -69,3 +69,5 @@ Route::post('api/news/section/{section_id}/scroll','AjaxController@showMorePrevi
 Route::resource('news/{id}/comments', 'CommentController')->only([
     'store'
 ]);
+
+Route::delete('api/news/{news_id}/comments/{id}', 'CommentController@delete');
