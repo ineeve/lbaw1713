@@ -15,7 +15,7 @@ Route::get('/', function () {
     return redirect('news');
 })->name('homepage');
 Route::get('error/404', 'Controller@errorNotFound');
-
+Route::get('error/403', 'Controller@errorUnauthorizedAction');
 // // Authentication
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login'); //NOT USING?
 /*Action of login*/
