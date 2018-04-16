@@ -3,7 +3,7 @@
   <div class="card-body p-0">
     <div class="d-flex">
       <div class="mr-2">
-        <img src="{{ Storage::url('users/'.($comment->commentator_picture == null ? 'default.png' : $comment->commentator_picture)) }}"
+        <img src="{{ Storage::url('users/'.($comment->commentator_picture == null ? 'default' : $comment->commentator_picture)) }}"
           style="max-height: 70px; max-width: 70px;" alt="{{ $comment->commentator }}'s picture">
       </div>
       <div>
