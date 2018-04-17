@@ -1,4 +1,4 @@
-<div id="source-inputs" class="d-flex flex-wrap align-items-center">
+<div class="d-flex flex-wrap align-items-center source-inputs">
       <fieldset class="form-group mr-3">
         {{ Form::text('author', null, ['class' => 'form-control', 'placeholder' => 'Author']) }}
       </fieldset>
