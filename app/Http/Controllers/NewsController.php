@@ -14,16 +14,53 @@ use App\Section as Section;
 
 class NewsController extends Controller
 {
-    CONST DEFAULT_IMAGE_NAME = 'default';
+    const DEFAULT_IMAGE_NAME = 'default';
+
+    const MOST_POPULAR = 'POPULAR';
+    const MOST_RECENT = 'RECENT';
+    const MOST_VOTED = 'VOTED';
+
+    private function getNewsByDate($offset) {
+      return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
+            FROM news JOIN users ON news.author_id = users.id
+            WHERE NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
+            -- WHERE textsearchable_body_and_title_index_col @@ to_tsquery(title) 
+            ORDER BY date DESC LIMIT 10 OFFSET ?', [$offset]);
+    }
+
+    private function getNewsByVotes($offset) {
+      return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
+            FROM news JOIN users ON news.author_id = users.id
+            WHERE NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
+            -- WHERE textsearchable_body_and_title_index_col @@ to_tsquery(title) 
+            ORDER BY votes DESC LIMIT 10 OFFSET ?', [$offset]);
+    }
+
+    /**
+     * @param  String  $order Either 'POPULAR', 'RECENT' or 'VOTED'.
+     */
+    public function changeOrder($order) {
+      switch ($order) {
+        case 'POPULAR':
+          $news = $this->getNewsByPopularity(0);
+        case 'RECENT':
+          $news = $this->getNewsByDate(0);
+        case 'VOTED':
+          $news = $this->getNewsByVotes(0);
+        default:
+          return redirect('error/404');
+      }
+
+      $view = View::make('partials.news_item_preview_list')->with('news', $news);
+      $data = ['view' => $view];
+      return $data;
+    }
+
     public function list()
     {
       //$this->authorize('list', News::class);
 
-      $news = DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
-                          FROM news JOIN users ON news.author_id = users.id
-                          WHERE NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
-                          -- WHERE textsearchable_body_and_title_index_col @@ to_tsquery(title) 
-                          ORDER BY date DESC LIMIT 10 OFFSET 0');
+      $news = $this->getNewsByDate(0); 
 
       $sections = DB::select('SELECT icon, name FROM Sections');
 
@@ -126,7 +163,6 @@ class NewsController extends Controller
     }
 
     //////////////////// EDITOR ABOVE
-
 
     /**
      * Inserts article in the DeletedItems table rather than actually deleting it.

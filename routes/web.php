@@ -76,3 +76,6 @@ Route::delete('api/news/{news_id}/comments/{id}', 'CommentController@delete');
 
 // Click on a notification
 Route::get('notifications/{id}', 'NotificationController@process');
+
+// Change news ordering criteria
+Route::get('api/news/order/{name}', 'NewsController@changeOrder');
