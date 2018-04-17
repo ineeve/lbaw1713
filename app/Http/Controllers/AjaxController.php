@@ -16,25 +16,24 @@ class AjaxController extends Controller {
 
     public function scrollComments(Request $request, $news_id) {
 
-    // echo "ECHOING NEWS ID: ".$news_id;
-    $comments =  DB::select('SELECT Comments.id AS id,text, date, Users.username AS commentator, Users.picture AS commentator_picture
-        FROM Comments, Users
-        WHERE Comments.target_news_id = ? AND Comments.creator_user_id = Users.id
-        AND NOT EXISTS (SELECT DeletedItems.comment_id FROM DeletedItems WHERE DeletedItems.comment_id = Comments.id)
-        ORDER BY date DESC LIMIT 10 OFFSET ?; ',[$news_id, $request->input('next_comment')]);
+        // echo "ECHOING NEWS ID: ".$news_id;
+        $comments =  DB::select('SELECT Comments.id AS id,text, date, Users.username AS commentator, Users.picture AS commentator_picture
+            FROM Comments, Users
+            WHERE Comments.target_news_id = ? AND Comments.creator_user_id = Users.id
+            AND NOT EXISTS (SELECT DeletedItems.comment_id FROM DeletedItems WHERE DeletedItems.comment_id = Comments.id)
+            ORDER BY date DESC LIMIT 10 OFFSET ?; ',[$news_id, $request->input('next_comment')]);
 
-    $status_code = 200; // TODO: change if not found!
-    $data = [
-        'view' => View::make('partials.comment')
-            ->with('comments', $comments)
-            ->with('news_id',$news_id)
-            ->render(),
-        'next' => count($comments)
-    ];
+        $status_code = 200; // TODO: change if not found!
+        $data = [
+            'view' => View::make('partials.comment')
+                ->with('comments', $comments)
+                ->with('news_id',$news_id)
+                ->render(),
+            'next' => count($comments)
+        ];
 
-    return Response::json($data, $status_code);
-    
- }
+        return Response::json($data, $status_code);
+    }
 
  public function changeToSectionAll(Request $request) {
 

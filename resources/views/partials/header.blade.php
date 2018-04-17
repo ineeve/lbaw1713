@@ -97,8 +97,6 @@
                     <button onclick="signIn()" type="submit" class="btn btn-primary">Sign in</button>
                   </form>
                   <div class="dropdown-divider"></div>
-                  <div class="px-4 fb-login-button" scope="public_profile,email" onlogin="checkLoginState()" data-max-rows="1" data-size="medium" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
-                  <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="/register">New around here? Sign up</a>
                   <a class="dropdown-item" href="#">Forgot password?</a>
                   

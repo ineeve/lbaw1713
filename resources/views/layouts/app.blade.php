@@ -54,7 +54,6 @@
 </head>
 
 <body>
-  <div id="fb-root"></div>
   <main>
     @include('partials.header')
 
