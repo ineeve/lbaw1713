@@ -21,22 +21,40 @@ class NewsController extends Controller
     const MOST_RECENT = 'RECENT';
     const MOST_VOTED = 'VOTED';
 
-    private $order = self::MOST_POPULAR;
+  public function getNewsByPopularity() {
+    
+  }
 
-    private function getNewsByDate($offset) {
-      return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
-            FROM news JOIN users ON news.author_id = users.id
-            WHERE NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
+    public function getNewsByDate($section, $offset) {
+      if(strcmp($this->current_section, 'All') == 0) {
+        return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
+          FROM news JOIN users ON news.author_id = users.id
+          WHERE NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
             -- WHERE textsearchable_body_and_title_index_col @@ to_tsquery(title) 
-            ORDER BY date DESC LIMIT 10 OFFSET ?', [$offset]);
+          ORDER BY date DESC LIMIT 10 OFFSET ?', [$offset]);
+      } else {
+        return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
+          FROM news JOIN users ON news.author_id = users.id
+          WHERE sections.name = ? AND NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
+            -- WHERE textsearchable_body_and_title_index_col @@ to_tsquery(title) 
+          ORDER BY date DESC LIMIT 10 OFFSET ?', [$section, $offset]);
+      }
     }
 
-    private function getNewsByVotes($offset) {
-      return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
+    public function getNewsByVotes($section, $offset) {
+      if(strcmp($this->current_section, 'All') == 0) {
+        return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
             FROM news JOIN users ON news.author_id = users.id
             WHERE NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
             -- WHERE textsearchable_body_and_title_index_col @@ to_tsquery(title) 
             ORDER BY votes DESC LIMIT 10 OFFSET ?', [$offset]);
+      } else {
+        return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
+          FROM news JOIN users ON news.author_id = users.id
+          WHERE sections.name = ? AND NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
+          -- WHERE textsearchable_body_and_title_index_col @@ to_tsquery(title) 
+          ORDER BY votes DESC LIMIT 10 OFFSET ?', [$section, $offset]);
+      }
     }
 
     private function getNews($offset) {
@@ -53,21 +71,51 @@ class NewsController extends Controller
     /**
      * @param  String  $order Either 'POPULAR', 'RECENT' or 'VOTED'.
      */
-    public function changeOrder($newOrder) {
-      $this->order = $newOrder;
-      $news = $this->getNews(0);
+    public function changeOrder($section, $order) {
+      $this->current_order = $order;
+      switch ($this->current_order) {
+        case self::MOST_POPULAR:
+          $news = $this->getNewsByPopularity();
+          break;
+        case self::MOST_RECENT:
+          $news = $this->getNewsByDate();
+          break;
+        case self::MOST_VOTED:
+          $news = $this->getNewsByVotes();
+          break;
+        default:
+          return redirect('error/404');
+      }
+
       $view = View::make('partials.news_item_preview_list')->with('news', $news)->render();
       $data = ['view' => $view];
       return $data;
     }
 
+    public function getOrderedPreviews() {
+      switch ($this->current_order) {
+        case self::MOST_POPULAR:
+          $news = $this->getNewsByPopularity();
+          break;
+        case self::MOST_RECENT:
+          $news = $this->getNewsByDate();
+          break;
+        case self::MOST_VOTED:
+          $news = $this->getNewsByVotes();
+          break;
+        default:
+          // return redirect('error/404');
+      }
 
-    public function changeToSectionAll(Request $request) {
+      return $news;
+    }
 
-      $news = DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview 
-                          FROM news JOIN users ON news.author_id = users.id
-                          WHERE NOT EXISTS (SELECT * FROM DeletedItems WHERE News.id = DeletedItems.news_id)
-                          ORDER BY date DESC LIMIT 10 OFFSET 0');
+    public function showMorePreviews(Request $request, $section) {
+      $this->current_offset = $request->input('next_preview');
+      $this->current_section = $section;
+
+      $news = $this->getOrderedPreviews();
+  
       $status_code = 200; // TODO: change if not found!
       $view = View::make('partials.news_item_preview_list')->with('news', $news)->render();
       $data = ['news' => $view];
@@ -82,6 +130,14 @@ class NewsController extends Controller
                           WHERE sections.name = ?
                               AND NOT EXISTS (SELECT * FROM DeletedItems WHERE News.id = DeletedItems.news_id)
                           ORDER BY date DESC LIMIT 10 OFFSET 0', [$section]);
+   }
+  
+   public function showMorePreviewsOfAll(Request $request) {
+      $this->current_offset = $request->input('next_preview');
+      $this->current_section = 'All';
+
+      $news = $this->getOrderedPreviews();
+
       $status_code = 200; // TODO: change if not found!
       $view = View::make('partials.news_item_preview_list')->with('news', $news)->render();
       $data = ['news' => $view];
@@ -147,6 +203,7 @@ class NewsController extends Controller
                     ->withErrors($validator)
                     ->withInput();
       }
+      echo($request->sources);
       $news = News::create([
           'title' => $request->title,
           'body' => $request->body,

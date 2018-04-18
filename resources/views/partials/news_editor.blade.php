@@ -1,4 +1,4 @@
-<script src="{{ asset('js/addSource.js') }}" defer></script>
+<script src="{{ asset('js/manageSources.js') }}" defer></script>
 
 <div class="container my-5">
   <h3 class="text-primary">Post a news story!</h3>
@@ -15,7 +15,6 @@
 
     {{ Form::label('section_id', 'Category') }}
     {{ Form::select('section_id', $sections, null, ['class' => 'form-control']) }}
-
     
     {{ Form::label('image', 'Preview image') }}
     {{ Form::file('image', ['class' => 'form-control']) }}
