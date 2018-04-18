@@ -15,7 +15,6 @@
 
     {{ Form::label('section_id', 'Category') }}
     {{ Form::select('section_id', $sections, null, ['class' => 'form-control']) }}
-
     
     {{ Form::label('image', 'Preview image') }}
     {{ Form::file('image', ['class' => 'form-control']) }}
