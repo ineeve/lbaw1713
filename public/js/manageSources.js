@@ -73,7 +73,7 @@ function getInputFieldset(name,placeholder,required){
     let input = document.createElement('input');
     input.setAttribute('class','form-control')
     input.setAttribute('placeholder',placeholder);
-    input.setAttribute('name',name);
+    input.setAttribute('name',name+'[]');
     input.setAttribute('type','text');
     if (required){
         input.setAttribute('required','required');
@@ -99,9 +99,9 @@ function addSource(e) {
     let sucessColor = 'green';
     let inputs = $('.source-inputs');
     let lastInput = inputs[inputs.length - 1];
-    let author = lastInput.querySelector('input[name="author"]');
-    let date = lastInput.querySelector('input[name="date"]');
-    let link = lastInput.querySelector('input[name="link"]');
+    let author = lastInput.querySelector('input[name="author[]"]');
+    let date = lastInput.querySelector('input[name="date[]"]');
+    let link = lastInput.querySelector('input[name="link[]"]');
     let errors = validateInput(author,date,link);
     if (!errors.hasErrors){
         if (inputs.length == 1){

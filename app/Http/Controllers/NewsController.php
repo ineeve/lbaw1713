@@ -182,7 +182,10 @@ class NewsController extends Controller
                     ->withErrors($validator)
                     ->withInput();
       }
-      echo($request->sources);
+      print_r($request->author);
+      print_r($request->date);
+      print_r($request->link);
+      die(-1);
       $news = News::create([
           'title' => $request->title,
           'body' => $request->body,
