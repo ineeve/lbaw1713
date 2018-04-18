@@ -31,7 +31,7 @@ Route::post('register', 'Auth\RegisterController@register');
 /*Form to create one news*/
 Route::get('news/create', 'NewsController@createArticle')->name('create_news'); 
 /*Page where all the news are listed (main page)*/
-Route::get('news', 'NewsController@list');
+Route::get('news/section/{section_name}/order/{order_name}', 'NewsController@list');
 Route::post('news', 'NewsController@create')->name('news');//NOT USING?
 
 //Route::get('api/news/{section_id}', 'NewsController@list');
@@ -55,10 +55,10 @@ Route::post('api/news/{news_id}/vote','AjaxController@createVote');
 Route::get('api/news/{news_id}/vote','AjaxController@getUserVote');
 
 //Route::post('api/news/','AjaxController@changeToSectionAll'); 
-/*Change to section 'All' in the main page*/
-Route::post('api/news/section/All','AjaxController@changeToSectionAll');
-/*Change to selected section */
-Route::post('api/news/section/{section_id}','AjaxController@changeSection');
+// /*Change to section 'All' in the main page*/
+// Route::post('api/news/section/All','NewsController@changeToSectionAll');
+// /*Change to selected section */
+// Route::post('api/news/section/{section_id}','NewsController@changeSection');
 /*Page that informs the user of our privacy policies*/
 Route::get('privacy_policy','PrivacyPolicyController@show');
 /*Infinite scroll for news of section 'All' */
@@ -78,4 +78,4 @@ Route::delete('api/news/{news_id}/comments/{id}', 'CommentController@delete');
 Route::get('notifications/{id}', 'NotificationController@process');
 
 // Change news ordering criteria
-Route::get('api/news/order/{name}', 'NewsController@changeOrder');
+// Route::get('api/news/order/{name}', 'NewsController@changeOrder');

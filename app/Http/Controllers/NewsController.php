@@ -22,7 +22,9 @@ class NewsController extends Controller
     const MOST_RECENT = 'RECENT';
     const MOST_VOTED = 'VOTED';
 
-  public function getNewsByPopularity() {}
+  public function getNewsByPopularity() {
+    
+  }
 
     public function getNewsByDate($section, $offset) {
       if(strcmp($this->current_section, 'All') == 0) {
@@ -57,42 +59,56 @@ class NewsController extends Controller
     }
 
     /**
-     * @param  String  $order Either 'POPULAR', 'RECENT' or 'VOTED'.
-     */
-    public function changeOrder($section, $order) {
-      $this->current_order = $order;
-      switch ($this->current_order) {
-        case 'POPULAR':
-          $news = $this->getNewsByPopularity();
-          break;
-        case 'RECENT':
-          $news = $this->getNewsByDate();
-          break;
-        case 'VOTED':
-          $news = $this->getNewsByVotes();
-          break;
-        default:
-          return redirect('error/404');
+      * @param  String  $order Either 'POPULAR', 'RECENT' or 'VOTED'.
+      */
+    private function getNews($section, $order, $offset) {
+      switch ($order) {
+        case self::MOST_POPULAR:
+          return $this->getNewsByPopularity($section, $offset);
+        case self::MOST_RECENT:
+          return $this->getNewsByDate($section, $offset);
+        case self::MOST_VOTED:
+          return $this->getNewsByVotes($section, $offset);
       }
-
-      $view = View::make('partials.news_item_preview_list')->with('news', $news)->render();
-      $data = ['view' => $view];
-      return $data;
     }
+
+    // /**
+    //  * @param  String  $order Either 'POPULAR', 'RECENT' or 'VOTED'.
+    //  */
+    // public function changeOrder($section, $order) {
+    //   $this->current_order = $order;
+    //   switch ($this->current_order) {
+    //     case self::MOST_POPULAR:
+    //       $news = $this->getNewsByPopularity();
+    //       break;
+    //     case self::MOST_RECENT:
+    //       $news = $this->getNewsByDate();
+    //       break;
+    //     case self::MOST_VOTED:
+    //       $news = $this->getNewsByVotes();
+    //       break;
+    //     default:
+    //       return redirect('error/404');
+    //   }
+
+    //   $view = View::make('partials.news_item_preview_list')->with('news', $news)->render();
+    //   $data = ['view' => $view];
+    //   return $data;
+    // }
 
     public function getOrderedPreviews() {
       switch ($this->current_order) {
-        case 'POPULAR':
+        case self::MOST_POPULAR:
           $news = $this->getNewsByPopularity();
           break;
-        case 'RECENT':
+        case self::MOST_RECENT:
           $news = $this->getNewsByDate();
           break;
-        case 'VOTED':
+        case self::MOST_VOTED:
           $news = $this->getNewsByVotes();
           break;
         default:
-          return redirect('error/404');
+          // return redirect('error/404');
       }
 
       return $news;
@@ -109,6 +125,15 @@ class NewsController extends Controller
       $data = ['news' => $view];
   
       return Response::json($data, $status_code);
+      
+   }
+  
+   public function changeSection(Request $request, $section) {
+      $news = DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview 
+                          FROM news JOIN users ON news.author_id = users.id JOIN sections ON sections.id = news.section_id
+                          WHERE sections.name = ?
+                              AND NOT EXISTS (SELECT * FROM DeletedItems WHERE News.id = DeletedItems.news_id)
+                          ORDER BY date DESC LIMIT 10 OFFSET 0', [$section]);
    }
   
    public function showMorePreviewsOfAll(Request $request) {
@@ -121,15 +146,14 @@ class NewsController extends Controller
       $view = View::make('partials.news_item_preview_list')->with('news', $news)->render();
       $data = ['news' => $view];
   
+  
       return Response::json($data, $status_code);
-      
    }
 
-    public function list()
-    {
+    public function list($section, $order) {
       //$this->authorize('list', News::class);
 
-      $news = $this->getNewsByDate(0); 
+      $news = $this->getNews($section, $order, 0); 
       $sections = DB::select('SELECT icon, name FROM Sections');
 
       return view('pages.news', ['news' => $news, 'sections' => $sections]);
