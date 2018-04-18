@@ -20,35 +20,58 @@ class NewsController extends Controller
     const MOST_RECENT = 'RECENT';
     const MOST_VOTED = 'VOTED';
 
-    private function getNewsByDate($offset) {
-      return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
-            FROM news JOIN users ON news.author_id = users.id
-            WHERE NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
+    protected $current_order = 'POPULAR';
+    protected $current_section = 'All';
+    protected $current_offset = 0;
+
+  public function getNewsByPopularity() {}
+
+    public function getNewsByDate() {
+      if(strcmp($this->current_section, 'All') == 0) {
+        return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
+          FROM news JOIN users ON news.author_id = users.id
+          WHERE NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
             -- WHERE textsearchable_body_and_title_index_col @@ to_tsquery(title) 
-            ORDER BY date DESC LIMIT 10 OFFSET ?', [$offset]);
+          ORDER BY date DESC LIMIT 10 OFFSET ?', [$this->current_offset]);
+      } else {
+        return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
+          FROM news JOIN users ON news.author_id = users.id
+          WHERE sections.name = ? AND NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
+            -- WHERE textsearchable_body_and_title_index_col @@ to_tsquery(title) 
+          ORDER BY date DESC LIMIT 10 OFFSET ?', [$this->current_section, $this->current_offset]);
+      }
     }
 
-    private function getNewsByVotes($offset) {
-      return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
+    public function getNewsByVotes() {
+      if(strcmp($this->current_section, 'All') == 0) {
+        return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
             FROM news JOIN users ON news.author_id = users.id
             WHERE NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
             -- WHERE textsearchable_body_and_title_index_col @@ to_tsquery(title) 
-            ORDER BY votes DESC LIMIT 10 OFFSET ?', [$offset]);
+            ORDER BY votes DESC LIMIT 10 OFFSET ?', [$this->current_offset]);
+      } else {
+        return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
+        FROM news JOIN users ON news.author_id = users.id
+        WHERE sections.name = ? AND NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
+        -- WHERE textsearchable_body_and_title_index_col @@ to_tsquery(title) 
+        ORDER BY votes DESC LIMIT 10 OFFSET ?', [$this->current_section, $this->current_offset]);
+      }
     }
 
     /**
      * @param  String  $order Either 'POPULAR', 'RECENT' or 'VOTED'.
      */
     public function changeOrder($order) {
-      switch ($order) {
+      $this->current_order = $order;
+      switch ($this->current_order) {
         case 'POPULAR':
-          $news = $this->getNewsByPopularity(0);
+          $news = $this->getNewsByPopularity();
           break;
         case 'RECENT':
-          $news = $this->getNewsByDate(0);
+          $news = $this->getNewsByDate();
           break;
         case 'VOTED':
-          $news = $this->getNewsByVotes(0);
+          $news = $this->getNewsByVotes();
           break;
         default:
           return redirect('error/404');
@@ -58,6 +81,50 @@ class NewsController extends Controller
       $data = ['view' => $view];
       return $data;
     }
+
+    public function getOrderedPreviews() {
+      switch ($this->current_order) {
+        case 'POPULAR':
+          $news = $this->getNewsByPopularity();
+          break;
+        case 'RECENT':
+          $news = $this->getNewsByDate();
+          break;
+        case 'VOTED':
+          $news = $this->getNewsByVotes();
+          break;
+        default:
+          return redirect('error/404');
+      }
+
+      return $news;
+    }
+
+    public function showMorePreviews(Request $request, $section) {
+      $this->current_offset = $request->input('next_preview');
+      $this->current_section = $section;
+
+      $news = $this->getOrderedPreviews();
+  
+      $status_code = 200; // TODO: change if not found!
+      $view = View::make('partials.news_item_preview_list')->with('news', $news)->render();
+      $data = ['news' => $view];
+  
+      return Response::json($data, $status_code);
+   }
+  
+   public function showMorePreviewsOfAll(Request $request) {
+      $this->current_offset = $request->input('next_preview');
+      $this->current_section = 'All';
+
+      $news = $this->getOrderedPreviews();
+
+      $view = View::make('partials.news_item_preview_list')->with('news', $news)->render();
+      $data = ['news' => $view];
+  
+      return Response::json($data, $status_code);
+      
+   }
 
     public function list()
     {
