@@ -20,6 +20,8 @@ class NewsController extends Controller
     const MOST_RECENT = 'RECENT';
     const MOST_VOTED = 'VOTED';
 
+    private $order = self::MOST_POPULAR;
+
     private function getNewsByDate($offset) {
       return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
             FROM news JOIN users ON news.author_id = users.id
@@ -36,24 +38,23 @@ class NewsController extends Controller
             ORDER BY votes DESC LIMIT 10 OFFSET ?', [$offset]);
     }
 
+    private function getNews($offset) {
+      switch ($this->order) {
+        case self::MOST_POPULAR:
+          return $this->getNewsByPopularity(0);
+        case self::MOST_RECENT:
+          return $this->getNewsByDate(0);
+        case self::MOST_VOTED:
+          return $this->getNewsByVotes(0);
+      }
+    }
+
     /**
      * @param  String  $order Either 'POPULAR', 'RECENT' or 'VOTED'.
      */
-    public function changeOrder($order) {
-      switch ($order) {
-        case 'POPULAR':
-          $news = $this->getNewsByPopularity(0);
-          break;
-        case 'RECENT':
-          $news = $this->getNewsByDate(0);
-          break;
-        case 'VOTED':
-          $news = $this->getNewsByVotes(0);
-          break;
-        default:
-          return redirect('error/404');
-      }
-
+    public function changeOrder($newOrder) {
+      $this->order = $newOrder;
+      $news = $this->getNews(0);
       $view = View::make('partials.news_item_preview_list')->with('news', $news)->render();
       $data = ['view' => $view];
       return $data;
