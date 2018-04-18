@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Response;
 use Storage;
 
 use App\News as News;
@@ -20,48 +21,44 @@ class NewsController extends Controller
     const MOST_RECENT = 'RECENT';
     const MOST_VOTED = 'VOTED';
 
-    protected $current_order = 'POPULAR';
-    protected $current_section = 'All';
-    protected $current_offset = 0;
-
   public function getNewsByPopularity() {}
 
-    public function getNewsByDate() {
+    public function getNewsByDate($section, $offset) {
       if(strcmp($this->current_section, 'All') == 0) {
         return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
           FROM news JOIN users ON news.author_id = users.id
           WHERE NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
             -- WHERE textsearchable_body_and_title_index_col @@ to_tsquery(title) 
-          ORDER BY date DESC LIMIT 10 OFFSET ?', [$this->current_offset]);
+          ORDER BY date DESC LIMIT 10 OFFSET ?', [$offset]);
       } else {
         return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
           FROM news JOIN users ON news.author_id = users.id
           WHERE sections.name = ? AND NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
             -- WHERE textsearchable_body_and_title_index_col @@ to_tsquery(title) 
-          ORDER BY date DESC LIMIT 10 OFFSET ?', [$this->current_section, $this->current_offset]);
+          ORDER BY date DESC LIMIT 10 OFFSET ?', [$section, $offset]);
       }
     }
 
-    public function getNewsByVotes() {
+    public function getNewsByVotes($section, $offset) {
       if(strcmp($this->current_section, 'All') == 0) {
         return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
             FROM news JOIN users ON news.author_id = users.id
             WHERE NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
             -- WHERE textsearchable_body_and_title_index_col @@ to_tsquery(title) 
-            ORDER BY votes DESC LIMIT 10 OFFSET ?', [$this->current_offset]);
+            ORDER BY votes DESC LIMIT 10 OFFSET ?', [$offset]);
       } else {
         return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
-        FROM news JOIN users ON news.author_id = users.id
-        WHERE sections.name = ? AND NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
-        -- WHERE textsearchable_body_and_title_index_col @@ to_tsquery(title) 
-        ORDER BY votes DESC LIMIT 10 OFFSET ?', [$this->current_section, $this->current_offset]);
+          FROM news JOIN users ON news.author_id = users.id
+          WHERE sections.name = ? AND NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
+          -- WHERE textsearchable_body_and_title_index_col @@ to_tsquery(title) 
+          ORDER BY votes DESC LIMIT 10 OFFSET ?', [$section, $offset]);
       }
     }
 
     /**
      * @param  String  $order Either 'POPULAR', 'RECENT' or 'VOTED'.
      */
-    public function changeOrder($order) {
+    public function changeOrder($section, $order) {
       $this->current_order = $order;
       switch ($this->current_order) {
         case 'POPULAR':
@@ -119,6 +116,7 @@ class NewsController extends Controller
 
       $news = $this->getOrderedPreviews();
 
+      $status_code = 200; // TODO: change if not found!
       $view = View::make('partials.news_item_preview_list')->with('news', $news)->render();
       $data = ['news' => $view];
   
