@@ -1,4 +1,4 @@
-<script src="{{ asset('js/addSource.js') }}" defer></script>
+<script src="{{ asset('js/manageSources.js') }}" defer></script>
 
 <div class="container my-5">
   <h3 class="text-primary">Post a news story!</h3>
