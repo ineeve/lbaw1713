@@ -11,7 +11,7 @@ jQuery(document).ready(function () {
                 $('#news_item_preview_list').append(result.view);
             },
             error: function (xhr) {
-                console.log(xhr);
+                //console.log(xhr);
             }
         });
     });

@@ -56,15 +56,15 @@ Route::get('api/news/{news_id}/vote','AjaxController@getUserVote');
 
 //Route::post('api/news/','AjaxController@changeToSectionAll'); 
 /*Change to section 'All' in the main page*/
-Route::post('api/news/section/All','AjaxController@changeToSectionAll');
+Route::post('api/news/section/All','NewsController@changeToSectionAll');
 /*Change to selected section */
-Route::post('api/news/section/{section_id}','AjaxController@changeSection');
+Route::post('api/news/section/{section_id}','NewsController@changeSection');
 /*Page that informs the user of our privacy policies*/
 Route::get('privacy_policy','PrivacyPolicyController@show');
 /*Infinite scroll for news of section 'All' */
-Route::post('api/news/section/All/scroll','AjaxController@showMorePreviewsOfAll');
+Route::post('api/news/section/All/scroll','NewsController@showMorePreviewsOfAll');
 /*Infinite scroll for news of a selected section */
-Route::post('api/news/section/{section_id}/scroll','AjaxController@showMorePreviews');
+Route::post('api/news/section/{section_id}/scroll','NewsController@showMorePreviews');
 
 // Comments - TODO: Add more methods once they're implemented
 Route::resource('news/{id}/comments', 'CommentController')->only([

@@ -35,35 +35,6 @@ class AjaxController extends Controller {
         return Response::json($data, $status_code);
     }
 
- public function changeToSectionAll(Request $request) {
-
-    $news = DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview 
-                        FROM news JOIN users ON news.author_id = users.id
-                        WHERE NOT EXISTS (SELECT * FROM DeletedItems WHERE News.id = DeletedItems.news_id)
-                        ORDER BY date DESC LIMIT 10 OFFSET 0');
-    $status_code = 200; // TODO: change if not found!
-    $view = View::make('partials.news_item_preview_list')->with('news', $news)->render();
-    $data = ['news' => $view];
-
-    return Response::json($data, $status_code);
-    
- }
-
- public function changeSection(Request $request, $section) {
-    $news = DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview 
-                        FROM news JOIN users ON news.author_id = users.id JOIN sections ON sections.id = news.section_id
-                        WHERE sections.name = ?
-                            AND NOT EXISTS (SELECT * FROM DeletedItems WHERE News.id = DeletedItems.news_id)
-                        ORDER BY date DESC LIMIT 10 OFFSET 0', [$section]);
-    $status_code = 200; // TODO: change if not found!
-    $view = View::make('partials.news_item_preview_list')->with('news', $news)->render();
-    $data = ['news' => $view];
-
-
-    return Response::json($data, $status_code);
-    
- }
-
  public function showMorePreviews(Request $request, $section) {
     $news = DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview 
     FROM news JOIN users ON news.author_id = users.id JOIN sections ON sections.id = news.section_id
@@ -87,8 +58,8 @@ class AjaxController extends Controller {
     $data = ['news' => $view];
 
     return Response::json($data, $status_code);
-    
  }
+
  public function userOwnsNews($news_id,$user_id){
     $result = DB::select('SELECT * FROM news WHERE id = ? AND author_id = ?',[$news_id,$user_id]);
     return !empty($result);
