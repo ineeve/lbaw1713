@@ -12,6 +12,7 @@ use Storage;
 
 use App\News as News;
 use App\Section as Section;
+use App\Source as Source;
 
 class NewsController extends Controller
 {
@@ -180,10 +181,8 @@ class NewsController extends Controller
                     ->withErrors($validator)
                     ->withInput();
       }
-      print_r($request->author);
-      print_r($request->date);
-      print_r($request->link);
-      die(-1);
+      $num_sources = count($request->link);
+
       $news = News::create([
           'title' => $request->title,
           'body' => $request->body,
@@ -200,6 +199,17 @@ class NewsController extends Controller
         $news->image = $news->id;
         $news->save();
       }
+
+
+      for($i = 0; $i < $num_sources; $i++){
+        $created_source = Source::create([
+          'author' => $request->author[$i],
+          'publication_year' => $request->date[$i],
+          'link' => $request->link[$i]
+          ]);
+          DB::table('newssources')->insert(['news_id' => $news->id, 'source_id' => $created_source->id ]);
+      }
+      
       return redirect('news/'.$news->id);
     }
 
