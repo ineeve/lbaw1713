@@ -57,40 +57,43 @@ class NewsController extends Controller
       }
     }
 
-    private function getNews($offset) {
-      switch ($this->order) {
-        case self::MOST_POPULAR:
-          return $this->getNewsByPopularity(0);
-        case self::MOST_RECENT:
-          return $this->getNewsByDate(0);
-        case self::MOST_VOTED:
-          return $this->getNewsByVotes(0);
-      }
-    }
-
     /**
-     * @param  String  $order Either 'POPULAR', 'RECENT' or 'VOTED'.
-     */
-    public function changeOrder($section, $order) {
-      $this->current_order = $order;
-      switch ($this->current_order) {
+      * @param  String  $order Either 'POPULAR', 'RECENT' or 'VOTED'.
+      */
+    private function getNews($section, $order, $offset) {
+      switch ($order) {
         case self::MOST_POPULAR:
-          $news = $this->getNewsByPopularity();
-          break;
+          return $this->getNewsByPopularity($section, $offset);
         case self::MOST_RECENT:
-          $news = $this->getNewsByDate();
-          break;
+          return $this->getNewsByDate($section, $offset);
         case self::MOST_VOTED:
-          $news = $this->getNewsByVotes();
-          break;
-        default:
-          return redirect('error/404');
+          return $this->getNewsByVotes($section, $offset);
       }
-
-      $view = View::make('partials.news_item_preview_list')->with('news', $news)->render();
-      $data = ['view' => $view];
-      return $data;
     }
+
+    // /**
+    //  * @param  String  $order Either 'POPULAR', 'RECENT' or 'VOTED'.
+    //  */
+    // public function changeOrder($section, $order) {
+    //   $this->current_order = $order;
+    //   switch ($this->current_order) {
+    //     case self::MOST_POPULAR:
+    //       $news = $this->getNewsByPopularity();
+    //       break;
+    //     case self::MOST_RECENT:
+    //       $news = $this->getNewsByDate();
+    //       break;
+    //     case self::MOST_VOTED:
+    //       $news = $this->getNewsByVotes();
+    //       break;
+    //     default:
+    //       return redirect('error/404');
+    //   }
+
+    //   $view = View::make('partials.news_item_preview_list')->with('news', $news)->render();
+    //   $data = ['view' => $view];
+    //   return $data;
+    // }
 
     public function getOrderedPreviews() {
       switch ($this->current_order) {
@@ -146,12 +149,10 @@ class NewsController extends Controller
       return Response::json($data, $status_code);
    }
 
-
-    public function list()
-    {
+    public function list($section, $order) {
       //$this->authorize('list', News::class);
 
-      $news = $this->getNewsByDate(0); 
+      $news = $this->getNews($section, $order, 0); 
       $sections = DB::select('SELECT icon, name FROM Sections');
 
       return view('pages.news', ['news' => $news, 'sections' => $sections]);
