@@ -150,10 +150,10 @@ class NewsController extends Controller
       return Response::json($data, $status_code);
    }
 
-    public function list($section, $order) {
+    public function list($section = 'All', $order = self::MOST_POPULAR) {
       //$this->authorize('list', News::class);
 
-      $news = $this->getNews($section, $order, 0); 
+      $news = $this->getNews($section, $order, 0);
       $sections = DB::select('SELECT icon, name FROM Sections');
 
       return view('pages.news', ['news' => $news, 'sections' => $sections]);

@@ -3,8 +3,9 @@
 jQuery(document).ready(function () {
     jQuery('.order-criteria').click(function (e) {
         e.preventDefault();
+        let section = $;
         jQuery.ajax({
-            url: "/api/news/order/" + $(this).attr('name'),
+            url: "/news/sections/{section_name}/order/" + $(this).attr('name'),
             method: 'get',
             success: function (result) {
                 $('#news_item_preview_list').empty();
