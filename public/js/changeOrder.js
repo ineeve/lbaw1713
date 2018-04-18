@@ -9,6 +9,9 @@ jQuery(document).ready(function () {
             success: function (result) {
                 $('#news_item_preview_list').empty();
                 $('#news_item_preview_list').append(result.view);
+            },
+            error: function (xhr) {
+                console.log(xhr);
             }
         });
     });

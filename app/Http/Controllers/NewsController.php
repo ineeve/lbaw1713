@@ -43,15 +43,18 @@ class NewsController extends Controller
       switch ($order) {
         case 'POPULAR':
           $news = $this->getNewsByPopularity(0);
+          break;
         case 'RECENT':
           $news = $this->getNewsByDate(0);
+          break;
         case 'VOTED':
           $news = $this->getNewsByVotes(0);
+          break;
         default:
           return redirect('error/404');
       }
 
-      $view = View::make('partials.news_item_preview_list')->with('news', $news);
+      $view = View::make('partials.news_item_preview_list')->with('news', $news)->render();
       $data = ['view' => $view];
       return $data;
     }
@@ -61,7 +64,6 @@ class NewsController extends Controller
       //$this->authorize('list', News::class);
 
       $news = $this->getNewsByDate(0); 
-
       $sections = DB::select('SELECT icon, name FROM Sections');
 
       return view('pages.news', ['news' => $news, 'sections' => $sections]);
