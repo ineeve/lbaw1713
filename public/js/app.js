@@ -1,6 +1,6 @@
 console.log('app.js included');
 
-let previews_offset = 0;
+let previews_offset = 10;
 function addEventListeners() {
   let scrollNews = document.querySelector('#scrollNewsPreview')
   if (scrollNews != null) {
@@ -17,7 +17,6 @@ function encodeForAjax(data) {
 
 function sendAjaxRequest(method, url, data, handler) {
   let request = new XMLHttpRequest();
-
   request.open(method, url, true);
   request.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').content);
   request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -26,24 +25,23 @@ function sendAjaxRequest(method, url, data, handler) {
 }
 
 function sendShowMorePreviews(event) {
-  previews_offset += 10;
   let section_name = document.querySelector('.current_section').innerText.trim();
-  if (section_name == "All") {
-    sendAjaxRequest('post', '/api/news/section/All/scroll', { next_preview: previews_offset }, showMorePreviewsHandler);
-  } else {
-    sendAjaxRequest('post', '/api/news/section/' + section_name + '/scroll', { next_preview: previews_offset }, showMorePreviewsHandler);
-  }
+  let order = document.querySelector("#sort-option").getAttribute('name');
+  console.log("Getting news for section: " + section_name + "; order:" + order + " ;offset:" + previews_offset);
+  sendAjaxRequest('GET', '/api/news/section/' + section_name + '/order/' + order + "/offset/" + previews_offset, null, showMorePreviewsHandler);
   console.log("offset = " + previews_offset);
 }
 
 function showMorePreviewsHandler() {
-  let response = JSON.parse(this.responseText);
-
-  if (response['news'].length == 0) {
-    console.log("There's no more news to load.");
-    // $('#placeComments').append("<div class=\"alert alert-dismissible alert-secondary\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Sorry!</strong> No more comments at the moment!</div>");
+  if (this.responseText != null && this.status == 200){
+    console.log(this);
+    if (this.responseText.length == 0) {
+      console.log("There's no more news to load.");
+      // $('#placeComments').append("<div class=\"alert alert-dismissible alert-secondary\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Sorry!</strong> No more comments at the moment!</div>");
+    }
+    previews_offset += 10;
+    document.getElementById('news_item_preview_list').innerHTML += this.responseText;
   }
-  document.getElementById('news_item_preview_list').innerHTML += response['news'];
 }
 
 function getUserVote() {

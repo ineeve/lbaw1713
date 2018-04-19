@@ -31,7 +31,7 @@ Route::post('register', 'Auth\RegisterController@register');
 /*Form to create one news*/
 Route::get('news/create', 'NewsController@createArticle')->name('create_news'); 
 /*Page where all the news are listed (main page)*/
-Route::get('news/sections/{section_name}/order/{order_name}', 'NewsController@list');
+Route::get('api/news/section/{section_name}/order/{order_name}/offset/{offset}', 'NewsController@list');
 Route::get('news', 'NewsController@getNewsHomepage');
 Route::post('news', 'NewsController@create')->name('news');//NOT USING?
 
@@ -63,9 +63,9 @@ Route::get('api/news/{news_id}/vote','AjaxController@getUserVote');
 /*Page that informs the user of our privacy policies*/
 Route::get('privacy_policy','PrivacyPolicyController@show');
 /*Infinite scroll for news of section 'All' */
-Route::post('api/news/section/All/scroll','NewsController@showMorePreviewsOfAll');
+//Route::post('api/news/section/All/scroll','NewsController@showMorePreviewsOfAll');
 /*Infinite scroll for news of a selected section */
-Route::post('api/news/section/{section_id}/scroll','NewsController@showMorePreviews');
+//Route::post('api/news/section/{section_id}/scroll','NewsController@showMorePreviews');
 
 // Comments - TODO: Add more methods once they're implemented
 Route::resource('news/{id}/comments', 'CommentController')->only([

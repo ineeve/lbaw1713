@@ -32,7 +32,7 @@
               <div class="btn-group" role="group">
                 <button id="btnGroupDrop1" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <div class="d-flex">
-                    <h5 class="sort-option">Most Popular </h5>
+                    <h5 id="sort-option" name="POPULAR" >Most Popular </h5>
                     <i class="fas fa-chevron-down ml-2 mt-1"></i>
                   </div>
                 </button>
@@ -42,11 +42,6 @@
                   <a class="dropdown-item order-criteria" name="RECENT" href="">Most Recent</a>
                 </div>
               </div>
-              <script>
-                $(".order .dropdown-item").click(function (event) {
-                  $(".sort-option").html($(this).text());
-                });
-              </script>
             </div>
 
           </div>

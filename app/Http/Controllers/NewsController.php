@@ -116,20 +116,19 @@ class NewsController extends Controller
 
       return $news;
     }
-
+/*
     public function showMorePreviews(Request $request, $section) {
       $this->current_offset = $request->input('next_preview');
       $this->current_section = $section;
 
       $news = $this->getOrderedPreviews();
-  
       $status_code = 200; // TODO: change if not found!
       $view = View::make('partials.news_item_preview_list')->with('news', $news)->render();
       $data = ['news' => $view];
   
       return Response::json($data, $status_code);
       
-   }
+   }*/
   
    public function changeSection(Request $request, $section) {
       $news = DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview 
@@ -153,10 +152,10 @@ class NewsController extends Controller
       return Response::json($data, $status_code);
    }
 
-    public function list($section = 'All', $order = self::MOST_POPULAR) {
+    public function list($section = 'All', $order = self::MOST_POPULAR, $offset = 0) {
       //$this->authorize('list', News::class);
-
-      $news = $this->getNews($section, $order, 0);
+      //echo($section.";".$order.";".$offset);
+      $news = $this->getNews($section, $order, $offset);
       $sections = DB::select('SELECT icon, name FROM Sections');
 
       return view('partials.news_item_preview_list', ['news' => $news, 'sections' => $sections]);
