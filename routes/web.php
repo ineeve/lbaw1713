@@ -32,7 +32,7 @@ Route::post('register', 'Auth\RegisterController@register');
 Route::get('news/create', 'NewsController@createArticle')->name('create_news'); 
 /*Page where all the news are listed (main page)*/
 Route::get('news/sections/{section_name}/order/{order_name}', 'NewsController@list');
-Route::get('news', 'NewsController@list');
+Route::get('news', 'NewsController@getNewsHomepage');
 Route::post('news', 'NewsController@create')->name('news');//NOT USING?
 
 //Route::get('api/news/{section_id}', 'NewsController@list');

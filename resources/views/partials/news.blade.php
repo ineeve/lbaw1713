@@ -1,4 +1,4 @@
-<script src="{{ asset('js/changeOrder.js') }}" defer></script>
+<script src="{{ asset('js/changeNewsCriteria.js') }}" defer></script>
 
 <div class="container-fluid">
   <!-- SECOND ROW -->

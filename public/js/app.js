@@ -2,10 +2,10 @@ console.log('app.js included');
 
 let previews_offset = 0;
 function addEventListeners() {
-  let availableSections = document.querySelectorAll('.section_item');
-  [].forEach.call(availableSections, function (section) {
-    section.addEventListener('click', sendSelectSection);
-  });
+  // let availableSections = document.querySelectorAll('.section_item');
+  // [].forEach.call(availableSections, function (section) {
+  //   section.addEventListener('click', sendSelectSection);
+  // });
   let scrollNews = document.querySelector('#scrollNewsPreview')
   if (scrollNews != null) {
     document.querySelector('#scrollNewsPreview').addEventListener('click', sendShowMorePreviews);

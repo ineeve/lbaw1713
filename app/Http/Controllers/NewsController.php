@@ -22,12 +22,13 @@ class NewsController extends Controller
     const MOST_RECENT = 'RECENT';
     const MOST_VOTED = 'VOTED';
 
-  public function getNewsByPopularity() {
-    
-  }
+    //TODO: Placeholder until popularity math is defined.
+    public function getNewsByPopularity($section, $offset) {
+      return $this->getNewsByDate($section, $offset);
+    }
 
     public function getNewsByDate($section, $offset) {
-      if(strcmp($this->current_section, 'All') == 0) {
+      if(strcmp($section, 'All') == 0) {
         return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
           FROM news JOIN users ON news.author_id = users.id
           WHERE NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
@@ -36,14 +37,15 @@ class NewsController extends Controller
       } else {
         return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
           FROM news JOIN users ON news.author_id = users.id
-          WHERE sections.name = ? AND NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
+            INNER JOIN sections ON sections.name = ?
+          WHERE NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
             -- WHERE textsearchable_body_and_title_index_col @@ to_tsquery(title) 
           ORDER BY date DESC LIMIT 10 OFFSET ?', [$section, $offset]);
       }
     }
 
     public function getNewsByVotes($section, $offset) {
-      if(strcmp($this->current_section, 'All') == 0) {
+      if(strcmp($section, 'All') == 0) {
         return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
             FROM news JOIN users ON news.author_id = users.id
             WHERE NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
@@ -52,7 +54,8 @@ class NewsController extends Controller
       } else {
         return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
           FROM news JOIN users ON news.author_id = users.id
-          WHERE sections.name = ? AND NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
+            INNER JOIN sections ON sections.name = ?
+          WHERE NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
           -- WHERE textsearchable_body_and_title_index_col @@ to_tsquery(title) 
           ORDER BY votes DESC LIMIT 10 OFFSET ?', [$section, $offset]);
       }
@@ -154,6 +157,13 @@ class NewsController extends Controller
       //$this->authorize('list', News::class);
 
       $news = $this->getNews($section, $order, 0);
+      $sections = DB::select('SELECT icon, name FROM Sections');
+
+      return view('partials.news_item_preview_list', ['news' => $news, 'sections' => $sections]);
+    }
+
+    public function getNewsHomepage() {
+      $news = $this->getNews('All', self::MOST_POPULAR, 0);
       $sections = DB::select('SELECT icon, name FROM Sections');
 
       return view('pages.news', ['news' => $news, 'sections' => $sections]);
