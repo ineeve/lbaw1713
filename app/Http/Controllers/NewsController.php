@@ -24,7 +24,19 @@ class NewsController extends Controller
 
     //TODO: Placeholder until popularity math is defined.
     public function getNewsByPopularity($section, $offset) {
-      return $this->getNewsByDate($section, $offset);
+      // date
+      if(strcmp($section, 'All') == 0) {
+        return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
+          FROM news NATURAL JOIN newspoints JOIN users ON news.author_id = users.id
+          WHERE NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
+          ORDER BY newspoints.points DESC LIMIT 10 OFFSET ?', [$offset]);
+      } else {
+        return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
+          FROM news NATURAL JOIN newspoints JOIN users ON news.author_id = users.id
+            INNER JOIN sections ON news.section_id = sections.id
+          WHERE sections.name = ? AND NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
+          ORDER BY newspoints.points DESC LIMIT 10 OFFSET ?', [$section, $offset]);
+      }
     }
 
     public function getNewsByDate($section, $offset) {
