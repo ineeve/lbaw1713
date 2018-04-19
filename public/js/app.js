@@ -36,8 +36,7 @@ function showMorePreviewsHandler() {
   if (this.responseText != null && this.status == 200){
     console.log(this);
     if (this.responseText.length == 0) {
-      console.log("There's no more news to load.");
-      // $('#placeComments').append("<div class=\"alert alert-dismissible alert-secondary\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Sorry!</strong> No more comments at the moment!</div>");
+      $('#allNews').append("<div class=\"alert alert-dismissible alert-secondary\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Sorry!</strong> No more news at the moment!</div>");
     }
     previews_offset += 10;
     document.getElementById('news_item_preview_list').innerHTML += this.responseText;
