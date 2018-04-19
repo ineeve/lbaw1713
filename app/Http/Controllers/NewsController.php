@@ -37,8 +37,8 @@ class NewsController extends Controller
       } else {
         return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
           FROM news JOIN users ON news.author_id = users.id
-            INNER JOIN sections ON sections.name = ?
-          WHERE NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
+            INNER JOIN sections ON news.section_id = sections.id
+          WHERE sections.name = ? AND NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
             -- WHERE textsearchable_body_and_title_index_col @@ to_tsquery(title) 
           ORDER BY date DESC LIMIT 10 OFFSET ?', [$section, $offset]);
       }
@@ -54,8 +54,8 @@ class NewsController extends Controller
       } else {
         return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
           FROM news JOIN users ON news.author_id = users.id
-            INNER JOIN sections ON sections.name = ?
-          WHERE NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
+            INNER JOIN sections ON news.section_id = sections.id
+          WHERE sections.name = ? AND NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
           -- WHERE textsearchable_body_and_title_index_col @@ to_tsquery(title) 
           ORDER BY votes DESC LIMIT 10 OFFSET ?', [$section, $offset]);
       }

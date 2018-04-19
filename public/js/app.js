@@ -2,10 +2,6 @@ console.log('app.js included');
 
 let previews_offset = 0;
 function addEventListeners() {
-  // let availableSections = document.querySelectorAll('.section_item');
-  // [].forEach.call(availableSections, function (section) {
-  //   section.addEventListener('click', sendSelectSection);
-  // });
   let scrollNews = document.querySelector('#scrollNewsPreview')
   if (scrollNews != null) {
     document.querySelector('#scrollNewsPreview').addEventListener('click', sendShowMorePreviews);
@@ -27,24 +23,6 @@ function sendAjaxRequest(method, url, data, handler) {
   request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   request.addEventListener('load', handler);
   request.send(encodeForAjax(data));
-}
-
-function sendSelectSection(event) {
-  previews_offset = 0;
-  let section_name = event.currentTarget.name;
-  console.log("section = "+ section_name);
-  document.querySelector('.current_section').innerHTML = event.currentTarget.innerHTML;
-  sendAjaxRequest('post', '/api/news/section/' + section_name, null, listSectionHandler);
-  console.log("offset = " + previews_offset);
-}
-
-function listSectionHandler() {
-  let response = JSON.parse(this.responseText);
-  let news_preview_div = document.getElementById('news_item_preview_list');
-  while (news_preview_div.hasChildNodes()) {
-    news_preview_div.removeChild(news_preview_div.lastChild);
-  }
-  news_preview_div.innerHTML = response['news'];
 }
 
 function sendShowMorePreviews(event) {
