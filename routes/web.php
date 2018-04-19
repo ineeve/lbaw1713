@@ -35,7 +35,6 @@ Route::get('api/news/section/{section_name}/order/{order_name}/offset/{offset}',
 Route::get('news', 'NewsController@getNewsHomepage');
 Route::post('news', 'NewsController@create')->name('news');//NOT USING?
 
-//Route::get('api/news/{section_id}', 'NewsController@list');
 /*Page showing the selected news*/
 Route::get('news/{id}', 'NewsController@show');
 
@@ -55,17 +54,10 @@ Route::post('api/news/{news_id}/vote','AjaxController@createVote');
 /*Get news' previous votes*/
 Route::get('api/news/{news_id}/vote','AjaxController@getUserVote');
 
-//Route::post('api/news/','AjaxController@changeToSectionAll'); 
-// /*Change to section 'All' in the main page*/
-// Route::post('api/news/section/All','NewsController@changeToSectionAll');
-// /*Change to selected section */
-// Route::post('api/news/section/{section_id}','NewsController@changeSection');
 /*Page that informs the user of our privacy policies*/
 Route::get('privacy_policy','PrivacyPolicyController@show');
 /*Infinite scroll for news of section 'All' */
-//Route::post('api/news/section/All/scroll','NewsController@showMorePreviewsOfAll');
-/*Infinite scroll for news of a selected section */
-//Route::post('api/news/section/{section_id}/scroll','NewsController@showMorePreviews');
+
 
 // Comments - TODO: Add more methods once they're implemented
 Route::resource('news/{id}/comments', 'CommentController')->only([
@@ -77,6 +69,3 @@ Route::delete('api/news/{news_id}/comments/{id}', 'CommentController@delete');
 
 // Click on a notification
 Route::get('notifications/{id}', 'NotificationController@process');
-
-// Change news ordering criteria
-// Route::get('api/news/order/{name}', 'NewsController@changeOrder');
