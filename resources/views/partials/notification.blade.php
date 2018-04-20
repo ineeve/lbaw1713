@@ -17,7 +17,6 @@
         @default
             Error: in notification.
     @endswitch
-    <?php
-        echo when($notification->date);
-    ?>
+
+    {{ when($notification->date) }}
 </a>
