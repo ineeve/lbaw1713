@@ -39,7 +39,10 @@
                       <form action="{{ route('delete_news', $news->id) }}" method="post" class="delete-news">
                         {{ method_field('delete') }}
                         {{ csrf_field() }}
-                        <span class="delete-news">
+                        <span class="delete-news" 
+                        onMouseOver="this.style.textDecoration= 'underline';
+                        this.style.cursor='pointer';"
+                        onMouseOut="this.style.textDecoration= 'none';">
                           <span class="mt-1 mr-2">Delete</span>
                           <i class="fas fa-times mt-2 clickable-btn"></i>
                         </span>
