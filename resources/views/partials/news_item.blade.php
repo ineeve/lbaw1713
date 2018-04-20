@@ -39,7 +39,10 @@
                       <form action="{{ route('delete_news', $news->id) }}" method="post" class="delete-news">
                         {{ method_field('delete') }}
                         {{ csrf_field() }}
-                        <span class="delete-news">
+                        <span class="delete-news" 
+                        onMouseOver="this.style.textDecoration= 'underline';
+                        this.style.cursor='pointer';"
+                        onMouseOut="this.style.textDecoration= 'none';">
                           <span class="mt-1 mr-2">Delete</span>
                           <i class="fas fa-times mt-2 clickable-btn"></i>
                         </span>
@@ -74,17 +77,21 @@
             var news_id = "{{ $news->id }}";//TODO get from route
           </script> 
             <h6 class="category"> {{ $news->section }}</h6>
-              <h2 class="title"> {{ $news->title }}</h2>
+              <h1 class="title"> {{ $news->title }}</h1>
               <h6 class="author"> {{ $news->author }} &middot; {{ date("F jS, Y \a\\t H:i", strtotime($news->date)) }}</h6>
-              <!-- TODO: change alt -->
-              <img class="img-fluid mx-auto my-3 d-block" src="{{ asset('storage/news/'.$news->image) }}" alt="{{$news->image}}"
-               width="460" height="345">
               <div class="body">
                   {!! $news->body !!}
               </div>
               <h4>Sources</h4>
                 @foreach ($sources as $source)
-                  <a href="{{ $source->link }}">{{ $source->link }}</a>
+                  <p>
+                  @if($source->author)
+                    {{$source->author}},
+                  @endif
+                  @if($source->publication_year)
+                    {{$source->publication_year}} -
+                  @endif
+                  <a href="{{ $source->link }}"> {{ $source->link }}</a></p>
                 @endforeach
               <h3 class="mt-4">Comments</h3>
               <form class="mt-3 mb-4" method="POST" action="{{ route('comments.store', $news->id) }}">

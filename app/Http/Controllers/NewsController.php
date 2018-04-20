@@ -6,22 +6,116 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
-
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Response;
+use Storage;
 
 use App\News as News;
 use App\Section as Section;
+use App\Source as Source;
 
 class NewsController extends Controller
 {
+    const DEFAULT_IMAGE_NAME = 'default';
 
-    public function list()
-    {
+    const MOST_POPULAR = 'POPULAR';
+    const MOST_RECENT = 'RECENT';
+    const MOST_VOTED = 'VOTED';
+
+    private function getNewsByPopularity($section, $offset) {
+      if(strcmp($section, 'All') == 0) {
+        return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
+          FROM news NATURAL JOIN newspoints JOIN users ON news.author_id = users.id
+          WHERE NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
+          ORDER BY newspoints.points DESC LIMIT 10 OFFSET ?', [$offset]);
+      } else {
+        return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
+          FROM news NATURAL JOIN newspoints JOIN users ON news.author_id = users.id
+            INNER JOIN sections ON news.section_id = sections.id
+          WHERE sections.name = ? AND NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
+          ORDER BY newspoints.points DESC LIMIT 10 OFFSET ?', [$section, $offset]);
+      }
+    }
+
+    private function getNewsByDate($section, $offset) {
+      if(strcmp($section, 'All') == 0) {
+        return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
+          FROM news JOIN users ON news.author_id = users.id
+          WHERE NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
+            -- WHERE textsearchable_body_and_title_index_col @@ to_tsquery(title) 
+          ORDER BY date DESC LIMIT 10 OFFSET ?', [$offset]);
+      } else {
+        return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
+          FROM news JOIN users ON news.author_id = users.id
+            INNER JOIN sections ON news.section_id = sections.id
+          WHERE sections.name = ? AND NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
+            -- WHERE textsearchable_body_and_title_index_col @@ to_tsquery(title) 
+          ORDER BY date DESC LIMIT 10 OFFSET ?', [$section, $offset]);
+      }
+    }
+
+    private function getNewsByVotes($section, $offset) {
+      if(strcmp($section, 'All') == 0) {
+        return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
+            FROM news JOIN users ON news.author_id = users.id
+            WHERE NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
+            -- WHERE textsearchable_body_and_title_index_col @@ to_tsquery(title) 
+            ORDER BY votes DESC LIMIT 10 OFFSET ?', [$offset]);
+      } else {
+        return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
+          FROM news JOIN users ON news.author_id = users.id
+            INNER JOIN sections ON news.section_id = sections.id
+          WHERE sections.name = ? AND NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
+          -- WHERE textsearchable_body_and_title_index_col @@ to_tsquery(title) 
+          ORDER BY votes DESC LIMIT 10 OFFSET ?', [$section, $offset]);
+      }
+    }
+
+    /**
+      * @param  String  $order Either 'POPULAR', 'RECENT' or 'VOTED'.
+      */
+    private function getNews($section, $order, $offset) {
+      switch ($order) {
+        case self::MOST_POPULAR:
+          return $this->getNewsByPopularity($section, $offset);
+        case self::MOST_RECENT:
+          return $this->getNewsByDate($section, $offset);
+        case self::MOST_VOTED:
+          return $this->getNewsByVotes($section, $offset);
+      }
+    }
+
+
+    private function getOrderedPreviews() {
+      switch ($this->current_order) {
+        case self::MOST_POPULAR:
+          $news = $this->getNewsByPopularity();
+          break;
+        case self::MOST_RECENT:
+          $news = $this->getNewsByDate();
+          break;
+        case self::MOST_VOTED:
+          $news = $this->getNewsByVotes();
+          break;
+        default:
+          // return redirect('error/404');
+      }
+
+      return $news;
+    }
+
+
+    public function list($section = 'All', $order = self::MOST_POPULAR, $offset = 0) {
       //$this->authorize('list', News::class);
+      //echo($section.";".$order.";".$offset);
+      $news = $this->getNews($section, $order, $offset);
+      $sections = DB::select('SELECT icon, name FROM Sections');
 
-      $news = DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview FROM news JOIN users ON news.author_id = users.id
-                          -- WHERE textsearchable_body_and_title_index_col @@ to_tsquery(title) 
-                          LIMIT 10 OFFSET 0');
+      return view('partials.news_item_preview_list', ['news' => $news, 'sections' => $sections]);
+    }
 
+    public function getNewsHomepage() {
+      $news = $this->getNews('All', self::MOST_POPULAR, 0);
       $sections = DB::select('SELECT icon, name FROM Sections');
 
       return view('pages.news', ['news' => $news, 'sections' => $sections]);
@@ -47,9 +141,60 @@ class NewsController extends Controller
       return view('pages.news_item', ['news' => $news, 'sources' => $sources]);
     }
 
+    /**
+     * Get a validator for an incoming news creation;
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'title' => 'required|string|max:255',
+            'section_id' => 'required|integer',
+            'image' => 'nullable|image',
+            'author_id' => 'integer',
+            'body' => 'string'
+        ]);
+    }
+
+
     public function create(Request $request) {
-      $request['author_id'] = Auth::user()->id;
-      $news = News::create($request->all());
+      
+      $validator = $this->validator($request->all());
+      if ($validator->fails()) {
+        return redirect('/news/create')
+                    ->withErrors($validator)
+                    ->withInput();
+      }
+      $num_sources = count($request->link);
+
+      $news = News::create([
+          'title' => $request->title,
+          'body' => $request->body,
+          'section_id' => $request->section_id,
+          'author_id' => Auth::user()->id,
+          'image' => self::DEFAULT_IMAGE_NAME
+      ]);
+
+      if ($request->image != NULL){
+        Storage::disk('news')->put(
+          $news->id,
+          file_get_contents($request->image->getRealPath())
+        );
+        $news->image = $news->id;
+        $news->save();
+      }
+
+
+      for($i = 0; $i < $num_sources; $i++){
+        $created_source = Source::create([
+          'author' => $request->author[$i],
+          'publication_year' => $request->date[$i],
+          'link' => $request->link[$i]
+          ]);
+          DB::table('newssources')->insert(['news_id' => $news->id, 'source_id' => $created_source->id ]);
+      }
       
       return redirect('news/'.$news->id);
     }
@@ -64,15 +209,15 @@ class NewsController extends Controller
     public function destroy($id) {
       $article = News::find($id);
       $this->authorize('delete', $article);
-      News::destroy($id);
-      return back();
+      $this->markDeleted($article);
+      return redirect('news');
     }
 
 
     ///////////////////// EDITOR BELOW
 
     public function createArticle() {
-      $this->authorize('createArticle', News::class);
+      $this->authorize('create', News::class);
       $sections = Section::pluck('name', 'id');
       return view('pages.news_editor', ['sections' => $sections]);
     }
@@ -82,5 +227,19 @@ class NewsController extends Controller
       $article = News::find($id);
       $this->authorize('editArticle', $article);
       return view('pages.news_editor', ['sections' => $sections, 'article' => $article]);
+    }
+
+    //////////////////// EDITOR ABOVE
+
+    /**
+     * Inserts article in the DeletedItems table rather than actually deleting it.
+     */
+    private function markDeleted($article) {
+      $deletedItems = DB::table('deleteditems')->where('news_id', $article->id)->get();
+      if (count($deletedItems) > 0) {
+        // item was already deleted
+        return;
+      }
+      DB::insert('INSERT INTO DeletedItems (user_id, news_id) VALUES (?, ?);', [Auth::user()->id, $article->id]);
     }
 }

@@ -1,10 +1,10 @@
 @foreach ($comments as $comment)
-<div style="display: block;" class="news_box card border-0 my-3 col-12">
+<div id="commentNo{{$comment->id}}" style="display: block;" class="news_box card border-0 my-3 col-12">
   <div class="card-body p-0">
     <div class="d-flex">
       <div class="mr-2">
-        <img src="{{ Storage::url('users/'.($comment->commentator_picture == null ? 'default.png' : $comment->commentator_picture)) }}"
-            style="max-height: 70px; max-width: 70px;" alt="{{ $comment->commentator }}'s picture">
+        <img src="{{ Storage::url('users/'.($comment->commentator_picture == null ? 'default' : $comment->commentator_picture)) }}"
+          style="max-height: 70px; max-width: 70px;" alt="{{ $comment->commentator }}'s picture">
       </div>
       <div>
         <div class="owner"> {{ $comment->commentator }}</div>
@@ -15,17 +15,15 @@
           <!-- <i class="fa fa-angle-down" ></i> -->
         </a>
         <div class="dropdown-menu" x-placement="bottom-start">
-        @if(Auth::check())
-@if(Auth::user()->username == $comment->commentator)
-  <!-- TODO: mandar por method delete -->
-  <a class="dropdown-item" href="/api/news/{{$news_id}}/comments/{{ $comment->id}}">Delete</a>
-@else
-        <a class="dropdown-item" href="#">Report</a>
-        @endif
-        @else
-          <a class="dropdown-item" href="register">You need to be registered in our website
+          @if(Auth::check()) @if(Auth::user()->username == $comment->commentator)
+          <!-- TODO: mandar por method delete -->
+          <a class="dropdown-item deleteComment" href="/api/news/{{$news_id}}/comments/{{ $comment->id}}">Delete</a>
+          @else
+          <a class="dropdown-item" href="#">Report</a>
+          @endif @else
+          <a class="dropdown-item" href="/register">You need to be registered in our website
             <br> to report this comment</a>
-        @endif
+          @endif
         </div>
       </div>
     </div>
