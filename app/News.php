@@ -19,13 +19,17 @@ class News extends Model {
     ];
 
      /**
-   * The user this news belongs to
-   */
-  public function user() {
-    return $this->belongsTo('App\User');
-  }
+     * The user this news belongs to
+     */
+    public function user() {
+        return $this->belongsTo('App\User');
+    }
 
     public function comments() {
         return $this->hasMany('App\Comment');
+    }
+
+    public function section() {
+        return $this->belongsTo('App\Section');
     }
 }

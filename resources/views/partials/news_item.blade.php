@@ -77,7 +77,7 @@
             var news_id = "{{ $news->id }}";//TODO get from route
           </script> 
             <h6 class="category"> {{ $news->section }}</h6>
-              <h2 class="title"> {{ $news->title }}</h2>
+              <h1 class="title"> {{ $news->title }}</h1>
               <h6 class="author"> {{ $news->author }} &middot; {{ date("F jS, Y \a\\t H:i", strtotime($news->date)) }}</h6>
               <div class="body">
                   {!! $news->body !!}
