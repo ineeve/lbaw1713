@@ -23,12 +23,12 @@ Route::get('error/403', 'Controller@errorUnauthorizedAction');
 Route::post('login', 'Auth\LoginController@login');
 /*Action of logout*/
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
-/*Form to registe*/
+/*Form to register*/
 Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-/*Action to registe*/
+/*Action to register*/
 Route::post('register', 'Auth\RegisterController@register');
 
-/*Form to create one news*/
+/*Form to create one piece of news*/
 Route::get('news/create', 'NewsController@createArticle')->name('create_news'); 
 /*Page where all the news are listed (main page)*/
 Route::get('api/news/section/{section_name}/order/{order_name}/offset/{offset}', 'NewsController@list');
