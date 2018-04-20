@@ -17,4 +17,5 @@
         @default
             Error: in notification.
     @endswitch
+    {{ $notification->date }}
 </a>
