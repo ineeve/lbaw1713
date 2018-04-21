@@ -10,23 +10,23 @@
       <div class="container mt-4">
         <div class="row">
           <!-- ARTICLE OPTIONS -->
-          <div class="col-2 pr-0">
+          <div class="col-12 col-md-1 px-0">
             <div name="newsOptions" title="Vote and manage this news">
-              <div class="d-flex flex-column align-items-center mt-5" name="vote" title="Use to vote on the news" style="font-size:1.5em">
+              <div class="d-flex flex-md-column justify-content-center flex-row align-items-center mt-md-5" name="vote" title="Use to vote on the news" style="font-size:1.5em">
                 @if (Auth::check())
                 <i class="fas fa-arrow-alt-circle-up clickable-btn" id="upvote" onclick="upvote({{$news->id}})"></i>
-                <span id="votesCounter">{{ $news->votes }}</span>
+                <span id="votesCounter" class="mx-2">{{ $news->votes }}</span>
                 <i class="fas fa-arrow-alt-circle-down clickable-btn" id="downvote" onclick="downvote({{$news->id}})"></i>
                 @else
                 <i class="fas fa-arrow-alt-circle-up clickable-btn" id="upvote" data-toggle="modal" data-target="#registerModal"></i>
-                <span id="votesCounter">{{ $news->votes }}</span>
+                <span id="votesCounter" class="mx-2">{{ $news->votes }}</span>
                 <i class="fas fa-arrow-alt-circle-down clickable-btn" id="downvote" data-toggle="modal" data-target="#registerModal"></i>
                 @endif
               </div>
 
               @if (Auth::check() && Auth::user()->id == $news->author_id)
               <!-- Edit -->
-              <div class="centerText mt-4" name="edit" title="Use to edit this news">
+              <div class="centerText mt-2 mt-md-4" name="edit" title="Use to edit this news">
                 <a href="{{ url('news/'.$news->id.'/edit') }}" class="lightText">
                   <span class="mr-md-1">Edit</span> 
                   <i class="fas fa-edit clickable-btn"></i>
@@ -55,16 +55,16 @@
                 @if (Auth::check())
                   <!-- Report -->
                   <span data-toggle="modal" data-target="#reportModal">
-                    <div class="mt-4">
-                      <span class="lightText mr-2">Report</span>
+                    <div class="centerText mt-4">
+                      <span class="lightText mr-md-2">Report</span>
                        <i class="fas fa-ban clickable-btn" data-toggle="modal" data-target="#reportModal"></i>
                     </div>
                     
                   </span>
                 @else
                 <span data-toggle="modal" data-target="#registerModal">
-                  <div class="mt-4">
-                      <span class="lightText mr-2">Report</span>
+                  <div class="centerText mt-4">
+                      <span class="lightText mr-md-2">Report</span>
                       <i class="fas fa-ban clickable-btn" data-toggle="modal" data-target="#registerModal"></i>
                   </div> 
                 </span>
@@ -75,7 +75,7 @@
             </div>            
           </div>
           <!-- ARTICLE -->
-          <div class="col-8 col-lg-10 mt-3 article px-0">
+          <div class="col-12 col-md-11 mt-3 article px-10">
           <script type="text/javascript">
             var news_id = "{{ $news->id }}";//TODO get from route
           </script> 
