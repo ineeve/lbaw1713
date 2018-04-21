@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Response;
 use App\Comment;
+use Illuminate\Http\RedirectResponse;
 
 class CommentController extends Controller
 {
