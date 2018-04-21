@@ -43,7 +43,7 @@ Route::get('news/{id}', 'NewsController@show');
 /*Form to edit one news*/
 Route::get('news/{id}/edit', 'NewsController@editArticle');
 /*Action to edit one news*/
-Route::patch('news/{id}/edit', 'NewsController@edit')->name('update_news');
+Route::put('news/{id}/edit', 'NewsController@edit')->name('update_news');
 //Delete News
 Route::delete('news/{id}', 'NewsController@destroy')->name('delete_news');
 /*Infinite scroll for news' comments */

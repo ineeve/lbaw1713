@@ -179,6 +179,8 @@ return [
 
         //Added for TinyMCE
         Barryvdh\Elfinder\ElfinderServiceProvider::class,
+        //Added for Intervention Image
+        Intervention\Image\ImageServiceProvider::class,
         //Added for Form
         'Collective\Html\HtmlServiceProvider'
 
@@ -230,7 +232,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        'Image' => Intervention\Image\Facades\Image::class,
         'Form' => 'Collective\Html\FormFacade',
         'Html' => 'Collective\Html\HtmlFacade'
 
