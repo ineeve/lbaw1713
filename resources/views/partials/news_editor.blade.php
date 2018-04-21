@@ -11,7 +11,7 @@
 
   <fieldset class="form-group">
     {{ Form::label('title', 'Title') }}
-    {{ Form::text('title', null, ['class' => 'form-control', 'placeholder' => 'Insert title here']) }}
+    {{ Form::text('title', null, ['class' => 'form-control', 'required'=>'required', 'placeholder' => 'Insert title here']) }}
     @if ($errors->has('title'))
       <div class="alert alert-dismissible alert-danger">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
