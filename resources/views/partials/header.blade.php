@@ -38,7 +38,7 @@
               <!-- Account -->
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
-                  <i class="fas fa-user-circle"></i>{{ Auth::user()->username }}</a>
+                  <i class="fas fa-user-circle mr-1"></i>{{ Auth::user()->username }}</a>
                 <div class="dropdown-menu dropdown-menu-right position-absolute" x-placement="bottom-start">
                   <a class="dropdown-item" href="profile.html">
                     <i class="fas fa-user">
