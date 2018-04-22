@@ -50,10 +50,19 @@
   </fieldset>
 
   {{ Form::label('sources', 'Sources') }}
-
+ 
   <div id="editor-sources">
-    @include('partials.editor_source_input')
+  @if (isset($sources))
+    @foreach ($sources as $source)
+      @if ($loop->last)
+        @include('partials.editor_source_input',['source' => $source,'last'=>True])
+      @else
+        @include('partials.editor_source_input',['source' => $source,'last'=>False])
+      @endif
+    @endforeach
+  @endif
   </div>
+
 
   {{ Form::submit('Submit', ['name' => 'submit', 'class' => 'btn btn-primary']) }}
 

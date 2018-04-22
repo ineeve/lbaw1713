@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Response;
 use Storage;
 use Image;
+use \stdClass;
 
 use App\News as News;
 use App\Section as Section;
@@ -159,6 +160,21 @@ class NewsController extends Controller
         ]);
     }
 
+    /**
+     * Get a validator for the sources of an incoming news creation;
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    protected function sourceValidator(array $data)
+    {
+        return Validator::make($data, [
+            'author' => 'nullable|string|max:255',
+            'publication_year' => 'nullable|integer',
+            'link' => 'url'
+        ]);
+    }
+
 
     public function create(Request $request) {
       
@@ -181,22 +197,28 @@ class NewsController extends Controller
 
       if ($request->image != NULL){
         Image::make(file_get_contents($request->image->getRealPath()))->resize(100, 100)->save('storage/news/'.$news->id);
-        /*Storage::disk('news')->put(
-          $news->id,
-          file_get_contents($request->image->getRealPath())
-        );*/
         $news->image = $news->id;
         $news->save();
       }
 
 
       for($i = 0; $i < $num_sources; $i++){
+        $extLink = $this->externalLink($request->link[$i]);
+        $sourceValidator = $this->sourceValidator(['author' => $request->author[$i],
+                              'publication_year' => $request->publication_year[$i],
+                              'link' => $extLink]);
+        if ($sourceValidator->fails()) {
+          echo 'errors found, redirecting';
+          return redirect('/news/create')
+                      ->withErrors($sourceValidator)
+                      ->withInput();
+        }
         $created_source = Source::create([
           'author' => $request->author[$i],
-          'publication_year' => $request->date[$i],
-          'link' => $request->link[$i]
+          'publication_year' => $request->publication_year[$i],
+          'link' => $extLink
           ]);
-          DB::table('newssources')->insert(['news_id' => $news->id, 'source_id' => $created_source->id ]);
+        DB::table('newssources')->insert(['news_id' => $news->id, 'source_id' => $created_source->id ]);
       }
       
       return redirect('news/'.$news->id);
@@ -219,17 +241,27 @@ class NewsController extends Controller
 
     ///////////////////// EDITOR BELOW
 
+    private function getEmptySource(){
+      $emptySource = new stdClass;
+      $emptySource->author = ""; $emptySource->publication_year=""; $emptySource->link="";
+      return $emptySource;
+    }
+
     public function createArticle() {
       $this->authorize('create', News::class);
       $sections = Section::pluck('name', 'id');
-      return view('pages.news_editor', ['sections' => $sections]);
+      $sources = array($this->getEmptySource());
+      return view('pages.news_editor', ['sections' => $sections, 'sources'=> $sources]);
     }
 
     public function editArticle($id) {
       $sections = Section::pluck('name', 'id');
       $article = News::find($id);
+      $sources = DB::select('SELECT link,author,publication_year FROM 
+        sources JOIN (SELECT * FROM newssources WHERE news_id=?) AS sourcesForANews ON sources.id = sourcesForANews.source_id',
+        [$id]);
       $this->authorize('update', $article);
-      return view('pages.news_editor', ['sections' => $sections, 'article' => $article]);
+      return view('pages.news_editor', ['sections' => $sections, 'article' => $article, 'sources' => $sources]);
     }
 
     //////////////////// EDITOR ABOVE
@@ -244,5 +276,16 @@ class NewsController extends Controller
         return;
       }
       DB::insert('INSERT INTO DeletedItems (user_id, news_id) VALUES (?, ?);', [Auth::user()->id, $article->id]);
+    }
+
+    /**
+     * Preprends "http://" to a string if it doesn't already begin with "http://" or "https://".
+     */
+    private function externalLink($url) {
+      if (substr($url, 0, strlen("http://")) !== "http://"
+            && substr($url, 0, strlen("https://")) !== "https://") {
+        $url = "http://" . $url;
+      }
+      return $url;
     }
 }
