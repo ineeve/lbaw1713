@@ -192,8 +192,8 @@ class NewsController extends Controller
           'author' => $request->author[$i],
           'publication_year' => $request->publication_year[$i],
           'link' => $this->externalLink($request->link[$i])
-          ]);
-          DB::table('newssources')->insert(['news_id' => $news->id, 'source_id' => $created_source->id ]);
+        ]);
+        DB::table('newssources')->insert(['news_id' => $news->id, 'source_id' => $created_source->id ]);
       }
       
       return redirect('news/'.$news->id);
