@@ -13,15 +13,24 @@
         {{ Form::text('link[]', $source->link, ['class' => 'form-control', 'placeholder' => 'Link', 'required' => 'required']) }}
       </fieldset>
 
-      @if($last)
-      <fieldset class="form-group mr-3" onclick="addSource(this)">
-        <i class="fas fa-plus-circle"></i>
-      </fieldset>
-      @endif
 
-      <fieldset class="form-group" onclick="removeSource(this)">
+      @if($first && $last)
+        <fieldset class="form-group mr-3" onclick="addSource(this)">
+          <i class="fas fa-plus-circle"></i>
+        </fieldset>
+      @elseif (!$first && $last)
+        <fieldset class="form-group mr-3" onclick="addSource(this)">
+          <i class="fas fa-plus-circle"></i>
+        </fieldset>
+        <fieldset class="form-group" onclick="removeSource(this)">
         <i class="fas fa-minus-circle"></i>
-      </fieldset>
+        </fieldset>
+      @else
+        <fieldset class="form-group" onclick="removeSource(this)">
+        <i class="fas fa-minus-circle"></i>
+        </fieldset>
+      @endif
+      
 
 </div>
 @else

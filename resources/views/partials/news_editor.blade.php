@@ -54,11 +54,15 @@
   <div id="editor-sources">
   @if (isset($sources))
     @foreach ($sources as $source)
-      @if ($loop->last)
-        @include('partials.editor_source_input',['source' => $source,'last'=>True])
-      @else
-        @include('partials.editor_source_input',['source' => $source,'last'=>False])
+      <?php $first = False;
+      $last = False; ?>
+      @if($loop->first)
+        <?php $first = True; ?>
       @endif
+      @if($loop->last)
+        <?php $last = True; ?>
+      @endif
+      @include('partials.editor_source_input',['source' => $source,'first' => $first, 'last' => $last])
     @endforeach
   @endif
   </div>
