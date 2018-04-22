@@ -9,6 +9,8 @@ use App\News;
 use App\Policies\NewsPolicy;
 use App\Comment;
 use App\Policies\CommentPolicy;
+use App\Notification;
+use App\Policies\NotificationPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -19,7 +21,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
       News::class => NewsPolicy::class,
-      Comment::class => CommentPolicy::class
+      Comment::class => CommentPolicy::class,
+      Notification::class => NotificationPolicy::class
     ];
 
     /**

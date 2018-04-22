@@ -1,5 +1,4 @@
-<a class="dropdown-item" href="">
-    <!-- TODO: add a link -->
+<a class="dropdown-item" href="{{ url('notifications/'.$notification->id) }}">
     <i class="fas fa-user-circle">
     </i>
     @switch($notification->type)
@@ -18,4 +17,6 @@
         @default
             Error: in notification.
     @endswitch
+
+    {{ when($notification->date) }}
 </a>

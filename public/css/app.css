@@ -155,3 +155,9 @@ input[type=email]:focus,
 input[type=password]:focus {
   border-color: #9b4dca;
 }
+
+#newsContent{
+    min-width:350px;        /* Suppose you want minimum width of 1000px */
+    width: auto !important;  /* Firefox will set width as auto */
+    width:350px;            /* As IE6 ignores !important it will set width as 1000px; */
+}

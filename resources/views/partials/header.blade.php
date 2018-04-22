@@ -21,11 +21,9 @@
             <ul class="navbar-nav ml-auto">
               <!-- Publish -->
               <li class="nav-item">
-                <button class="btn btn-outline-light my-2 my-sm-0 rounded">
-                  <a href="{{ route('create_news') }}" style="color:inherit; text-decoration:none">
-                    Publish
-                  </a>
-                </button>
+                <a class="btn btn-outline-light my-2 my-sm-0 rounded" href="{{ route('create_news') }}" style="text-decoration:none">
+                  <span style="color: inherit">Publish</span>
+                </a>
               </li>
 
               <!-- Notifications -->
@@ -34,13 +32,13 @@
                   <i class="fas fa-bell">
                   </i> Notifications</a>
                 <div class="dropdown-menu dropdown-menu-right position-absolute" x-placement="bottom-start">
-                  @each('partials.notification', Auth::user()->notifications()->orderBy('date')->get(), 'notification')
+                  @each('partials.notification', Auth::user()->notifications()->where('was_read', FALSE)->orderBy('date', 'desc')->get(), 'notification')
                 </div>
               </li>
               <!-- Account -->
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
-                  <i class="fas fa-user-circle"></i>{{ Auth::user()->username }}</a>
+                  <i class="fas fa-user-circle mr-1"></i>{{ Auth::user()->username }}</a>
                 <div class="dropdown-menu dropdown-menu-right position-absolute" x-placement="bottom-start">
                   <a class="dropdown-item" href="profile.html">
                     <i class="fas fa-user">
@@ -98,8 +96,6 @@
                     </div>
                     <button onclick="signIn()" type="submit" class="btn btn-primary">Sign in</button>
                   </form>
-                  <div class="dropdown-divider"></div>
-                  <div class="px-4 fb-login-button" scope="public_profile,email" onlogin="checkLoginState()" data-max-rows="1" data-size="medium" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="/register">New around here? Sign up</a>
                   <a class="dropdown-item" href="#">Forgot password?</a>

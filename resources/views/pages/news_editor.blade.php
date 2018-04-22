@@ -17,7 +17,7 @@
       "searchreplace wordcount visualblocks visualchars code fullscreen",
       "insertdatetime media nonbreaking save table contextmenu directionality",
       "emoticons template paste textcolor colorpicker textpattern codesample",
-      "fullpage toc imagetools help"
+      "toc imagetools help"
     ],
     toolbar: "insertfile undo redo | styleselect | bold italic strikethrough | alignleft aligncenter alignright alignjustify | ltr rtl | bullist numlist outdent indent removeformat formatselect| link image media | emoticons charmap | code codesample | forecolor backcolor",
     //external_plugins: { "nanospell": "{{asset('js/tinymce/js/tinymce/plugins/nanospell/plugin.js')}}" },
