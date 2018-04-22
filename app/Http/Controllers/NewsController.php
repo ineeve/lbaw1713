@@ -192,7 +192,7 @@ class NewsController extends Controller
           'author' => $request->author[$i],
           'publication_year' => $request->publication_year[$i],
           'link' => $this->externalLink($request->link[$i])
-        ]);
+          ]);
         DB::table('newssources')->insert(['news_id' => $news->id, 'source_id' => $created_source->id ]);
       }
       
@@ -257,9 +257,10 @@ class NewsController extends Controller
      * Preprends "http://" to a string if it doesn't already begin with "http://" or "https://".
      */
     private function externalLink($url) {
-      if (substr($url, 0, strlen("http://")) === "http://"
-            || substr($url, 0, strlen("https://")) === "https://") {
+      if (substr($url, 0, strlen("http://")) !== "http://"
+            && substr($url, 0, strlen("https://")) !== "https://") {
         $url = "http://" . $url;
       }
+      return $url;
     }
 }
