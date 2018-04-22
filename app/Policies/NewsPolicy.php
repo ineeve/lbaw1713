@@ -47,18 +47,6 @@ class NewsPolicy
     }
 
     /**
-     * Determine whether the user can get the form to update news.
-     * 
-     * @param  \App\User  $user
-     * @param  \App\News  $news
-     * @return mixed
-     */
-    public function editArticle(User $user, News $news)
-    {
-        return $user->id == $news->author_id;        
-    }
-
-    /**
      * Determine whether the user can delete the news.
      *
      * @param  \App\User  $user
