@@ -39,8 +39,10 @@
                   {{ csrf_field() }}
                   <span class="delete-news" 
                     onMouseOver="this.style.textDecoration= 'underline';
+                    this.style.color='#2780E3';
                     this.style.cursor='pointer';"
-                    onMouseOut="this.style.textDecoration= 'none';">
+                    onMouseOut="this.style.textDecoration= 'none';
+                    this.style.color='initial';">
                     <span class="lightText mr-md-1">Delete</span>
                     <i class="fas fa-times clickable-btn"></i>
                   </span>
