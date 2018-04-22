@@ -194,7 +194,7 @@ class NewsController extends Controller
         $created_source = Source::create([
           'author' => $request->author[$i],
           'publication_year' => $request->date[$i],
-          'link' => $request->link[$i]
+          'link' => $this->externalLink($request->link[$i])
           ]);
           DB::table('newssources')->insert(['news_id' => $news->id, 'source_id' => $created_source->id ]);
       }
@@ -244,5 +244,15 @@ class NewsController extends Controller
         return;
       }
       DB::insert('INSERT INTO DeletedItems (user_id, news_id) VALUES (?, ?);', [Auth::user()->id, $article->id]);
+    }
+
+    /**
+     * Preprends "http://" to a string if it doesn't already begin with "http://" or "https://".
+     */
+    private function externalLink($url) {
+      if (substr($url, 0, strlen("http://")) === "http://"
+            || substr($url, 0, strlen("https://")) === "https://") {
+        $url = "http://" . $url;
+      }
     }
 }
