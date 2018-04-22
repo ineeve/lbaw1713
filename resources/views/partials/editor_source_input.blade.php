@@ -14,7 +14,7 @@
       </fieldset>
 
       @if($last)
-      <fieldset class="form-group" onclick="addSource(this)">
+      <fieldset class="form-group mr-3" onclick="addSource(this)">
         <i class="fas fa-plus-circle"></i>
       </fieldset>
       @endif
