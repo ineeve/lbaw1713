@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Response;
 use Storage;
+use Image;
 
 use App\News as News;
 use App\Section as Section;
@@ -154,7 +155,7 @@ class NewsController extends Controller
             'section_id' => 'required|integer',
             'image' => 'nullable|image',
             'author_id' => 'integer',
-            'body' => 'string'
+            'body' => 'string|required'
         ]);
     }
 
@@ -163,6 +164,7 @@ class NewsController extends Controller
       
       $validator = $this->validator($request->all());
       if ($validator->fails()) {
+        echo 'errors found, redirecting';
         return redirect('/news/create')
                     ->withErrors($validator)
                     ->withInput();
@@ -178,10 +180,11 @@ class NewsController extends Controller
       ]);
 
       if ($request->image != NULL){
-        Storage::disk('news')->put(
+        Image::make(file_get_contents($request->image->getRealPath()))->resize(100, 100)->save('storage/news/'.$news->id);
+        /*Storage::disk('news')->put(
           $news->id,
           file_get_contents($request->image->getRealPath())
-        );
+        );*/
         $news->image = $news->id;
         $news->save();
       }
@@ -225,7 +228,7 @@ class NewsController extends Controller
     public function editArticle($id) {
       $sections = Section::pluck('name', 'id');
       $article = News::find($id);
-      $this->authorize('editArticle', $article);
+      $this->authorize('update', $article);
       return view('pages.news_editor', ['sections' => $sections, 'article' => $article]);
     }
 

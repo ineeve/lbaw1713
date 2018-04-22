@@ -30,7 +30,16 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/news';
+    // protected $redirectTo = '/news';
+
+    public function redirectPath()
+    {
+        // ...
+        // custom logic here 
+        // ...
+
+        return redirect()->back()->getTargetUrl();
+    }
 
     /*
      * Method override to send correct error messages

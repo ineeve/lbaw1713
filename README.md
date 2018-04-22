@@ -17,7 +17,7 @@ the php package manager _composer_.
 
 We recommend using an _ubuntu_ distribution that ships _php 7.1_ (e.g Ubuntu 17.10). You can install the required software with:
 
-    sudo apt-get install git composer php7.1 php7.1-mbstring php7.1-xml php7.1-pgsql
+    sudo apt-get install git composer php7.1 php7.1-mbstring php7.1-xml php7.1-pgsql php7.1-gd
 
 You will also need to install the latest version of docker and docker compose, as described
 [here](https://docs.docker.com/install/linux/docker-ce/ubuntu/) and [here](https://docs.docker.com/compose/install/#install-compose):
