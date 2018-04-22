@@ -2,7 +2,7 @@ FROM ubuntu:17.10
 
 # Install dependencies
 
-#RUN apt-get clean if you get errors fetching
+RUN apt-get clean
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends libpq-dev vim nginx php-fpm php-mbstring php-xml php-pgsql php-gd
 # Copy project code and install project dependencies

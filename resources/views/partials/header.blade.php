@@ -29,8 +29,14 @@
               <!-- Notifications -->
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
-                  <i class="fas fa-bell">
+                
+                @if((bool)Auth::user()->notifications()->where('was_read', FALSE)->first())
+                  <i class="fas fa-bell" style="color: yellow;">
                   </i> Notifications</a>
+                @else
+                <i class="fas fa-bell">
+                  </i> Notifications</a>
+                @endif
                 <div class="dropdown-menu dropdown-menu-right position-absolute" x-placement="bottom-start">
                   @each('partials.notification', Auth::user()->notifications()->where('was_read', FALSE)->orderBy('date')->get(), 'notification')
                 </div>

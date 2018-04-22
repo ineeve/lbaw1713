@@ -18,5 +18,5 @@
             Error: in notification.
     @endswitch
 
-    {{ when($notification->date) }}
+    <strong>{{ when($notification->date) }}</strong>
 </a>
