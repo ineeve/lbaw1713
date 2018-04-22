@@ -129,15 +129,13 @@ function removeSource(clickedFieldset){
         if (allSources.childElementCount == 2){
             lastSource.lastElementChild.remove();
         }
+        clickedFieldset.parentElement.remove();
     }else{
-        if (allSources.childElementCount == 1){
-            lastSource.lastElementChild.remove();
-            lastSource.appendChild(createPlusFieldset());
-        } else{
-            lastSource.insertBefore(createPlusFieldset(),lastSource.children[3]);
-        }
+        clickedFieldset.parentElement.remove();
+        lastSource = allSources.lastElementChild;
+        lastSource.insertBefore(createPlusFieldset(),lastSource.children[3]);
     }
-    clickedFieldset.parentElement.remove();
+    
     
     
     
