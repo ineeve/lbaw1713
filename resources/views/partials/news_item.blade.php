@@ -39,8 +39,10 @@
                   {{ csrf_field() }}
                   <span class="delete-news" 
                     onMouseOver="this.style.textDecoration= 'underline';
+                    this.style.color='#2780E3';
                     this.style.cursor='pointer';"
-                    onMouseOut="this.style.textDecoration= 'none';">
+                    onMouseOut="this.style.textDecoration= 'none';
+                    this.style.color='initial';">
                     <span class="lightText mr-md-1">Delete</span>
                     <i class="fas fa-times clickable-btn"></i>
                   </span>
@@ -55,9 +57,7 @@
                 @if (Auth::check())
                   <!-- Report -->
                   <span data-toggle="modal" data-target="#reportModal">
-                    <div class="centerText mt-4"  onMouseOver="this.style.textDecoration= 'underline';
-                    this.style.cursor='pointer';"
-                    onMouseOut="this.style.textDecoration= 'none';">
+                    <div class="centerText mt-4">
                       <span class="lightText mr-md-2">Report</span>
                        <i class="fas fa-ban clickable-btn" data-toggle="modal" data-target="#reportModal"></i>
                     </div>
@@ -65,9 +65,7 @@
                   </span>
                 @else
                 <span data-toggle="modal" data-target="#registerModal">
-                  <div class="centerText mt-4" onMouseOver="this.style.textDecoration= 'underline';
-                    this.style.cursor='pointer';"
-                    onMouseOut="this.style.textDecoration= 'none';">
+                  <div class="centerText mt-4">
                       <span class="lightText mr-md-2">Report</span>
                       <i class="fas fa-ban clickable-btn" data-toggle="modal" data-target="#registerModal"></i>
                   </div> 
