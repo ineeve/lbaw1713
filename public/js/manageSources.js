@@ -86,7 +86,7 @@ function getNewSourcesInput(){
     let externalDiv = document.createElement('div');
     externalDiv.setAttribute('class','d-flex flex-wrap align-items-center source-inputs');
     let authorFieldset = getInputFieldset('author','Publication author',false);
-    let dateFieldset = getInputFieldset('date','Publication year',false);
+    let dateFieldset = getInputFieldset('publication_year','Publication year',false);
     let linkFieldset = getInputFieldset('link','Link',true);
     let plusFieldset = createPlusFieldset();
     let minusFieldset = createMinusFieldset();
@@ -100,7 +100,7 @@ function addSource(e) {
     let inputs = $('.source-inputs');
     let lastInput = inputs[inputs.length - 1];
     let author = lastInput.querySelector('input[name="author[]"]');
-    let date = lastInput.querySelector('input[name="date[]"]');
+    let date = lastInput.querySelector('input[name="publication_year[]"]');
     let link = lastInput.querySelector('input[name="link[]"]');
     let errors = validateInput(author,date,link);
     if (!errors.hasErrors){
