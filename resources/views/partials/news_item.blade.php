@@ -55,7 +55,9 @@
                 @if (Auth::check())
                   <!-- Report -->
                   <span data-toggle="modal" data-target="#reportModal">
-                    <div class="centerText mt-4">
+                    <div class="centerText mt-4"  onMouseOver="this.style.textDecoration= 'underline';
+                    this.style.cursor='pointer';"
+                    onMouseOut="this.style.textDecoration= 'none';">
                       <span class="lightText mr-md-2">Report</span>
                        <i class="fas fa-ban clickable-btn" data-toggle="modal" data-target="#reportModal"></i>
                     </div>
@@ -63,7 +65,9 @@
                   </span>
                 @else
                 <span data-toggle="modal" data-target="#registerModal">
-                  <div class="centerText mt-4">
+                  <div class="centerText mt-4" onMouseOver="this.style.textDecoration= 'underline';
+                    this.style.cursor='pointer';"
+                    onMouseOut="this.style.textDecoration= 'none';">
                       <span class="lightText mr-md-2">Report</span>
                       <i class="fas fa-ban clickable-btn" data-toggle="modal" data-target="#registerModal"></i>
                   </div> 
