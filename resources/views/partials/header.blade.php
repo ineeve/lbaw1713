@@ -38,7 +38,7 @@
                   </i> Notifications</a>
                 @endif
                 <div class="dropdown-menu dropdown-menu-right position-absolute" x-placement="bottom-start">
-                  @each('partials.notification', Auth::user()->notifications()->where('was_read', FALSE)->orderBy('date')->get(), 'notification')
+                  @each('partials.notification', Auth::user()->notifications()->where('was_read', FALSE)->orderBy('date', 'desc')->get(), 'notification')
                 </div>
               </li>
               <!-- Account -->
