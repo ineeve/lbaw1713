@@ -46,7 +46,7 @@
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
                   <i class="fas fa-user-circle mr-1"></i>{{ Auth::user()->username }}</a>
                 <div class="dropdown-menu dropdown-menu-right position-absolute" x-placement="bottom-start">
-                  <a class="dropdown-item" href="profile.html">
+                  <a class="dropdown-item" href="/users/{{Auth::user()->username}}">
                     <i class="fas fa-user">
                     </i> Profile
                   </a>
