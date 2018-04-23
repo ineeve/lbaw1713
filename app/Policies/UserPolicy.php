@@ -10,8 +10,8 @@ class UserPolicy
     use HandlesAuthorization;
 
 
-    public function update(User $me, User $user)
+    public function update(User $user, User $user1)
     {
-        return $me->id === $user->id;
+        return $user->id === $user1->id;
     }
 }

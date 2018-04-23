@@ -55,6 +55,9 @@ class UserController extends Controller
         $user = User::find($request->IDInput);
         $this->authorize('update', $user);
         // $user->update($request->all());
-        return redirect('users/'.$username);
+        echo $user;
+        echo implode(" ",$request->all());
+        return;
+        // return redirect('users/'.$username);
       }
 }

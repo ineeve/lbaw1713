@@ -11,6 +11,8 @@ use App\Comment;
 use App\Policies\CommentPolicy;
 use App\Notification;
 use App\Policies\NotificationPolicy;
+use App\User;
+use App\Policies\UserPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
