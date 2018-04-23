@@ -18,9 +18,9 @@
                 <span id="votesCounter" class="mx-2">{{ $news->votes }}</span>
                 <i class="fas fa-arrow-alt-circle-down clickable-btn" id="downvote" onclick="downvote({{$news->id}})"></i>
                 @else
-                <i class="fas fa-arrow-alt-circle-up clickable-btn" id="upvote" data-toggle="modal" data-target="#registerModal"></i>
+                <i class="fas fa-arrow-alt-circle-up clickable-btn" id="upvote" data-toggle="modal" data-target="#loginModal"></i>
                 <span id="votesCounter" class="mx-2">{{ $news->votes }}</span>
-                <i class="fas fa-arrow-alt-circle-down clickable-btn" id="downvote" data-toggle="modal" data-target="#registerModal"></i>
+                <i class="fas fa-arrow-alt-circle-down clickable-btn" id="downvote" data-toggle="modal" data-target="#loginModal"></i>
                 @endif
               </div>
 
@@ -64,10 +64,10 @@
                     
                   </span>
                 @else
-                <span data-toggle="modal" data-target="#registerModal">
+                <span data-toggle="modal" data-target="#loginModal">
                   <div class="centerText mt-4">
                       <span class="lightText mr-md-2">Report</span>
-                      <i class="fas fa-ban clickable-btn" data-toggle="modal" data-target="#registerModal"></i>
+                      <i class="fas fa-ban clickable-btn" data-toggle="modal" data-target="#loginModal"></i>
                   </div> 
                 </span>
                 @endif
