@@ -17,9 +17,13 @@ method="post">
         </div>
         <div class="form-group">
           <label for="inputCountry">Country:</label>
-          <select id="inputCountry" class="form-control">
-            <option selected>Portugal</option>
-            <option>USA</option>
+          <select id="country" name="country_id" class="form-control">
+          <!-- TODO: preselect country -->
+              <option value="" disabled>Select your country</option>
+              @foreach ($countries as $country)
+                <option value="{{$country->id}}"> {{$country->name}}
+                 </option>
+              @endforeach
           </select>
         </div>
       </div>
