@@ -4,7 +4,7 @@ method="post">
     <div class="row">
       <div class="col-md-6">
       <!-- TODO: Alter Image path -->
-        <img src="https://c1.staticflickr.com/3/2936/14387367072_85312c31b3_b.jpg" alt="pic" height="200px" width="200px">
+        <img src="{{asset('storage/users/'.Auth::user()->picture)}}" alt="Profile Photo" height="200px" width="200px">
         <div class="form-group">
           <label for="inputPhoto">Input Photo:</label>
           <input type="file" class="form-control-file" id="inputPhoto" aria-describedby="fileHelp">
@@ -12,7 +12,7 @@ method="post">
         </div>
         <div class="form-group">
           <label for="exampleInputEmail1">Email address:</label>
-          <input type="email" class="form-control" id="inputEmail1" aria-describedby="emailHelp" placeholder="{{Auth::user()->email}}">
+          <input type="email" class="form-control" id="inputEmail1" aria-describedby="emailHelp" value="{{Auth::user()->email}}">
           <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
         </div>
         <div class="form-group">
@@ -21,7 +21,11 @@ method="post">
           <!-- TODO: preselect country -->
               <option value="" disabled>Select your country</option>
               @foreach ($countries as $country)
-                <option value="{{$country->id}}"> {{$country->name}}
+                <option value="{{$country->id}}"
+                @if($country->id === Auth::user()->country_id)
+                  selected
+                  @endif
+                > {{$country->name}}
                  </option>
               @endforeach
           </select>
@@ -30,13 +34,21 @@ method="post">
       <div class="col-md-6">
         <div class="form-group">
           <label class="col-form-label" for="inputDefault">Username:</label>
-          <input type="text" class="form-control" placeholder="{{Auth::user()->username}}" id="usernameInput">
+          <input type="text" class="form-control" value="{{Auth::user()->username}}" id="usernameInput">
         </div>
         <div class="form-group">
           <label class="col-form-label" for="gender">Gender:</label>
-          <select class="custom-select" id="gender">
-            <option value="female">Female</option>
-            <option value="male">Male</option>
+          <select class="custom-select" id="gender" name="gender" class="form-control">
+            <option value="" disabled>Select your gender</option>
+            <option value="female" @if('female' == Auth::user()->gender)
+                  selected
+                  @endif >Female</option>
+            <option value="male" @if('male' == Auth::user()->gender)
+                  selected
+                  @endif >Male</option>
+            <option value="other" @if('other'== Auth::user()->gender)
+                  selected
+                  @endif >Other</option>
           </select>
         </div>
         <div class="mt-5 mb-1">
