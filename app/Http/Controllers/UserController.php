@@ -16,10 +16,15 @@ use App\News as News;
 use App\Section as Section;
 use App\Source as Source;
 
+use Illuminate\Support\Facades\DB;
+
+use App\User as User;
+
 class UserController extends Controller
 {
     public function edit() {
-        return view('pages.profile_edit');
+        $countries = DB::select('SELECT * FROM countries');
+        return view('pages.profile_edit', ['countries' => $countries]);
     }
     
     public function show($username)
@@ -47,4 +52,11 @@ class UserController extends Controller
     }
 
    
+
+    public function update(Request $request, $username) {
+        // $user = User::find($username);
+        // $this->authorize('update', $article);
+        // $user->update($request->all());
+        return redirect('users/'.$username);
+      }
 }
