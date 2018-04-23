@@ -1,1 +1,1 @@
-@each('partials.news_item_preview', $achieved_badges, 'badge')
+@each('partials.badge', $achieved_badges, 'badge')

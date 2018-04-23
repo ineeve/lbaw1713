@@ -16,7 +16,6 @@ use App\News as News;
 use App\Section as Section;
 use App\Source as Source;
 
-use Illuminate\Support\Facades\DB;
 
 use App\User as User;
 
