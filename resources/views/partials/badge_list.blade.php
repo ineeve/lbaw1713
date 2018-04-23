@@ -1,0 +1,1 @@
+@each('partials.badge', $achieved_badges, 'badge')

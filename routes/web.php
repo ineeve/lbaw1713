@@ -20,6 +20,7 @@ Route::get('error/403', 'Controller@errorUnauthorizedAction');
 
 Route::get('/users/{username}', 'UserController@show');
 Route::get('/users/{username}/edit', 'UserController@edit');
+Route::patch('/users/{username}/edit', 'UserController@update')->name('update_user');;
 
 // // Authentication
 
