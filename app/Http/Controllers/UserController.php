@@ -15,4 +15,11 @@ class UserController extends Controller
         $countries = DB::select('SELECT * FROM countries');
         return view('pages.profile_edit', ['countries' => $countries]);
     }
+
+    public function update(Request $request, $username) {
+        $user = User::find($id);
+        // $this->authorize('update', $article);
+        $user->update($request->all());
+        return redirect('user/');
+      }
 }

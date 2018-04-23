@@ -1,6 +1,11 @@
-<form class="profile_item border container p-2 mx-auto mt-3" 
+<!-- <form class="profile_item border container p-2 mx-auto mt-3" 
 action="/users/{{Auth::user()->username}}/edit" 
-method="post">
+method="post"
+> -->
+<div class="profile_item border container p-2 mx-auto mt-3">
+{{ Form::open(['route' => ['update_user', Auth::user()->id], 'method' => 'patch']) }}
+
+{{ csrf_field() }}
     <div class="row">
       <div class="col-md-6">
       <!-- TODO: Alter Image path -->
@@ -64,5 +69,6 @@ method="post">
         <button type="submit" class="btn btn-primary">Submit</button>
       </div>
     </div>
-
-  </form>
+{{ Form::close() }}
+<div>
+  <!-- </form> -->
