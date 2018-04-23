@@ -15,14 +15,20 @@
           <!-- <i class="fa fa-angle-down" ></i> -->
         </a>
         <div class="dropdown-menu" x-placement="bottom-start">
-          @if(Auth::check()) @if(Auth::user()->username == $comment->commentator)
-          <!-- TODO: mandar por method delete -->
-          <a class="dropdown-item deleteComment" href="/api/news/{{$news_id}}/comments/{{ $comment->id}}">Delete</a>
+          @if(Auth::check())
+            @if(Auth::user()->username == $comment->commentator)
+              <!-- TODO: mandar por method delete -->
+              <a class="dropdown-item deleteComment" href="/api/news/{{$news_id}}/comments/{{ $comment->id}}">Delete</a>
+            @else
+              <!-- Report -->
+              <span class="dropdown-item" data-toggle="modal" data-target="#reportModal">
+                Report
+              </span>
+            @endif
           @else
-          <a class="dropdown-item" href="#">Report</a>
-          @endif @else
-          <a class="dropdown-item" href="/register">You need to be registered in our website
-            <br> to report this comment</a>
+            <span class="dropdown-item" data-toggle="modal" data-target="#registerModal">
+              Report
+            </span>
           @endif
         </div>
       </div>

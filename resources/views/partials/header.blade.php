@@ -100,7 +100,7 @@
                         Remember me
                       </label>
                     </div>
-                    <button onclick="signIn()" type="submit" class="btn btn-primary">Sign in</button>
+                    <button type="submit" class="btn btn-primary">Sign in</button>
                   </form>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="/register">New around here? Sign up</a>

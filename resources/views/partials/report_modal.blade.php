@@ -20,7 +20,7 @@
                       <label class="btn btn-primary">
                         <div class="itemcontent">
                           <input class="no-display" type="checkbox" name="var_id[]" autocomplete="off" value="">
-                          <h5>Offensive</h5>
+                          <h5>rude or abusive</h5>
                         </div>
                       </label>
                     </div>
@@ -32,7 +32,7 @@
                       <label class="btn btn-primary">
                         <div class="itemcontent">
                           <input class="no-display" type="checkbox" name="var_id[]" autocomplete="off" value="">
-                          <h5>Scam/Spam</h5>
+                          <h5>scam/spam</h5>
                         </div>
                       </label>
                     </div>
@@ -44,7 +44,7 @@
                       <label class="btn btn-primary">
                         <div class="itemcontent">
                           <input class="no-display" type="checkbox" name="var_id[]" autocomplete="off" value="">
-                          <h5>Sexually Inappropriate</h5>
+                          <h5>sexually inappropriate</h5>
                         </div>
                       </label>
                     </div>
