@@ -17,8 +17,10 @@
         <div class="dropdown-menu" x-placement="bottom-start">
           @if(Auth::check())
             @if(Auth::user()->username == $comment->commentator)
-              <!-- TODO: mandar por method delete -->
-              <a class="dropdown-item deleteComment" href="/api/news/{{$news_id}}/comments/{{ $comment->id}}">Delete</a>
+              <!-- Edit -->
+              <a class="dropdown-item editCommentForm" name="{{$comment->id}}" href="/api/news/{{$news_id}}/comments/{{$comment->id}}">Edit</a>
+              <!-- Delete -->
+              <a class="dropdown-item deleteComment" href="/api/news/{{$news_id}}/comments/{{$comment->id}}">Delete</a>
             @else
               <!-- Report -->
               <span class="dropdown-item" data-toggle="modal" data-target="#reportModal">
@@ -35,7 +37,7 @@
     </div>
     <div class="row">
       <div class="col">
-        <p>{{ $comment->text }}</p>
+        <p class="commentBody">{{ $comment->text }}</p>
         </p>
       </div>
     </div>

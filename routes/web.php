@@ -65,7 +65,7 @@ Route::get('privacy_policy','PrivacyPolicyController@show');
 
 // Comments - TODO: Add more methods once they're implemented
 Route::resource('news/{id}/comments', 'CommentController')->only([
-    'store'
+    'store', 'update'
 ]);
 
 Route::delete('api/news/{news_id}/comments/{id}', 'CommentController@delete');
