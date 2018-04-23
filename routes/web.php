@@ -17,6 +17,9 @@ Route::get('/', function () {
 Route::get('error/404', 'Controller@errorNotFound');
 Route::get('error/403', 'Controller@errorUnauthorizedAction');
 
+
+Route::get('/users/{username}', 'UserController@show');
+
 // // Authentication
 
 /*Action of login*/
