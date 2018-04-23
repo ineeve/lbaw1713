@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
 
+use App\User as User;
+
 class UserController extends Controller
 {
     public function show() {
@@ -17,9 +19,9 @@ class UserController extends Controller
     }
 
     public function update(Request $request, $username) {
-        $user = User::find($id);
+        // $user = User::find($username);
         // $this->authorize('update', $article);
-        $user->update($request->all());
-        return redirect('user/');
+        // $user->update($request->all());
+        return redirect('users/'.$username);
       }
 }
