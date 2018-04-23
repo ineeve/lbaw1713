@@ -119,11 +119,13 @@ function upvote(newsId) {
 addEventListeners();
 getUserVote();
 
+
 function createEditCommentForm(comment_body) {
   let form = document.createElement('form');
+  form.onsubmit = editComment;
   form.className = '';
   form.innerHTML = '<div class="form-group">';
-  form.innerHTML += '<textarea class="form-control" value="'+comment_body+'"></textarea>';
+  form.innerHTML += '<textarea class="form-control">'+comment_body+'</textarea>';
   form.innerHTML += '</div>';
   form.innerHTML += '<button name="cancel" class="btn btn-secondary">Cancel</button>';
   form.innerHTML += '<button type="submit" class="btn btn-primary editComment">Edit</button>';
@@ -131,20 +133,51 @@ function createEditCommentForm(comment_body) {
   return form;
 }
 
+/**
+   * Submits edit form, replacing it with the new comment body.
+   * Request returns object with new comment's ID and body.
+   */
+function editComment(e) {
+  e.preventDefault();
+  
+  let comment_id = e.target.parentElement.getAttribute('comm-id');
+  let news_id = e.target.parentElement.getAttribute('news-id');
+
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  jQuery.ajax({
+    url: '/api/news/'+news_id+'/comments/'+comment_id,
+    method: 'patch',
+    success: function (newComm) {
+      console.log('Edited '+"commentNo"+newComm.id);
+      $("#commentNo"+newComm.id + " .commentBody").outerHTML = newComm.body;
+    },
+    error: function(xhr) {
+      console.log('Failed to edit comment');
+//      $("#commentNo"+newComm.id + " .commentBody").outerHTML = "";
+    }
+  });
+}
+
 function onScrollComments() {
   
   // Replaces comment body by the edit form.
   jQuery('.editCommentForm').click(function (e) {
     e.preventDefault();
-    let form = createEditCommentForm(e);
-    $("#commentNo"+e.target.name + " .commentBody").replaceWith(form);
+    let commentBody = $("#commentNo"+e.target.name + " .commentBody").text();
+    let form = createEditCommentForm(commentBody);
+    $("#commentNo"+e.target.name + " .commentBody").empty();
+    $("#commentNo"+e.target.name + " .commentBody").append(form);
   });
 
   /**
    * Submits edit form, replacing it with the new comment body.
    * Request returns object with new comment's ID and body.
    */
-  jQuery('.editComment').click(function (e) {
+  /*jQuery('.editComment').click(function (e) {
     e.preventDefault();
     $.ajaxSetup({
       headers: {
@@ -159,7 +192,7 @@ function onScrollComments() {
         $("#commentNo"+newComm.id + " .commentBody").outerHTML = newComm.body;
       }
     });
-  });
+  });*/
 
   jQuery('.deleteComment').click(function (e) {
     e.preventDefault();

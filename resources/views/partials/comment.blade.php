@@ -37,8 +37,7 @@
     </div>
     <div class="row">
       <div class="col">
-        <p class="commentBody">{{ $comment->text }}</p>
-        </p>
+        <div class="commentBody" news-id="{{$news_id}}" comm-id="{{$comment->id}}">{{ $comment->text }}</div>
       </div>
     </div>
   </div>
