@@ -139,37 +139,9 @@
 
           <div class="d-flex flex-wrap flex-row mx-auto mt-3" data-toggle="modal" data-target="#badgesModal" style="cursor:pointer">
 
-            <div class="badge">
-
-              <img alt="Icon" src="http://icons.iconarchive.com/icons/seanau/fresh-web/128/Badge-icon.png" width="80" height="80">
-              <h3>Opiniated</h3>
-              <p>Do 10 comments</p>
-
-            </div>
-
-            <div class="badge">
-
-              <img alt="Icon" src="http://icons.iconarchive.com/icons/seanau/fresh-web/128/Badge-icon.png" width="80" height="80">
-              <h3>Scribophile</h3>
-              <p>Publish 10 news</p>
-            </div>
-
-
-
-            <div class="badge">
-
-              <img alt="Icon" src="http://icons.iconarchive.com/icons/seanau/fresh-web/128/Badge-icon.png" width="80" height="80">
-              <h3>Opiniated</h3>
-              <p>Do 10 comments</p>
-
-            </div>
-            <div class="badge">
-
-              <img alt="Icon" src="http://icons.iconarchive.com/icons/seanau/fresh-web/128/Badge-icon.png" width="80" height="80">
-              <h3>Opiniated</h3>
-              <p>Do 10 comments</p>
-
-            </div>
+            @if ($achieved_badges != null)
+                @include('partials.badge_list',$achieved_badges)
+            @endif
           </div>
 
         </div>

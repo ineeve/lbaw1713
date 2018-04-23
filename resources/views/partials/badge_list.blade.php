@@ -1,0 +1,1 @@
+@each('partials.news_item_preview', $achieved_badges, 'badge')
