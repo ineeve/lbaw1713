@@ -2,7 +2,7 @@
   @include('partials/report_modal')
   <meta name="news_id" content="{{$news->id}}">
 @else
-  @include('partials/register_modal')
+  @include('partials/login_modal')
 @endif
 <script src="{{ asset('js/scrollComment.js') }}" defer></script>
   <div id="newsContent" class="tab-content">

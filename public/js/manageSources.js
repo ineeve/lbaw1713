@@ -125,20 +125,20 @@ function removeSource(clickedFieldset){
     
     let allSources = document.querySelector('#editor-sources');
     let lastSource = allSources.lastElementChild;
-    if (lastSource.lastElementChild != clickedFieldset){
-        if (allSources.childElementCount == 2){
-            lastSource.lastElementChild.remove();
-        }
-        clickedFieldset.parentElement.remove();
-    }else{
+
+    if (clickedFieldset == lastSource.lastElementChild){
         clickedFieldset.parentElement.remove();
         lastSource = allSources.lastElementChild;
+        if (allSources.childElementCount == 1){
+            lastSource.lastElementChild.remove();
+        }
         lastSource.insertBefore(createPlusFieldset(),lastSource.children[3]);
+    }else{
+        clickedFieldset.parentElement.remove();
+        if (allSources.childElementCount == 1){
+            lastSource.lastElementChild.remove();
+        }
     }
-    
-    
-    
-    
     
     
 }
