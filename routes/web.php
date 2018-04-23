@@ -19,6 +19,7 @@ Route::get('error/403', 'Controller@errorUnauthorizedAction');
 
 
 Route::get('/users/{username}', 'UserController@show');
+Route::get('/users/{username}/edit', 'UserController@edit');
 
 // // Authentication
 
