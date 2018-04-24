@@ -26,13 +26,23 @@ class CommentController extends Controller
         Comment::create($request->all());
         return back();
     }
-    public function delete($news_id, $id) {
-        $comment = Comment::find($id);
-        $this->authorize('delete', $comment);
-        Comment::destroy($id);
+
+    public function update($news_id, $comm_id, Request $request) {
+        $comment = Comment::find($comm_id);
+        $this->authorize('update', $comment);
+        $comment->save($request->body);
         // TODO: see if happened
         $status_code = 200; 
-        return Response::json($id, $status_code);
+        return Response::json($comment->id, $comment->body, $status_code);
+    }
+
+    public function delete($news_id, $comm_id) {
+        $comment = Comment::find($comm_id);
+        $this->authorize('delete', $comment);
+        Comment::destroy($comm_id);
+        // TODO: see if happened
+        $status_code = 200; 
+        return Response::json($comm_id, $status_code);
       }  
 
 }

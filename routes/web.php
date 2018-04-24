@@ -20,6 +20,7 @@ Route::get('error/403', 'Controller@errorUnauthorizedAction');
 
 Route::get('/users/{username}', 'UserController@show');
 Route::get('/users/{username}/edit', 'UserController@edit');
+Route::patch('/users/{username}/edit', 'UserController@update')->name('update_user');;
 
 // // Authentication
 
@@ -64,7 +65,7 @@ Route::get('privacy_policy','PrivacyPolicyController@show');
 
 // Comments - TODO: Add more methods once they're implemented
 Route::resource('news/{id}/comments', 'CommentController')->only([
-    'store'
+    'store', 'update'
 ]);
 
 Route::delete('api/news/{news_id}/comments/{id}', 'CommentController@delete');

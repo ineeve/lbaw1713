@@ -241,7 +241,7 @@ class NewsController extends Controller
 
     ///////////////////// EDITOR BELOW
 
-    private function getEmptySource(){
+    private function getEmptySource() {
       $emptySource = new stdClass;
       $emptySource->author = ""; $emptySource->publication_year=""; $emptySource->link="";
       return $emptySource;

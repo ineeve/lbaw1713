@@ -70,7 +70,7 @@
           <select id="country" name="country_id" class="form-control">
               <option value="" disabled selected>Select your country</option>
               @foreach ($countries as $country)
-                <option value={{$country->id}}> {{$country->name}} </option>
+                <option value="{{$country->id}}"> {{$country->name}} </option>
               @endforeach
           </select>
           @if ($errors->has('country_id'))
