@@ -1,10 +1,61 @@
 console.log('app.js included');
 
 let previews_offset = 10;
+let comment_id;
 function addEventListeners() {
   let scrollNews = document.querySelector('#scrollNewsPreview')
   if (scrollNews != null) {
     document.querySelector('#scrollNewsPreview').addEventListener('click', sendShowMorePreviews);
+  }
+  let reportModalForm = document.querySelector('#reportModalForm');
+  if (reportModalForm != null){
+    reportModalForm.addEventListener('submit', submitReportForm);
+  }
+}
+
+function selectComment(id){
+  comment_id = id;
+}
+
+function submitReportForm(e){
+  e.preventDefault();
+  console.log(`submiting report for news:${news_id}; comment:${comment_id}`);
+  let parameters = {brief: document.querySelector('#report-description-area').value};
+  let csrf = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+  let reasonsGroup = document.querySelector('#reasonsGroup');
+  parameters.reasons = Array.from(reasonsGroup.querySelectorAll('.active')).map(button => button.innerText.trim()).join(",");
+  let url = `/news/${news_id}`;
+  if (comment_id != null){
+    url += `/comments/${comment_id}`;
+  }
+  url += "/report";
+  console.log('url:' + url);
+  let request = new XMLHttpRequest;
+  request.onload = handleReportSubmit;
+  request.open("POST",url);
+  request.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+  request.setRequestHeader('X-CSRF-TOKEN', csrf);
+  request.send(encodeForAjax(parameters));
+  comment_id = null;
+}
+
+function handleReportSubmit(e){
+  let text = e.target.responseText;
+  let parameters = {brief: document.querySelector('#report-description-area').value};
+  let reasonsGroup = document.querySelector('#reasonsGroup');
+  parameters.reasons = Array.from(reasonsGroup.querySelectorAll('.active')).forEach(btn => {
+    btn.classList.remove('active');
+  });
+  let briefTextarea = document.getElementById("report-description-area");
+  briefTextarea != null ? briefTextarea.value = '' : null;
+  if (text != null){
+    let response = JSON.parse(text);
+    if (response){
+      let closeBtn = document.querySelector("#closeReportModal");
+      closeBtn.click();
+    } else {
+      alert('error');
+    }
   }
 }
 

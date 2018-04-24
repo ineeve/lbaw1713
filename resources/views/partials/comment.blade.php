@@ -21,12 +21,12 @@
               <a class="dropdown-item deleteComment" href="/api/news/{{$news_id}}/comments/{{ $comment->id}}">Delete</a>
             @else
               <!-- Report -->
-              <span class="dropdown-item" data-toggle="modal" data-target="#reportModal">
+              <a class="dropdown-item reportItem" onclick="selectComment({{$comment->id}})" data-toggle="modal" data-target="#reportModal">
                 Report
-              </span>
+              </a>
             @endif
           @else
-            <span class="dropdown-item" data-toggle="modal" data-target="#registerModal">
+            <span class="dropdown-item" data-toggle="modal" data-target="#loginModal">
               Report
             </span>
           @endif
