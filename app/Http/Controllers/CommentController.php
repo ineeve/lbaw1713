@@ -30,10 +30,12 @@ class CommentController extends Controller
     public function update($news_id, $comm_id, Request $request) {
         $comment = Comment::find($comm_id);
         $this->authorize('update', $comment);
-        $comment->save($request->body);
+       // dd($request);
+        $comment->text = $request->text;
+        $comment->save();
         // TODO: see if happened
         $status_code = 200; 
-        return Response::json($comment->id, $comment->body, $status_code);
+        return Response::json(['id' => $comment->id, 'body' => $comment->text], $status_code);
     }
 
     public function delete($news_id, $comm_id) {

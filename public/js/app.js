@@ -125,7 +125,7 @@ function createEditCommentForm(comment_body) {
   form.onsubmit = editComment;
   form.className = '';
   form.innerHTML = '<div class="form-group">';
-  form.innerHTML += '<textarea class="form-control">'+comment_body+'</textarea>';
+  form.innerHTML += '<textarea name="text" class="form-control">'+comment_body+'</textarea>';
   form.innerHTML += '</div>';
   form.innerHTML += '<button name="cancel" class="btn btn-secondary">Cancel</button>';
   form.innerHTML += '<button type="submit" class="btn btn-primary editComment">Edit</button>';
@@ -135,6 +135,7 @@ function createEditCommentForm(comment_body) {
 
 /**
    * Submits edit form, replacing it with the new comment body.
+   * e.target is the edit form.
    * Request returns object with new comment's ID and body.
    */
 function editComment(e) {
@@ -142,6 +143,7 @@ function editComment(e) {
   
   let comment_id = e.target.parentElement.getAttribute('comm-id');
   let news_id = e.target.parentElement.getAttribute('news-id');
+  let comment_body = e.target[0].value;
 
   $.ajaxSetup({
     headers: {
@@ -149,8 +151,11 @@ function editComment(e) {
     }
   });
   jQuery.ajax({
-    url: '/api/news/'+news_id+'/comments/'+comment_id,
+    url: '/news/'+news_id+'/comments/'+comment_id,
     method: 'patch',
+    data: {
+      text: comment_body
+    },
     success: function (newComm) {
       console.log('Edited '+"commentNo"+newComm.id);
       $("#commentNo"+newComm.id + " .commentBody").outerHTML = newComm.body;
