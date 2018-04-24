@@ -158,11 +158,11 @@ function editComment(e) {
     },
     success: function (newComm) {
       console.log('Edited '+"commentNo"+newComm.id);
-      $("#commentNo"+newComm.id + " .commentBody").outerHTML = newComm.body;
+      $("#commentNo"+newComm.id + " .commentBody")[0].innerHTML = newComm.body;
     },
     error: function(xhr) {
       console.log('Failed to edit comment');
-//      $("#commentNo"+newComm.id + " .commentBody").outerHTML = "";
+      $("#commentNo"+newComm.id + " .commentBody")[0].innerHTML = "";
     }
   });
 }
