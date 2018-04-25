@@ -24,9 +24,7 @@
           </div>
           <div class="d-flex flex-column">
             <div id="news_item_preview_list">
-              @if ($news != null)
-                @include('partials.news_item_preview_list',$news)
-              @endif
+              @if ($news != null) @include('partials.news_item_preview_list',$news) @endif
             </div>
             @include('partials.load_more')
           </div>
