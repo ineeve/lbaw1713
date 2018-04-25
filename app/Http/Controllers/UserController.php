@@ -95,8 +95,8 @@ class UserController extends Controller
           $user->save();
         }
         // echo $user;
-        // echo $request;
-        // return;
-        return redirect('users/'.$username);
+        echo $request->photo;
+        return;
+        // return redirect('users/'.$username);
       }
 }
