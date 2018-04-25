@@ -16,7 +16,6 @@ use App\News as News;
 use App\Section as Section;
 use App\Source as Source;
 
-
 use App\User as User;
 
 class UserController extends Controller
@@ -53,9 +52,12 @@ class UserController extends Controller
    
 
     public function update(Request $request, $username) {
-        // $user = User::find($username);
-        // $this->authorize('update', $article);
+        $user = User::find($request->IDInput);
+        $this->authorize('update', $user);
         // $user->update($request->all());
-        return redirect('users/'.$username);
+        echo $user;
+        echo implode(" ",$request->all());
+        return;
+        // return redirect('users/'.$username);
       }
 }

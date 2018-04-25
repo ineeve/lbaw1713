@@ -1,10 +1,61 @@
 console.log('app.js included');
 
 let previews_offset = 10;
+let comment_id;
 function addEventListeners() {
   let scrollNews = document.querySelector('#scrollNewsPreview')
   if (scrollNews != null) {
     document.querySelector('#scrollNewsPreview').addEventListener('click', sendShowMorePreviews);
+  }
+  let reportModalForm = document.querySelector('#reportModalForm');
+  if (reportModalForm != null){
+    reportModalForm.addEventListener('submit', submitReportForm);
+  }
+}
+
+function selectComment(id){
+  comment_id = id;
+}
+
+function submitReportForm(e){
+  e.preventDefault();
+  console.log(`submiting report for news:${news_id}; comment:${comment_id}`);
+  let parameters = {brief: document.querySelector('#report-description-area').value};
+  let csrf = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+  let reasonsGroup = document.querySelector('#reasonsGroup');
+  parameters.reasons = Array.from(reasonsGroup.querySelectorAll('.active')).map(button => button.innerText.trim()).join(",");
+  let url = `/news/${news_id}`;
+  if (comment_id != null){
+    url += `/comments/${comment_id}`;
+  }
+  url += "/report";
+  console.log('url:' + url);
+  let request = new XMLHttpRequest;
+  request.onload = handleReportSubmit;
+  request.open("POST",url);
+  request.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+  request.setRequestHeader('X-CSRF-TOKEN', csrf);
+  request.send(encodeForAjax(parameters));
+  comment_id = null;
+}
+
+function handleReportSubmit(e){
+  let text = e.target.responseText;
+  let parameters = {brief: document.querySelector('#report-description-area').value};
+  let reasonsGroup = document.querySelector('#reasonsGroup');
+  parameters.reasons = Array.from(reasonsGroup.querySelectorAll('.active')).forEach(btn => {
+    btn.classList.remove('active');
+  });
+  let briefTextarea = document.getElementById("report-description-area");
+  briefTextarea != null ? briefTextarea.value = '' : null;
+  if (text != null){
+    let response = JSON.parse(text);
+    if (response){
+      let closeBtn = document.querySelector("#closeReportModal");
+      closeBtn.click();
+    } else {
+      alert('error');
+    }
   }
 }
 
@@ -119,8 +170,81 @@ function upvote(newsId) {
 addEventListeners();
 getUserVote();
 
+
+function createEditCommentForm(comment_body) {
+  let form = document.createElement('form');
+  form.onsubmit = editComment;
+  form.className = '';
+  form.innerHTML = '<div class="form-group">';
+  form.innerHTML += '<textarea class="form-control">'+comment_body+'</textarea>';
+  form.innerHTML += '</div>';
+  form.innerHTML += '<button name="cancel" class="btn btn-secondary">Cancel</button>';
+  form.innerHTML += '<button type="submit" class="btn btn-primary editComment">Edit</button>';
+
+  return form;
+}
+
+/**
+   * Submits edit form, replacing it with the new comment body.
+   * Request returns object with new comment's ID and body.
+   */
+function editComment(e) {
+  e.preventDefault();
+  
+  let comment_id = e.target.parentElement.getAttribute('comm-id');
+  let news_id = e.target.parentElement.getAttribute('news-id');
+
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  jQuery.ajax({
+    url: '/api/news/'+news_id+'/comments/'+comment_id,
+    method: 'patch',
+    success: function (newComm) {
+      console.log('Edited '+"commentNo"+newComm.id);
+      $("#commentNo"+newComm.id + " .commentBody").outerHTML = newComm.body;
+    },
+    error: function(xhr) {
+      console.log('Failed to edit comment');
+//      $("#commentNo"+newComm.id + " .commentBody").outerHTML = "";
+    }
+  });
+}
+
 function onScrollComments() {
   
+  // Replaces comment body by the edit form.
+  jQuery('.editCommentForm').click(function (e) {
+    e.preventDefault();
+    let commentBody = $("#commentNo"+e.target.name + " .commentBody").text();
+    let form = createEditCommentForm(commentBody);
+    $("#commentNo"+e.target.name + " .commentBody").empty();
+    $("#commentNo"+e.target.name + " .commentBody").append(form);
+  });
+
+  /**
+   * Submits edit form, replacing it with the new comment body.
+   * Request returns object with new comment's ID and body.
+   */
+  /*jQuery('.editComment').click(function (e) {
+    e.preventDefault();
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+    jQuery.ajax({
+      url: e.target.href,
+      method: 'patch',
+      success: function (newComm) {
+        console.log('Edited '+"commentNo"+newComm.id);
+        $("#commentNo"+newComm.id + " .commentBody").outerHTML = newComm.body;
+      }
+    });
+  });*/
+
   jQuery('.deleteComment').click(function (e) {
     e.preventDefault();
     $.ajaxSetup({

@@ -241,7 +241,7 @@ class NewsController extends Controller
 
     ///////////////////// EDITOR BELOW
 
-    private function getEmptySource(){
+    private function getEmptySource() {
       $emptySource = new stdClass;
       $emptySource->author = ""; $emptySource->publication_year=""; $emptySource->link="";
       return $emptySource;
@@ -287,5 +287,46 @@ class NewsController extends Controller
         $url = "http://" . $url;
       }
       return $url;
+    }
+
+    public function reportItem(Request $request, $news_id, $comment_id = NULL){
+      $brief = $request->input('brief');
+      $reasons = $request->input('reasons');
+      $validReasons = ['rude or abusive','scam/spam','sexually inappropriate'];
+      $success = False;
+      //check news is valid and check comment belongs to news.
+      if (is_null($brief)) {
+        $brief = '';
+      }
+      $reported_item_id = -1;
+      if (DB::table('news')->where('id',$news_id)->exists()) {
+        if (!is_null($comment_id)) {
+          if (DB::table('comments')->where('id',$comment_id)->where('target_news_id',$news_id)->exists()){
+            $reported_item_id = DB::table('reporteditems')->insertGetId([
+              'user_id' => Auth::user()->id, 'comment_id' => $comment_id, 'description' => $brief
+            ]);
+            $success = True;
+          }
+        } else {
+          $reported_item_id = DB::table('reporteditems')->insertGetId([
+            'user_id' => Auth::user()->id, 'news_id' => $news_id, 'description' => $brief
+          ]);
+          $success = True;
+        }
+      }
+      if ($reported_item_id != -1){
+        $reasons = explode(",",$reasons);
+        foreach($reasons as $reason){
+          if (in_array($reason, $validReasons)){
+            DB::table('reasonsforreport')->insert([
+              'reason' => $reason, 'reported_item_id' => $reported_item_id
+            ]);
+          }else{
+            $success = False;
+          }
+        }
+      }
+      echo json_encode($success);
+      
     }
 }

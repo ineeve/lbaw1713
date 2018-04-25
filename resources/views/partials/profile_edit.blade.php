@@ -4,7 +4,7 @@ method="post"
 > -->
 <div class="profile_item border container p-2 mx-auto mt-3">
 {{ Form::open(['route' => ['update_user', Auth::user()->username], 'method' => 'patch']) }}
-
+{{ Form::hidden('IDInput', Auth::user()->id) }}
 {{ csrf_field() }}
     <div class="row">
       <div class="col-md-6">

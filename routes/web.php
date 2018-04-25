@@ -61,12 +61,11 @@ Route::get('api/news/{news_id}/vote','AjaxController@getUserVote');
 
 /*Page that informs the user of our privacy policies*/
 Route::get('privacy_policy','PrivacyPolicyController@show');
-/*Infinite scroll for news of section 'All' */
 
 
 // Comments - TODO: Add more methods once they're implemented
 Route::resource('news/{id}/comments', 'CommentController')->only([
-    'store'
+    'store', 'update'
 ]);
 
 Route::delete('api/news/{news_id}/comments/{id}', 'CommentController@delete');
@@ -74,3 +73,8 @@ Route::delete('api/news/{news_id}/comments/{id}', 'CommentController@delete');
 
 // Click on a notification
 Route::get('notifications/{id}', 'NotificationController@process');
+
+//Report news
+Route::post('news/{id}/report', 'NewsController@reportItem');
+//Report comment
+Route::post('news/{news_id}/comments/{comment_id}/report','NewsController@reportItem');
