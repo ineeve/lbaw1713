@@ -88,17 +88,20 @@
             <div class="body">
                 {!! $news->body !!}
             </div>
-            <h4>Sources</h4>
+            <div id="sourcesDiv" class="mt-4">
+              <h5>Sources</h5>
               @foreach ($sources as $source)
-                <p>
-                @if($source->author)
-                  {{$source->author}},
-                @endif
-                @if($source->publication_year)
-                  {{$source->publication_year}} -
-                @endif
-                <a href="{{ $source->link }}"> {{ $source->link }}</a></p>
-              @endforeach
+                  <p>
+                  @if($source->author)
+                    {{$source->author}},
+                  @endif
+                  @if($source->publication_year)
+                    {{$source->publication_year}} -
+                  @endif
+                  <a href="{{ $source->link }}"> {{ $source->link }}</a></p>
+                @endforeach
+            </div>
+
             <h3 class="mt-4">Comments</h3>
             <form class="mt-3 mb-4" method="POST" action="{{ route('comments.store', $news->id) }}">
               {{ csrf_field() }}
