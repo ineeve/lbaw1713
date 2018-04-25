@@ -10,17 +10,6 @@
     <div class="col-lg-8 col-md-9 col-12">
       <div id="myTabContent" class="tab-content">
         <div class="tab-pane fade active show" id="allNews">
-          @if ($errors->has('email'))
-          <div class="alert alert-dismissible alert-danger">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <strong> {{ $errors->first('email') }} </strong>
-          </div>
-          @endif @if ($errors->has('password'))
-          <div class="alert alert-dismissible alert-danger">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <strong> {{ $errors->first('password') }} </strong>
-          </div>
-          @endif
           <!-- NEWS -->
           <!-- News Header -->
           <div class="row">

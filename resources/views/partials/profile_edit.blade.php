@@ -3,7 +3,7 @@ action="/users/{{Auth::user()->username}}/edit"
 method="post"
 > -->
 <div class="profile_item border container p-2 mx-auto mt-3">
-{{ Form::open(['route' => ['update_user', Auth::user()->username], 'method' => 'patch']) }}
+{{ Form::open(['route' => ['update_user', Auth::user()->username], 'method' => 'patch', 'enctype' => 'multipart/form-data' ]) }}
 {{ Form::hidden('IDInput', Auth::user()->id) }}
 {{ csrf_field() }}
     <div class="row">
@@ -12,13 +12,18 @@ method="post"
         <img src="{{asset('storage/users/'.Auth::user()->picture)}}" alt="Profile Photo" height="200px" width="200px">
         <div class="form-group">
           <label for="inputPhoto">Input Photo:</label>
-          <input type="file" class="form-control-file" id="inputPhoto" aria-describedby="fileHelp">
+          {{ Form::file('photo', ['class' => 'form-control-file','id' => 'inputPhoto', 'aria-describedby' => 'fileHelp']) }}
           <small id="fileHelp" class="form-text text-muted">Please choose an image!</small>
         </div>
         <div class="form-group">
           <label for="exampleInputEmail1">Email address:</label>
-          <input type="email" class="form-control" id="inputEmail1" aria-describedby="emailHelp" value="{{Auth::user()->email}}">
+          {{Form::email('email', Auth::user()->email, ['class'=>'form-control', 'id'=>'inputEmail1', 'aria-describedby'=>'emailHelp'])}}
           <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+          @if ($errors->has('email'))
+            <span class="error">
+                {{ $errors->first('email') }}
+            </span>
+          @endif
         </div>
         <div class="form-group">
           <label for="inputCountry">Country:</label>
@@ -39,7 +44,12 @@ method="post"
       <div class="col-md-6">
         <div class="form-group">
           <label class="col-form-label" for="inputDefault">Username:</label>
-          <input type="text" class="form-control" value="{{Auth::user()->username}}" id="usernameInput">
+          {{ Form::text('username', Auth::user()->username, ['class' => 'form-control','id'=>'usernameInput']) }}
+          @if ($errors->has('username'))
+            <span class="error">
+                {{ $errors->first('username') }}
+            </span>
+          @endif
         </div>
         <div class="form-group">
           <label class="col-form-label" for="gender">Gender:</label>
@@ -59,11 +69,13 @@ method="post"
         <div class="mt-5 mb-1">
           <div class="form-group">
             <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="inputPassword1" placeholder="Password">
+            {{ Form::password('password', ['class' => 'form-control','id'=>'inputPassword1',
+            'placeholder'=>'Password']) }}
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1">Confirm Password</label>
-            <input type="password" class="form-control" id="confirmPassword1" placeholder="Password">
+            {{ Form::password('confirmPassword', ['class' => 'form-control','id'=>'confirmPassword1',
+            'placeholder'=>'Password']) }}
           </div>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>

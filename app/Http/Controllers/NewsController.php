@@ -234,7 +234,12 @@ class NewsController extends Controller
     public function destroy($id) {
       $article = News::find($id);
       $this->authorize('delete', $article);
-      $this->markDeleted($article);
+      if (Auth::user()->id == $article->author_id){
+        $article->delete();
+      }else{
+        $this->markDeleted($article);
+      }
+      
       return redirect('news');
     }
 

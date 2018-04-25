@@ -91,15 +91,67 @@ class UserController extends Controller
       return Response::json($data, $status_code);
     }
 
-   
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'username' => 'required|string|max:255|unique:users',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+            'country' => 'string|nullable',
+            'gender' => 'string|nullable',
+            'picture' => 'nullable'
+        ]);
+    }
 
     public function update(Request $request, $username) {
         $user = User::find($request->IDInput);
         $this->authorize('update', $user);
-        // $user->update($request->all());
-        echo $user;
-        echo implode(" ",$request->all());
-        return;
-        // return redirect('users/'.$username);
+        $flag = FALSE;
+
+        if(($user->username != $request->username) && ($request->username!=null)) {
+          $this->validate($request,[
+            'username'=>'required|string|max:255|unique:users'
+          ]);
+          $user->username = $request->username;
+          $flag = TRUE;
+        }
+        if(($user->email != $request->email) && ($request->email !=null)) {
+          $this->validate($request,[
+            'email' => 'required|string|email|max:255|unique:users'
+          ]);
+          $user->email = $request->email;
+          $flag = TRUE;
+        }
+        
+        if($user->country_id != $request->county_id) {
+          $user->country_id = $request->county_id;
+          $flag = TRUE;
+        }
+        
+        if($user->gender != $request->gender) {
+          $user->gender = $request->gender;
+          $flag = TRUE;
+        }
+
+        if ($request->photo!=null){
+          $flag = TRUE;
+          $user->picture = $user->id;
+          $picture = $request->photo;
+          Storage::disk('users')->put($user->id, file_get_contents($picture->getRealPath()));
+        }
+        if(($request->password != null)&&($request->password ===$request->confirmPassword)) {
+          $user->password = bcrypt($request->password);
+          $flag = TRUE;
+        }
+
+        if ($flag == TRUE){
+          $user->save();
+        }
+        return redirect('users/'.$user->username);
       }
+
+    public function showSettings($username) {
+      $user = User::where('username', $username);
+      return view('pages.settings', '');
+    }
 }

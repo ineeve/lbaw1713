@@ -33,17 +33,17 @@
                 </a>
               </div>
               <!-- Delete -->
-              <div class="centerText mt-2" name="delete" title="Use to delete this news. The news will still be stored in our servers but will not be visible for any user.">
+              <div class="centerText mt-2" name="delete" title="Use to delete this news. If you are the author the news will be permantly deleted from our servers.">
                 <form action="{{ route('delete_news', $news->id) }}" method="post" class="delete-news">
                   {{ method_field('delete') }}
                   {{ csrf_field() }}
-                  <span class="delete-news" 
+                  <span class="delete-news lightText" 
                     onMouseOver="this.style.textDecoration= 'underline';
                     this.style.color='#2780E3';
                     this.style.cursor='pointer';"
                     onMouseOut="this.style.textDecoration= 'none';
                     this.style.color='initial';">
-                    <span class="lightText mr-md-1">Delete</span>
+                    <span class="mr-md-1">Delete</span>
                     <i class="fas fa-times clickable-btn"></i>
                   </span>
                   <script>
@@ -88,17 +88,20 @@
             <div class="body">
                 {!! $news->body !!}
             </div>
-            <h4>Sources</h4>
+            <div id="sourcesDiv" class="mt-4">
+              <h5>Sources</h5>
               @foreach ($sources as $source)
-                <p>
-                @if($source->author)
-                  {{$source->author}},
-                @endif
-                @if($source->publication_year)
-                  {{$source->publication_year}} -
-                @endif
-                <a href="{{ $source->link }}"> {{ $source->link }}</a></p>
-              @endforeach
+                  <p>
+                  @if($source->author)
+                    {{$source->author}},
+                  @endif
+                  @if($source->publication_year)
+                    {{$source->publication_year}} -
+                  @endif
+                  <a href="{{ $source->link }}"> {{ $source->link }}</a></p>
+                @endforeach
+            </div>
+
             <h3 class="mt-4">Comments</h3>
             <form class="mt-3 mb-4" method="POST" action="{{ route('comments.store', $news->id) }}">
               {{ csrf_field() }}

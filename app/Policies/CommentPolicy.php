@@ -44,6 +44,6 @@ class CommentPolicy
      */
     public function delete(User $user, Comment $comment)
     {
-        return $user->id == $comment->creator_user_id;
+        return $user->id == $comment->creator_user_id || $user->permission == 'admin' || $user->permission == 'moderator';
     }
 }
