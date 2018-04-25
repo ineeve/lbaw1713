@@ -6,10 +6,10 @@
         </div>
         <div class="col-12 col-md-5">
           <div class="container ml-0 d-flex flex-column px-0">
-            <form class="form-inline" action="#" method="post">
-              <input class="form-control mr-sm-2 rounded" type="search" placeholder="Search" aria-label="Search">
+            <form class="form-inline" action="{{route("search")}}" method="get">
+              <input class="form-control mr-sm-2 rounded" name="searchText" type="search" placeholder="Search" aria-label="Search" required>
               <button class="btn btn-outline-light my-2 my-sm-0 rounded" type="submit">
-                <a href="#" style="color:inherit; text-decoration:none">Search</a>
+                Search
               </button>
             </form>
             <a class="small" data-toggle="modal" style="color:white;" href="#searchModal">advanced search</a>
@@ -54,7 +54,7 @@
                     <i class="fas fa-university">
                     </i> Forum
                   </a>
-                  <a class="dropdown-item" href="settings.html">
+                  <a class="dropdown-item" href="{{ route('show_settings', Auth::user()->username) }}">
                     <i class="fas fa-cog">
                     </i> Settings
                   </a>

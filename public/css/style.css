@@ -37,9 +37,9 @@ a.nounderline {
   }
 }
 /* TODO: why did we have this? - Anabela */
-/* div.news_box {
-  display: none; 
-} */
+div.news_box:hover {
+   background-color: rgb(245, 245, 245);
+}
 
 #loadMore {
   transition: all 600ms ease-in-out;
@@ -63,6 +63,9 @@ a.nounderline {
   color:#428bca;
 }
 #downvote:hover{
+  color:#428bca;
+}
+.clickable:hover{
   color:#428bca;
 }
 

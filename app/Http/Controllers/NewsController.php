@@ -106,6 +106,13 @@ class NewsController extends Controller
       return $news;
     }
 
+    public function search(Request $request){
+      $searchText = $request->searchText;
+      $filteredNews = DB::select("SELECT news.id, title,users.username As author,date,votes,image, substring(body, '(?:<p>)[^<>]*\.(?:<\/p>)') as body_preview
+      FROM news NATURAL JOIN users WHERE textsearchable_body_and_title_index_col @@ plainto_tsquery('english',?)
+      LIMIT 10 OFFSET 0;",[$searchText]);
+      return view('pages.searched_news',['news'=> $filteredNews, 'searchText' => $searchText]);
+    }
 
     public function list($section = 'All', $order = self::MOST_POPULAR, $offset = 0) {
       //$this->authorize('list', News::class);

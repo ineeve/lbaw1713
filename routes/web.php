@@ -20,8 +20,9 @@ Route::get('error/403', 'Controller@errorUnauthorizedAction');
 
 Route::get('/users/{username}', 'UserController@show');
 Route::get('/users/{username}/edit', 'UserController@edit');
-Route::patch('/users/{username}/edit', 'UserController@update')->name('update_user');;
-
+Route::patch('/users/{username}/edit', 'UserController@update')->name('update_user');
+Route::get('api/users/{username}/articles/', 'UserController@getArticles');
+Route::get('/users/{username}/settings', 'UserController@showSettings')->name('show_settings');
 // // Authentication
 
 /*Action of login*/
@@ -32,6 +33,9 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 /*Action to register*/
 Route::post('register', 'Auth\RegisterController@register');
+
+//Search
+Route::get('news/search','NewsController@search')->name('search');
 
 /*Form to create one piece of news*/
 Route::get('news/create', 'NewsController@createArticle')->name('create_news'); 
@@ -73,8 +77,6 @@ Route::delete('api/news/{news_id}/comments/{id}', 'CommentController@delete');
 
 // Click on a notification
 Route::get('notifications/{id}', 'NotificationController@process');
-
-Route::get('/reports', 'ReporteditemController@show');
 
 //Report news
 Route::post('news/{id}/report', 'NewsController@reportItem');
