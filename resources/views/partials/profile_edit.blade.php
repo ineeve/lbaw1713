@@ -19,6 +19,11 @@ method="post"
           <label for="exampleInputEmail1">Email address:</label>
           {{Form::email('email', Auth::user()->email, ['class'=>'form-control', 'id'=>'inputEmail1', 'aria-describedby'=>'emailHelp'])}}
           <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+          @if ($errors->has('email'))
+            <span class="error">
+                {{ $errors->first('email') }}
+            </span>
+          @endif
         </div>
         <div class="form-group">
           <label for="inputCountry">Country:</label>
@@ -40,6 +45,11 @@ method="post"
         <div class="form-group">
           <label class="col-form-label" for="inputDefault">Username:</label>
           {{ Form::text('username', Auth::user()->username, ['class' => 'form-control','id'=>'usernameInput']) }}
+          @if ($errors->has('username'))
+            <span class="error">
+                {{ $errors->first('username') }}
+            </span>
+          @endif
         </div>
         <div class="form-group">
           <label class="col-form-label" for="gender">Gender:</label>
