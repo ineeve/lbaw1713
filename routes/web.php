@@ -34,6 +34,9 @@ Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('re
 /*Action to register*/
 Route::post('register', 'Auth\RegisterController@register');
 
+//Search
+Route::get('news/search','NewsController@search')->name('search');
+
 /*Form to create one piece of news*/
 Route::get('news/create', 'NewsController@createArticle')->name('create_news'); 
 /*Page where all the news are listed (main page)*/

@@ -15,21 +15,10 @@
           <div class="row">
             <div class="container ml-0 d-flex justify-content-between">
               <h1 class="current_section">
-                <i class="fa fa-bullseye"></i> All</h1>
+                <i class="fa fa-bullseye"></i> All
+              </h1>
               <!-- Sort News Dropdown -->
-              <div class="btn-group" role="group">
-                <button id="btnGroupDrop1" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <div class="d-flex">
-                    <h5 id="sort-option" name="POPULAR">Most Popular </h5>
-                    <i class="fas fa-chevron-down ml-2 mt-1"></i>
-                  </div>
-                </button>
-                <div class="dropdown-menu order" aria-labelledby="btnGroupDrop1">
-                  <a class="dropdown-item order-criteria" name="POPULAR" href="">Most Popular</a>
-                  <a class="dropdown-item order-criteria" name="VOTED" href="">Most Voted</a>
-                  <a class="dropdown-item order-criteria" name="RECENT" href="">Most Recent</a>
-                </div>
-              </div>
+              @include('partials.sort_news_dropdown')
             </div>
 
           </div>

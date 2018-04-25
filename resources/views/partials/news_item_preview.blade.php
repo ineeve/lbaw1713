@@ -13,7 +13,7 @@
                 <p>
                     <span class="font-weight-bold">{{ $item->votes }} votes</span> &middot; {{ $item->author }} &middot; {{ date("F jS, Y \a\\t H:i", strtotime($item->date))  }}</p>
             </div>
-            <div class="row">
+            <div class="row pr-4">
                 <p>{!! $item->body_preview !!}</p>
             </div>
         </div>
