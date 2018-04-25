@@ -33,8 +33,8 @@ class UserController extends Controller
       FROM users NATURAL JOIN countries
       WHERE users.username = ?;',[$username]);
 
-      $total_badges = DB::select('SELECT count(*)
-      FROM badges;');
+      $total_badges = (DB::select('SELECT count(*)
+      FROM badges;'))[0]->count;
 
       $achieved_badges = DB::select('SELECT badges.id as badge_id, name, brief, votes, comments, articles FROM badges JOIN achievements ON badges.id = achievements.badge_id
       JOIN users ON users.id = achievements.user_id
