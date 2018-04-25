@@ -46,9 +46,8 @@
 
         </div>
         <div class="col-6 col-lg-12 p-2 mt-3">
-
           <h3>Last badges earned
-            <span class="badge badge-secondary">10/25</span>
+            <span class="badge badge-secondary">{{ count($achieved_badges) }} / {{ $total_badges }}</span>
           </h3>
           <!-- Badges Modal -->
           <div class="modal fade" id="badgesModal" tabindex="-1" role="dialog" aria-labelledby="badgesModalLabel" style="display: none;"
@@ -61,87 +60,32 @@
                     <span aria-hidden="true">×</span>
                   </button>
                 </div>
-                <div class="modal-body d-flex justify-content-around flex-wrap" style="height:650px;">
-                  <div class="badge d-flex flex-column flex-wrap align-items-center">
-
-                    <img alt="Icon" src="http://icons.iconarchive.com/icons/seanau/fresh-web/128/Badge-icon.png" width="80" height="80">
-                    <h3>Opiniator</h3>
-                    <span>Do 10 comments</span>
-
-                  </div>
-                  <div class="badge d-flex flex-column flex-wrap align-items-center">
-
-                    <img alt="Icon" src="http://icons.iconarchive.com/icons/seanau/fresh-web/128/Badge-icon.png" width="80" height="80">
-                    <h3>Citizen</h3>
-                    <span>Do 10 votes</span>
-
-                  </div>
-                  <div class="badge d-flex flex-column flex-wrap align-items-center">
-
-                    <img alt="Icon" src="http://icons.iconarchive.com/icons/seanau/fresh-web/128/Badge-icon.png" width="80" height="80">
-                    <h3>Navigator</h3>
-                    <span>Read 5 news</span>
-
-                  </div>
-                  <div class="badge d-flex flex-column flex-wrap align-items-center">
-
-                    <img alt="Icon" src="http://icons.iconarchive.com/icons/seanau/fresh-web/128/Badge-icon.png" width="80" height="80">
-                    <h3>Cultured</h3>
-                    <span>Read 25 news</span>
-
-                  </div>
-                  <div class="badge d-flex flex-column flex-wrap align-items-center">
-
-                    <img alt="Icon" src="http://icons.iconarchive.com/icons/seanau/fresh-web/128/Badge-icon.png" width="80" height="80">
-                    <h3>Readaholic</h3>
-                    <span>Read 100 news</span>
-
-                  </div>
-                  <div class="badge d-flex flex-column flex-wrap align-items-center">
-
-                    <img alt="Icon" src="http://icons.iconarchive.com/icons/seanau/fresh-web/128/Badge-icon.png" width="80" height="80">
-                    <h3>Writer</h3>
-                    <span>Publish a news</span>
-
-                  </div>
-                  <div class="badge d-flex flex-column flex-wrap align-items-center">
-
-                    <img alt="Icon" src="http://icons.iconarchive.com/icons/seanau/fresh-web/128/Badge-icon.png" width="80" height="80">
-                    <h3>Senior Writer</h3>
-                    <span>Publish 20 news</span>
-
-                  </div>
-                  <div class="badge d-flex flex-column flex-wrap align-items-center">
-
-                    <img alt="Icon" src="http://icons.iconarchive.com/icons/seanau/fresh-web/128/Badge-icon.png" width="80" height="80">
-                    <h3>Scribophile</h3>
-                    <span>Publish 100 news</span>
-
-                  </div>
-                  <div class="badge d-flex flex-column flex-wrap align-items-center">
-
-                    <img alt="Icon" src="http://icons.iconarchive.com/icons/seanau/fresh-web/128/Badge-icon.png" width="80" height="80">
-                    <h3>Scribophile</h3>
-                    <span>Publish 100 news</span>
-
-                  </div>
-                  <div class="badge d-flex flex-column flex-wrap align-items-center">
-
-                    <img alt="Icon" src="http://icons.iconarchive.com/icons/seanau/fresh-web/128/Badge-icon.png" width="80" height="80">
-                    <h3>Scribophile</h3>
-                    <span>Publish 100 news</span>
-
-                  </div>
+                <div class="modal-body d-flex justify-content-around flex-wrap" style="height:auto;">
+                @if ($achieved_badges != null)
+                @include('partials.badge_list',$achieved_badges)
+                @endif
                 </div>
               </div>
             </div>
           </div>
 
           <div class="d-flex flex-wrap flex-row mx-auto mt-3" data-toggle="modal" data-target="#badgesModal" style="cursor:pointer">
-
-            @if ($achieved_badges != null)
-                @include('partials.badge_list',$achieved_badges)
-            @endif
+          @if ($achieved_badges != null)
+            <?php 
+              $max = 6;
+              if(count($achieved_badges) < 6) {
+                $max = count($achieved_badges);
+              }
+              for ($x = 0; $x < $max; $x++) {?>
+              
+                <div class="badge">
+                <img alt="Icon" src="http://icons.iconarchive.com/icons/seanau/fresh-web/128/Badge-icon.png" width="80" height="80">
+                <h3><?= $achieved_badges[$x]->name ?></h3>
+                <p><?= $achieved_badges[$x]->brief ?></p>
+                
+              <?php } ?>
+          
+          @endif
           </div>
 
         </div>
