@@ -39,6 +39,12 @@ class UserController extends Controller
       JOIN users ON users.id = achievements.user_id
       WHERE users.username = ? LIMIT 6 OFFSET 0;',[$username]);
 
+      $news = DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
+      FROM News INNER JOIN Users ON (News.author_id = Users.id)
+                  WHERE Users.username = ? AND
+                        NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
+                  ORDER BY date DESC LIMIT 10 OFFSET 0;',[$username]);
+
       if(count($user) == 0) {
         return redirect('/error/404');
       }
@@ -46,7 +52,8 @@ class UserController extends Controller
 
       return view('pages.profile', ['user' => $user,
        'total_badges' => $total_badges,
-       'achieved_badges' => $achieved_badges]);
+       'achieved_badges' => $achieved_badges,
+       'news' => $news]);
     }
 
    

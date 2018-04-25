@@ -10,18 +10,17 @@
     <div class="col-lg-8 col-md-9 col-12">
       <div id="myTabContent" class="tab-content">
         <div class="tab-pane fade active show" id="allNews">
-        @if ($errors->has('email'))
-            <div class="alert alert-dismissible alert-danger">
-              <button type="button" class="close" data-dismiss="alert">&times;</button>
-              <strong> {{ $errors->first('email') }} </strong>
-            </div>
-        @endif
-        @if ($errors->has('password'))
-            <div class="alert alert-dismissible alert-danger">
-              <button type="button" class="close" data-dismiss="alert">&times;</button>
-              <strong> {{ $errors->first('password') }} </strong>
-            </div>
-        @endif
+          @if ($errors->has('email'))
+          <div class="alert alert-dismissible alert-danger">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong> {{ $errors->first('email') }} </strong>
+          </div>
+          @endif @if ($errors->has('password'))
+          <div class="alert alert-dismissible alert-danger">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong> {{ $errors->first('password') }} </strong>
+          </div>
+          @endif
           <!-- NEWS -->
           <!-- News Header -->
           <div class="row">
@@ -32,7 +31,7 @@
               <div class="btn-group" role="group">
                 <button id="btnGroupDrop1" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <div class="d-flex">
-                    <h5 id="sort-option" name="POPULAR" >Most Popular </h5>
+                    <h5 id="sort-option" name="POPULAR">Most Popular </h5>
                     <i class="fas fa-chevron-down ml-2 mt-1"></i>
                   </div>
                 </button>
@@ -47,9 +46,7 @@
           </div>
           <div class="d-flex flex-column">
             <div id="news_item_preview_list">
-              @if ($news != null)
-                @include('partials.news_item_preview_list',$news)
-              @endif
+              @if ($news != null) @include('partials.news_item_preview_list',$news) @endif
             </div>
             <div class="row">
               <div class="col">
