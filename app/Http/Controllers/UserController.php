@@ -55,9 +55,48 @@ class UserController extends Controller
         $user = User::find($request->IDInput);
         $this->authorize('update', $user);
         // $user->update($request->all());
-        echo $user;
-        echo implode(" ",$request->all());
-        return;
-        // return redirect('users/'.$username);
+
+        $flag = FALSE;
+
+        if(($user->username != $request->username) && ($request->username!=null)) {
+          //TODO: validate unique
+          $user->username = $request->username;
+          $flag = TRUE;
+        }
+        if(($user->email != $request->email) && ($request->email !=null)) {
+          
+          //TODO: validate unique
+          $user->email = $request->email;
+          $flag = TRUE;
+        }
+        
+        if($user->country_id != $request->county_id) {
+          $user->country_id = $request->county_id;
+          $flag = TRUE;
+        }
+        
+        if($user->gender != $request->gender) {
+          $user->gender = $request->gender;
+          $flag = TRUE;
+        }
+
+        if ($request->photo!=null){
+          $flag = TRUE;
+          $user->picture = $user->id;
+          $picture = $request->photo;
+          Storage::disk('users')->put($user->id, file_get_contents($picture->getRealPath()));
+        }
+        if(($request->password != null)&&($request->password ===$request->confirmPassword)) {
+          $user->password = bcrypt($request->password);
+          $flag = TRUE;
+        }
+
+        if ($flag == TRUE){
+          $user->save();
+        }
+        // echo $user;
+        // echo $request;
+        // return;
+        return redirect('users/'.$username);
       }
 }
