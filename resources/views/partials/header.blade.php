@@ -60,7 +60,7 @@
                   </a>
                   <form class="dropdown-item logout" method="POST" action="/logout">
                     <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
-                    <span class="logout">
+                    <span style="cursor:pointer" class="logout">
                       <i class="fas fa-sign-out-alt">
                       </i> Log out
                     </span>
