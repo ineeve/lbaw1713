@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Input;
 use Storage;
 use Image;
 use \stdClass;
@@ -43,17 +44,51 @@ class UserController extends Controller
       FROM News INNER JOIN Users ON (News.author_id = Users.id)
                   WHERE Users.username = ? AND
                         NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
-                  ORDER BY date DESC LIMIT 10 OFFSET 0;',[$username]);
+                  ORDER BY date DESC LIMIT 2 OFFSET 0;',[$username]);
+
+      $count = count(DB::select('SELECT *
+      FROM News INNER JOIN Users ON (News.author_id = Users.id)
+                  WHERE Users.username = ? AND
+                        NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id);',[$username])) - 2;
 
       if(count($user) == 0) {
         return redirect('/error/404');
       }
       $user = $user[0];
+      
+      $offset = 0;
 
       return view('pages.profile', ['user' => $user,
        'total_badges' => $total_badges,
        'achieved_badges' => $achieved_badges,
-       'news' => $news]);
+       'news' => $news,
+       'count' => $count,
+       'offset' => $offset]);
+    }
+
+    public function getArticles($username) {
+      $offset = Input::get('offset');
+      $news = DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
+      FROM News INNER JOIN Users ON (News.author_id = Users.id)
+                  WHERE Users.username = ? AND
+                        NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
+                  ORDER BY date DESC LIMIT 2 OFFSET ?;',[$username, $offset]);
+      
+      $count = count(DB::select('SELECT *
+      FROM News INNER JOIN Users ON (News.author_id = Users.id)
+                  WHERE Users.username = ? AND
+                        NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id);',[$username])) - 2 - $offset;
+
+      $status_code = 200; // TODO: change if not found!
+      $data = [
+          'view' => View::make('partials.news_item_preview_list')
+              ->with('news', $news)
+              ->render(),
+          'count' => $count,
+          'offset' => $offset
+      ];
+
+      return Response::json($data, $status_code);
     }
 
    

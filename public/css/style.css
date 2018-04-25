@@ -65,6 +65,9 @@ a.nounderline {
 #downvote:hover{
   color:#428bca;
 }
+.clickable:hover{
+  color:#428bca;
+}
 
 #votesCounter{
   font-weight:bold;
