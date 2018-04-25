@@ -35,12 +35,15 @@ Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('re
 Route::post('register', 'Auth\RegisterController@register');
 
 //Search
-Route::get('news/search','NewsController@search')->name('search');
+Route::get('news/search','NewsController@getSearchPage')->name('search');
 
 /*Form to create one piece of news*/
 Route::get('news/create', 'NewsController@createArticle')->name('create_news'); 
 /*Page where all the news are listed (main page)*/
 Route::get('api/news/section/{section_name}/order/{order_name}/offset/{offset}', 'NewsController@list');
+/*Page where all the news are listed (main page)*/
+Route::get('api/news/order/{order_name}/offset/{offset}', 'NewsController@listSearch');
+
 Route::get('news', 'NewsController@getNewsHomepage');
 Route::post('news', 'NewsController@create')->name('news');//NOT USING?
 
