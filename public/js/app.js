@@ -257,7 +257,7 @@ function onScrollComments() {
       method: 'delete',
       success: function (result) {
         console.log('Deleted '+"commentNo"+result);
-        document.getElementById("commentNo"+result).outerHTML = "";
+        document.getElementById("commentNo"+result).remove();
       }
     });
   });

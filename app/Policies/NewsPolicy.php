@@ -55,6 +55,6 @@ class NewsPolicy
      */
     public function delete(User $user, News $news)
     {
-        return $user->id == $news->author_id;
+        return $user->id == $news->author_id || $user->permission == 'admin' || $user->permission == 'moderator';
     }
 }
