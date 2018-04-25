@@ -60,7 +60,7 @@
                   </a>
                   <form class="dropdown-item logout" method="POST" action="/logout">
                     <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
-                    <span class="logout">
+                    <span style="cursor:pointer" class="logout">
                       <i class="fas fa-sign-out-alt">
                       </i> Log out
                     </span>
@@ -88,11 +88,11 @@
                     {{ csrf_field() }}
                     <div class="form-group">
                       <label for="dropdownFormEmail">Email address</label>
-                      <input name="email" type="email" class="form-control" id="dropdownFormEmail" placeholder="email@example.com">
+                      <input name="email" type="email" class="form-control" id="dropdownFormEmail" placeholder="email@example.com" required>
                     </div>
                     <div class="form-group">
                       <label for="dropdownFormPassword">Password</label>
-                      <input name="password" type="password" class="form-control" id="dropdownFormPassword" placeholder="Password">
+                      <input name="password" type="password" class="form-control" id="dropdownFormPassword" placeholder="Password" required>
                     </div>
                     <div class="form-check">
                       <input name="rememberMe" type="checkbox" class="form-check-input" id="dropdownCheck">
@@ -115,4 +115,20 @@
           </div>
         </div>
       </nav>
+      @if ($errors->has('email') || $errors->has('password'))
+        <div class="container mt-2">
+        @if ($errors->has('email'))
+          <div class="alert alert-dismissible alert-danger">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong> {{ $errors->first('email') }} </strong>
+          </div>
+        @else
+            <div class="alert alert-dismissible alert-danger">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              <strong> {{ $errors->first('password') }} </strong>
+            </div>
+        @endif
+        </div>
+      @endif
+      
 </header>

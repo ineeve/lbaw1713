@@ -13,11 +13,11 @@
                 {{ csrf_field() }}
                 <div class="form-group">
                   <label for="modalFormEmail">Email address</label>
-                  <input name="email" type="email" class="form-control" id="modalFormEmail" placeholder="email@example.com">
+                  <input name="email" type="email" class="form-control" id="modalFormEmail" placeholder="email@example.com" required>
                 </div>
                 <div class="form-group">
                   <label for="modalFormPassword">Password</label>
-                  <input name="password" type="password" class="form-control" id="modalFormPassword" placeholder="Password">
+                  <input name="password" type="password" class="form-control" id="modalFormPassword" placeholder="Password" required>
                 </div>
                 <div class="form-check">
                   <input name="rememberMe" type="checkbox" class="form-check-input" id="modalCheck">

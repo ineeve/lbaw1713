@@ -75,6 +75,8 @@ Route::delete('api/news/{news_id}/comments/{id}', 'CommentController@delete');
 // Click on a notification
 Route::get('notifications/{id}', 'NotificationController@process');
 
+Route::get('/reports', 'ReporteditemController@show');
+
 //Report news
 Route::post('news/{id}/report', 'NewsController@reportItem');
 //Report comment
