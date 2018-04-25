@@ -49,23 +49,34 @@ class UserController extends Controller
        'achieved_badges' => $achieved_badges]);
     }
 
-   
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'username' => 'required|string|max:255|unique:users',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+            'country' => 'string|nullable',
+            'gender' => 'string|nullable',
+            'picture' => 'nullable'
+        ]);
+    }
 
     public function update(Request $request, $username) {
         $user = User::find($request->IDInput);
         $this->authorize('update', $user);
-        // $user->update($request->all());
-
         $flag = FALSE;
 
         if(($user->username != $request->username) && ($request->username!=null)) {
-          //TODO: validate unique
+          $this->validate($request,[
+            'username'=>'required|string|max:255|unique:users'
+          ]);
           $user->username = $request->username;
           $flag = TRUE;
         }
         if(($user->email != $request->email) && ($request->email !=null)) {
-          
-          //TODO: validate unique
+          $this->validate($request,[
+            'email' => 'required|string|email|max:255|unique:users'
+          ]);
           $user->email = $request->email;
           $flag = TRUE;
         }
@@ -94,9 +105,6 @@ class UserController extends Controller
         if ($flag == TRUE){
           $user->save();
         }
-        // echo $user;
-        echo $request->photo;
-        return;
-        // return redirect('users/'.$username);
+        return redirect('users/'.$user->username);
       }
 }
