@@ -99,4 +99,9 @@ class UserController extends Controller
         // return;
         return redirect('users/'.$username);
       }
+
+    public function showSettings($username) {
+      $user = User::where('username', $username);
+      return view('pages.settings', '');
+    }
 }
