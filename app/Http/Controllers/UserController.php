@@ -158,6 +158,6 @@ class UserController extends Controller
 
     public function showSettings($username) {
       $user = User::where('username', $username);
-      return view('pages.settings', '');
+      return view('pages.settings');
     }
 }
