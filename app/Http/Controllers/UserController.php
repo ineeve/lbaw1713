@@ -51,6 +51,11 @@ class UserController extends Controller
                   WHERE Users.username = ? AND
                         NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id);',[$username])) - 5;
 
+      $following = DB::select('SELECT users.id, username, picture
+      FROM users INNER JOIN follows ON users.id = follows.followed_user_id 
+      WHERE EXISTS (SELECT users.id FROM users WHERE users.username = ? AND users.id = follows.follower_user_id)
+      ORDER BY username DESC LIMIT 5 OFFSET 0;',[$username]);
+
       if(count($user) == 0) {
         return redirect('/error/404');
       }
@@ -63,6 +68,7 @@ class UserController extends Controller
        'achieved_badges' => $achieved_badges,
        'news' => $news,
        'count' => $count,
+       'following' => $following,
        'offset' => $offset]);
     }
 

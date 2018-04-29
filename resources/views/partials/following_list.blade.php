@@ -1,0 +1,1 @@
+@each('partials.following', $following, 'user')
