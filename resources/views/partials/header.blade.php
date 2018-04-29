@@ -54,7 +54,7 @@
                     <i class="fas fa-university">
                     </i> Forum
                   </a>
-                  <a class="dropdown-item" href="{{ route('show_settings', Auth::user()->username) }}">
+                  <a class="dropdown-item" href="{{ route('show_settings') }}">
                     <i class="fas fa-cog">
                     </i> Settings
                   </a>

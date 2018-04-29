@@ -156,8 +156,13 @@ class UserController extends Controller
         return redirect('users/'.$user->username);
       }
 
-    public function showSettings($username) {
-      $user = User::where('username', $username);
-      return view('pages.settings');
+    public function showSettings() {
+      $user = Auth::user();
+      $sections = Section::all();
+      $userSections = DB::select('SELECT *
+                                    FROM Sections
+                                      INNER JOIN UserInterests ON Sections.id = UserInterests.section_id
+                                    WHERE UserInterests.user_id = ?', [$user->id]);
+      return view('pages.settings', ['sections' => $sections, 'userSections' => $userSections]);
     }
 }
