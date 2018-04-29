@@ -1,4 +1,5 @@
 <script src="{{ asset('js/collapsible.js') }}" defer></script>
+<script src="{{ asset('js/settings.js') }}" defer></script>
 
 <div class="container-fluid mt-2">
     <div class="row">

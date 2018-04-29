@@ -3,26 +3,26 @@
   <fieldset class="pt-3">
     <div class="form-group">
       <div class="custom-control custom-checkbox">
-        <input class="custom-control-input" type="checkbox" value="" id="article-comments" <?php if($userNotifs->contains('CommentMyPost')) echo "checked"; ?>>
-        <label class="custom-control-label" for="article-comments">
+        <input class="custom-control-input" type="checkbox" value="" id="CommentMyPost" <?php if($userNotifs->contains('CommentMyPost')) echo "checked"; ?>>
+        <label class="custom-control-label" for="CommentMyPost">
           Comments to my articles
         </label>
       </div>
       <div class="custom-control custom-checkbox">
-        <input class="custom-control-input" type="checkbox" value="" id="article-votes" <?php if($userNotifs->contains('VoteMyPost')) echo "checked"; ?>>
-        <label class="custom-control-label" for="article-votes">
+        <input class="custom-control-input" type="checkbox" value="" id="VoteMyPost" <?php if($userNotifs->contains('VoteMyPost')) echo "checked"; ?>>
+        <label class="custom-control-label" for="VoteMyPost">
           Votes in my articles
         </label>
       </div>
       <div class="custom-control custom-checkbox">
-        <input class="custom-control-input" type="checkbox" value="" id="follow-articles" <?php if($userNotifs->contains('FollowedPublish')) echo "checked"; ?>>
-        <label class="custom-control-label" for="follow-articles">
+        <input class="custom-control-input" type="checkbox" value="" id="FollowedPublish" <?php if($userNotifs->contains('FollowedPublish')) echo "checked"; ?>>
+        <label class="custom-control-label" for="FollowedPublish">
           Articles from people I follow
         </label>
       </div>
       <div class="custom-control custom-checkbox">
-        <input class="custom-control-input" type="checkbox" value="" id="article-interest" <?php if($userNotifs->contains('FollowMe')) echo "checked"; ?>>
-        <label class="custom-control-label" for="article-interest">
+        <input class="custom-control-input" type="checkbox" value="" id="FollowMe" <?php if($userNotifs->contains('FollowMe')) echo "checked"; ?>>
+        <label class="custom-control-label" for="FollowMe">
           New articles of my interest
         </label>
       </div>

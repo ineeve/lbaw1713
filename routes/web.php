@@ -22,7 +22,11 @@ Route::get('/users/{username}', 'UserController@show');
 Route::get('/users/{username}/edit', 'UserController@edit');
 Route::patch('/users/{username}/edit', 'UserController@update')->name('update_user');
 Route::get('api/users/{username}/articles/', 'UserController@getArticles');
+
 Route::get('/settings', 'UserController@showSettings')->name('show_settings');
+Route::post('/api/settings/notifications/{notification}', 'UserController@activateNotification'); // activate notification type
+Route::delete('/api/settings/notifications/{notification}', 'UserController@deactivateNotification'); // deactivate notification type
+
 // // Authentication
 
 /*Action of login*/
