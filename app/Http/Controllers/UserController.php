@@ -44,12 +44,12 @@ class UserController extends Controller
       FROM News INNER JOIN Users ON (News.author_id = Users.id)
                   WHERE Users.username = ? AND
                         NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
-                  ORDER BY date DESC LIMIT 2 OFFSET 0;',[$username]);
+                  ORDER BY date DESC LIMIT 5 OFFSET 0;',[$username]);
 
       $count = count(DB::select('SELECT *
       FROM News INNER JOIN Users ON (News.author_id = Users.id)
                   WHERE Users.username = ? AND
-                        NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id);',[$username])) - 2;
+                        NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id);',[$username])) - 5;
 
       if(count($user) == 0) {
         return redirect('/error/404');
@@ -72,12 +72,12 @@ class UserController extends Controller
       FROM News INNER JOIN Users ON (News.author_id = Users.id)
                   WHERE Users.username = ? AND
                         NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
-                  ORDER BY date DESC LIMIT 2 OFFSET ?;',[$username, $offset]);
+                  ORDER BY date DESC LIMIT 5 OFFSET ?;',[$username, $offset]);
       
       $count = count(DB::select('SELECT *
       FROM News INNER JOIN Users ON (News.author_id = Users.id)
                   WHERE Users.username = ? AND
-                        NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id);',[$username])) - 2 - $offset;
+                        NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id);',[$username])) - 5 - $offset;
 
       $status_code = 200; // TODO: change if not found!
       $data = [

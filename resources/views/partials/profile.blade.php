@@ -21,8 +21,8 @@
         </div>
         <div class="row">
           <div class="col">
-            <img class="img-responsive" src="{{ Storage::url('users/'.($user->picture == null ? 'default' : $user->picture)) }}" alt="pic" height="200px"
-              width="200px">
+            <img class="img-responsive" src="{{ Storage::url('users/'.($user->picture == null ? 'default' : $user->picture)) }}" alt="pic"
+              height="200px" width="200px">
           </div>
 
         </div>
@@ -95,40 +95,28 @@
     </div>
 
     <div class="col-lg-8 col-12 mt-3 mx-2">
-      <div class="row h-50 d-flex flex-column mx-auto">
-        <h2 class="container pl-0">Articles</h2>
-        <div id="my_articles">
-          @if ($news != null) @include('partials.news_item_preview_list',$news) @endif
-        </div>
-        <!-- <div class="row">
-          <div class="col">
-            <a href="#" class="loadMore" style="text-decoration: none; display: none;">Show More</a>
-          </div>
-          <div class="col text-right">
-            <p class="totop">
-              <a style="text-decoration: none; display: none;" href="#top">Back to top</a>
-            </p>
-          </div>
-        </div> -->
-        <ul class="pagination">
-          <li class="page-item mx-2">
-            @if($offset == 0)
-            <i class="fas fa-2x fa-angle-left clickable-btn" id="previous_articles" onclick="getPreviousArticles( '{{ $user->username }}' )"></i>
-            @else
-            <i class="fas fa-2x fa-angle-left clickable-btn clickable" id="previous_articles" onclick="getPreviousArticles( '{{ $user->username }}' )"></i>
-            @endif
-          </li>
-          <li class="page-item mx-2">
-            @if($count == 0)
-            <i class="fas fa-2x fa-angle-right clickable-btn" id="next_articles" onclick="getNextArticles( '{{ $user->username }} )"></i>
-            @else
-            <i class="fas fa-2x fa-angle-right clickable-btn clickable" id="next_articles" onclick="getNextArticles( '{{ $user->username }}' )"></i>
-            @endif
-          </li>
-        </ul>
+      <h2 class="w-100 pl-0">Articles</h2>
+      <div id="my_articles">
+        @if ($news != null) @include('partials.news_item_preview_list',$news) @endif
       </div>
-      <div class="row h-50 d-flex flex-column mx-auto">
-        <h2 class="container pl-0">Following</h2>
+      <ul class="pagination">
+        <li class="page-item mx-2">
+          @if($offset == 0)
+          <i class="fas fa-2x fa-angle-left clickable-btn" id="previous_articles" onclick="getPreviousArticles( '{{ $user->username }}' )"></i>
+          @else
+          <i class="fas fa-2x fa-angle-left clickable-btn clickable" id="previous_articles" onclick="getPreviousArticles( '{{ $user->username }}' )"></i>
+          @endif
+        </li>
+        <li class="page-item mx-2">
+          @if($count <= 0)
+          <i class="fas fa-2x fa-angle-right clickable-btn" id="next_articles" onclick="getNextArticles( '{{ $user->username }} )"></i>
+          @else
+          <i class="fas fa-2x fa-angle-right clickable-btn clickable" id="next_articles" onclick="getNextArticles( '{{ $user->username }}' )"></i>
+          @endif
+        </li>
+      </ul>
+      <div class="mx-auto">
+        <h2 class="w-100 pl-0">Following</h2>
       </div>
     </div>
 

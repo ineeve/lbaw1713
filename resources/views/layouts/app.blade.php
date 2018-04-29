@@ -43,9 +43,9 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
 
-    <!-- event handler script -->
-    <script type="text/javascript" src={{ asset( 'js/app.js') }} defer>
-  </script> 
+  <!-- event handler script -->
+  <script type="text/javascript" src={{ asset( 'js/app.js') }} defer>
+  </script>
 
   <!-- END OUR -->
 
@@ -55,24 +55,21 @@
 
 <body>
   <main>
-    @include('partials.header')
-
-    @include('partials.search_modal')
-
-    <section id="content">
-      @yield('content')
-    </section>
-    <footer class="page-footer sticky-bottom mt-4">
-      <p class=" mx-auto text-center mb-0">
-        <a href="#">About us</a>
-        &middot;
-        <a href="#">FAQ</a>
-        &middot;
-        <a href="{{ url('privacy_policy') }}">Privacy Policy</a>
-      </p>
-      <p class="text-center footer-copyright mb-1">
-        <i class="far fa-copyright"></i> 2018 Photon News</p>
-    </footer>
+    @include('partials.header') @include('partials.search_modal')
+      <section id="content">
+        @yield('content')
+      </section>
+      <footer class="page-footer sticky-bottom mt-4">
+        <p class=" mx-auto text-center mb-0">
+          <a href="#">About us</a>
+          &middot;
+          <a href="#">FAQ</a>
+          &middot;
+          <a href="{{ url('privacy_policy') }}">Privacy Policy</a>
+        </p>
+        <p class="text-center footer-copyright mb-1">
+          <i class="far fa-copyright"></i> 2018 Photon News</p>
+      </footer>
   </main>
 </body>
 

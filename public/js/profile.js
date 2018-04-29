@@ -2,7 +2,7 @@ let offset = 0;
 
 function getPreviousArticles(username) {
     if ($('#previous_articles').hasClass("clickable")) {
-        offset -= 2;
+        offset -= 5;
         jQuery.ajax({
             url: "/api/users/" + username + "/articles",
             method: 'get',
@@ -28,7 +28,7 @@ function getPreviousArticles(username) {
 function getNextArticles(username) {
     console.log("ofset = "+offset);
     if ($('#next_articles').hasClass("clickable")) {
-        offset += 2;
+        offset += 5;
         jQuery.ajax({
             url: "/api/users/" + username + "/articles",
             method: 'get',
