@@ -163,6 +163,7 @@ class UserController extends Controller
                                     FROM Sections
                                       INNER JOIN UserInterests ON Sections.id = UserInterests.section_id
                                     WHERE UserInterests.user_id = ?', [$user->id]);
-      return view('pages.settings', ['sections' => $sections, 'userSections' => $userSections]);
+      $userNotifs = DB::table('settingsnotifications')->where('user_id', $user->id)->pluck('type');
+      return view('pages.settings', ['sections' => $sections, 'userSections' => $userSections, 'userNotifs' => $userNotifs]);
     }
 }

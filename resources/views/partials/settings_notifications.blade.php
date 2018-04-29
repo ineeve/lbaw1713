@@ -3,25 +3,25 @@
   <fieldset class="pt-3">
     <div class="form-group">
       <div class="custom-control custom-checkbox">
-        <input class="custom-control-input" type="checkbox" value="" id="article-comments">
+        <input class="custom-control-input" type="checkbox" value="" id="article-comments" <?php if($userNotifs->contains('CommentMyPost')) echo "checked"; ?>>
         <label class="custom-control-label" for="article-comments">
           Comments To My Articles
         </label>
       </div>
       <div class="custom-control custom-checkbox">
-        <input class="custom-control-input" type="checkbox" value="" id="article-votes">
+        <input class="custom-control-input" type="checkbox" value="" id="article-votes" <?php if($userNotifs->contains('VoteMyPost')) echo "checked"; ?>>
         <label class="custom-control-label" for="article-votes">
           Votes In My Articles
         </label>
       </div>
       <div class="custom-control custom-checkbox">
-        <input class="custom-control-input" type="checkbox" value="" id="follow-articles" checked>
+        <input class="custom-control-input" type="checkbox" value="" id="follow-articles" <?php if($userNotifs->contains('FollowedPublish')) echo "checked"; ?>>
         <label class="custom-control-label" for="follow-articles">
           Articles from people I follow
         </label>
       </div>
       <div class="custom-control custom-checkbox">
-        <input class="custom-control-input" type="checkbox" value="" id="article-interest">
+        <input class="custom-control-input" type="checkbox" value="" id="article-interest" <?php if($userNotifs->contains('FollowMe')) echo "checked"; ?>>
         <label class="custom-control-label" for="article-interest">
           New articles of my interest
         </label>
