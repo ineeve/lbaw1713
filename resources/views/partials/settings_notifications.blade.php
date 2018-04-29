@@ -5,13 +5,13 @@
       <div class="custom-control custom-checkbox">
         <input class="custom-control-input" type="checkbox" value="" id="article-comments" <?php if($userNotifs->contains('CommentMyPost')) echo "checked"; ?>>
         <label class="custom-control-label" for="article-comments">
-          Comments To My Articles
+          Comments to my articles
         </label>
       </div>
       <div class="custom-control custom-checkbox">
         <input class="custom-control-input" type="checkbox" value="" id="article-votes" <?php if($userNotifs->contains('VoteMyPost')) echo "checked"; ?>>
         <label class="custom-control-label" for="article-votes">
-          Votes In My Articles
+          Votes in my articles
         </label>
       </div>
       <div class="custom-control custom-checkbox">
