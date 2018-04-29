@@ -76,10 +76,16 @@ function sendAjaxRequest(method, url, data, handler) {
 }
 
 function sendShowMorePreviews(event) {
-  let section_name = document.querySelector('.current_section').innerText.trim();
+  let section_name = document.querySelector('.current_section');
   let order = document.querySelector("#sort-option").getAttribute('name');
-  console.log("Getting news for section: " + section_name + "; order:" + order + " ;offset:" + previews_offset);
-  sendAjaxRequest('GET', '/api/news/section/' + section_name + '/order/' + order + "/offset/" + previews_offset, null, showMorePreviewsHandler);
+  if (section_name != null){
+    section_name = section_name.innerText.trim();
+    sendAjaxRequest('GET', '/api/news/section/' + section_name + '/order/' + order + "/offset/" + previews_offset, null, showMorePreviewsHandler);
+  } else {
+    searchText = document.querySelector("#searchedText").innerText.trim();
+    sendAjaxRequest('GET','/api/news/order/' + order + '/offset/' + previews_offset + "?searchText=" + searchText, null, showMorePreviewsHandler)
+  }
+  
   console.log("offset = " + previews_offset);
 }
 
@@ -150,7 +156,6 @@ function voteHandler(e) {
       }
     }
   }
-
 }
 
 function downvote(newsId) {
@@ -219,11 +224,10 @@ function editComment(e) {
 }
 
 function onScrollComments() {
-  
   // Replaces comment body by the edit form.
   jQuery('.editCommentForm').click(function (e) {
     e.preventDefault();
-    let commentBody = $("#commentNo"+e.target.name + " .commentBody").text();
+    let commentBody = $("#commentNo" + e.target.name + " .commentBody").text();
     let form = createEditCommentForm(commentBody);
     $("#commentNo"+e.target.name + " .commentBody").empty();
     $("#commentNo"+e.target.name + " .commentBody").append(form);

@@ -6,8 +6,8 @@
         </div>
     </button>
     <div class="dropdown-menu order" aria-labelledby="btnGroupDrop1">
-        <a class="dropdown-item order-criteria" name="POPULAR" href="">Most Popular</a>
-        <a class="dropdown-item order-criteria" name="VOTED" href="">Most Voted</a>
-        <a class="dropdown-item order-criteria" name="RECENT" href="">Most Recent</a>
+        <a class="dropdown-item order-criteria" name="POPULAR" href="#">Most Popular</a>
+        <a class="dropdown-item order-criteria" name="VOTED" href="#">Most Voted</a>
+        <a class="dropdown-item order-criteria" name="RECENT" href="#">Most Recent</a>
     </div>
 </div>

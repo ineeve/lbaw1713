@@ -24,6 +24,30 @@ class NewsController extends Controller
     const MOST_RECENT = 'RECENT';
     const MOST_VOTED = 'VOTED';
 
+    private function searchNewsByPopularity($searchText, $offset) {
+      return DB::select("SELECT news.id, title, users.username As author, date, votes, image, substring(body, '(?:<p>)[^<>]*\.(?:<\/p>)') as body_preview
+        FROM news NATURAL JOIN newspoints JOIN users ON news.author_id = users.id
+          WHERE NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
+          AND textsearchable_body_and_title_index_col @@ plainto_tsquery('english',?)
+        ORDER BY newspoints.points DESC LIMIT 10 OFFSET ?", [$searchText, $offset]);
+    }
+
+    private function searchNewsByDate($searchText, $offset) {
+      return DB::select("SELECT news.id, title, users.username As author, date, votes, image, substring(body, '(?:<p>)[^<>]*\.(?:<\/p>)') as body_preview
+        FROM news JOIN users ON news.author_id = users.id
+          WHERE NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
+          AND textsearchable_body_and_title_index_col @@ plainto_tsquery('english',?)
+        ORDER BY date DESC LIMIT 10 OFFSET ?", [$searchText, $offset]);
+    }
+
+    private function searchNewsByVotes($searchText, $offset) {
+      return DB::select("SELECT news.id, title, users.username As author, date, votes, image, substring(body, '(?:<p>)[^<>]*\.(?:<\/p>)') as body_preview
+        FROM news JOIN users ON news.author_id = users.id
+          WHERE NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
+          AND textsearchable_body_and_title_index_col @@ plainto_tsquery('english',?)
+        ORDER BY votes DESC LIMIT 10 OFFSET ?", [$searchText, $offset]);
+    }
+
     private function getNewsByPopularity($section, $offset) {
       if(strcmp($section, 'All') == 0) {
         return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
@@ -44,14 +68,12 @@ class NewsController extends Controller
         return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
           FROM news JOIN users ON news.author_id = users.id
           WHERE NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
-            -- WHERE textsearchable_body_and_title_index_col @@ to_tsquery(title) 
           ORDER BY date DESC LIMIT 10 OFFSET ?', [$offset]);
       } else {
         return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
           FROM news JOIN users ON news.author_id = users.id
             INNER JOIN sections ON news.section_id = sections.id
           WHERE sections.name = ? AND NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
-            -- WHERE textsearchable_body_and_title_index_col @@ to_tsquery(title) 
           ORDER BY date DESC LIMIT 10 OFFSET ?', [$section, $offset]);
       }
     }
@@ -61,14 +83,12 @@ class NewsController extends Controller
         return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
             FROM news JOIN users ON news.author_id = users.id
             WHERE NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
-            -- WHERE textsearchable_body_and_title_index_col @@ to_tsquery(title) 
             ORDER BY votes DESC LIMIT 10 OFFSET ?', [$offset]);
       } else {
         return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
           FROM news JOIN users ON news.author_id = users.id
             INNER JOIN sections ON news.section_id = sections.id
           WHERE sections.name = ? AND NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
-          -- WHERE textsearchable_body_and_title_index_col @@ to_tsquery(title) 
           ORDER BY votes DESC LIMIT 10 OFFSET ?', [$section, $offset]);
       }
     }
@@ -86,6 +106,20 @@ class NewsController extends Controller
           return $this->getNewsByVotes($section, $offset);
       }
     }
+
+    /**
+      * @param  String  $order Either 'POPULAR', 'RECENT' or 'VOTED'.
+      */
+      private function searchNews($searchText, $order, $offset) {
+        switch ($order) {
+          case self::MOST_POPULAR:
+            return $this->searchNewsByPopularity($searchText, $offset);
+          case self::MOST_RECENT:
+            return $this->searchNewsByDate($searchText, $offset);
+          case self::MOST_VOTED:
+            return $this->searchNewsByVotes($searchText, $offset);
+        }
+      }
 
 
     private function getOrderedPreviews() {
@@ -106,11 +140,9 @@ class NewsController extends Controller
       return $news;
     }
 
-    public function search(Request $request){
+    public function getSearchPage(Request $request){
       $searchText = $request->searchText;
-      $filteredNews = DB::select("SELECT news.id, title,users.username As author,date,votes,image, substring(body, '(?:<p>)[^<>]*\.(?:<\/p>)') as body_preview
-      FROM news NATURAL JOIN users WHERE textsearchable_body_and_title_index_col @@ to_tsquery(?)
-      LIMIT 10 OFFSET 0;",[$searchText]);
+      $filteredNews = $this->searchNewsByPopularity($searchText, 0);
       return view('pages.searched_news',['news'=> $filteredNews, 'searchText' => $searchText]);
     }
 
@@ -121,6 +153,11 @@ class NewsController extends Controller
       $sections = DB::select('SELECT icon, name FROM Sections');
 
       return view('partials.news_item_preview_list', ['news' => $news, 'sections' => $sections]);
+    }
+
+    public function listSearch(Request $request, $order = self::MOST_POPULAR, $offset = 0) {
+      $news = $this->searchNews($request->searchText, $order, $offset);
+      return view('partials.news_item_preview_list', ['news' => $news]);
     }
 
     public function getNewsHomepage() {

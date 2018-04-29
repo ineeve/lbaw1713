@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Notification;
 use Illuminate\Http\Request;
-
+use App\User;
 class NotificationController extends Controller
 {
     const FOLLOW = 'FollowMe';

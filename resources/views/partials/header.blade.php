@@ -50,7 +50,7 @@
                     <i class="fas fa-user">
                     </i> Profile
                   </a>
-                  <a class="dropdown-item" href="forum.html">
+                  <a class="dropdown-item" href="/reports">
                     <i class="fas fa-university">
                     </i> Forum
                   </a>

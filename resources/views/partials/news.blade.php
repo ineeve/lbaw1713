@@ -26,16 +26,7 @@
             <div id="news_item_preview_list">
               @if ($news != null) @include('partials.news_item_preview_list',$news) @endif
             </div>
-            <div class="row">
-              <div class="col">
-                <a id="scrollNewsPreview" href="#scrollNewsPreview" class="loadMore" style="text-decoration: none;">Show More</a>
-              </div>
-              <div class="col text-right">
-                <p class="totop">
-                  <a style="text-decoration: none;" href="#top">Back to top</a>
-                </p>
-              </div>
-            </div>
+            @include('partials.load_more')
           </div>
         </div>
       </div>
