@@ -85,10 +85,20 @@ class UserController extends Controller
                   WHERE Users.username = ? AND
                         NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id);',[$username])) - 5 - $offset;
 
+      $user = DB::select('SELECT users.id, username, email, gender, Countries.name As country, picture, points, permission
+      FROM users NATURAL JOIN countries
+      WHERE users.username = ?;',[$username]);
+      $user = $user[0];
+
       $status_code = 200; // TODO: change if not found!
       $data = [
           'view' => View::make('partials.news_item_preview_list')
               ->with('news', $news)
+              ->render(),
+          'view_pagination' => View::make('partials.articles_pagination_btn')
+              ->with('user', $user)
+              ->with('count', $count)
+              ->with('offset', $offset)
               ->render(),
           'count' => $count,
           'offset' => $offset
