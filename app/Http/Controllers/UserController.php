@@ -25,70 +25,93 @@ class UserController extends Controller
         $countries = DB::select('SELECT * FROM countries');
         return view('pages.profile_edit', ['countries' => $countries]);
     }
-    
-    public function show($username)
-    {
 
+    public function queryUser($username) {
       $user = DB::select('SELECT users.id, username, email, gender, Countries.name As country, picture, points, permission
       FROM users NATURAL JOIN countries
       WHERE users.username = ?;',[$username]);
 
-      $total_badges = (DB::select('SELECT count(*)
-      FROM badges;'))[0]->count;
+    if(count($user) == 0) {
+      return redirect('/error/404');
+    }
 
-      $achieved_badges = DB::select('SELECT badges.id as badge_id, name, brief, votes, comments, articles FROM badges JOIN achievements ON badges.id = achievements.badge_id
-      JOIN users ON users.id = achievements.user_id
-      WHERE users.username = ? LIMIT 6 OFFSET 0;',[$username]);
+      return $user[0];
 
-      $news = DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
+    }
+
+    public function queryArticles($username, $offset) {
+      return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
       FROM News INNER JOIN Users ON (News.author_id = Users.id)
                   WHERE Users.username = ? AND
                         NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
-                  ORDER BY date DESC LIMIT 5 OFFSET 0;',[$username]);
+                  ORDER BY date DESC LIMIT 5 OFFSET ?;',[$username, $offset]);
+    }
 
-      $count = count(DB::select('SELECT *
+    public function queryAllArticles($username) {
+      return DB::select('SELECT *
       FROM News INNER JOIN Users ON (News.author_id = Users.id)
                   WHERE Users.username = ? AND
-                        NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id);',[$username])) - 5;
+                        NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id);',[$username]);
+    }
 
-      $following = DB::select('SELECT users.id, username, picture
+    public function queryFollowing($username, $offset) {
+      return DB::select('SELECT users.id, username, picture
       FROM users INNER JOIN follows ON users.id = follows.followed_user_id 
       WHERE EXISTS (SELECT users.id FROM users WHERE users.username = ? AND users.id = follows.follower_user_id)
-      ORDER BY username DESC LIMIT 5 OFFSET 0;',[$username]);
+      ORDER BY username DESC LIMIT 5 OFFSET ?;',[$username, $offset]);
+    }
 
-      if(count($user) == 0) {
-        return redirect('/error/404');
-      }
-      $user = $user[0];
+    public function queryAllFollowing($username) {
+      return DB::select('SELECT *
+      FROM users INNER JOIN follows ON users.id = follows.followed_user_id 
+      WHERE EXISTS (SELECT users.id FROM users WHERE users.username = ? AND users.id = follows.follower_user_id);',[$username]);
+    }
+
+    public function queryBadges($username, $offset) {
+      return DB::select('SELECT badges.id as badge_id, name, brief, votes, comments, articles FROM badges JOIN achievements ON badges.id = achievements.badge_id
+      JOIN users ON users.id = achievements.user_id
+      WHERE users.username = ? LIMIT 6 OFFSET ?;',[$username, $offset]);
+    }
+    
+    public function show($username)
+    {
+
+      $user = $this->queryUser($username);
+
+      $total_badges = (DB::select('SELECT count(*)
+      FROM badges;'))[0]->count;
+
+      $achieved_badges = $this->queryBadges($username, 0);
+
+      $news = $this->queryArticles($username, 0);
+
+      $articles_count = count($this->queryAllArticles($username)) - 5;
+
+      $following = $this->queryFollowing($username, 0);
+
+      $following_count = count($this->queryAllFollowing($username)) - 5;
       
-      $offset = 0;
+      $articles_offset = 0;
+      $following_offset = 0;
 
       return view('pages.profile', ['user' => $user,
        'total_badges' => $total_badges,
        'achieved_badges' => $achieved_badges,
        'news' => $news,
-       'count' => $count,
+       'articles_count' => $articles_count,
+       'following_count' => $following_count,
        'following' => $following,
-       'offset' => $offset]);
+       'articles_offset' => $articles_offset,
+       'following_offset' => $following_offset]);
     }
 
     public function getArticles($username) {
-      $offset = Input::get('offset');
-      $news = DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
-      FROM News INNER JOIN Users ON (News.author_id = Users.id)
-                  WHERE Users.username = ? AND
-                        NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
-                  ORDER BY date DESC LIMIT 5 OFFSET ?;',[$username, $offset]);
+      $articles_offset = Input::get('offset');
+      $news = $this->queryArticles($username, $articles_offset);
       
-      $count = count(DB::select('SELECT *
-      FROM News INNER JOIN Users ON (News.author_id = Users.id)
-                  WHERE Users.username = ? AND
-                        NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id);',[$username])) - 5 - $offset;
+      $articles_count = count($this->queryAllArticles($username)) - 5 - $articles_offset;
 
-      $user = DB::select('SELECT users.id, username, email, gender, Countries.name As country, picture, points, permission
-      FROM users NATURAL JOIN countries
-      WHERE users.username = ?;',[$username]);
-      $user = $user[0];
+      $user = $this->queryUser($username);
 
       $status_code = 200; // TODO: change if not found!
       $data = [
@@ -97,11 +120,36 @@ class UserController extends Controller
               ->render(),
           'view_pagination' => View::make('partials.articles_pagination_btn')
               ->with('user', $user)
-              ->with('count', $count)
-              ->with('offset', $offset)
+              ->with('articles_count', $articles_count)
+              ->with('articles_offset', $articles_offset)
               ->render(),
-          'count' => $count,
-          'offset' => $offset
+          'articles_count' => $articles_count,
+          'articles_offset' => $articles_offset
+      ];
+
+      return Response::json($data, $status_code);
+    }
+
+    public function getFollowing($username) {
+      $following_offset = Input::get('offset');
+      $following = $this->queryFollowing($username, $following_offset);
+      
+      $following_count = count($this->queryAllFollowing($username)) - 5 - $following_offset;
+
+      $user = $this->queryUser($username);
+
+      $status_code = 200; // TODO: change if not found!
+      $data = [
+          'view' => View::make('partials.following_list')
+              ->with('following', $following)
+              ->render(),
+          'view_pagination' => View::make('partials.following_pagination_btn')
+              ->with('user', $user)
+              ->with('following_count', $following_count)
+              ->with('following_offset', $following_offset)
+              ->render(),
+          'following_count' => $following_count,
+          'following_offset' => $following_offset
       ];
 
       return Response::json($data, $status_code);
