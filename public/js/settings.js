@@ -42,7 +42,15 @@ $(document).ready(function () {
         interest_id: event.target.interest_id.value
       },
       success: function (result) {
-        console.log(result);
+        if (!result.added) {
+          return;
+        }
+        let interestList = $('#interests div.list-group');
+        let interest = jQuery('<a href="" class="remove_section list-group-item list-group-item-action" section-id="' + result.section.id + '">'
+                              + result.section.name
+                              + '<div class="float-right">X</div>'
+                              + '</a>)');
+        interestList.append(interest);
       }
     })
   });
