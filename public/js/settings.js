@@ -64,7 +64,9 @@ $(document).ready(function () {
         interest_id: event.target.getAttribute('section-id')
       },
       success: function (result) {
-
+        if (result.removed) {
+          event.target.remove();
+        }
       }
     });
   });
