@@ -20,8 +20,8 @@ function getBootstrapDeviceSize() {
 $(document).ready(function() {
     let maxSize = getBootstrapDeviceSize();
     if (maxSize == 'md' || maxSize == 'lg' || maxSize == 'xl') {
-        $('div#sections_list').addClass('show');
+        $('.collapsible').addClass('show');
     } else {
-        $('div#sections_list').removeClass('show');
+        $('.collapsible').removeClass('show');
     }
 })

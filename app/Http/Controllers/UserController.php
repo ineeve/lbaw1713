@@ -166,8 +166,30 @@ class UserController extends Controller
         return redirect('users/'.$user->username);
       }
 
-    public function showSettings($username) {
-      $user = User::where('username', $username);
-      return view('pages.settings', '');
+    public function showSettings() {
+      $user = Auth::user();
+      $sections = Section::all();
+      $userSections = DB::select('SELECT *
+                                    FROM Sections
+                                      INNER JOIN UserInterests ON Sections.id = UserInterests.section_id
+                                    WHERE UserInterests.user_id = ?', [$user->id]);
+      $userNotifs = DB::table('settingsnotifications')->where('user_id', $user->id)->pluck('type');
+      return view('pages.settings', ['sections' => $sections, 'userSections' => $userSections, 'userNotifs' => $userNotifs]);
+    }
+
+    /**
+     * $notification in notification type domain ['CommentMyPost', 'FollowMe', 'VoteMyPost', 'FollowedPublish']
+     */
+    public function activateNotification($notification) {
+      DB::insert('INSERT INTO SettingsNotifications (type, user_id)
+                    VALUES (?, ?)', [$notification, Auth::user()->id]);
+    }
+
+    /**
+     * $notification in notification type domain ['CommentMyPost', 'FollowMe', 'VoteMyPost', 'FollowedPublish']
+     */
+    public function deactivateNotification($notification) {
+      DB::insert('DELETE FROM SettingsNotifications
+                    WHERE type = ? AND user_id = ?', [$notification, Auth::user()->id]);
     }
 }
