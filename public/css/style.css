@@ -99,3 +99,35 @@ a{
 .lightText{
   font-weight: 300;
 }
+
+a#users-tab {
+  color: white;
+}
+
+a#users-tab.active {
+  color: black;
+}
+
+a#bagdes-tab {
+  color: white;
+}
+
+a#bagdes-tab.active {
+  color: black;
+}
+
+a#categories-tab {
+  color: white;
+}
+
+a#categories-tab.active {
+  color: black;
+}
+
+a#statistics-tab {
+  color: white;
+}
+
+a#statistics-tab.active {
+  color: black;
+}

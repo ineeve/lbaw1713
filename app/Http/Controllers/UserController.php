@@ -250,4 +250,29 @@ class UserController extends Controller
       DB::insert('DELETE FROM SettingsNotifications
                     WHERE type = ? AND user_id = ?', [$notification, Auth::user()->id]);
     }
+
+    public function addInterest(Request $request) {
+      $status_code = 200;
+      $current = DB::select('SELECT 1 FROM UserInterests
+                  WHERE user_id = ? AND section_id = ?', [Auth::user()->id, $request->interest_id]);
+      
+      if (count($current) > 0) {
+        $response = ['added' => false];
+        return Response::JSON($response, $status_code);
+      }
+      
+      $new = DB::insert('INSERT INTO UserInterests (user_id, section_id)
+                    VALUES (?, ?);', [Auth::user()->id, $request->interest_id]);
+      $section = Section::find($request->interest_id);
+      $response = ['added' => true, 'section' => $section];
+      return Response::JSON($response, $status_code);
+    }
+
+    public function removeInterest(Request $request) {
+      $status_code = 200;
+      $removed = DB::delete('DELETE FROM UserInterests
+                              WHERE user_id = ? AND section_id = ?', [Auth::user()->id, $request->interest_id]);
+      $response = ['removed' => $removed];
+      return Response::JSON($response, $status_code);
+    }
 }
