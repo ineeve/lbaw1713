@@ -183,8 +183,9 @@ class NewsController extends Controller
                               FROM Sources
                                 INNER JOIN NewsSources ON Sources.id = NewsSources.source_id
                               WHERE NewsSources.news_id = ?', [$news->id]);
+      $reportReasons = array_column(DB::select('SELECT unnest(enum_range(NULL::reason_type))'),'unnest');
 
-      return view('pages.news_item', ['news' => $news, 'sources' => $sources]);
+      return view('pages.news_item', ['news' => $news, 'sources' => $sources, 'reportReasons'=> $reportReasons]);
     }
 
     /**
@@ -341,7 +342,7 @@ class NewsController extends Controller
     public function reportItem(Request $request, $news_id, $comment_id = NULL){
       $brief = $request->input('brief');
       $reasons = $request->input('reasons');
-      $validReasons = ['rude or abusive','scam/spam','sexually inappropriate'];
+      $validReasons = array_column(DB::select('SELECT unnest(enum_range(NULL::reason_type))'),'unnest');
       $success = False;
       //check news is valid and check comment belongs to news.
       if (is_null($brief)) {

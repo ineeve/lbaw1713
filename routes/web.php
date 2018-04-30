@@ -22,6 +22,7 @@ Route::get('/users/{username}', 'UserController@show');
 Route::get('/users/{username}/edit', 'UserController@edit');
 Route::patch('/users/{username}/edit', 'UserController@update')->name('update_user');
 Route::get('api/users/{username}/articles/', 'UserController@getArticles');
+Route::get('api/users/{username}/following/', 'UserController@getFollowing');
 
 Route::get('/settings', 'UserController@showSettings')->name('show_settings');
 Route::post('/api/settings/notifications/{notification}', 'UserController@activateNotification'); // activate notification type

@@ -4,6 +4,7 @@ namespace App;
 
 
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -42,5 +43,12 @@ class User extends Authenticatable
      */
     public function notifications() {
         return $this->hasMany('App\Notification', 'target_user_id','id');
+    }
+
+    public function following($username) {
+        $result = count(DB::select('SELECT * FROM users WHERE EXISTS (SELECT users.username
+        FROM users INNER JOIN follows ON users.id = follows.followed_user_id 
+        WHERE users.username = ? AND EXISTS (SELECT users.id FROM users WHERE users.username = ? AND users.id = follows.follower_user_id));',[$username, $this->username]));
+        return $result != 0;
     }
 }
