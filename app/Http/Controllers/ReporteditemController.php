@@ -11,14 +11,24 @@ class ReporteditemController extends Controller
 {
     public function show() {
         //get All news Reports
-        $reports = DB::select('SELECT news.title, users.username, news.date AS date, count(reporteditems.id) AS reports_number 
-		FROM reporteditems 
-        JOIN news ON(news.id = reporteditems.news_id)
-        JOIN users ON(news.author_id=users.id)
-		JOIN reporteditems AS r ON(reporteditems.id=r.id)
-        WHERE reporteditems.comment_id IS NULL
-        GROUP BY users.username, news.title, news.date
-        ORDER BY COUNT(reporteditems.id) DESC;');
+        $reports = DB::select(';WITH r AS
+        (
+           SELECT *, ROW_NUMBER() OVER (PARTITION BY news_id ORDER BY date DESC) AS rn
+           FROM reporteditems
+        )
+        SELECT r.news_id, r.description, r.date AS reportDate, n.title, n.author_id, n.date AS newsDate, numberReports, u.username
+        FROM r
+        JOIN news AS n ON (r.news_id = n.id)
+        JOIN users AS u ON (n.author_id = u.id)
+        JOIN (SELECT r.news_id, count(r.id) AS numberReports
+            FROM reporteditems AS r 
+            WHERE (r.comment_id IS NULL)
+            GROUP BY r.news_id
+            ORDER BY r.news_id)
+            AS b ON (b.news_id = r.news_id)
+        WHERE rn = 1;
+        ');
+        // print_r($reports);
         return view('pages.reports',['reports' => $reports]);
     }
 }
