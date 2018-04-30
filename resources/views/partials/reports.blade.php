@@ -57,17 +57,15 @@
                           <a href="news_user_doesnt_own.html">{{ $report->title }}</a>
                         </th>
                         <td>{{ $report->username }}</td>
-                        <td>{{ $report->date }}</td>
+                        <td>{{ $report->newsdate }}</td>
                         <td>
                           <div class="d-flex flex-column justify-content-between">
-                            <p>20</p>
+                            <p>{{$report->numberreports}}</p>
                             <a href="all_reports.html">+ Show More</a>
                           </div>
                         </td>
-                        <td>15:31 26/02/2018</td>
-                        <td>Has violent or prohibited content
-                          <br>It's offensive
-                          <br>I do not agree with this</td>
+                        <td>{{$report->reportdate}}</td>
+                        <td>{{$report->description}}</td>
                       </tr>
                     @endforeach
                    </tbody>
