@@ -155,6 +155,16 @@ class UserController extends Controller
       return Response::json($data, $status_code);
     }
 
+    public function startFollowing($username) {
+      DB::insert('INSERT INTO Follows (follower_user_id, followed_user_id)
+                    VALUES (?, ?)', [Auth::user()->id, $username]);
+    }
+
+    public function stopFollowing($username) {
+      DB::insert('DELETE FROM Follows
+      WHERE follower_user_id = ? AND followed_user_id = ?', [Auth::user()->id, $username]);
+    }
+
     protected function validator(array $data)
     {
         return Validator::make($data, [

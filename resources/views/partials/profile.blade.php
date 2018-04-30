@@ -18,9 +18,9 @@
               </div>
             </a>
             @else @if (Auth::user()->following($user->username))
-            <button type="button" class="btn btn-outline-primary">Following</button>
+            <button type="button" class="btn btn-outline-primary" onclick="stopFollowing( '{{ $user->username }}' )">Following</button>
             @else
-            <button type="button" class="btn btn-primary">Follow</button>
+            <button type="button" class="btn btn-primary" onclick="startFollowing( '{{ $user->username }}' )">Follow</button>
             @endif @endif
           </div>
         </div>
