@@ -25,21 +25,48 @@ $(document).ready(function () {
     });
   });
 
-  // $('#notifications .custom-checkbox').prop('checked', false) {
+  // Add interest
+  $('#interests form').submit(function(event) {
+    event.preventDefault();
+    
+    $.ajaxSetup({
+      headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
 
-  // }
+    $.ajax({
+      url: '/api/settings/interests',
+      method: 'POST',
+      data: {
+        interest_id: event.target.interest_id.value
+      },
+      success: function (result) {
+        console.log(result);
+      }
+    })
+  });
+
+  // Remove interest
+  $('#interests a.remove_section').click(function(event) {
+    event.preventDefault();
+
+    $.ajaxSetup({
+      headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+
+    $.ajax({
+      url: '/api/settings/interests',
+      method: 'DELETE',
+      data: {
+        interest_id: event.target.getAttribute('section-id')
+      },
+      success: function (result) {
+
+      }
+    });
+  });
 
 });
-
-// function toggleNotification(checkbox) {
-
-//   console.log(checkbox);
-
-//   // jQuery.ajax({
-//   //   url:,
-//   //   method: 'POST',
-//   //   success: function() {
-
-//   //   }
-//   //});
-// }

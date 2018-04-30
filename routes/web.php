@@ -26,6 +26,9 @@ Route::get('api/users/{username}/articles/', 'UserController@getArticles');
 Route::get('/settings', 'UserController@showSettings')->name('show_settings');
 Route::post('/api/settings/notifications/{notification}', 'UserController@activateNotification'); // activate notification type
 Route::delete('/api/settings/notifications/{notification}', 'UserController@deactivateNotification'); // deactivate notification type
+Route::post('/api/settings/interests', 'UserController@addInterest')->name('add_interest');
+Route::delete('/api/settings/interests', 'UserController@removeInterest')->name('remove_interest');
+
 
 // // Authentication
 
