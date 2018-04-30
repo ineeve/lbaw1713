@@ -52,6 +52,8 @@ function getNextArticles(username) {
                 }
                 $('#my_articles').empty();
                 $('#my_articles').append(result.view);
+                $('#articles_pagination').empty();
+                $('#articles_pagination').append(result.view_pagination);
 
             }
         });

@@ -97,21 +97,20 @@
     <div class="col-lg-8 col-12 mt-3 mx-2">
       <h2 class="w-100 pl-0 mb-3">Articles</h2>
       <div id="my_articles">
-        @if ($news != null) @include('partials.news_item_preview_list',$news) 
+        @if ($news != null) @include('partials.news_item_preview_list',$news)
       </div>
-      @if(!($offset == 0 && $count <= 0))
-      <div id="articles_pagination">
-        @include('partials.articles_pagination_btn',[$offset, $count]) 
-      </div>
-      @endif
-      @else
-      <p> No articles published </p>
-      @endif
-        <h2 class="w-100 pl-0 my-3">Following</h2>
-        <div id="following_users" class="d-flex justify-content-between flex-wrap">
-          @if ($following != null) @include('partials.following_list',$following) @endif
-        </div>
+      @if(!($offset == 0 && $count
+      <=0 )) <div id="articles_pagination">
+        @include('partials.articles_pagination_btn',[$offset, $count])
     </div>
-
+    @endif @else
+    <p> No articles published </p>
+    @endif
+    <h2 class="w-100 pl-0 my-3">Following</h2>
+    <div id="following_users" class="d-flex justify-content-between flex-wrap">
+      @if ($following != null) @include('partials.following_list',$following) @endif
+    </div>
   </div>
+
+</div>
 </div>
