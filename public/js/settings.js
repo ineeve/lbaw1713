@@ -25,21 +25,58 @@ $(document).ready(function () {
     });
   });
 
-  // $('#notifications .custom-checkbox').prop('checked', false) {
+  // Add interest
+  $('#interests form').submit(function(event) {
+    event.preventDefault();
+    
+    $.ajaxSetup({
+      headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
 
-  // }
+    $.ajax({
+      url: '/api/settings/interests',
+      method: 'POST',
+      data: {
+        interest_id: event.target.interest_id.value
+      },
+      success: function (result) {
+        if (!result.added) {
+          return;
+        }
+        let interestList = $('#interests div.list-group');
+        let interest = jQuery('<a href="" class="remove_section list-group-item list-group-item-action" section-id="' + result.section.id + '">'
+                              + result.section.name
+                              + '<div class="float-right">X</div>'
+                              + '</a>)');
+        interestList.append(interest);
+      }
+    })
+  });
+
+  // Remove interest
+  $('#interests a.remove_section').click(function(event) {
+    event.preventDefault();
+
+    $.ajaxSetup({
+      headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+
+    $.ajax({
+      url: '/api/settings/interests',
+      method: 'DELETE',
+      data: {
+        interest_id: event.target.getAttribute('section-id')
+      },
+      success: function (result) {
+        if (result.removed) {
+          event.target.remove();
+        }
+      }
+    });
+  });
 
 });
-
-// function toggleNotification(checkbox) {
-
-//   console.log(checkbox);
-
-//   // jQuery.ajax({
-//   //   url:,
-//   //   method: 'POST',
-//   //   success: function() {
-
-//   //   }
-//   //});
-// }

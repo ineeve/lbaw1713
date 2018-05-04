@@ -11,8 +11,6 @@ function getPreviousArticles(username) {
                 offset: articles_offset
             },
             success: function (result) {
-                console.log("offset = " + result.articles_offset);
-                console.log("count = " + result.articles_count);
                 if (result.articles_offset == 0) {
                     $('#previous_articles').removeClass("clickable");
                 }
@@ -39,8 +37,6 @@ function getNextArticles(username) {
                 offset: articles_offset
             },
             success: function (result) {
-                console.log("offset = " + result.articles_offset);
-                console.log("count = " + result.count);
                 if (result.articles_offset == 0) {
                     $('#previous_articles').removeClass("clickable");
                 } else {
@@ -72,8 +68,6 @@ function getNextFollowing(username) {
                 offset: following_offset
             },
             success: function (result) {
-                console.log("offset = " + result.following_offset);
-                console.log("count = " + result.following_count);
                 if (result.following_offset == 0) {
                     $('#previous_following').removeClass("clickable");
                 } else {
@@ -105,8 +99,6 @@ function getPreviousFollowing(username) {
                 offset: following_offset
             },
             success: function (result) {
-                console.log("offset = " + result.following_offset);
-                console.log("count = " + result.following_count);
                 if (result.following_offset == 0) {
                     $('#previous_following').removeClass("clickable");
                 }
@@ -120,5 +112,34 @@ function getPreviousFollowing(username) {
             }
         });
     }
+
+}
+
+function startFollowing(username) {
+    
+        jQuery.ajax({
+            url: "/api/users/" + username + "/start_following",
+            method: 'post',
+            // data: {
+            // },
+            // success: function (result) {
+                // $('#following_pagination').empty();
+                // $('#following_pagination').append(result.view_pagination);
+            // }
+        });
+
+}
+
+function stopFollowing(username) {
+    jQuery.ajax({
+        url: "/api/users/" + username + "/stop_following",
+        method: 'post',
+        // data: {
+        // },
+        // success: function (result) {
+            // $('#following_pagination').empty();
+            // $('#following_pagination').append(result.view_pagination);
+        // }
+    });
 
 }

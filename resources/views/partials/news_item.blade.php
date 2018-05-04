@@ -1,5 +1,5 @@
 @if(Auth::check())
-  @include('partials/report_modal')
+  @include('partials/report_modal',$reportReasons)
   <meta name="news_id" content="{{$news->id}}">
 @else
   @include('partials/login_modal')
