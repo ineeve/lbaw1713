@@ -31,9 +31,9 @@ class UserController extends Controller
       FROM users NATURAL JOIN countries
       WHERE users.username = ?;',[$username]);
 
-    if(count($user) == 0) {
-      return redirect('/error/404');
-    }
+      if(count($user) == 0) {
+        return redirect('/error/404');
+      }
 
       return $user[0];
 

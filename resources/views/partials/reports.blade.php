@@ -1,3 +1,5 @@
+<script src="{{ asset('js/reports.js') }}" defer></script>
+
 <div class="container-fluid mt-2">
     <div class="row">
       <!-- TABS -->
@@ -49,26 +51,7 @@
                         <th scope="col" style="width: 16.67%; height: 25%;">Reasons of the last report</th>
                       </tr>
                     </thead>
-                    <tbody>
-                   @foreach ($reports as $report)
-                    <tr class="table-light">
-                        <th scope="row">
-                        <!-- TODO: href -->
-                          <a href="news_user_doesnt_own.html">{{ $report->title }}</a>
-                        </th>
-                        <td>{{ $report->username }}</td>
-                        <td>{{ $report->newsdate }}</td>
-                        <td>
-                          <div class="d-flex flex-column justify-content-between">
-                            <p>{{$report->numberreports}}</p>
-                            <a href="all_reports.html">+ Show More</a>
-                          </div>
-                        </td>
-                        <td>{{$report->reportdate}}</td>
-                        <td>{{$report->description}}</td>
-                      </tr>
-                    @endforeach
-                   </tbody>
+                   @include('partials.reports_list')
                   </table>
                 </div>
               </div>
@@ -76,26 +59,11 @@
                 <div class="col-12">
                   <div class="col-centered">
                     <ul class="pagination pagination-sm">
-                      <li class="page-item disabled">
-                        <a class="page-link" href="#">&laquo;</a>
+                      <li id="p" class="page-item disabled">
+                        <a  class="page-link" href="#">&laquo;</a>
                       </li>
-                      <li class="page-item active">
-                        <a class="page-link" href="#">1</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">2</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">3</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">4</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">5</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">&raquo;</a>
+                      <li id="n" class="page-item">
+                        <a  class="page-link" href="#" onClick="getNextArticles();">&raquo;</a>
                       </li>
                     </ul>
                   </div>
