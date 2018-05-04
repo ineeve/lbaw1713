@@ -60,10 +60,10 @@
                   <div class="col-centered">
                     <ul class="pagination pagination-sm">
                       <li id="p" class="page-item disabled">
-                        <a  class="page-link" href="#">&laquo;</a>
+                        <a  class="page-link" href="#" onClick="getPreviousArticles(event);">&laquo;</a>
                       </li>
                       <li id="n" class="page-item">
-                        <a  class="page-link" href="#" onClick="getNextArticles();">&raquo;</a>
+                        <a  class="page-link" href="#" onClick="getNextArticles(event);">&raquo;</a>
                       </li>
                     </ul>
                   </div>
