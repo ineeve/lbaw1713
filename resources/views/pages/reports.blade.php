@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-  @include('partials.reports', $reports)
+  @include('partials.reports', $newsreports)
 @endsection

@@ -36,8 +36,9 @@ class ReporteditemController extends Controller
     public function show() {
         //get All news Reports
         $reports = $this->queryArticleReports(0);
+        $commentsReports = $this->queryCommentsReports(0);
         // print_r($reports);
-        return view('pages.reports',['reports' => $reports]);
+        return view('pages.reports',['newsreports' => $reports, 'commentreports' => $commentsReports]);
     }
     
     public function getReports() {
@@ -52,5 +53,41 @@ class ReporteditemController extends Controller
             'offset' => $report_offset
         ];
         return Response::json($data, $status_code);
+      }
+      public function getReportsComments() {
+        $report_offset = Input::get('offset');
+        $reports = $this->queryCommentsReports($report_offset);
+        $report_offset = $report_offset + count($reports);
+        $status_code = 200; // TODO: change if not found!
+        $data = [
+            'view' => View::make('partials.report_list_comment')
+                ->with('commentsreports', $reports)
+                ->render(),
+            'offset' => $report_offset
+        ];
+        return Response::json($data, $status_code);
+      }
+
+      public function queryCommentsReports($offset) {
+        return DB::select(';WITH r AS
+        (
+           SELECT *, ROW_NUMBER() OVER (PARTITION BY comment_id ORDER BY date DESC) AS rn
+           FROM reporteditems
+        )
+        SELECT r.comment_id AS commentid, r.description, r.date AS reportDate, 
+			n.id, n.creator_user_id, n.date AS commentDate,
+			numberReports, u.username
+        FROM r
+        JOIN comments AS n ON (r.comment_id = n.id)
+        JOIN users AS u ON (n.creator_user_id = u.id)
+        JOIN (SELECT r.comment_id, count(r.id) AS numberReports
+            FROM reporteditems AS r 
+            WHERE (r.news_id IS NULL)
+            GROUP BY r.comment_id
+            ORDER BY r.comment_id)
+            AS b ON (b.comment_id = r.comment_id)
+        WHERE rn = 1
+        LIMIT 5 OFFSET ?;
+        ',[$offset]);
       }
 }

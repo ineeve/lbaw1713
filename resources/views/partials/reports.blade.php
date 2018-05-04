@@ -102,8 +102,7 @@
                         <th scope="col" style="width: 16.67%; height: 25%;">Reasons of the last report</th>
                       </tr>
                     </thead>
-                    <tbody id="tbodyComments">
-                    </tbody>
+                    @include('partials.report_list_comment')
                   </table>
                 </div>
               </div>
@@ -111,26 +110,11 @@
                 <div class="col-12">
                   <div class="col-centered">
                     <ul class="pagination pagination-sm">
-                      <li class="page-item disabled">
-                        <a class="page-link" href="#">&laquo;</a>
+                      <li id="pComments" class="page-item disabled">
+                        <a  class="page-link" href="#" onClick="getPreviousComments(event);">&laquo;</a>
                       </li>
-                      <li class="page-item active">
-                        <a class="page-link" href="#">1</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">2</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">3</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">4</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">5</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">&raquo;</a>
+                      <li id="nComments" class="page-item">
+                        <a  class="page-link" href="#" onClick="getNextComments(event);">&raquo;</a>
                       </li>
                     </ul>
                   </div>

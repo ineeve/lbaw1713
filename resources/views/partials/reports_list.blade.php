@@ -1,4 +1,4 @@
-<tbody>
+<tbody id="tbodyNews">
   @foreach ($newsreports as $report)
   <tr class="table-light">
     <th scope="row">
