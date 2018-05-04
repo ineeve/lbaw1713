@@ -102,54 +102,7 @@
                         <th scope="col" style="width: 16.67%; height: 25%;">Reasons of the last report</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <tr class="table-light">
-                        <th scope="row" style="width: 16.67%; height: 25%;">
-                          <a href="#">#6643</a>
-                        </th>
-                        <td style="width: 16.67%; height: 25%;">Mark</td>
-                        <td style="width: 16.67%; height: 25%;">12:25 23/02/2018</td>
-                        <td style="width: 16.67%; height: 25%;">
-                          <div class="d-flex flex-column justify-content-between">
-                            <p>20</p>
-                            <a href="all_reports.html">+ Show More</a>
-                          </div>
-                        </td>
-                        <td style="width: 16.67%; height: 25%;">15:31 26/02/2018</td>
-                        <td style="width: 16.67%; height: 25%;">Has violent or prohibited content
-                          <br>It's offensive
-                          <br>I do not agree with this</td>
-                      </tr>
-                      <tr class="table-light">
-                        <th scope="row" style="width: 16.67%; height: 25%;">
-                          <a href="#">#15</a>
-                        </th>
-                        <td style="width: 16.67%; height: 25%;">Dylan</td>
-                        <td style="width: 16.67%; height: 25%;">12:25 23/02/2018</td>
-                        <td style="width: 16.67%; height: 25%;">
-                          <div class="d-flex flex-column justify-content-between">
-                            <p>10</p>
-                            <a href="all_reports.html">+ Show More</a>
-                          </div>
-                        </td>
-                        <td style="width: 16.67%; height: 25%;">15:31 26/02/2018</td>
-                        <td style="width: 16.67%; height: 25%;">It's spam</td>
-                      </tr>
-                      <tr class="table-light">
-                        <th scope="row" style="width: 16.67%; height: 25%;">
-                          <a href="#">#189</a>
-                        </th>
-                        <td style="width: 16.67%; height: 25%;">David</td>
-                        <td style="width: 16.67%; height: 25%;">12:25 23/02/2018</td>
-                        <td style="width: 16.67%; height: 25%;">
-                          <div class="d-flex flex-column justify-content-between">
-                            <p>6</p>
-                            <a href="all_reports.html">+ Show More</a>
-                          </div>
-                        </td>
-                        <td style="width: 16.67%; height: 25%;">15:31 26/02/2018</td>
-                        <td style="width: 16.67%; height: 25%;">Is sexually inappropriate</td>
-                      </tr>
+                    <tbody id="tbodyComments">
                     </tbody>
                   </table>
                 </div>
