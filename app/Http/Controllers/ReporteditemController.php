@@ -34,6 +34,7 @@ class ReporteditemController extends Controller
       }
 
     public function show() {
+        $this->authorize('show', Reporteditem::class);
         //get All news Reports
         $reports = $this->queryArticleReports(0);
         $commentsReports = $this->queryCommentsReports(0);

@@ -11,8 +11,11 @@ use App\Comment;
 use App\Policies\CommentPolicy;
 use App\Notification;
 use App\Policies\NotificationPolicy;
+
 use App\User;
 use App\Policies\UserPolicy;
+use App\Reporteditem;
+use App\Policies\ReporteditemPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -25,8 +28,10 @@ class AuthServiceProvider extends ServiceProvider
       News::class => NewsPolicy::class,
       Comment::class => CommentPolicy::class,
       Notification::class => NotificationPolicy::class,
-      User::class => UserPolicy::class
+      User::class => UserPolicy::class,
+      Reporteditem::class => ReporteditemPolicy::class
     ];
+    // NOTE: see import
 
     /**
      * Register any authentication / authorization services.
