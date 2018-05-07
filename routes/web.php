@@ -19,6 +19,7 @@ Route::get('error/403', 'Controller@errorUnauthorizedAction');
 
 Route::get('/reports', 'ReporteditemController@show');
 Route::get('/api/reports/news', 'ReporteditemController@getReports');
+Route::get('/api/reports/comments', 'ReporteditemController@getReportsComments');
 Route::get('/users/{username}', 'UserController@show');
 Route::get('/users/{username}/edit', 'UserController@edit');
 Route::patch('/users/{username}/edit', 'UserController@update')->name('update_user');

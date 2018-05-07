@@ -2,8 +2,7 @@
   @foreach ($newsreports as $report)
   <tr class="table-light">
     <th scope="row">
-      <!-- TODO: href -->
-      <a href="news_user_doesnt_own.html">{{ $report->title }}</a>
+      <a href="/news/{{$report->news_id}}">{{ $report->title }}</a>
     </th>
     <td>{{ $report->username }}</td>
     <td>{{ $report->newsdate }}</td>

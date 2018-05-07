@@ -48,7 +48,7 @@ class ReporteditemController extends Controller
         $status_code = 200; // TODO: change if not found!
         $data = [
             'view' => View::make('partials.reports_list')
-                ->with('reports', $reports)
+                ->with('newsreports', $reports)
                 ->render(),
             'offset' => $report_offset
         ];
@@ -61,7 +61,7 @@ class ReporteditemController extends Controller
         $status_code = 200; // TODO: change if not found!
         $data = [
             'view' => View::make('partials.report_list_comment')
-                ->with('commentsreports', $reports)
+                ->with('commentreports', $reports)
                 ->render(),
             'offset' => $report_offset
         ];
@@ -76,7 +76,7 @@ class ReporteditemController extends Controller
         )
         SELECT r.comment_id AS commentid, r.description, r.date AS reportDate, 
 			n.id, n.creator_user_id, n.date AS commentDate,
-			numberReports, u.username
+			numberReports, u.username, n.target_news_id AS news_id
         FROM r
         JOIN comments AS n ON (r.comment_id = n.id)
         JOIN users AS u ON (n.creator_user_id = u.id)
