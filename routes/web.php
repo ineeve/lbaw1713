@@ -14,20 +14,34 @@
 Route::get('/', function () {
     return redirect('news');
 })->name('homepage');
-Route::get('error/404', 'Controller@errorNotFound');
-Route::get('error/403', 'Controller@errorUnauthorizedAction');
 
-Route::get('/reports', 'ReporteditemController@show');
-Route::get('/api/reports/news', 'ReporteditemController@getReports');
-Route::get('/api/reports/comments', 'ReporteditemController@getReportsComments');
-Route::get('/users/{username}', 'UserController@show');
-Route::get('/users/{username}/edit', 'UserController@edit');
-Route::patch('/users/{username}/edit', 'UserController@update')->name('update_user');
-Route::get('api/users/{username}/articles/', 'UserController@getArticles');
-Route::get('api/users/{username}/following/', 'UserController@getFollowing');
-Route::post('api/users/{username}/start_following/', 'UserController@startFollowing');
-Route::post('api/users/{username}/stop_following/', 'UserController@stopFollowing');
+// ERROR PAGES
+    // not found
+    Route::get('error/404', 'Controller@errorNotFound');
+    // not autorized
+    Route::get('error/403', 'Controller@errorUnauthorizedAction');
 
+// REPORT PAGES
+    // show reports
+    Route::get('/reports', 'ReporteditemController@show');
+    // get news reports
+    Route::get('/api/reports/news', 'ReporteditemController@getReports');
+    // get comments reports
+    Route::get('/api/reports/comments', 'ReporteditemController@getReportsComments');
+// USER PAGES
+    // see a user
+    Route::get('/users/{username}', 'UserController@show');
+    // form to edit a user
+    Route::get('/users/{username}/edit', 'UserController@edit');
+    // action to edit a user
+    Route::patch('/users/{username}/edit', 'UserController@update')->name('update_user');
+    // get articles writen by user
+    Route::get('api/users/{username}/articles/', 'UserController@getArticles');
+    // get the users this one is following
+    Route::get('api/users/{username}/following/', 'UserController@getFollowing');
+    Route::post('api/users/{username}/start_following/', 'UserController@startFollowing');
+    Route::post('api/users/{username}/stop_following/', 'UserController@stopFollowing');
+// SETTINGS PAGES
 Route::get('/settings', 'UserController@showSettings')->name('show_settings');
 Route::post('/api/settings/notifications/{notification}', 'UserController@activateNotification'); // activate notification type
 Route::delete('/api/settings/notifications/{notification}', 'UserController@deactivateNotification'); // deactivate notification type
