@@ -47,6 +47,9 @@ Route::post('/api/settings/notifications/{notification}', 'UserController@activa
 Route::delete('/api/settings/notifications/{notification}', 'UserController@deactivateNotification'); // deactivate notification type
 Route::post('/api/settings/interests', 'UserController@addInterest')->name('add_interest');
 Route::delete('/api/settings/interests', 'UserController@removeInterest')->name('remove_interest');
+//ADMIN PAGES
+Route::get('/admin','AdminController@show')->name('show_admin_page');
+Route::get('/admin/users','AdminController@getUsersTabRoute');
 
 
 // // Authentication

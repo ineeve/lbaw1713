@@ -51,4 +51,5 @@ class User extends Authenticatable
         WHERE users.username = ? AND EXISTS (SELECT users.id FROM users WHERE users.username = ? AND users.id = follows.follower_user_id));',[$username, $this->username]));
         return $result != 0;
     }
+
 }
