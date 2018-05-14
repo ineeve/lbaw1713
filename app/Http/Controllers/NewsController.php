@@ -97,6 +97,15 @@ class NewsController extends Controller
           FROM news JOIN users ON news.author_id = users.id
           WHERE NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
           ORDER BY date DESC LIMIT 10 OFFSET ?', [$offset]);
+      } else if (strcmp($section, 'for_you') == 0) {
+        $selectInputs = $this->getUserSectionsArray();
+        $userSectionsBindings = $this->getQueryBindings(count($selectInputs));
+        array_push($selectInputs, $offset);
+        return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
+          FROM news NATURAL JOIN newspoints JOIN users ON news.author_id = users.id
+            INNER JOIN sections ON news.section_id = sections.id
+          WHERE ' . $userSectionsBindings . ' NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
+          ORDER BY date DESC LIMIT 10 OFFSET ?', $selectInputs);
       } else {
         return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
           FROM news JOIN users ON news.author_id = users.id
@@ -112,6 +121,15 @@ class NewsController extends Controller
             FROM news JOIN users ON news.author_id = users.id
             WHERE NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
             ORDER BY votes DESC LIMIT 10 OFFSET ?', [$offset]);
+      } else if (strcmp($section, 'for_you') == 0) {
+        $selectInputs = $this->getUserSectionsArray();
+        $userSectionsBindings = $this->getQueryBindings(count($selectInputs));
+        array_push($selectInputs, $offset);
+        return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
+          FROM news NATURAL JOIN newspoints JOIN users ON news.author_id = users.id
+            INNER JOIN sections ON news.section_id = sections.id
+          WHERE ' . $userSectionsBindings . ' NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
+          ORDER BY votes DESC LIMIT 10 OFFSET ?', $selectInputs);
       } else {
         return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
           FROM news JOIN users ON news.author_id = users.id
