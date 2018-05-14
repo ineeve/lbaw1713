@@ -10,7 +10,7 @@ function createPaginationHandlers(){
 }
 
 function usersChangePage(e){
-    let pageNumber = parseInt(e.target.text);
+    let pageNumber = e.target.parentNode.value;
     if(pageNumber != NaN){
         if(pageNumber<=0)return;
         let request = new XMLHttpRequest()
