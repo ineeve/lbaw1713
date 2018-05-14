@@ -1,25 +1,25 @@
 @if(Auth::check()) @include('partials/report_modal',$reportReasons)
 <meta name="news_id" content="{{$news->id}}"> @else @include('partials/login_modal') @endif
 <script src="{{ asset('js/scrollComment.js') }}" defer></script>
-<div id="newsContent" class="tab-content">
-  <div class="tab-pane fade active show" id="article">
-    <div class="container mt-4">
-      <div class="row">
-        <!-- ARTICLE OPTIONS -->
-        <div class="col-12 col-md-1 px-0">
-          <div name="newsOptions" title="Vote and manage this news">
-            <div class="d-flex flex-md-column justify-content-center flex-row align-items-center mt-md-5" name="vote" title="Use to vote on the news"
-              style="font-size:1.5em">
-              @if (Auth::check())
-              <i class="fas fa-arrow-alt-circle-up clickable-btn" id="upvote" onclick="upvote({{$news->id}})"></i>
-              <span id="votesCounter" class="mx-2">{{ $news->votes }}</span>
-              <i class="fas fa-arrow-alt-circle-down clickable-btn" id="downvote" onclick="downvote({{$news->id}})"></i>
-              @else
-              <i class="fas fa-arrow-alt-circle-up clickable-btn" id="upvote" data-toggle="modal" data-target="#loginModal"></i>
-              <span id="votesCounter" class="mx-2">{{ $news->votes }}</span>
-              <i class="fas fa-arrow-alt-circle-down clickable-btn" id="downvote" data-toggle="modal" data-target="#loginModal"></i>
-              @endif
-            </div>
+  <div id="newsContent" class="tab-content">
+    <div class="tab-pane fade active show" id="article">
+      <div class="container mt-4">
+        <div class="row">
+          <!-- ARTICLE OPTIONS -->
+          <!-- TODO: ADD moderetor option -->
+          <div class="col-12 col-md-1 px-0">
+            <div name="newsOptions" title="Vote and manage this news">
+              <div class="d-flex flex-md-column justify-content-center flex-row align-items-center mt-md-5" name="vote" title="Use to vote on the news" style="font-size:1.5em">
+                @if (Auth::check())
+                <i class="fas fa-arrow-alt-circle-up clickable-btn" id="upvote" onclick="upvote({{$news->id}})"></i>
+                <span id="votesCounter" class="mx-2">{{ $news->votes }}</span>
+                <i class="fas fa-arrow-alt-circle-down clickable-btn" id="downvote" onclick="downvote({{$news->id}})"></i>
+                @else
+                <i class="fas fa-arrow-alt-circle-up clickable-btn" id="upvote" data-toggle="modal" data-target="#loginModal"></i>
+                <span id="votesCounter" class="mx-2">{{ $news->votes }}</span>
+                <i class="fas fa-arrow-alt-circle-down clickable-btn" id="downvote" data-toggle="modal" data-target="#loginModal"></i>
+                @endif
+              </div>
 
             @if (Auth::check() && Auth::user()->id == $news->author_id)
             <!-- Edit -->

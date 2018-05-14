@@ -9,7 +9,7 @@
         <td style="width: 16.67%; height: 25%;">
             <div class="d-flex flex-column justify-content-between">
                 <p>{{$report->numberreports}}</p>
-                <a href="all_reports.html">+ Show More</a>
+                <a href="/reports/{{$report->id}}">+ Show More</a>
             </div>
         </td>
         <td style="width: 16.67%; height: 25%;">{{$report->reportdate}}</td>
