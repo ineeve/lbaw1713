@@ -15,7 +15,7 @@
           <div class="row">
             <div class="container ml-0 d-flex justify-content-between">
               <h1 class="current_section">
-                <i class="fa fa-bullseye"></i> For You
+                <i class="fas fa-heart"></i> For You
               </h1>
               <!-- Sort News Dropdown -->
               @include('partials.sort_news_dropdown')
