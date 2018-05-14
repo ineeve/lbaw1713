@@ -17,11 +17,16 @@
                 <h5 class="ml-2 mt-2">Edit Profile</h5>
               </div>
             </a>
-            @else @if (Auth::user()->following($user->username))
+            
+            @else 
+            <div id="following_btn">
+            @if (Auth::user()->following($user->username))
             <button type="button" class="btn btn-outline-primary" onclick="stopFollowing( '{{ $user->username }}' )">Following</button>
             @else
             <button type="button" class="btn btn-primary" onclick="startFollowing( '{{ $user->username }}' )">Follow</button>
-            @endif @endif
+            @endif
+            </div> @endif
+            
           </div>
         </div>
         <div class="row">
