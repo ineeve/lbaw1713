@@ -8,7 +8,7 @@
           <ul class="nav nav-pills flex-column left-pane">
             <li class="nav-item">
               <a href="#" role="button" data-toggle="tab" name="for_you" class="nav-link active section_item">
-                <i class="fa fa-bullseye"></i> For You</a>
+                <i class="fas fa-heart"></i> For You</a>
             </li>
             <li class="nav-item">
               <a href="#" role="button" data-toggle="tab" name="All" class="nav-link section_item">
