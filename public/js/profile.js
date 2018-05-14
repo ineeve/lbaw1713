@@ -116,30 +116,38 @@ function getPreviousFollowing(username) {
 }
 
 function startFollowing(username) {
-    
-        jQuery.ajax({
-            url: "/api/users/" + username + "/start_following",
-            method: 'post',
-            // data: {
-            // },
-            // success: function (result) {
-                // $('#following_pagination').empty();
-                // $('#following_pagination').append(result.view_pagination);
-            // }
-        });
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    jQuery.ajax({
+        url: "/api/users/" + username + "/start_following",
+        method: 'post',
+        success: function (result) {
+            console.log("sucesso");
+            var btn = "<button type=\"button\" class=\"btn btn-outline-primary\" onclick=\"stopFollowing( '" + username + "' )\">Following</button>";
+            document.querySelector("div#following_btn").innerHTML = btn;
+        }
+    });
 
 }
 
 function stopFollowing(username) {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
     jQuery.ajax({
         url: "/api/users/" + username + "/stop_following",
         method: 'post',
-        // data: {
-        // },
-        // success: function (result) {
-            // $('#following_pagination').empty();
-            // $('#following_pagination').append(result.view_pagination);
-        // }
+        success: function (result) {
+            console.log("sucesso");
+            
+            var btn = "<button type=\"button\" class=\"btn btn-primary\" onclick=\"startFollowing( '" + username + "' )\">Follow</button>";
+            document.querySelector("div#following_btn").innerHTML = btn;
+        }
     });
 
 }

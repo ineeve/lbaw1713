@@ -7,7 +7,11 @@
         <div class="collapse show collapsible" id="sections_list">
           <ul class="nav nav-pills flex-column left-pane">
             <li class="nav-item">
-              <a href="#" role="button" data-toggle="tab" name="All" class="nav-link active section_item">
+              <a href="#" role="button" data-toggle="tab" name="for_you" class="nav-link active section_item">
+                <i class="fas fa-heart"></i> For You</a>
+            </li>
+            <li class="nav-item">
+              <a href="#" role="button" data-toggle="tab" name="All" class="nav-link section_item">
                 <i class="fa fa-bullseye"></i> All</a>
             </li>
             @foreach ($sections as $section)

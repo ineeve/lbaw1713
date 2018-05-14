@@ -9,7 +9,7 @@ jQuery(document).ready(function () {
         let section = $('#sections_list a.active').attr('name');
         order = $(this).attr('name');
         $('#sort-option').attr('name',order);
-        let searchedText = $("#searchedText")[0].innerText.trim();
+        let searchedText = $("input[name=searchText]")[0].innerText.trim();
         if (section != null){
             jQuery.ajax({
                 url: "/api/news/section/" + section + "/order/" + order + "/offset/0",

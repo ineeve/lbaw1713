@@ -28,6 +28,10 @@ Route::get('/', function () {
     Route::get('/api/reports/news', 'ReporteditemController@getReports');
     // get comments reports
     Route::get('/api/reports/comments', 'ReporteditemController@getReportsComments');
+    // get specific report
+    Route::get('/reports/{id}', 'ReporteditemController@showReport');
+
+
 // USER PAGES
     // see a user
     Route::get('/users/{username}', 'UserController@show');
