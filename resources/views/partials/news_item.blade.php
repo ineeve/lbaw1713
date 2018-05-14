@@ -10,6 +10,7 @@
       <div class="container mt-4">
         <div class="row">
           <!-- ARTICLE OPTIONS -->
+          <!-- TODO: ADD moderetor option -->
           <div class="col-12 col-md-1 px-0">
             <div name="newsOptions" title="Vote and manage this news">
               <div class="d-flex flex-md-column justify-content-center flex-row align-items-center mt-md-5" name="vote" title="Use to vote on the news" style="font-size:1.5em">
