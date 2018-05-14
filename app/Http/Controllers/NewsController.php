@@ -48,12 +48,37 @@ class NewsController extends Controller
         ORDER BY votes DESC LIMIT 10 OFFSET ?", [$searchText, $offset]);
     }
 
+    private function getUserSectionsArray() {
+      $userSections = DB::select('SELECT name
+        FROM Sections
+          INNER JOIN UserInterests ON Sections.id = UserInterests.section_id
+        WHERE UserInterests.user_id = ?', [Auth::user()->id]);
+      $userSectionsArray = [];
+      for ($i = 0; $i < count($userSections); $i++) {
+        array_push($userSectionsArray, $userSections[$i]->name);
+      }
+      return $userSectionsArray;
+    }
+
+    private function getQueryBindings($numBindings) {
+      return implode(',', array_fill(0, $numBindings, '?'));
+    }
+
     private function getNewsByPopularity($section, $offset) {
       if(strcmp($section, 'All') == 0) {
         return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
           FROM news NATURAL JOIN newspoints JOIN users ON news.author_id = users.id
           WHERE NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
           ORDER BY newspoints.points DESC LIMIT 10 OFFSET ?', [$offset]);
+      } else if (strcmp($section, 'for_you') == 0) {
+        $selectInputs = $this->getUserSectionsArray();
+        $userSectionsBindings = $this->getQueryBindings(count($selectInputs));
+        array_push($selectInputs, $offset);
+        return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
+          FROM news NATURAL JOIN newspoints JOIN users ON news.author_id = users.id
+            INNER JOIN sections ON news.section_id = sections.id
+          WHERE sections.name IN (' . $userSectionsBindings . ') AND NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
+          ORDER BY newspoints.points DESC LIMIT 10 OFFSET ?', $selectInputs);
       } else {
         return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
           FROM news NATURAL JOIN newspoints JOIN users ON news.author_id = users.id
