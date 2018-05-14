@@ -25,7 +25,7 @@ class AdminController extends Controller
     private function getUsersTab($pageNumber,$itemsPerPage){
         $users = $this->getUserList('id',$pageNumber,$itemsPerPage);
         $total = $this->getTotalNumberOfUsers();
-        return view('pages.admin', 
+        return view('partials.admin_users_tab', 
             ['users' => $users,
             'total' => $total,
             'currentPage'=>$pageNumber,
@@ -43,6 +43,12 @@ class AdminController extends Controller
         //todo::check permissions
         $currentPage = 1;
         $itemsPerPage = 10;
-        return $this->getUsersTab($currentPage,$itemsPerPage);
+        $users = $this->getUserList('id',$currentPage,$itemsPerPage);
+        $total = $this->getTotalNumberOfUsers();
+        return view('pages.admin', 
+            ['users' => $users,
+            'total' => $total,
+            'currentPage'=>$currentPage,
+            'itemsPerPage'=>$itemsPerPage]);
     }
 }
