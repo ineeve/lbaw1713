@@ -156,13 +156,25 @@ class UserController extends Controller
     }
 
     public function startFollowing($username) {
+      $user = $this->queryUser($username);
+
       DB::insert('INSERT INTO Follows (follower_user_id, followed_user_id)
-                    VALUES (?, ?)', [Auth::user()->id, $username]);
+                    VALUES (?, ?)', [Auth::user()->id, $user->id]);
+
+      $status_code = 200;
+      $data = [];
+      return Response::json($data, $status_code);
     }
 
     public function stopFollowing($username) {
+      $user = $this->queryUser($username);
+
       DB::insert('DELETE FROM Follows
-      WHERE follower_user_id = ? AND followed_user_id = ?', [Auth::user()->id, $username]);
+      WHERE follower_user_id = ? AND followed_user_id = ?', [Auth::user()->id, $user->id]);
+
+      $status_code = 200;
+      $data = [];
+      return Response::json($data, $status_code);
     }
 
     protected function validator(array $data)
