@@ -8,19 +8,19 @@
         <div class="collapse show collapsible-lg" id="sections_list">
             <ul class="nav nav-pills flex-column left-pane">
                 <li class="nav-item">
-                    <a href="#users" role="button" data-toggle="tab" class="nav-link active">
+                    <a href="#users_tab" role="button" data-toggle="tab" class="nav-link active">
                         <i class="fa fa-bullseye"></i> Users</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#categories" role="button" data-toggle="tab" class="nav-link">
+                    <a href="#categories_tab" role="button" data-toggle="tab" class="nav-link">
                         <i class="fa fa-laptop"></i> Categories</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#badges" role="button" data-toggle="tab" class="nav-link">
+                    <a href="#badges_tab" role="button" data-toggle="tab" class="nav-link">
                         <i class="fa fa-flask"></i> Badges</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#statistics" role="button" data-toggle="tab" class="nav-link">
+                    <a href="#statistics_tab" role="button" data-toggle="tab" class="nav-link">
                         <i class="fa fa-briefcase"></i> Statistics</a>
                 </li>
             </ul>
