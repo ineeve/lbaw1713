@@ -115,6 +115,39 @@ function getPreviousFollowing(username) {
 
 }
 
+function createPaginationHandlers(){
+    console.log("entrou!!!!");
+    let usersPaginationItems = [...document.querySelectorAll('.page-link')]
+    if(usersPaginationItems!=null){
+        usersPaginationItems.forEach(pagItem=>{
+            pagItem.addEventListener('click',usersChangePage)
+        })
+    }
+}
+
+function usersChangePage(e){
+
+    let pageNumber = e.target.parentNode.value;
+    if(pageNumber != NaN){
+        if(pageNumber<=0)return;
+        
+        let username = $('input#user')[0].value;
+        console.log($('input#user'));
+        jQuery.ajax({
+            url: "/api/users/" + username + "/following",
+            method: 'get',
+            data: {
+                offset: Math.floor((pageNumber - 1)/5)
+            },
+            success: function (result) {
+                $('#my_following_users').empty();
+                $('#my_following_users').append(result.view);
+                createPaginationHandlers();
+            }
+        });
+    }
+}
+
 function startFollowing(username) {
     $.ajaxSetup({
         headers: {
@@ -151,3 +184,5 @@ function stopFollowing(username) {
     });
 
 }
+
+createPaginationHandlers();

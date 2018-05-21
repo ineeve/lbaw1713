@@ -85,7 +85,8 @@
 
       </div>
     </div>
-
+    <input id="user" type="hidden" value="{{$user->username}}"></input>
+     
     <div class="col-lg-8 col-12 mt-3 mx-2">
       <h2 class="w-100 pl-0 mb-3">Articles</h2>
       <div id="my_articles">
@@ -93,7 +94,7 @@
       </div>
       @if(!($articles_offset == 0 && $articles_count
       <=0 )) <div id="articles_pagination">
-        @include('partials.articles_pagination_btn',[$articles_offset, $articles_count])
+        @include('partials.articles_pagination_btn',[$articles_offset, $articles_count, $user])
     </div>
     @endif @else
     <p> No articles published </p>

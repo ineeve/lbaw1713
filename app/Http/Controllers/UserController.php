@@ -93,7 +93,7 @@ class UserController extends Controller
 
       $news = $this->queryArticles($username, 0);
 
-      $articles_count = count($this->queryAllArticles($username)) - 5;
+      $articles_count = ceil(count($this->queryAllArticles($username))/ 5);
 
       $following = $this->queryFollowing($username, 0);
 
