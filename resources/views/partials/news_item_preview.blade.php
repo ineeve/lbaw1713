@@ -7,7 +7,7 @@
         <div class="col">
             <div class="row">
                 <a class="nounderline" style="color:inherit;" href="{{ url('news/'.$item->id) }}">
-                    <h3 class="font-weight-normal">{{ $item->title }}</a>
+                    <h3 class="font-weight-normal">{{ $item->title }}</h3></a>
             </div>
             <div class="row">
                 <p>
