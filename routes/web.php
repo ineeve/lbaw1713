@@ -52,8 +52,11 @@ Route::delete('/api/settings/notifications/{notification}', 'UserController@deac
 Route::post('/api/settings/interests', 'UserController@addInterest')->name('add_interest');
 Route::delete('/api/settings/interests', 'UserController@removeInterest')->name('remove_interest');
 //ADMIN PAGES
-Route::get('/admin','AdminController@show')->name('show_admin_page');
-Route::get('/admin/users','AdminController@getUsersTabRoute');
+Route::get('/adm','AdminController@show')->name('show_admin_page');
+Route::get('/adm/users','AdminController@getUsersTabRoute');
+Route::put('/adm/users/{username}/promote','AdminController@promoteUser');
+Route::put('/adm/users/{username}/demote','AdminController@demoteUser');
+Route::put('/adm/users/{username}/ban','AdminController@banUser');
 
 
 // // Authentication

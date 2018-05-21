@@ -10,10 +10,10 @@
         <!-- TODO: Alterar vista -->
           <ul class="nav nav-pills flex-column left-pane">
             <li class="nav-item">
-              <a class="nav-link active" data-toggle="tab" href="#news-reports">News</a>
+              <a id="TAB_news" class="nav-link active" data-toggle="tab" href="#news-reports">News</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#comments-reports">Comments</a>
+              <a id="TAB_coms" class="nav-link" data-toggle="tab" href="#comments-reports">Comments</a>
             </li>
           </ul>
         </div>
@@ -55,20 +55,7 @@
                   </table>
                 </div>
               </div>
-              <div class="row mt-2">
-                <div class="col-12">
-                  <div class="col-centered">
-                    <ul class="pagination pagination-sm">
-                      <li id="p" class="page-item disabled">
-                        <a  class="page-link" href="#" onClick="getPreviousArticles(event);">&laquo;</a>
-                      </li>
-                      <li id="n" class="page-item">
-                        <a  class="page-link" href="#" onClick="getNextArticles(event);">&raquo;</a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+              @include('partials.nav_news')
             </div>
           </div>
 
@@ -106,20 +93,8 @@
                   </table>
                 </div>
               </div>
-              <div class="row mt-2">
-                <div class="col-12">
-                  <div class="col-centered">
-                    <ul class="pagination pagination-sm">
-                      <li id="pComments" class="page-item disabled">
-                        <a  class="page-link" href="#" onClick="getPreviousComments(event);">&laquo;</a>
-                      </li>
-                      <li id="nComments" class="page-item">
-                        <a  class="page-link" href="#" onClick="getNextComments(event);">&raquo;</a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+
+              @include('partials.nav_comments')
             </div>
           </div>
         </div>
