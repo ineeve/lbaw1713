@@ -15,7 +15,11 @@
           <div class="row">
             <div class="container ml-0 d-flex justify-content-between">
               <h1 class="current_section">
-                <i class="fas fa-heart"></i> For You
+                @if ($currentSection === 'for_you')
+                  <i class="fas fa-heart"></i> For You
+                @else
+                  <i class="fas fa-bullseye"></i> All
+                @endif
               </h1>
               <!-- Sort News Dropdown -->
               @include('partials.sort_news_dropdown')

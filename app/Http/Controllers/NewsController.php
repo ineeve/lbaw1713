@@ -214,8 +214,8 @@ class NewsController extends Controller
       }
       $news = $this->getNews($initial_page, self::MOST_POPULAR, 0);
       $sections = DB::select('SELECT icon, name FROM Sections');
-
-      return view('pages.news', ['news' => $news, 'sections' => $sections]);
+      
+      return view('pages.news', ['news' => $news, 'sections' => $sections, 'currentSection' => $initial_page]);
     }
 
     public function show($id)
