@@ -74,6 +74,45 @@ class ReporteditemController extends Controller
         LIMIT 5 OFFSET ?;
         ',[$offset]);
       }
+      public function totalNews() {
+        return DB::select(';WITH r AS
+        (
+           SELECT *, ROW_NUMBER() OVER (PARTITION BY news_id ORDER BY date DESC) AS rn
+           FROM reporteditems
+        )
+        SELECT count(*) AS n
+        FROM r
+        JOIN news AS n ON (r.news_id = n.id)
+        JOIN users AS u ON (n.author_id = u.id)
+        JOIN (SELECT r.news_id, count(r.id) AS numberReports
+            FROM reporteditems AS r 
+            WHERE (r.comment_id IS NULL)
+            GROUP BY r.news_id
+            ORDER BY r.news_id)
+            AS b ON (b.news_id = r.news_id)
+        WHERE rn = 1;
+        ')[0]->n;
+      }
+      //TODO CHANGE
+      public function totalComments() {
+        return DB::select(';WITH r AS
+        (
+           SELECT *, ROW_NUMBER() OVER (PARTITION BY comment_id ORDER BY date DESC) AS rn
+           FROM reporteditems
+        )
+        SELECT count(*) AS n
+        FROM r
+        JOIN comments AS n ON (r.comment_id = n.id)
+        JOIN users AS u ON (n.creator_user_id = u.id)
+        JOIN (SELECT r.comment_id, count(r.id) AS numberReports
+            FROM reporteditems AS r 
+            WHERE (r.news_id IS NULL)
+            GROUP BY r.comment_id
+            ORDER BY r.comment_id)
+            AS b ON (b.comment_id = r.comment_id)
+        WHERE rn = 1;
+        ')[0]->n;
+      }
 
     public function show() {
         $this->authorize('show', Reporteditem::class);
@@ -81,7 +120,11 @@ class ReporteditemController extends Controller
         $reports = $this->queryArticleReports(0);
         $commentsReports = $this->queryCommentsReports(0);
         // print_r($reports);
-        return view('pages.reports',['newsreports' => $reports, 'commentreports' => $commentsReports]);
+        $currentPageNews = 1;
+        $currentPageComments = 1;
+        $numberNews = $this->totalNews()/5;
+        $numberComments = $this->totalComments()/5;
+        return view('pages.reports',['newsreports' => $reports, 'commentreports' => $commentsReports,'currentPageNews'=>$currentPageNews,'currentPageComments'=>$currentPageComments,'numberOfPagesNews'=>$numberNews,'numberOfPagesComments'=>$numberComments]);
     }
     
     public function getReports() {
@@ -89,11 +132,17 @@ class ReporteditemController extends Controller
         $reports = $this->queryArticleReports($report_offset);
         $report_offset = $report_offset + count($reports);
         $status_code = 200; // TODO: change if not found!
+        $currentPageNews = ($report_offset/5);
+        $numberOfPagesNews = $this->totalNews()/5;
         $data = [
             'view' => View::make('partials.reports_list')
                 ->with('newsreports', $reports)
                 ->render(),
-            'offset' => $report_offset
+            'offset' => $report_offset,
+            'nav_news' => View::make('partials.nav_news')
+            ->with('currentPageNews', $currentPageNews)
+            ->with('numberOfPagesNews', $numberOfPagesNews)
+            ->render()
         ];
         return Response::json($data, $status_code);
       }
@@ -102,11 +151,16 @@ class ReporteditemController extends Controller
         $reports = $this->queryCommentsReports($report_offset);
         $report_offset = $report_offset + count($reports);
         $status_code = 200; // TODO: change if not found!
+        $currentPageComments = ($report_offset/5);
+        $numberOfPagesComments = $this->totalComments()/5;
         $data = [
             'view' => View::make('partials.report_list_comment')
                 ->with('commentreports', $reports)
                 ->render(),
-            'offset' => $report_offset
+            'offset' => $report_offset,
+            'nav_comments' => View::make('partials.nav_comments')->with('currentPageComments', $currentPageComments)
+            ->with('numberOfPagesComments', $numberOfPagesComments)
+            ->render()
         ];
         return Response::json($data, $status_code);
       }
