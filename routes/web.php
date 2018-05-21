@@ -45,6 +45,13 @@ Route::get('/', function () {
     Route::get('api/users/{username}/following/', 'UserController@getFollowing');
     Route::post('api/users/{username}/start_following/', 'UserController@startFollowing');
     Route::post('api/users/{username}/stop_following/', 'UserController@stopFollowing');
+
+    // Password Reset Routes...
+    $this->get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+    $this->post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+    $this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+    $this->post('password/reset', 'Auth\ResetPasswordController@reset');
+
 // SETTINGS PAGES
 Route::get('/settings', 'UserController@showSettings')->name('show_settings');
 Route::post('/api/settings/notifications/{notification}', 'UserController@activateNotification'); // activate notification type
