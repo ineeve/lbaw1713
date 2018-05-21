@@ -31,8 +31,33 @@ class AdminController extends Controller
             'currentPage'=>$pageNumber,
             'itemsPerPage'=>$itemsPerPage]);
     }
+
+    public function promoteUser(Request $request, $username){
+        //todo::checkPermissions
+        $user = User::where('username', $username)->firstOrFail();
+        if($user->permission == 'normal'){
+            $user->permission = 'moderator';
+        }else{
+            $user->permission = 'admin';
+        }
+        $user->save();
+        return view('partials.admin_user_row',['user'=>$user]);
+    }
+    public function demoteUser(Request $request, $username){
+        $user = User::where('username', $username)->firstOrFail();
+        if($user->permission == 'moderator'){
+            $user->permission = 'normal';
+        }
+        $user->save();
+        return view('partials.admin_user_row',['user'=>$user]);
+    }
+    public function banUser(Request $request, $username){
+        $user = User::where('username', $username)->firstOrFail();
+        
+    }
     
     public function getUsersTabRoute(Request $request){
+        //todo::checkPermissions
         $pageNumber = $request->pageNumber;
         $itemsPerPage=$request->itemsPerPage;
         return $this->getUsersTab($pageNumber,$itemsPerPage);
