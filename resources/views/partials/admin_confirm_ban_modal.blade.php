@@ -10,7 +10,7 @@
           <div class="modal-body">
             <form>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Description">
+                <input type="text" class="form-control" placeholder="Describe the reasons to ban user">
               </div>
               
               <button type="submit" class="btn btn-primary float-right">Search</button>
