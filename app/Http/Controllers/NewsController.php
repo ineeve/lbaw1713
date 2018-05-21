@@ -73,7 +73,7 @@ class NewsController extends Controller
           FROM news NATURAL JOIN newspoints JOIN users ON news.author_id = users.id
           WHERE NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
           ORDER BY newspoints.points DESC LIMIT 10 OFFSET ?', [$offset]);
-      } else if (strcmp($section, 'for_you') == 0) {
+      } else if (strcmp($section, 'For You') == 0) {
         $selectInputs = $this->getUserSectionsArray();
         $userSectionsBindings = $this->getQueryBindings(count($selectInputs));
         array_push($selectInputs, $offset);
@@ -97,7 +97,7 @@ class NewsController extends Controller
           FROM news JOIN users ON news.author_id = users.id
           WHERE NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
           ORDER BY date DESC LIMIT 10 OFFSET ?', [$offset]);
-      } else if (strcmp($section, 'for_you') == 0) {
+      } else if (strcmp($section, 'For You') == 0) {
         $selectInputs = $this->getUserSectionsArray();
         $userSectionsBindings = $this->getQueryBindings(count($selectInputs));
         array_push($selectInputs, $offset);
@@ -121,7 +121,7 @@ class NewsController extends Controller
             FROM news JOIN users ON news.author_id = users.id
             WHERE NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
             ORDER BY votes DESC LIMIT 10 OFFSET ?', [$offset]);
-      } else if (strcmp($section, 'for_you') == 0) {
+      } else if (strcmp($section, 'For You') == 0) {
         $selectInputs = $this->getUserSectionsArray();
         $userSectionsBindings = $this->getQueryBindings(count($selectInputs));
         array_push($selectInputs, $offset);
@@ -208,7 +208,7 @@ class NewsController extends Controller
 
     public function getNewsHomepage() {
       if (Auth::check()) {
-        $initial_page = 'for_you';
+        $initial_page = 'For You';
       } else {
         $initial_page = 'All';
       }

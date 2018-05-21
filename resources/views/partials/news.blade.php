@@ -15,7 +15,7 @@
           <div class="row">
             <div class="container ml-0 d-flex justify-content-between">
               <h1 class="current_section">
-                @if ($currentSection === 'for_you')
+                @if ($currentSection === 'For You')
                   <i class="fas fa-heart"></i> For You
                 @else
                   <i class="fas fa-bullseye"></i> All

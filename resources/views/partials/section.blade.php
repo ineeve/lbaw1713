@@ -7,7 +7,7 @@
         <div class="collapse show collapsible" id="sections_list">
           <ul class="nav nav-pills flex-column left-pane">
             <li class="nav-item">
-              <a href="#" role="button" data-toggle="tab" name="for_you" class="nav-link section_item {{ $currentSection == 'for_you' ? 'active' : '' }}">
+              <a href="#" role="button" data-toggle="tab" name="for_you" class="nav-link section_item {{ $currentSection == 'For You' ? 'active' : '' }}">
                 <i class="fas fa-heart"></i> For You</a>
             </li>
             <li class="nav-item">
