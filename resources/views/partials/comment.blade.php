@@ -7,7 +7,10 @@
           style="max-height: 70px; max-width: 70px;" alt="{{ $comment->commentator }}'s picture">
       </div>
       <div>
-        <div class="owner"> {{ $comment->commentator }}</div>
+        <!-- <div class="owner"> {{ $comment->commentator }}</div> -->
+        <a class="nounderline owner" style="color:inherit;" href="{{ url('users/'.$comment->commentator) }}">
+          <span class="font-weight-bold">{{ $comment->commentator }} </span>
+        </a>
         <time class="date"> {{ date("F jS, Y \a\\t H:i", strtotime($comment->date)) }}</time>
       </div>
       <div class="ml-auto">
