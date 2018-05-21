@@ -207,7 +207,12 @@ class NewsController extends Controller
     }
 
     public function getNewsHomepage() {
-      $news = $this->getNews('for_you', self::MOST_POPULAR, 0);
+      if (Auth::check()) {
+        $initial_page = 'for_you';
+      } else {
+        $initial_page = 'All';
+      }
+      $news = $this->getNews($initial_page, self::MOST_POPULAR, 0);
       $sections = DB::select('SELECT icon, name FROM Sections');
 
       return view('pages.news', ['news' => $news, 'sections' => $sections]);
