@@ -72,6 +72,12 @@ class UserController extends Controller
       JOIN users ON users.id = achievements.user_id
       WHERE users.username = ? LIMIT 6 OFFSET ?;',[$username, $offset]);
     }
+
+    public function queryNthBadges($username, $n) {
+      return DB::select('SELECT badges.id as badge_id, name, brief, votes, comments, articles FROM badges JOIN achievements ON badges.id = achievements.badge_id
+      JOIN users ON users.id = achievements.user_id
+      WHERE users.username = ? LIMIT ? OFFSET 0;',[$username, $n]);
+    }
     
     public function show($username)
     {
@@ -80,6 +86,8 @@ class UserController extends Controller
 
       $total_badges = (DB::select('SELECT count(*)
       FROM badges;'))[0]->count;
+
+      $nth_badges = $this->queryNthBadges($username, 6);
 
       $achieved_badges = $this->queryBadges($username, 0);
 
@@ -96,6 +104,7 @@ class UserController extends Controller
 
       return view('pages.profile', ['user' => $user,
        'total_badges' => $total_badges,
+       'nth_badges' => $nth_badges,
        'achieved_badges' => $achieved_badges,
        'news' => $news,
        'articles_count' => $articles_count,

@@ -18,8 +18,19 @@ class ReporteditemController extends Controller
         // $reports = $this->queryArticleReports(0);
         // $commentsReports = $this->queryCommentsReports(0);
         // print_r($reports);
-        $news_id = 713;
+        $separate =  DB::select('SELECT news_id, comment_id FROM reporteditems WHERE id = ?',[$id]);
+        if($separate == null) return redirect('error/404');
+        if($separate[0]->news_id != null){
+            $news_id = $separate[0]->news_id;
+            return $this->showReportOfNews($news_id);
+        } elseif($separate[0]->comment_id != null){
+            $comment_id = $separate[0]->comment_id;
+            return $this->showReportOfComments($comment_id);
+        }
+        return redirect('error/404');
+    }
 
+    public function showReportOfNews($news_id) {
         $info =  DB::select('SELECT title, date, author_id, news.id, username FROM news JOIN users ON (author_id = users.id) WHERE news.id = ?',[$news_id]);
 
         $descriptions = DB::select('SELECT description FROM reporteditems WHERE news_id = ?',[$news_id]);
@@ -27,7 +38,20 @@ class ReporteditemController extends Controller
         $comments = DB::select('SELECT  news_id, moderatorcomments.id, text, date, username AS commentator, Users.picture AS commentator_picture FROM moderatorcomments JOIN users ON(creator_user_id = users.id) WHERE news_id = ? ORDER BY date DESC',[$news_id]);
 
         $reasons = DB::select('SELECT reason, count(*) AS number FROM reasonsforreport WHERE reported_item_id IN ( SELECT id FROM reporteditems WHERE news_id = ?) GROUP BY reason',[$news_id]);
-        return view('pages.report',['comments' => $comments, 'reasons' => $reasons, 'descriptions' => $descriptions, 'info' => $info[0]]);
+        $route_mod_comment = '/api/news/'.$news_id.'/mod/create_comment';
+        return view('pages.report',['comments' => $comments, 'reasons' => $reasons, 'descriptions' => $descriptions, 'info' => $info[0],'route_mod_comment'=>$route_mod_comment]);
+    }
+    public function showReportOfComments($comment_id) {
+        $info =  DB::select('SELECT target_news_id AS news_id, comments.id AS title, date, creator_user_id, username FROM comments JOIN users ON (creator_user_id = users.id) WHERE comments.id = ?',[$comment_id]);
+
+        $descriptions = DB::select('SELECT description FROM reporteditems WHERE comment_id = ?',[$comment_id]);
+
+        $comments = DB::select('SELECT  news_id, comment_id, moderatorcomments.id, text, date, username AS commentator, Users.picture AS commentator_picture FROM moderatorcomments JOIN users ON(creator_user_id = users.id) WHERE comment_id = ? ORDER BY date DESC',[$comment_id]);
+
+        $reasons = DB::select('SELECT reason, count(*) AS number FROM reasonsforreport WHERE reported_item_id IN ( SELECT id FROM reporteditems WHERE comment_id = ?) GROUP BY reason',[$comment_id]);
+    
+        $route_mod_comment = '/api/news/'.$info[0]->news_id.'/comments/'.$comment_id.'/mod/create_comment';
+        return view('pages.report',['comments' => $comments, 'reasons' => $reasons, 'descriptions' => $descriptions, 'info' => $info[0],'route_mod_comment'=>$route_mod_comment]);
     }
 
     public function queryArticleReports($offset) {

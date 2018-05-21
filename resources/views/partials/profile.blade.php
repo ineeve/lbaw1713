@@ -17,16 +17,16 @@
                 <h5 class="ml-2 mt-2">Edit Profile</h5>
               </div>
             </a>
-            
-            @else 
-            <div id="following_btn">
-            @if (Auth::user()->following($user->username))
-            <button type="button" class="btn btn-outline-primary" onclick="stopFollowing( '{{ $user->username }}' )">Following</button>
+
             @else
-            <button type="button" class="btn btn-primary" onclick="startFollowing( '{{ $user->username }}' )">Follow</button>
-            @endif
+            <div id="following_btn">
+              @if (Auth::user()->following($user->username))
+              <button type="button" class="btn btn-outline-primary" onclick="stopFollowing( '{{ $user->username }}' )">Following</button>
+              @else
+              <button type="button" class="btn btn-primary" onclick="startFollowing( '{{ $user->username }}' )">Follow</button>
+              @endif
             </div> @endif
-            
+
           </div>
         </div>
         <div class="row">
@@ -79,25 +79,7 @@
         </div>
 
         <div class="d-flex flex-wrap flex-row mx-auto mt-3" data-toggle="modal" data-target="#badgesModal" style="cursor:pointer">
-          @if ($achieved_badges != null)
-          <?php 
-              $max = 6;
-              if(count($achieved_badges) < 6) {
-                $max = count($achieved_badges);
-              }
-              for ($x = 0; $x < $max; $x++) {?>
-
-          <div class="badge">
-            <img alt="Icon" src="http://icons.iconarchive.com/icons/seanau/fresh-web/128/Badge-icon.png" width="80" height="80">
-            <h3>
-              <?= $achieved_badges[$x]->name ?>
-            </h3>
-            <p>
-              <?= $achieved_badges[$x]->brief ?>
-            </p>
-          </div>
-
-          <?php } ?> @endif
+          @if ($achieved_badges != null) @foreach ($nth_badges as $badge) @include('partials.nth_badges',[$badge]) @endforeach @endif
 
         </div>
 
