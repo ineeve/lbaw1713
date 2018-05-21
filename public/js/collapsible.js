@@ -24,4 +24,10 @@ $(document).ready(function() {
     } else {
         $('.collapsible').removeClass('show');
     }
+
+    if (maxSize == 'lg' || maxSize == 'xl') {
+        $('.collapsible-lg').addClass('show');
+    } else {
+        $('.collapsible-lg').removeClass('show');
+    }
 })

@@ -121,3 +121,6 @@ Route::get('notifications/{id}', 'NotificationController@process');
 Route::post('news/{id}/report', 'NewsController@reportItem');
 //Report comment
 Route::post('news/{news_id}/comments/{comment_id}/report','NewsController@reportItem');
+       
+Route::post('/api/news/{news_id}/comments/{comment_id}/mod/create_comment','ModeratorcommentController@createcomments');
+Route::post('/api/news/{news_id}/mod/create_comment','ModeratorcommentController@createnews');

@@ -73,7 +73,7 @@ class NewsController extends Controller
           FROM news NATURAL JOIN newspoints JOIN users ON news.author_id = users.id
           WHERE NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
           ORDER BY newspoints.points DESC LIMIT 10 OFFSET ?', [$offset]);
-      } else if (strcmp($section, 'for_you') == 0) {
+      } else if (strcmp($section, 'For You') == 0) {
         $selectInputs = $this->getUserSectionsArray();
         $userSectionsBindings = $this->getQueryBindings(count($selectInputs));
         array_push($selectInputs, $offset);
@@ -97,7 +97,7 @@ class NewsController extends Controller
           FROM news JOIN users ON news.author_id = users.id
           WHERE NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
           ORDER BY date DESC LIMIT 10 OFFSET ?', [$offset]);
-      } else if (strcmp($section, 'for_you') == 0) {
+      } else if (strcmp($section, 'For You') == 0) {
         $selectInputs = $this->getUserSectionsArray();
         $userSectionsBindings = $this->getQueryBindings(count($selectInputs));
         array_push($selectInputs, $offset);
@@ -121,7 +121,7 @@ class NewsController extends Controller
             FROM news JOIN users ON news.author_id = users.id
             WHERE NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
             ORDER BY votes DESC LIMIT 10 OFFSET ?', [$offset]);
-      } else if (strcmp($section, 'for_you') == 0) {
+      } else if (strcmp($section, 'For You') == 0) {
         $selectInputs = $this->getUserSectionsArray();
         $userSectionsBindings = $this->getQueryBindings(count($selectInputs));
         array_push($selectInputs, $offset);
@@ -207,10 +207,15 @@ class NewsController extends Controller
     }
 
     public function getNewsHomepage() {
-      $news = $this->getNews('for_you', self::MOST_POPULAR, 0);
+      if (Auth::check()) {
+        $initial_page = 'For You';
+      } else {
+        $initial_page = 'All';
+      }
+      $news = $this->getNews($initial_page, self::MOST_POPULAR, 0);
       $sections = DB::select('SELECT icon, name FROM Sections');
-
-      return view('pages.news', ['news' => $news, 'sections' => $sections]);
+      
+      return view('pages.news', ['news' => $news, 'sections' => $sections, 'currentSection' => $initial_page]);
     }
 
     public function show($id)

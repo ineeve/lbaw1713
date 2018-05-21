@@ -1,3 +1,11 @@
+<form class="mt-3 mb-4" method="POST" 
+action="{{$route_mod_comment}}">
+            {{ csrf_field() }}
+            <div class="form-group">
+              <textarea class="form-control" name="text" id="text" rows="3" placeholder="Comment"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Post</button>
+          </form>
 @foreach ($comments as $comment)
 <div id="commentNo{{$comment->id}}" style="display: block;" class="news_box card border-0 my-3 col-12">
   <div class="card-body p-0">
@@ -9,20 +17,7 @@
       <div>
         <div class="owner"> {{ $comment->commentator }}</div>
         <time class="date"> {{ date("F jS, Y \a\\t H:i", strtotime($comment->date)) }}</time>
-      </div>
-      <div class="ml-auto">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
-          <!-- <i class="fa fa-angle-down" ></i> -->
-        </a>
-        <div class="dropdown-menu" x-placement="bottom-start">
-        @if(Auth::user()->username == $comment->commentator)
-              <!-- Edit -->
-              <a class="dropdown-item editCommentForm" name="{{$comment->id}}" href="/api/news/{{$comment->news_id}}/comments/{{$comment->id}}">Edit</a>
-              <!-- Delete -->
-              <a class="dropdown-item deleteComment" href="/api/news/{{$comment->news_id}}/comments/{{$comment->id}}">Delete</a>
-          @endif
-        </div>
-      </div>
+      </div> 
     </div>
     <div class="row">
       <div class="col">
