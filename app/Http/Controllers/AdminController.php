@@ -52,8 +52,11 @@ class AdminController extends Controller
         return view('partials.admin_user_row',['user'=>$user]);
     }
     public function banUser(Request $request, $username){
-        $user = User::where('username', $username)->firstOrFail();
-        
+        $adminBanning = Auth::user();
+        $bannedUser = User::where('username', $username)->firstOrFail();
+        if (count(DB::table('Bans')->where('banned_user_id', $bannedUser->id)) > 0) {
+            DB::insert('INSERT INTO Bans (banned_user_id, admin_user_id, reason) VALUES (?, ?, ?)', [$bannedUser->id, $adminBanning->id, $request->reason]);
+        }
     }
     
     public function getUsersTabRoute(Request $request){
