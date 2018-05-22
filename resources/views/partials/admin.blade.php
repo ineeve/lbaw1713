@@ -1,4 +1,5 @@
 <script src="{{ asset('js/admin.js') }}" defer></script>
+
 <div class="container-fluid">
     <div class="row mt-2">
         @include('partials.admin_left_section')
