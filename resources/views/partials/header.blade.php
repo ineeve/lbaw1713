@@ -50,10 +50,12 @@
                     <i class="fas fa-user">
                     </i> Profile
                   </a>
-                  <a class="dropdown-item" href="/reports">
-                    <i class="fas fa-university">
-                    </i> Forum
-                  </a>
+                  @can('mod', Auth::user())
+                    <a class="dropdown-item" href="/reports">
+                      <i class="fas fa-university">
+                      </i> Forum
+                    </a>
+                  @endcan
                   <a class="dropdown-item" href="{{ route('show_settings') }}">
                     <i class="fas fa-cog">
                     </i> Settings
