@@ -11,7 +11,11 @@ class UserPolicy
 
     public function admin(User $user) {
         return $user->permission === 'admin';
-      }
+    }
+
+    public function mod(User $user) {
+        return $user->permission === 'mod' || $user->permission === 'admin';
+    }
 
     public function update(User $user, User $user1)
     {
