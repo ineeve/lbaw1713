@@ -115,38 +115,7 @@ function getPreviousFollowing(username) {
 
 }
 
-function createPaginationHandlers(){
-    console.log("entrou!!!!");
-    let usersPaginationItems = [...document.querySelectorAll('.page-link')]
-    if(usersPaginationItems!=null){
-        usersPaginationItems.forEach(pagItem=>{
-            pagItem.addEventListener('click',usersChangePage)
-        })
-    }
-}
 
-function usersChangePage(e){
-
-    let pageNumber = e.target.parentNode.value;
-    if(pageNumber != NaN){
-        if(pageNumber<=0)return;
-        
-        let username = $('input#user')[0].value;
-        console.log($('input#user'));
-        jQuery.ajax({
-            url: "/api/users/" + username + "/following",
-            method: 'get',
-            data: {
-                offset: Math.floor((pageNumber - 1)/5)
-            },
-            success: function (result) {
-                $('#my_following_users').empty();
-                $('#my_following_users').append(result.view);
-                createPaginationHandlers();
-            }
-        });
-    }
-}
 
 function startFollowing(username) {
     $.ajaxSetup({
@@ -183,6 +152,53 @@ function stopFollowing(username) {
         }
     });
 
+}
+
+function createPaginationHandlers(){
+    let usersPaginationItems = [...document.querySelectorAll('.page-link')]
+    if(usersPaginationItems!=null){
+        usersPaginationItems.forEach(pagItem=>{
+            pagItem.addEventListener('click',articlesChangePage)
+        })
+    }
+}
+
+function articlesChangePage(e){
+
+    let pageNumber = e.target.parentNode.value;
+    if(pageNumber != NaN){
+        if(pageNumber<=0)return;
+        
+        let username = $('input#user')[0].value;
+        console.log(e.target.parentNode);
+        jQuery.ajax({
+            url: "/api/users/" + username + "/articles",
+            method: 'get',
+            data: {
+                offset: Math.floor((pageNumber - 1) * 5)
+            },
+            success: function (result) {
+                $('#my_articles').empty();
+                $('#my_articles').append(result.view);
+                let elem = e.target.parentNode;
+
+                let pag = document.querySelectorAll("#profile_articles_pag li");
+                for (let i=0; i<pag.length; i++) {
+                    pag[i].classList.remove("active");
+                }
+
+                if(e.target.getAttribute('value') == 'first') {
+                    elem.nextElementSibling.classList.add('active');
+                } else if(e.target.getAttribute('value') == 'last') {
+                    elem.previousElementSibling.classList.add('active');
+                } else {
+                    elem.classList.add('active');
+                }
+                
+                createPaginationHandlers();
+            }
+        });
+    }
 }
 
 createPaginationHandlers();
