@@ -28,8 +28,8 @@ class UserController extends Controller
 
     public function queryUser($username) {
       $user = DB::select('SELECT users.id, username, email, gender, Countries.name As country, picture, points, permission
-      FROM users NATURAL JOIN countries
-      WHERE users.username = ?;',[$username]);
+      FROM Users LEFT JOIN Countries ON country_id = Countries.id
+      WHERE Users.username = ?;',[$username]);
 
       if(count($user) == 0) {
         return redirect('/error/404');

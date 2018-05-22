@@ -47,8 +47,10 @@
             </h4>
             <p class="mb-0">{{ $user->gender }}
             </p>
-            <p class="mb-0">{{ $user->country }}
-            </p>
+            @if (isset($user->country))
+              <p class="mb-0">{{ $user->country }}
+              </p>
+            @endif
             <p class="mb-0">{{ $user->email }}
             </p>
 
