@@ -24,6 +24,12 @@ class NewsController extends Controller
     const MOST_RECENT = 'RECENT';
     const MOST_VOTED = 'VOTED';
 
+    private function searchUsers($searchText, $offset) {
+      return DB::select('SELECT users.id, username, picture
+      FROM users WHERE users.username = ?
+      ORDER BY username DESC LIMIT 5 OFFSET ?;',[$searchText, $offset]);
+    }
+
     private function searchNewsByPopularity($searchText, $offset) {
       return DB::select("SELECT news.id, title, users.username As author, date, votes, image, substring(body, '(?:<p>)[^<>]*\.(?:<\/p>)') as body_preview
         FROM news NATURAL JOIN newspoints JOIN users ON news.author_id = users.id
@@ -190,6 +196,12 @@ class NewsController extends Controller
       $searchText = $request->searchText;
       $filteredNews = $this->searchNewsByPopularity($searchText, 0);
       return view('pages.searched_news',['news'=> $filteredNews, 'searchText' => $searchText]);
+    }
+
+    public function getSearchUsers(Request $request){
+      $searchText = $request->searchText;
+      $filteredUser = $this->searchUsers($searchText, 0);
+      return view('pages.searched_users',['users'=> $filteredUser, 'searchText' => $searchText]);
     }
 
     public function list($section = 'All', $order = self::MOST_POPULAR, $offset = 0) {
