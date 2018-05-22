@@ -55,7 +55,7 @@
 
 <body>
   <main>
-    @include('partials.header') @include('partials.search_modal')
+    @include('partials.header') @include('partials.modals.search_modal')
       <section id="content">
         @yield('content')
       </section>

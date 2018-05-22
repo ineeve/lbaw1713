@@ -1,5 +1,5 @@
 @if(Auth::check()) @include('partials/report_modal',$reportReasons)
-<meta name="news_id" content="{{$news->id}}"> @else @include('partials/login_modal') @endif
+<meta name="news_id" content="{{$news->id}}"> @else @include('partials/modals/login_modal') @endif
 <script src="{{ asset('js/scrollComment.js') }}" defer></script>
   <div id="newsContent" class="tab-content">
     <div class="tab-pane fade active show" id="article">
