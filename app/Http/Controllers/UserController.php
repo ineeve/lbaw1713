@@ -97,7 +97,7 @@ class UserController extends Controller
 
       $following = $this->queryFollowing($username, 0);
 
-      $following_count = count($this->queryAllFollowing($username)) - 5;
+      $following_count = ceil(count($this->queryAllFollowing($username))/ 5);
       
       $articles_offset = 0;
       $following_offset = 0;

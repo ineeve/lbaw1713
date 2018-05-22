@@ -1,3 +1,4 @@
+/*
 let articles_offset = 0;
 let following_offset = 0;
 
@@ -57,6 +58,9 @@ function getNextArticles(username) {
     }
 
 }
+*/
+
+/*
 
 function getNextFollowing(username) {
     if ($('#next_following').hasClass("clickable")) {
@@ -115,7 +119,7 @@ function getPreviousFollowing(username) {
 
 }
 
-
+*/
 
 function startFollowing(username) {
     $.ajaxSetup({
@@ -127,7 +131,6 @@ function startFollowing(username) {
         url: "/api/users/" + username + "/start_following",
         method: 'post',
         success: function (result) {
-            console.log("sucesso");
             var btn = "<button type=\"button\" class=\"btn btn-outline-primary\" onclick=\"stopFollowing( '" + username + "' )\">Following</button>";
             document.querySelector("div#following_btn").innerHTML = btn;
         }
@@ -145,7 +148,6 @@ function stopFollowing(username) {
         url: "/api/users/" + username + "/stop_following",
         method: 'post',
         success: function (result) {
-            console.log("sucesso");
             
             var btn = "<button type=\"button\" class=\"btn btn-primary\" onclick=\"startFollowing( '" + username + "' )\">Follow</button>";
             document.querySelector("div#following_btn").innerHTML = btn;
@@ -155,10 +157,17 @@ function stopFollowing(username) {
 }
 
 function createPaginationHandlers(){
-    let usersPaginationItems = [...document.querySelectorAll('.page-link')]
-    if(usersPaginationItems!=null){
-        usersPaginationItems.forEach(pagItem=>{
+    let articlesPaginationItems = [...document.querySelectorAll('ul#profile_articles_pag li .page-link')]
+    if(articlesPaginationItems!=null){
+        articlesPaginationItems.forEach(pagItem=>{
             pagItem.addEventListener('click',articlesChangePage)
+        })
+    }
+
+    let followingPaginationItems = [...document.querySelectorAll('ul#profile_following_pag li .page-link')]
+    if(followingPaginationItems!=null){
+        followingPaginationItems.forEach(pagItem=>{
+            pagItem.addEventListener('click',followingChangePage)
         })
     }
 }
@@ -170,7 +179,6 @@ function articlesChangePage(e){
         if(pageNumber<=0)return;
         
         let username = $('input#user')[0].value;
-        console.log(e.target.parentNode);
         jQuery.ajax({
             url: "/api/users/" + username + "/articles",
             method: 'get',
@@ -183,6 +191,44 @@ function articlesChangePage(e){
                 let elem = e.target.parentNode;
 
                 let pag = document.querySelectorAll("#profile_articles_pag li");
+                for (let i=0; i<pag.length; i++) {
+                    pag[i].classList.remove("active");
+                }
+
+                if(e.target.getAttribute('value') == 'first') {
+                    elem.nextElementSibling.classList.add('active');
+                } else if(e.target.getAttribute('value') == 'last') {
+                    elem.previousElementSibling.classList.add('active');
+                } else {
+                    elem.classList.add('active');
+                }
+                
+                createPaginationHandlers();
+            }
+        });
+    }
+}
+
+function followingChangePage(e){
+
+    let pageNumber = e.target.parentNode.value;
+    if(pageNumber != NaN){
+        if(pageNumber<=0)return;
+        
+        let username = $('input#user')[0].value;
+        console.log("ok");
+        jQuery.ajax({
+            url: "/api/users/" + username + "/following",
+            method: 'get',
+            data: {
+                offset: Math.floor((pageNumber - 1) * 5)
+            },
+            success: function (result) {
+                $('#my_following_users').empty();
+                $('#my_following_users').append(result.view);
+                let elem = e.target.parentNode;
+
+                let pag = document.querySelectorAll("#profile_following_pag li");
                 for (let i=0; i<pag.length; i++) {
                     pag[i].classList.remove("active");
                 }
