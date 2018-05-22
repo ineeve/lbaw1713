@@ -10,4 +10,5 @@ class ResetPasswordController extends Controller {
   
   //trait for handling reset Password
   use ResetsPasswords;
+  protected $redirectTo = '/news';
 }
