@@ -29,6 +29,11 @@
               <a class="dropdown-item reportItem" onclick="selectComment({{$comment->id}})" data-toggle="modal" data-target="#reportModal">
                 Report
               </a>
+              @if(Auth::user()->permission == 'admin' || Auth::user()->permission ==  'moderator')
+              <!-- TODO: A FAZEER COMO SE FOSSE O AUTOR  È SUPOSTO?-->
+              <a class="dropdown-item deleteComment" href="/api/news/{{$news_id}}/comments/{{$comment->id}}">Delete</a>
+            
+              @endif
             @endif
           @else
             <span class="dropdown-item" data-toggle="modal" data-target="#loginModal">
