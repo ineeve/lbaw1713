@@ -9,7 +9,7 @@
 
 
         <div class="row">
-          <div clas="col">
+          <div class="col">
             @if (Auth::check() && Auth::user()->username == $user->username)
             <a href="profile_edit.html">
               <div class="ml-3 mt-1 d-flex flex-row align-items-center">
@@ -85,7 +85,7 @@
 
       </div>
     </div>
-    <input id="user" type="hidden" value="{{$user->username}}"></input>
+    <input id="user" type="hidden" value="{{$user->username}}">
      
     <div class="col-lg-8 col-12 mt-3 mx-2">
       <h2 class="w-100 pl-0 mb-3">Articles</h2>
