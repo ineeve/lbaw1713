@@ -17,14 +17,14 @@
 
 <nav aria-label="...">
 
-                <ul class="pagination">
+                <ul id="profile_articles_pag" class="pagination">
                     <li class="page-item" value='1'>
-                        <a class="page-link" href="#">First</a>
+                        <a class="page-link" href="#" value="first">First</a>
                     </li>
                     @if(floor($articles_offset/5 + 1)<5)
                         @for($i=1;$i<floor($articles_offset/5 + 1);$i++)
                         <li class="page-item" value={{$i}}>
-                            <a class="page-link" href="#">{{$i}}</a>
+                            <a class="page-link" href="#" value={{$i}}>{{$i}} </a>
                         </li>
                         @endfor
                     @else
@@ -33,16 +33,16 @@
                         </li>
                         @for($i=floor($articles_offset/5 + 1)-3;$i< floor($articles_offset/5 + 1);$i++)
                         <li class="page-item" value={{$i}}>
-                            <a class="page-link" href="#">{{$i}}</a>
+                            <a class="page-link" href="#" value={{$i}}>{{$i}}</a>
                         </li>
                         @endfor
                     @endif
                         <li class="page-item active" value={{$i}}>
-                            <a class="page-link" href="#">{{floor($articles_offset/5 + 1)}}</a>
+                            <a class="page-link" href="#" value={{$i}}>{{floor($articles_offset/5 + 1)}}</a>
                         </li>
                         @for($i=floor($articles_offset/5 + 1)+1;$i< floor($articles_offset/5 + 1)+4&&$i<=$articles_count;$i++) 
                             <li class="page-item" value={{$i}}>
-                            <a class="page-link" href="#">{{$i}}</a>
+                            <a class="page-link" href="#" value={{$i}}>{{$i}}</a>
                             </li>
                         @endfor 
                             @if(floor($articles_offset/5 + 1)+4 <= $articles_count)
@@ -51,7 +51,7 @@
                             </li>
                             @endif
                             <li class="page-item" value={{$articles_count}}>
-                                <a class="page-link" href="#">Last</a>
+                                <a class="page-link" href="#" value='last'>Last</a>
                             </li>
                 </ul>
             </nav>
