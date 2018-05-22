@@ -17,11 +17,13 @@ class AdminController extends Controller {
     }
 
     private function getTotalNumberOfUsers(){
+        $this->authorize('admin', \Auth::user());
         return User::count();
     }
 
 
     private function getUsersTab($pageNumber,$itemsPerPage) {
+        $this->authorize('admin', \Auth::user());
         $users = $this->getUserList('id',$pageNumber,$itemsPerPage);
         $total = $this->getTotalNumberOfUsers();
         return view('partials.admin_users_tab', 
@@ -31,8 +33,8 @@ class AdminController extends Controller {
             'itemsPerPage'=>$itemsPerPage]);
     }
 
-    public function promoteUser(Request $request, $username){
-        //todo::checkPermissions
+    public function promoteUser(Request $request, $username) {
+        $this->authorize('admin', \Auth::user());
         $user = User::where('username', $username)->firstOrFail();
         if($user->permission == 'normal'){
             $user->permission = 'moderator';
@@ -42,7 +44,9 @@ class AdminController extends Controller {
         $user->save();
         return view('partials.admin_user_row',['user'=>$user]);
     }
+
     public function demoteUser(Request $request, $username){
+        $this->authorize('admin', \Auth::user());
         $user = User::where('username', $username)->firstOrFail();
         if($user->permission == 'moderator'){
             $user->permission = 'normal';
@@ -50,7 +54,9 @@ class AdminController extends Controller {
         $user->save();
         return view('partials.admin_user_row',['user'=>$user]);
     }
+
     public function banUser(Request $request, $username){
+        $this->authorize('admin', \Auth::user());
         $adminBanning = \Auth::user();
         $bannedUser = User::where('username', $username)->firstOrFail();
         if (count(DB::table('Bans')->where('banned_user_id', $bannedUser->id)) > 0) {
@@ -58,8 +64,8 @@ class AdminController extends Controller {
         }
     }
     
-    public function getUsersTabRoute(Request $request){
-        //todo::checkPermissions
+    public function getUsersTabRoute(Request $request) {
+        $this->authorize('admin', \Auth::user());
         $pageNumber = $request->pageNumber;
         $itemsPerPage=$request->itemsPerPage;
         return $this->getUsersTab($pageNumber,$itemsPerPage);
@@ -67,7 +73,7 @@ class AdminController extends Controller {
 
     public function show()
     {
-        //todo::check permissions
+        $this->authorize('admin', \Auth::user());
         $currentPage = 1;
         $itemsPerPage = 10;
         $users = $this->getUserList('id',$currentPage,$itemsPerPage);
