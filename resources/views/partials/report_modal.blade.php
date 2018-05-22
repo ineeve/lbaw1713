@@ -17,12 +17,14 @@
               <div class="mr-2 items">
                 <div class="info-block block-info clearfix">
                   <div data-toggle="buttons" class="btn-group bizmoduleselect">
-                    <label class="btn btn-primary">
+                    
                       <div class="itemcontent">
-                        <input class="no-display" type="checkbox" name="var_id[]" autocomplete="off" value="">
+                      <label class="btn btn-primary">
+                        <input class="no-display" type="checkbox" name="var_id[]" value="">
                         <h5>{{$reason}}</h5>
+                        </label>
+
                       </div>
-                    </label>
                   </div>
                 </div>
               </div>

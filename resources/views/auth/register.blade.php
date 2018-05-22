@@ -52,7 +52,7 @@
           
         <div class="form-group">
           <label for="gender">Gender:</label>
-          <select class="custom-select" id="gender" name="gender" class="form-control">
+          <select class="custom-select" id="gender" name="gender" required="required">
             <option value="" disabled selected>Select your gender</option>
             <option value="female">Female</option>
             <option value="male">Male</option>
