@@ -1,4 +1,5 @@
 <script src="{{ asset('js/reports.js') }}" defer></script>
+<script src="{{ asset('js/collapsible.js') }}" defer></script>
 
 <div class="container-fluid mt-2">
     <div class="row">
@@ -6,7 +7,7 @@
       <div class="col-xl-2 col-lg-3 col-12">
         <h3 data-toggle="collapse" data-target="#sections_list" aria-expanded="true" aria-controls="sections_list">
           <i class="fas fa-bars"></i> Reports</h3>
-        <div class="collapse" id="sections_list">
+        <div class="collapse show collapsible-lg" id="sections_list">
         <!-- TODO: Alterar vista -->
           <ul class="nav nav-pills flex-column left-pane">
             <li class="nav-item">

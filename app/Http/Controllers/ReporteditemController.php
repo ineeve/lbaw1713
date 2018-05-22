@@ -13,7 +13,7 @@ class ReporteditemController extends Controller
 {
 
     public function showReport($id) {
-        // $this->authorize('show', Reporteditem::class);
+        $this->authorize('mod', \Auth::user());
         //get All news Reports
         // $reports = $this->queryArticleReports(0);
         // $commentsReports = $this->queryCommentsReports(0);
@@ -31,6 +31,7 @@ class ReporteditemController extends Controller
     }
 
     public function showReportOfNews($news_id) {
+        $this->authorize('mod', \Auth::user());
         $info =  DB::select('SELECT title, date, author_id, news.id, username FROM news JOIN users ON (author_id = users.id) WHERE news.id = ?',[$news_id]);
 
         $descriptions = DB::select('SELECT description FROM reporteditems WHERE news_id = ?',[$news_id]);
@@ -42,6 +43,7 @@ class ReporteditemController extends Controller
         return view('pages.report',['comments' => $comments, 'reasons' => $reasons, 'descriptions' => $descriptions, 'info' => $info[0],'route_mod_comment'=>$route_mod_comment]);
     }
     public function showReportOfComments($comment_id) {
+        $this->authorize('mod', Auth::user());
         $info =  DB::select('SELECT target_news_id AS news_id, comments.id AS title, date, creator_user_id, username FROM comments JOIN users ON (creator_user_id = users.id) WHERE comments.id = ?',[$comment_id]);
 
         $descriptions = DB::select('SELECT description FROM reporteditems WHERE comment_id = ?',[$comment_id]);
@@ -55,6 +57,7 @@ class ReporteditemController extends Controller
     }
 
     public function queryArticleReports($offset) {
+        $this->authorize('mod', \Auth::user());
         return DB::select(';WITH r AS
         (
            SELECT *, ROW_NUMBER() OVER (PARTITION BY news_id ORDER BY date DESC) AS rn
@@ -75,6 +78,7 @@ class ReporteditemController extends Controller
         ',[$offset]);
       }
       public function totalNews() {
+        $this->authorize('mod', \Auth::user());
         return DB::select(';WITH r AS
         (
            SELECT *, ROW_NUMBER() OVER (PARTITION BY news_id ORDER BY date DESC) AS rn
@@ -95,6 +99,7 @@ class ReporteditemController extends Controller
       }
       //TODO CHANGE
       public function totalComments() {
+        $this->authorize('mod', \Auth::user());
         return DB::select(';WITH r AS
         (
            SELECT *, ROW_NUMBER() OVER (PARTITION BY comment_id ORDER BY date DESC) AS rn
@@ -115,7 +120,7 @@ class ReporteditemController extends Controller
       }
 
     public function show() {
-        $this->authorize('show', Reporteditem::class);
+        $this->authorize('mod', \Auth::user());
         //get All news Reports
         $reports = $this->queryArticleReports(0);
         $commentsReports = $this->queryCommentsReports(0);
@@ -128,6 +133,7 @@ class ReporteditemController extends Controller
     }
     
     public function getReports() {
+        $this->authorize('mod', \Auth::user());
         $report_offset = Input::get('offset');
         $reports = $this->queryArticleReports($report_offset);
         $report_offset = $report_offset + count($reports);
@@ -147,6 +153,7 @@ class ReporteditemController extends Controller
         return Response::json($data, $status_code);
       }
       public function getReportsComments() {
+        $this->authorize('mod', \Auth::user());
         $report_offset = Input::get('offset');
         $reports = $this->queryCommentsReports($report_offset);
         $report_offset = $report_offset + count($reports);
@@ -166,6 +173,7 @@ class ReporteditemController extends Controller
       }
 
       public function queryCommentsReports($offset) {
+        $this->authorize('mod', \Auth::user());
         return DB::select(';WITH r AS
         (
            SELECT *, ROW_NUMBER() OVER (PARTITION BY comment_id ORDER BY date DESC) AS rn

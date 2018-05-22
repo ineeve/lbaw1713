@@ -50,18 +50,22 @@
                     <i class="fas fa-user">
                     </i> Profile
                   </a>
-                  <a class="dropdown-item" href="/reports">
-                    <i class="fas fa-university">
-                    </i> Forum
-                  </a>
+                  @can('mod', Auth::user())
+                    <a class="dropdown-item" href="/reports">
+                      <i class="fas fa-university">
+                      </i> Forum
+                    </a>
+                  @endcan
                   <a class="dropdown-item" href="{{ route('show_settings') }}">
                     <i class="fas fa-cog">
                     </i> Settings
                   </a>
-                  <a class="dropdown-item" href="{{ route('show_admin_page') }}">
-                    <i class="fab fa-autoprefixer"></i>
-                    Admin
-                  </a>
+                  @can('admin', Auth::user())
+                    <a class="dropdown-item" href="{{ route('show_admin_page') }}">
+                      <i class="fab fa-autoprefixer"></i>
+                      Admin
+                    </a>
+                  @endcan
                   <form class="dropdown-item logout" method="POST" action="/logout">
                     <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
                     <span style="cursor:pointer" class="logout">
