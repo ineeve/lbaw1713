@@ -9,6 +9,9 @@ class UserPolicy
 {
     use HandlesAuthorization;
 
+    public function admin(User $user) {
+        return $user->permission === 'admin';
+      }
 
     public function update(User $user, User $user1)
     {

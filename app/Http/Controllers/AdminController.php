@@ -7,11 +7,10 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use App\User;
 
-class AdminController extends Controller
-{
+class AdminController extends Controller {
 
-
-    private function getUserList($orderBy,$pageNumber,$itemsPerPage){
+    private function getUserList($orderBy,$pageNumber,$itemsPerPage) {
+        $this->authorize('admin', \Auth::user());
         return User::orderBy('id', 'asc')
                ->forPage($pageNumber,$itemsPerPage)
                ->get();
@@ -22,7 +21,7 @@ class AdminController extends Controller
     }
 
 
-    private function getUsersTab($pageNumber,$itemsPerPage){
+    private function getUsersTab($pageNumber,$itemsPerPage) {
         $users = $this->getUserList('id',$pageNumber,$itemsPerPage);
         $total = $this->getTotalNumberOfUsers();
         return view('partials.admin_users_tab', 
@@ -52,7 +51,7 @@ class AdminController extends Controller
         return view('partials.admin_user_row',['user'=>$user]);
     }
     public function banUser(Request $request, $username){
-        $adminBanning = Auth::user();
+        $adminBanning = \Auth::user();
         $bannedUser = User::where('username', $username)->firstOrFail();
         if (count(DB::table('Bans')->where('banned_user_id', $bannedUser->id)) > 0) {
             DB::insert('INSERT INTO Bans (banned_user_id, admin_user_id, reason) VALUES (?, ?, ?)', [$bannedUser->id, $adminBanning->id, $request->reason]);
