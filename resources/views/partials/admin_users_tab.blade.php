@@ -1,5 +1,5 @@
 <?php $numberOfPages = intval(ceil($total/$itemsPerPage));?>
-
+@include('partials/modals/admin_confirm_ban_modal')
 <div class="mb-2">
     <div class="row">
         <div class="col-12 col-md-10">
@@ -41,6 +41,8 @@
                     <input class="form-control mr-sm-2 rounded" type="search" placeholder="Search by username ..." aria-label="Search">
                 </form>
                 <h4>Displaying 10 out of {{$total}} users</h4>
+            </div>
+            <div id="alert-messages">
             </div>
             <!-- USERS TABLE -->
             <div class="table-responsive">

@@ -63,7 +63,7 @@ Route::get('/adm','AdminController@show')->name('show_admin_page');
 Route::get('/adm/users','AdminController@getUsersTabRoute');
 Route::put('/adm/users/{username}/promote','AdminController@promoteUser');
 Route::put('/adm/users/{username}/demote','AdminController@demoteUser');
-Route::put('/adm/users/{username}/ban','AdminController@banUser');
+Route::post('/adm/users/{username}/ban','AdminController@banUser');
 
 
 // // Authentication

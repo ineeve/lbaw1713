@@ -6,14 +6,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use App\User;
+use App\Ban;
 
 class AdminController extends Controller {
 
     private function getUserList($orderBy,$pageNumber,$itemsPerPage) {
         $this->authorize('admin', \Auth::user());
-        return User::orderBy('id', 'asc')
-               ->forPage($pageNumber,$itemsPerPage)
-               ->get();
+        $notBannedUsers = User::orderBy('id','asc')
+            ->get()
+            ->filter(function($val){
+                return $val->ban->isEmpty();
+        });
+        return $notBannedUsers->forPage($pageNumber,$itemsPerPage);
     }
 
     private function getTotalNumberOfUsers(){
@@ -59,9 +63,18 @@ class AdminController extends Controller {
         $this->authorize('admin', \Auth::user());
         $adminBanning = \Auth::user();
         $bannedUser = User::where('username', $username)->firstOrFail();
-        if (count(DB::table('Bans')->where('banned_user_id', $bannedUser->id)) > 0) {
-            DB::insert('INSERT INTO Bans (banned_user_id, admin_user_id, reason) VALUES (?, ?, ?)', [$bannedUser->id, $adminBanning->id, $request->reason]);
+        $wasBannedBefore = $bannedUser->ban()->get();
+        if($wasBannedBefore->isEmpty()){
+            $ban = new Ban;
+            $ban->banned_user_id = $bannedUser->id;
+            $ban->admin_user_id = $adminBanning->id;
+            $ban->reason = $request->reason;
+            $ban->save();
+            return response()->json([
+                'message' => 'User '.$username.' has been banned'
+            ]);
         }
+        return response('',404);
     }
     
     public function getUsersTabRoute(Request $request) {

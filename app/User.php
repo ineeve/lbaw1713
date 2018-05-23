@@ -52,4 +52,8 @@ class User extends Authenticatable
         return $result != 0;
     }
 
+    public function ban(){
+        return $this->hasMany('App\Ban','banned_user_id'); //0 or 1
+    }
+
 }

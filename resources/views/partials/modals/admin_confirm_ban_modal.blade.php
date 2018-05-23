@@ -8,12 +8,13 @@
             </button>
           </div>
           <div class="modal-body">
-            <form>
+            <form id="banDescriptionForm">
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Describe the reasons to ban user">
+                <label for="banDescriptionTextarea">Ban description</label>
+                <textarea class="form-control" id="banDescriptionTextarea" rows="3" required></textarea>
               </div>
-              
-              <button type="submit" class="btn btn-primary float-right">Search</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary float-right">Confirm</button>
             </form>
           </div>
         </div>
