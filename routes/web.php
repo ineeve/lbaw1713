@@ -21,6 +21,9 @@ Route::get('/', function () {
     // not autorized
     Route::get('error/403', 'Controller@errorUnauthorizedAction');
 
+    // PAGINATION
+    Route::get('/pagination','PaginationController@getPagination');
+
 // REPORT PAGES
     // show reports
     Route::get('/reports', 'ReporteditemController@show');
@@ -60,10 +63,11 @@ Route::post('/api/settings/interests', 'UserController@addInterest')->name('add_
 Route::delete('/api/settings/interests', 'UserController@removeInterest')->name('remove_interest');
 //ADMIN PAGES
 Route::get('/adm','AdminController@show')->name('show_admin_page');
-Route::get('/adm/users','AdminController@getUsersTabRoute');
+Route::get('/adm/users','AdminController@getUsersTableRoute');
 Route::put('/adm/users/{username}/promote','AdminController@promoteUser');
 Route::put('/adm/users/{username}/demote','AdminController@demoteUser');
 Route::post('/adm/users/{username}/ban','AdminController@banUser');
+Route::get('/adm/users/{username}/search','AdminController@searchUser');
 
 
 // // Authentication

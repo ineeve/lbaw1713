@@ -1,4 +1,3 @@
-<?php $numberOfPages = intval(ceil($total/$itemsPerPage));?>
 @include('partials/modals/admin_confirm_ban_modal')
 <div class="mb-2">
     <div class="row">
@@ -38,39 +37,13 @@
             </div>
             <div class="row d-flex justify-content-between m-2">
                 <form class="d-flex align-items-center">
-                    <input class="form-control mr-sm-2 rounded" type="search" placeholder="Search by username ..." aria-label="Search">
+                    <input id="searchUsername" class="form-control mr-sm-2 rounded" type="search" placeholder="Search by username ..." aria-label="Search">
                 </form>
-                <h4>Displaying 10 out of {{$total}} users</h4>
             </div>
             <div id="alert-messages">
             </div>
             <!-- USERS TABLE -->
-            <div class="table-responsive">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th class="text-left" scope="col">#
-                            </th>
-                            <th class="text-right" scope="col">Username
-                            </th>
-                            <th class="text-right" scope="col">Role
-                            </th>
-                            <th class="text-right" scope="col">Email
-                            </th>
-                            <th class="text-right" scope="col">Points
-                            </th>
-                            </th>
-                            <th class="text-right" scope="col">Actions
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($users as $user)
-                            @include('partials/admin_user_row',[$user])
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+            @include('partials.admin_users_table',['users' => $users, 'total'=> $total])
 
         </div>
     </div>
@@ -91,46 +64,8 @@
                     </tbody>
                 </table>
             </div>
-
-            <nav aria-label="...">
-                <ul class="pagination">
-                    <li class="page-item" value='1'>
-                        <a class="page-link" href="#">First</a>
-                    </li>
-                    @if($currentPage<5)
-                        @for($i=1;$i<$currentPage;$i++)
-                        <li class="page-item" value={{$i}}>
-                            <a class="page-link" href="#">{{$i}}</a>
-                        </li>
-                        @endfor
-                    @else
-                        <li class="page-item disabled">
-                            <span class="page-link">...</span>
-                        </li>
-                        @for($i=$currentPage-3;$i<$currentPage;$i++)
-                        <li class="page-item" value={{$i}}>
-                            <a class="page-link" href="#">{{$i}}</a>
-                        </li>
-                        @endfor
-                    @endif
-                        <li class="page-item active" value={{$i}}>
-                            <a class="page-link" href="#">{{$currentPage}}</a>
-                        </li>
-                        @for($i=$currentPage+1;$i<$currentPage+4&&$i<=$numberOfPages;$i++) 
-                            <li class="page-item" value={{$i}}>
-                            <a class="page-link" href="#">{{$i}}</a>
-                            </li>
-                        @endfor 
-                            @if($currentPage+4 <= $numberOfPages)
-                            <li class="page-item disabled">
-                                <span class="page-link">...</span>
-                            </li>
-                            @endif
-                            <li class="page-item" value={{$numberOfPages}}>
-                                <a class="page-link" href="#">Last</a>
-                            </li>
-                </ul>
-            </nav>
+            <!-- PAGINATION -->
+            @include('partials.pagination',['currentPage'=>$currentPage,'numberOfPages'=>$numberOfPages])
         </div>
     </div>
 </div>

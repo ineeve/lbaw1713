@@ -10,33 +10,30 @@ use App\Ban;
 
 class AdminController extends Controller {
 
-    private function getUserList($orderBy,$pageNumber,$itemsPerPage) {
+    private function getUsersNotBanned() {
         $this->authorize('admin', \Auth::user());
-        $notBannedUsers = User::orderBy('id','asc')
+        return User::orderBy('id','asc')
             ->get()
             ->filter(function($val){
                 return $val->ban->isEmpty();
         });
-        return $notBannedUsers->forPage($pageNumber,$itemsPerPage);
+        
     }
 
-    private function getTotalNumberOfUsers(){
+    private function getUsersForPage($pageNumber,$itemsPerPage){
+        $users = $this->getUsersNotBanned();
+        return $users->forPage($pageNumber,$itemsPerPage);
+    }
+
+    private function getUsersTable($pageNumber,$itemsPerPage) {
         $this->authorize('admin', \Auth::user());
-        return User::count();
-    }
-
-
-    private function getUsersTab($pageNumber,$itemsPerPage) {
-        $this->authorize('admin', \Auth::user());
-        $users = $this->getUserList('id',$pageNumber,$itemsPerPage);
-        $total = $this->getTotalNumberOfUsers();
-        return view('partials.admin_users_tab', 
-            ['users' => $users,
-            'total' => $total,
-            'currentPage'=>$pageNumber,
-            'itemsPerPage'=>$itemsPerPage]);
-    }
-
+        $users = $this->getUsersNotBanned();
+        $total = $users->count();
+        return view('partials.admin_users_table', 
+            ['users' => $users->forPage($pageNumber,$itemsPerPage),
+            'total' => $total]);
+        }
+            
     public function promoteUser(Request $request, $username) {
         $this->authorize('admin', \Auth::user());
         $user = User::where('username', $username)->firstOrFail();
@@ -58,7 +55,7 @@ class AdminController extends Controller {
         $user->save();
         return view('partials.admin_user_row',['user'=>$user]);
     }
-
+    
     public function banUser(Request $request, $username){
         $this->authorize('admin', \Auth::user());
         $adminBanning = \Auth::user();
@@ -76,12 +73,19 @@ class AdminController extends Controller {
         }
         return response('',404);
     }
+    public function searchUser(Request $request, $username){
+        $this->authorize('admin',\Auth::user());
+        $users = User::where('username','ilike', '%'.$username.'%')->get();
+        return view('partials.admin_users_table', 
+            ['users' => $users,
+            'total' => $users->count()]);
+    }
     
-    public function getUsersTabRoute(Request $request) {
+    public function getUsersTableRoute(Request $request) {
         $this->authorize('admin', \Auth::user());
         $pageNumber = $request->pageNumber;
         $itemsPerPage=$request->itemsPerPage;
-        return $this->getUsersTab($pageNumber,$itemsPerPage);
+        return $this->getUsersTable($pageNumber,$itemsPerPage);
     }
 
     public function show()
@@ -89,12 +93,14 @@ class AdminController extends Controller {
         $this->authorize('admin', \Auth::user());
         $currentPage = 1;
         $itemsPerPage = 10;
-        $users = $this->getUserList('id',$currentPage,$itemsPerPage);
-        $total = $this->getTotalNumberOfUsers();
+        $users = $this->getUsersForPage($currentPage,$itemsPerPage);
+        $total = $this->getUsersNotBanned()->count();
+        $numberOfPages = intval(ceil($total/$itemsPerPage));
         return view('pages.admin', 
             ['users' => $users,
-            'total' => $total,
+            'numberOfPages' => $numberOfPages,
             'currentPage'=>$currentPage,
-            'itemsPerPage'=>$itemsPerPage]);
+            'itemsPerPage'=>$itemsPerPage,
+            'total'=>$total]);
     }
 }
