@@ -83,7 +83,7 @@ Route::post('register', 'Auth\RegisterController@register');
 
 //Search
 Route::get('news/search','NewsController@getSearchPage')->name('search');
-Route::get('news/advanced_search','NewsController@getAdvancedSearchPage')->name('advanced_search');
+Route::get('advanced_search','AdvancedSearchController@getAdvancedSearchPage')->name('advanced_search');
 
 /*Form to create one piece of news*/
 Route::get('news/create', 'NewsController@createArticle')->name('create_news'); 
@@ -108,7 +108,8 @@ Route::put('news/{id}/edit', 'NewsController@edit')->name('update_news');
 Route::delete('news/{id}', 'NewsController@destroy')->name('delete_news');
 /*Infinite scroll for news' comments */
 Route::post('api/news/{news_id}/comments/scroll','AjaxController@scrollComments');
-
+/*Infinite scroll for users advanced search*/
+Route::post('/api/advanced_search/users/{searchText}/scroll','AdvancedSearchController@scrollAdvancedSearchUsers');
 /*Action of voting on a news*/
 Route::post('api/news/{news_id}/vote','AjaxController@createVote');
 /*Get news' previous votes*/

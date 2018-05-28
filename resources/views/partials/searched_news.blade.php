@@ -21,5 +21,6 @@
               @include('partials.load_more')
             @endif
           </div>
+          id="scroll_advanced_search_users"
       </div>
   </div>

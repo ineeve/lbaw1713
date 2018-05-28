@@ -199,25 +199,6 @@ class NewsController extends Controller
       return view('pages.searched_news',['news'=> $filteredNews, 'searchText' => $searchText]);
     }
 
-    public function getAdvancedSearchPage(Request $request){
-      $typeOfSearch = $request->elementToSearch;
-      $searchText = $request->searchText;
-
-      if($typeOfSearch == 'titleAndBody') {
-
-      }
-      if($typeOfSearch == 'onlyTitle') {
-
-      }
-      if($typeOfSearch == 'onlyBody') {
-
-      }
-      if($typeOfSearch == 'username') {
-        $filteredUser = $this->searchUsers($searchText, 0);
-        return view('pages.searched_users',['users'=> $filteredUser, 'searchText' => $searchText]);
-      }
-    }
-
     public function list($section = 'All', $order = self::MOST_POPULAR, $offset = 0) {
       //$this->authorize('list', News::class);
       //echo($section.";".$order.";".$offset);
