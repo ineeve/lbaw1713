@@ -21,6 +21,7 @@ function createAllListeners(){
     createUserActionListeners();
     createModalBanFormListener();
     createSearchByUsernameListener();
+    createLeftSectionsListeners();
 }
 
 function createUserActionListeners(){
@@ -48,7 +49,6 @@ function createSearchByUsernameListener(){
     if(searchInput){
         searchInput.addEventListener('input',searchUsernameHandler);
     }
-    
 }
 
 function createPaginationListeners(){
@@ -58,6 +58,34 @@ function createPaginationListeners(){
             pagItem.addEventListener('click',usersChangePage)
         })
     }
+}
+
+function createLeftSectionsListeners(){
+    let sections_list = document.getElementById("sections_list");
+    if (sections_list != null){
+        let section_items = [...sections_list.querySelectorAll('.nav-item')];
+        section_items.forEach(i => i.addEventListener('click',changeSectionHandler))
+    }
+}
+
+function changeSectionHandler(e){
+    console.log('changing section')
+    let section_name = e.target.innerText.trim();
+    if (section_name.length == 0){
+        section_name = e.target.parentNode.innerText.trim();
+    }
+    console.log("Selected section: " + section_name);
+    switch(section_name){
+        case 'Categories':
+        sendRequest('get',"/adm/categories?pageNumber=1&itemsPerPage=" + itemsPerPage,replaceCategoriesTable);
+        break;
+        case 'Badges':
+        break;
+        case 'Users':
+        sendRequest('get',"/adm/users?pageNumber=1&itemsPerPage=" + itemsPerPage,replaceUsersTable);
+        break;
+    }
+
 }
 
 function searchUsernameHandler(e){
@@ -96,26 +124,28 @@ function getCloseBtn(){
     return closeBtn;
 }
 
-function banCallback(){
-    let alertDiv = document.getElementById('alert-messages');
-    let divElement = document.createElement('div');
-    let closeBtn = getCloseBtn();
+/**
+ * Change user row to the banned color and replace the ban button by the unban one.
+ */
+function banUserRow() {
     
-    if(this.status == 200){
-        last_row_selected.innerHTML = '';
-        let response = JSON.parse(this.responseText);
-        if(response != null){
-            divElement.setAttribute('class','alert alert-success');
-            divElement.innerText = response.message;
-            
-        }
-    }else{
-        divElement.setAttribute('class','alert alert-danger');
-        divElement.innerHTML = '<strong>Oh snap!</strong> Try again latter';
-    }
-    divElement.appendChild(closeBtn);
-    alertDiv.appendChild(divElement);
+    let userRow = last_row_selected;
+    let banBtn = $('#'+last_row_selected.id + ' .ban')[0];
+
+    userRow.classList.add('table-danger');
+    banBtn.outerHTML = '<i class="text-danger fas fa-door-open unban" data-toggle="tooltip" title="Unban user"></i>';
 }
+
+function banCallback() {
+    banUserRow();
+    if (this.status == 200) {
+        let msg = JSON.parse(this.responseText).message;
+        showSuccessMsg(msg);
+    } else {
+        showFailureMsg('Failed to ban user.');
+    }
+}
+
 function updateUserRow(){
     if(this.status == 200){
         last_row_selected.innerHTML = this.responseText;
@@ -149,7 +179,6 @@ function usersChangePage(e){
             url+="&searchToken="+searchToken
         }
         sendRequest('get',url, replaceUsersTable);
-        sendRequest('get',"/pagination?pageNumber="+ currentPage + "&numberOfPages=" + numberOfPages, replacePagination);
     }
 }
 
@@ -192,7 +221,7 @@ $(document).ready(function() {
     /**
      * Unban user.
      */
-    $('.unban').click(function(e) {
+    $('body').on('click', '.unban', function(e) {
         updateLastRowSelected(e);
         let username = last_row_selected.id;
         let banBtn = e.target;

@@ -225,8 +225,7 @@ class NewsController extends Controller
       return view('pages.news', ['news' => $news, 'sections' => $sections, 'currentSection' => $initial_page]);
     }
 
-    public function show($id)
-    {
+    public function show($id) {
 
       $news = DB::select('SELECT News.id, title, author_id, date, body, image, votes, Sections.name AS section, Users.username AS author
       FROM News, Sections, Users
@@ -252,8 +251,7 @@ class NewsController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
-    {
+    protected function validator(array $data) {
         return Validator::make($data, [
             'title' => 'required|string|max:255',
             'section_id' => 'required|integer',
@@ -269,8 +267,7 @@ class NewsController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function sourceValidator(array $data)
-    {
+    protected function sourceValidator(array $data) {
         return Validator::make($data, [
             'author' => 'nullable|string|max:255',
             'publication_year' => 'nullable|integer',
@@ -345,7 +342,6 @@ class NewsController extends Controller
       
       return redirect('news');
     }
-
 
     ///////////////////// EDITOR BELOW
 

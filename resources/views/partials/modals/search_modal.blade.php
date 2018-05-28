@@ -24,23 +24,23 @@
             </select>
           </div>
           <div class="form-group my-1">
-            <select name="sectionToSearch" class="custom-select">
+            <select name="sectionSearch" class="custom-select">
               @foreach($sections as $section)
               <option value="{{ $section->id }}">{{ $section->name }}</option>
               @endforeach
             </select>
           </div>
-          <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="News' Author...">
+          <input type="text" name="authorSearch" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="News' Author...">
           <div class="d-flex">
             <div class="form-group">
               <!-- <p><time></time></p> -->
               <label class="col-form-label">Begin:</label>
-              <input type="date" class="form-control" value="1990-01-01">
+              <input type="date" name="date1" class="form-control" value="1990-01-01">
             </div>
             <div class="form-group">
               <!-- <p><time></time></p> -->
               <label class="col-form-label">End:</label>
-              <input type="date" class="form-control" value="2018-03-15">
+              <input type="date" name="date2" class="form-control" value="2018-03-15">
             </div>
           </div>
           <button type="submit" class="btn btn-primary float-right">Search</button>
