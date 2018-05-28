@@ -55,12 +55,4 @@ class User extends Authenticatable
     public function ban() {
         return $this->hasMany('App\Ban','banned_user_id'); // 0 or 1
     }
-
-    /**
-     * Check if user is banned without logging in.
-     */
-    public static function checkBan()
-    {
-        return DB::table('bans')->where('banned_user_id', '=', \Auth::id())->exists();
-    }
 }

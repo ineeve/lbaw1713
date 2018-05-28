@@ -19,7 +19,7 @@ class CheckBanMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::check() && User::checkBan()) {
+        if (Auth::check() && Auth::user()->ban()) {
             $bandata = DB::table('bans')->where('banned_user_id', Auth::id())->first();
             return response()->view('pages.banned', ['bandata' => $bandata]);
         }
