@@ -72,9 +72,7 @@ class AdminController extends Controller {
             return response('', 404);
         }
         $bannedUser->ban()->delete();
-        return response()->json([
-            'message' => 'User '.$username.' has been unbanned'
-        ]);
+        return response()->json('User '.$username.' has been unbanned');
     }
 
     private function getUsersByName($username){

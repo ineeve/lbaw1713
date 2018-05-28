@@ -191,11 +191,14 @@ $(document).ready(function() {
     $('.unban').click(function(e) {
         updateLastRowSelected(e);
         let username = last_row_selected.id;
+        let userRow = e.target.parentNode.parentNode;
+        console.log(e);
         $.ajax({
             url: '/adm/users/'+username+'/unban',
             method: 'post',
-            success: function(view) {
-                console.log(view);
+            success: function(msg) {
+                userRow.classList.remove('table-danger');
+                console.log(msg);
             },
             error: function(xhr) {
                 console.log(xhr);
