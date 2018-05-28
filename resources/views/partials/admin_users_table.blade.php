@@ -13,7 +13,6 @@
                 </th>
                 <th class="text-right" scope="col">Points
                 </th>
-                </th>
                 <th class="text-right" scope="col">Actions
                 </th>
             </tr>
