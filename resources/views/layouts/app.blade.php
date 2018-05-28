@@ -25,7 +25,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Font Awesome CSS -->
-  <link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
+  <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
@@ -55,7 +55,7 @@
 
 <body>
   <main>
-    @include('partials.header') @include('partials.modals.search_modal')
+    @include('partials.header') @include('partials.modals.search_modal', ['sections' => App\Section::get()])
       <section id="content">
         @yield('content')
       </section>

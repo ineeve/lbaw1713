@@ -77,7 +77,7 @@ function sendAjaxRequest(method, url, data, handler) {
 
 function sendShowMorePreviews(event) {
   let section_name = document.querySelector('.current_section');
-  let order = document.querySelector("#sort-option").getAttribute('name');
+  let order = document.querySelector("#sort-option").getAttribute('data-name');
   if (section_name != null){
     section_name = section_name.innerText.trim();
     sendAjaxRequest('GET', '/api/news/section/' + section_name + '/order/' + order + "/offset/" + previews_offset, null, showMorePreviewsHandler);

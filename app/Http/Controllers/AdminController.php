@@ -7,35 +7,25 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use App\User;
 use App\Ban;
+use Auth;
 
 class AdminController extends Controller {
 
-    private function getUsersNotBanned() {
-        $this->authorize('admin', \Auth::user());
-        return User::orderBy('id','asc')
-            ->get()
-            ->filter(function($val){
-                return $val->ban->isEmpty();
-        });
-        
+    private function getAllUsers(){
+        $this->authorize('admin', Auth::user());
+        return User::orderBy('id','asc')->get();
     }
 
-    private function getUsersForPage($pageNumber,$itemsPerPage){
-        $users = $this->getUsersNotBanned();
-        return $users->forPage($pageNumber,$itemsPerPage);
-    }
-
-    private function getUsersTable($pageNumber,$itemsPerPage) {
-        $this->authorize('admin', \Auth::user());
-        $users = $this->getUsersNotBanned();
-        $total = $users->count();
+    private function getUsersTableView($usersList,$pageNumber,$itemsPerPage) {
+        $this->authorize('admin', Auth::user());
+        $total = $usersList->count();
         return view('partials.admin_users_table', 
-            ['users' => $users->forPage($pageNumber,$itemsPerPage),
+            ['users' => $usersList->forPage($pageNumber,$itemsPerPage),
             'total' => $total]);
         }
             
     public function promoteUser(Request $request, $username) {
-        $this->authorize('admin', \Auth::user());
+        $this->authorize('admin', Auth::user());
         $user = User::where('username', $username)->firstOrFail();
         if($user->permission == 'normal'){
             $user->permission = 'moderator';
@@ -47,7 +37,7 @@ class AdminController extends Controller {
     }
 
     public function demoteUser(Request $request, $username){
-        $this->authorize('admin', \Auth::user());
+        $this->authorize('admin', Auth::user());
         $user = User::where('username', $username)->firstOrFail();
         if($user->permission == 'moderator'){
             $user->permission = 'normal';
@@ -57,8 +47,8 @@ class AdminController extends Controller {
     }
     
     public function banUser(Request $request, $username){
-        $this->authorize('admin', \Auth::user());
-        $adminBanning = \Auth::user();
+        $this->authorize('admin', Auth::user());
+        $adminBanning = Auth::user();
         $bannedUser = User::where('username', $username)->firstOrFail();
         $wasBannedBefore = $bannedUser->ban()->get();
         if($wasBannedBefore->isEmpty()){
@@ -71,30 +61,46 @@ class AdminController extends Controller {
                 'message' => 'User '.$username.' has been banned'
             ]);
         }
-        return response('',404);
+        return response('', 404);
     }
-    public function searchUser(Request $request, $username){
-        $this->authorize('admin',\Auth::user());
-        $users = User::where('username','ilike', '%'.$username.'%')->get();
-        return view('partials.admin_users_table', 
-            ['users' => $users,
-            'total' => $users->count()]);
+
+    public function unbanUser(Request $request, $username) {
+        $this->authorize('admin', Auth::user());
+        $bannedUser = User::where('username', $username)->firstOrFail();
+        $wasBannedBefore = $bannedUser->ban()->get();
+        if (!$wasBannedBefore) {
+            return response('', 404);
+        }
+        $bannedUser->ban()->delete();
+        return response()->json('User '.$username.' has been unbanned');
+    }
+
+    private function getUsersByName($username){
+        return User::where('username','ilike', '%'.$username.'%')
+            ->orderBy('id','asc')
+            ->get();
     }
     
     public function getUsersTableRoute(Request $request) {
-        $this->authorize('admin', \Auth::user());
+        $this->authorize('admin', Auth::user());
         $pageNumber = $request->pageNumber;
         $itemsPerPage=$request->itemsPerPage;
-        return $this->getUsersTable($pageNumber,$itemsPerPage);
+        if ($request->searchToken){
+            $users = $this->getUsersByName($request->searchToken);
+        }else{
+            $users = $this->getAllUsers();
+        }
+        return $this->getUsersTableView($users,$pageNumber,$itemsPerPage);
     }
 
     public function show()
     {
-        $this->authorize('admin', \Auth::user());
+        $this->authorize('admin', Auth::user());
         $currentPage = 1;
         $itemsPerPage = 10;
-        $users = $this->getUsersForPage($currentPage,$itemsPerPage);
-        $total = $this->getUsersNotBanned()->count();
+        $usersNotBanned = $this->getAllUsers();
+        $users = $usersNotBanned->forPage($currentPage,$itemsPerPage);
+        $total = $usersNotBanned->count();
         $numberOfPages = intval(ceil($total/$itemsPerPage));
         return view('pages.admin', 
             ['users' => $users,

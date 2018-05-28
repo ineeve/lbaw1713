@@ -1,4 +1,5 @@
 <header class="container-fluid px-0">
+
       <!-- NAVBAR -->
       <nav class="row navbar navbar-expand-lg navbar-dark bg-primary mx-0">
         <div class="col-12 col-md-3">
@@ -66,14 +67,12 @@
                       Admin
                     </a>
                   @endcan
-                  <form class="dropdown-item logout" method="POST" action="/logout">
+                  <form class="dropdown-item logout" method="POST" action="/logout" style="cursor:pointer">
                     <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
-                    <span style="cursor:pointer" class="logout">
-                      <i class="fas fa-sign-out-alt">
-                      </i> Log out
-                    </span>
+                    <i class="fas fa-sign-out-alt">
+                    </i> Log out
                     <script>
-                      $('span.logout').click(function() {
+                      $('form.logout').click(function() {
                         $('form.logout').submit();
                       });
                     </script>
@@ -121,7 +120,7 @@
           </div>
         </div>
       </nav>
-      @if ($errors->has('email') || $errors->has('password'))
+      @if (($errors->has('email') || $errors->has('password')))
         <div class="container mt-2">
         @if ($errors->has('email'))
           <div class="alert alert-dismissible alert-danger">

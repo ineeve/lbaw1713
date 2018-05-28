@@ -51,11 +51,11 @@ function createPaginationHandlers(){
 
 function articlesChangePage(e){
 
-    let pageNumber = e.target.parentNode.value;
+    let pageNumber = e.target.parentNode.getAttribute("data-value");
     if(pageNumber != NaN){
         if(pageNumber<=0)return;
         
-        let username = $('input#user_profile')[0].value;
+        let username = $('input#user')[0].getAttribute("value");
         jQuery.ajax({
             url: "/api/users/" + username + "/articles",
             method: 'get',
@@ -72,9 +72,9 @@ function articlesChangePage(e){
                     pag[i].classList.remove("active");
                 }
 
-                if(e.target.getAttribute('value') == 'first') {
+                if(e.target.getAttribute('data-value') == 'first') {
                     elem.nextElementSibling.classList.add('active');
-                } else if(e.target.getAttribute('value') == 'last') {
+                } else if(e.target.getAttribute('data-value') == 'last') {
                     elem.previousElementSibling.classList.add('active');
                 } else {
                     elem.classList.add('active');
@@ -87,8 +87,9 @@ function articlesChangePage(e){
 }
 
 function followingChangePage(e){
-
-    let pageNumber = e.target.parentNode.value;
+    
+    let pageNumber = e.target.parentNode.getAttribute("data-value");
+    
     if(pageNumber != NaN){
         if(pageNumber<=0)return;
         
@@ -110,9 +111,9 @@ function followingChangePage(e){
                     pag[i].classList.remove("active");
                 }
 
-                if(e.target.getAttribute('value') == 'first') {
+                if(e.target.getAttribute('data-value') == 'first') {
                     elem.nextElementSibling.classList.add('active');
-                } else if(e.target.getAttribute('value') == 'last') {
+                } else if(e.target.getAttribute('data-value') == 'last') {
                     elem.previousElementSibling.classList.add('active');
                 } else {
                     elem.classList.add('active');

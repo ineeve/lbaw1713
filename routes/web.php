@@ -67,7 +67,7 @@ Route::get('/adm/users','AdminController@getUsersTableRoute');
 Route::put('/adm/users/{username}/promote','AdminController@promoteUser');
 Route::put('/adm/users/{username}/demote','AdminController@demoteUser');
 Route::post('/adm/users/{username}/ban','AdminController@banUser');
-Route::get('/adm/users/{username}/search','AdminController@searchUser');
+Route::post('/adm/users/{username}/unban','AdminController@unbanUser');
 
 
 // // Authentication
@@ -109,7 +109,7 @@ Route::delete('news/{id}', 'NewsController@destroy')->name('delete_news');
 /*Infinite scroll for news' comments */
 Route::post('api/news/{news_id}/comments/scroll','AjaxController@scrollComments');
 /*Infinite scroll for users advanced search*/
-Route::post('/api/advanced_search/users/{searchText}/scroll','AdvancedSearchController@scrollAdvancedSearchUsers');
+Route::post('api/advanced_search/users/{searchText}/scroll','AdvancedSearchController@scrollAdvancedSearchUsers');
 /*Action of voting on a news*/
 Route::post('api/news/{news_id}/vote','AjaxController@createVote');
 /*Get news' previous votes*/

@@ -4,6 +4,8 @@ let csrf = document.querySelector('meta[name="csrf-token"]').getAttribute('conte
 let modalCloseBtn = document.querySelector('#banModal .close');
 let itemsPerPage = 10;
 let currentPage = 1;
+let searchToken = "";
+let filterBy = [];
 
 function sendRequest(method,url,handler,body=null){
     let request = new XMLHttpRequest();
@@ -59,11 +61,12 @@ function createPaginationListeners(){
 }
 
 function searchUsernameHandler(e){
-    let searchToken = e.target.value;
+    searchToken = e.target.value;
+    let url = "/adm/users?pageNumber=" + currentPage + "&itemsPerPage=" + itemsPerPage;
     if (searchToken.length > 0){
-        sendRequest('get','adm/users/'+searchToken+"/search",replaceUsersTable);
+        sendRequest('get',url + "&searchToken="+searchToken,replaceUsersTable);
     } else{
-        sendRequest('get',"/adm/users?pageNumber="+1+"&itemsPerPage="+itemsPerPage,replaceUsersTable);
+        sendRequest('get',url,replaceUsersTable);
     }
     currentPage=1;
 
@@ -77,7 +80,7 @@ function banSubmitHandler(e){
     let body="reason="+description;
     textarea.value = '';
     modalCloseBtn.click();
-    sendRequest('post','/adm/users/'+username+'/ban', banCallback, body)
+    sendRequest('post','/adm/users/'+username+'/ban', banCallback, body);
 }
 
 function getCloseBtn(){
@@ -137,11 +140,15 @@ function demoteUser(){
 }
 
 function usersChangePage(e){
-    currentPage = e.target.parentNode.value;
+    currentPage = e.target.parentNode.getAttribute("data-value");
+    let url = "/adm/users?pageNumber=" + currentPage + "&itemsPerPage=" + itemsPerPage;
     let numberOfPages = Math.ceil(total.getAttribute('value')/itemsPerPage);
     if(currentPage != NaN){
         if(currentPage<=0)return;
-        sendRequest('get',"/adm/users?pageNumber=" + currentPage + "&itemsPerPage=" + itemsPerPage, replaceUsersTable);
+        if (searchToken.length > 0){
+            url+="&searchToken="+searchToken
+        }
+        sendRequest('get',url, replaceUsersTable);
         sendRequest('get',"/pagination?pageNumber="+ currentPage + "&numberOfPages=" + numberOfPages, replacePagination);
     }
 }
@@ -174,3 +181,59 @@ function replaceUsersTable(){
 }
 
 createAllListeners();
+
+$(document).ready(function() {
+    $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+    
+    /**
+     * Unban user.
+     */
+    $('.unban').click(function(e) {
+        updateLastRowSelected(e);
+        let username = last_row_selected.id;
+        let banBtn = e.target;
+        let userRow = banBtn.parentNode.parentNode;
+        console.log(e);
+        $.ajax({
+            url: '/adm/users/'+username+'/unban',
+            method: 'post',
+            success: function(msg) {
+                userRow.classList.remove('table-danger');
+                banBtn.outerHTML = '<i class="text-danger fas fa-ban ban" data-toggle="modal" data-target="#banModal" title="Ban user"></i>';
+                showSuccessMsg(msg);
+            },
+            error: function(xhr) {
+                showFailureMsg('Failed to unban user.');
+                console.log(xhr);
+            }
+        })
+    })
+})
+
+function showSuccessMsg(msg) {
+    showMsg(msg, 'success');
+}
+
+function showFailureMsg(msg) {
+    showMsg(msg, 'danger');
+
+}
+
+/**
+ * 
+ * @param {*} msg Message to show.
+ * @param {*} type One of Bootstrap's alert-* types.
+ */
+function showMsg(msg, type) {
+    let alertDiv = document.getElementById('alert-messages');
+    let divElement = document.createElement('div');
+    let closeBtn = getCloseBtn();
+    divElement.setAttribute('class','alert alert-'+type);
+    divElement.innerText = msg;
+    divElement.appendChild(closeBtn);
+    alertDiv.appendChild(divElement);
+}
