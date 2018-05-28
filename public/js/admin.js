@@ -77,7 +77,7 @@ function banSubmitHandler(e){
     let body="reason="+description;
     textarea.value = '';
     modalCloseBtn.click();
-    sendRequest('post','/adm/users/'+username+'/ban', banCallback, body)
+    sendRequest('post','/adm/users/'+username+'/ban', banCallback, body);
 }
 
 function getCloseBtn(){
