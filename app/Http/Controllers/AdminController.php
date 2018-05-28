@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use App\User;
 use App\Ban;
+use App\Section;
 use Auth;
 
 class AdminController extends Controller {
@@ -106,11 +107,13 @@ class AdminController extends Controller {
         $users = $usersNotBanned->forPage($currentPage,$itemsPerPage);
         $total = $usersNotBanned->count();
         $numberOfPages = intval(ceil($total/$itemsPerPage));
+        $categories = Section::get();
         return view('pages.admin', 
             ['users' => $users,
             'numberOfPages' => $numberOfPages,
             'currentPage'=>$currentPage,
             'itemsPerPage'=>$itemsPerPage,
-            'total'=>$total]);
+            'total'=>$total,
+            'categories'=>$categories]);
     }
 }
