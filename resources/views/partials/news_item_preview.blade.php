@@ -1,7 +1,7 @@
 <div class="news_box border container ml-0 my-2">
     <div class="row" style="position:relative;">
         <div class="col col-sm-auto my-2">
-            <img src="{{ asset('storage/news/'.$item->image) }}" width="100px" height="100px" alt="Icon">
+            <img src="{{ asset('storage/news/'.$item->image) }}" width="100" height="100" alt="Icon">
 
         </div>
         <div class="col">

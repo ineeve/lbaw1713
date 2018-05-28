@@ -49,13 +49,13 @@
             </div>
             @else @if (Auth::check())
             <!-- Report -->
-            <span data-toggle="modal" data-target="#reportModal">
+            <div data-toggle="modal" data-target="#reportModal">
               <div class="centerText mt-4">
                 <span class="lightText mr-md-2">Report</span>
                 <i class="fas fa-ban clickable-btn" data-toggle="modal" data-target="#reportModal"></i>
               </div>
 
-            </span>
+            </div>
             @if(Auth::user()->permission == 'admin' || Auth::user()->permission ==  'moderator')
             <!-- TODO: ver metodo delete para admin e moderadores -->
             <div class="centerText mt-2" name="delete" title="Use to delete this news. If you are the author the news will be permantly deleted from our servers.">

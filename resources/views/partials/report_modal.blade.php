@@ -21,7 +21,7 @@
                       <div class="itemcontent">
                       <label class="btn btn-primary">
                         <input class="no-display" type="checkbox" name="var_id[]" value="">
-                        <h5>{{$reason}}</h5>
+                        {{$reason}}
                         </label>
 
                       </div>
