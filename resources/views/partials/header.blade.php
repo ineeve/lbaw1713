@@ -1,4 +1,5 @@
 <header class="container-fluid px-0">
+
       <!-- NAVBAR -->
       <nav class="row navbar navbar-expand-lg navbar-dark bg-primary mx-0">
         <div class="col-12 col-md-3">
@@ -121,7 +122,7 @@
           </div>
         </div>
       </nav>
-      @if ($errors->has('email') || $errors->has('password'))
+      @if (isset($errors) && ($errors->has('email') || $errors->has('password')))
         <div class="container mt-2">
         @if ($errors->has('email'))
           <div class="alert alert-dismissible alert-danger">
