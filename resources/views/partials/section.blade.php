@@ -7,16 +7,16 @@
         <div class="collapse show collapsible" id="sections_list">
           <ul class="nav nav-pills flex-column left-pane">
             <li class="nav-item">
-              <a href="#" role="button" data-toggle="tab" name="for_you" class="nav-link section_item {{ $currentSection == 'For You' ? 'active' : '' }}">
+              <a href="#" role="button" data-toggle="tab" data-name="for_you" class="nav-link section_item {{ $currentSection == 'For You' ? 'active' : '' }}">
                 <i class="fas fa-heart"></i> For You</a>
             </li>
             <li class="nav-item">
-              <a href="#" role="button" data-toggle="tab" name="All" class="nav-link section_item {{ $currentSection == 'All' ? 'active' : '' }}">
+              <a href="#" role="button" data-toggle="tab" data-name="All" class="nav-link section_item {{ $currentSection == 'All' ? 'active' : '' }}">
                 <i class="fa fa-bullseye"></i> All</a>
             </li>
             @foreach ($sections as $section)
               <li class="nav-item">
-                <a href="#" name="{{ $section->name }}" role="button" data-toggle="tab" class="nav-link section_item">
+                <a href="#" data-name="{{ $section->name }}" role="button" data-toggle="tab" class="nav-link section_item">
                   <i class="{{ $section->icon }}"></i> {{ $section->name }}</a>
               </li>
             @endforeach
