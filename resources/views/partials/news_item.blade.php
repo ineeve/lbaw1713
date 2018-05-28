@@ -122,16 +122,7 @@
           </form>
           <div class="row" id="placeComments">
           </div>
-          <div class="row">
-            <div class="col">
-              <a id="scrollComment" href="#" class="loadMore" style="text-decoration: none;">Show More</a>
-            </div>
-            <div class="col text-right">
-              <p class="totop">
-                <a style="text-decoration: none;" href="#top">Back to top</a>
-              </p>
-            </div>
-          </div>
+          @include('partials.load_more')
         </div>
       </div>
     </div>
