@@ -1,17 +1,13 @@
 console.log('app.js included');
 
-let previews_offset = 10;
 let comment_id;
 function addEventListeners() {
-  let scrollNews = document.querySelector('.previews #scroll')
-  if (scrollNews != null) {
-    document.querySelector('.previews #scroll').addEventListener('click', sendShowMorePreviews);
-  }
   let reportModalForm = document.querySelector('#reportModalForm');
   if (reportModalForm != null){
     reportModalForm.addEventListener('submit', submitReportForm);
   }
 }
+
 
 function selectComment(id){
   comment_id = id;
@@ -75,30 +71,6 @@ function sendAjaxRequest(method, url, data, handler) {
   request.send(encodeForAjax(data));
 }
 
-function sendShowMorePreviews(event) {
-  let section_name = document.querySelector('.current_section');
-  let order = document.querySelector("#sort-option").getAttribute('data-name');
-  if (section_name != null){
-    section_name = section_name.innerText.trim();
-    sendAjaxRequest('GET', '/api/news/section/' + section_name + '/order/' + order + "/offset/" + previews_offset, null, showMorePreviewsHandler);
-  } else {
-    searchText = document.querySelector("#searchedText").innerText.trim();
-    sendAjaxRequest('GET','/api/news/order/' + order + '/offset/' + previews_offset + "?searchText=" + searchText, null, showMorePreviewsHandler)
-  }
-  
-  console.log("offset = " + previews_offset);
-}
-
-function showMorePreviewsHandler() {
-  if (this.responseText != null && this.status == 200){
-    console.log(this);
-    if (this.responseText.length == 0) {
-      $('#allNews').append("<div class=\"alert alert-dismissible alert-secondary\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Sorry!</strong> No more news at the moment!</div>");
-    }
-    previews_offset += 10;
-    document.getElementById('news_item_preview_list').innerHTML += this.responseText;
-  }
-}
 
 function getUserVote() {
   let meta_tag = document.querySelector('meta[name="news_id"]');
