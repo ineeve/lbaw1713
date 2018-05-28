@@ -6,6 +6,7 @@ let itemsPerPage = 10;
 let currentPage = 1;
 let searchToken = "";
 let filterBy = [];
+const USERS_TABLE_ROUTE = "/adm/users/table";
 
 function sendRequest(method,url,handler,body=null){
     let request = new XMLHttpRequest();
@@ -68,6 +69,11 @@ function createLeftSectionsListeners(){
     }
 }
 
+function replaceTabContent(tabID, newContent){
+    let tab = document.getElementById(tabID);
+    tab.innerHTML = newContent;
+}
+
 function changeSectionHandler(e){
     console.log('changing section')
     let section_name = e.target.innerText.trim();
@@ -77,20 +83,46 @@ function changeSectionHandler(e){
     console.log("Selected section: " + section_name);
     switch(section_name){
         case 'Categories':
-        sendRequest('get',"/adm/categories?pageNumber=1&itemsPerPage=" + itemsPerPage,replaceCategoriesTable);
+        sendRequest('get',"/adm/categories", replaceCategoriesTab);
         break;
         case 'Badges':
+        sendRequest('get',"/adm/badges", replaceBadgesTab);
         break;
         case 'Users':
-        sendRequest('get',"/adm/users?pageNumber=1&itemsPerPage=" + itemsPerPage,replaceUsersTable);
+        sendRequest('get',"/adm/users", replaceUsersTab);
         break;
     }
-
 }
+
+
+function replaceUsersTab(){
+    if (this.responseText != null && this.status == 200){
+        replaceTabContent('users_tab',this.responseText);
+    }else{
+        console.log(this.responseText)
+    }
+}
+function replaceCategoriesTab(){
+    if (this.responseText != null && this.status == 200){
+        replaceTabContent('categories_tab',this.responseText);
+    }else{
+        console.log(this.responseText)
+    }
+}
+function replaceBadgesTab(){
+    if (this.responseText != null && this.status == 200){
+        replaceTabContent('badges_tab',this.responseText);
+    }else{
+        console.log(this.responseText)
+    }
+}
+
+
+
 
 function searchUsernameHandler(e){
     searchToken = e.target.value;
-    let url = "/adm/users?pageNumber=" + currentPage + "&itemsPerPage=" + itemsPerPage;
+    let url = USERS_TABLE_ROUTE + "?pageNumber=" + currentPage + "&itemsPerPage=" + itemsPerPage;
     if (searchToken.length > 0){
         sendRequest('get',url + "&searchToken="+searchToken,replaceUsersTable);
     } else{
@@ -169,7 +201,7 @@ function demoteUser(){
 
 function usersChangePage(e){
     currentPage = e.target.parentNode.getAttribute("data-value");
-    let url = "/adm/users?pageNumber=" + currentPage + "&itemsPerPage=" + itemsPerPage;
+    let url = USERS_TABLE_ROUTE + "?pageNumber=" + currentPage + "&itemsPerPage=" + itemsPerPage;
     let numberOfPages = Math.ceil(total.getAttribute('value')/itemsPerPage);
     if(currentPage != NaN){
         if(currentPage<=0)return;

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use App\User;
 use App\Ban;
+use App\Section;
 use Auth;
 
 class AdminController extends Controller {
@@ -93,8 +94,41 @@ class AdminController extends Controller {
         return $this->getUsersTableView($users,$pageNumber,$itemsPerPage);
     }
 
-    public function getSections(Request $request){
+    public function getCategoriesTab(Request $request){
         $this->authorize('admin', \Auth::user());
+        $currentPage = 1; $itemsPerPage = 10;
+        $sections = Section::get();
+        $total = $sections->count();
+        $sections = $sections->forPage($currentPage,$itemsPerPage);
+        $numberOfPages = intval(ceil($total/$itemsPerPage));
+        return view('partials.admin_categories_tab',
+            ['categories'=>$sections,
+            'numberOfPages'=>$numberOfPages,
+            'currentPage'=>$currentPage,
+            'itemsPerPage'=>$itemsPerPage,
+            'total'=>$total]);
+    }
+
+
+    public function getBadgesTab(Request $request){
+        $this->authorize('admin', \Auth::user());
+        return view('partials.admin_badges_tab');
+    }
+
+
+    public function getUsersTab(Request $request){
+        $this->authorize('admin', \Auth::user());
+        $currentPage = 1; $itemsPerPage = 10;
+        $allUsers = $this->getAllUsers();
+        $users = $allUsers->forPage($currentPage,$itemsPerPage);
+        $total = $allUsers->count();
+        $numberOfPages = intval(ceil($total/$itemsPerPage));
+        return view('partials.admin_user_tab',
+            ['users' => $users,
+            'numberOfPages' => $numberOfPages,
+            'currentPage'=>$currentPage,
+            'itemsPerPage'=>$itemsPerPage,
+            'total'=>$total]);
     }
 
     public function show()
@@ -102,9 +136,9 @@ class AdminController extends Controller {
         $this->authorize('admin', Auth::user());
         $currentPage = 1;
         $itemsPerPage = 10;
-        $usersNotBanned = $this->getAllUsers();
-        $users = $usersNotBanned->forPage($currentPage,$itemsPerPage);
-        $total = $usersNotBanned->count();
+        $allUsers = $this->getAllUsers();
+        $users = $allUsers->forPage($currentPage,$itemsPerPage);
+        $total = $allUsers->count();
         $numberOfPages = intval(ceil($total/$itemsPerPage));
         return view('pages.admin', 
             ['users' => $users,
