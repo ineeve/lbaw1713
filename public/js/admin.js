@@ -21,6 +21,7 @@ function createAllListeners(){
     createUserActionListeners();
     createModalBanFormListener();
     createSearchByUsernameListener();
+    createLeftSectionsListeners();
 }
 
 function createUserActionListeners(){
@@ -48,7 +49,6 @@ function createSearchByUsernameListener(){
     if(searchInput){
         searchInput.addEventListener('input',searchUsernameHandler);
     }
-    
 }
 
 function createPaginationListeners(){
@@ -58,6 +58,34 @@ function createPaginationListeners(){
             pagItem.addEventListener('click',usersChangePage)
         })
     }
+}
+
+function createLeftSectionsListeners(){
+    let sections_list = document.getElementById("sections_list");
+    if (sections_list != null){
+        let section_items = [...sections_list.querySelectorAll('.nav-item')];
+        section_items.forEach(i => i.addEventListener('click',changeSectionHandler))
+    }
+}
+
+function changeSectionHandler(e){
+    console.log('changing section')
+    let section_name = e.target.innerText.trim();
+    if (section_name.length == 0){
+        section_name = e.target.parentNode.innerText.trim();
+    }
+    console.log("Selected section: " + section_name);
+    switch(section_name){
+        case 'Categories':
+        sendRequest('get',"/adm/categories?pageNumber=1&itemsPerPage=" + itemsPerPage,replaceCategoriesTable);
+        break;
+        case 'Badges':
+        break;
+        case 'Users':
+        sendRequest('get',"/adm/users?pageNumber=1&itemsPerPage=" + itemsPerPage,replaceUsersTable);
+        break;
+    }
+
 }
 
 function searchUsernameHandler(e){
@@ -149,7 +177,6 @@ function usersChangePage(e){
             url+="&searchToken="+searchToken
         }
         sendRequest('get',url, replaceUsersTable);
-        sendRequest('get',"/pagination?pageNumber="+ currentPage + "&numberOfPages=" + numberOfPages, replacePagination);
     }
 }
 
