@@ -20,17 +20,11 @@ class AdminController extends Controller {
         
     }
 
-    private function getUsersForPage($pageNumber,$itemsPerPage){
-        $users = $this->getUsersNotBanned();
-        return $users->forPage($pageNumber,$itemsPerPage);
-    }
-
-    private function getUsersTable($pageNumber,$itemsPerPage) {
+    private function getUsersTableView($usersList,$pageNumber,$itemsPerPage) {
         $this->authorize('admin', \Auth::user());
-        $users = $this->getUsersNotBanned();
-        $total = $users->count();
+        $total = $usersList->count();
         return view('partials.admin_users_table', 
-            ['users' => $users->forPage($pageNumber,$itemsPerPage),
+            ['users' => $usersList->forPage($pageNumber,$itemsPerPage),
             'total' => $total]);
         }
             
@@ -73,19 +67,23 @@ class AdminController extends Controller {
         }
         return response('',404);
     }
-    public function searchUser(Request $request, $username){
-        $this->authorize('admin',\Auth::user());
-        $users = User::where('username','ilike', '%'.$username.'%')->get();
-        return view('partials.admin_users_table', 
-            ['users' => $users,
-            'total' => $users->count()]);
+
+    private function getUsersByName($username){
+        return User::where('username','ilike', '%'.$username.'%')
+            ->orderBy('id','asc')
+            ->get();
     }
     
     public function getUsersTableRoute(Request $request) {
         $this->authorize('admin', \Auth::user());
         $pageNumber = $request->pageNumber;
         $itemsPerPage=$request->itemsPerPage;
-        return $this->getUsersTable($pageNumber,$itemsPerPage);
+        if ($request->searchToken){
+            $users = $this->getUsersByName($request->searchToken);
+        }else{
+            $users = $this->getUsersNotBanned();
+        }
+        return $this->getUsersTableView($users,$pageNumber,$itemsPerPage);
     }
 
     public function show()
@@ -93,8 +91,9 @@ class AdminController extends Controller {
         $this->authorize('admin', \Auth::user());
         $currentPage = 1;
         $itemsPerPage = 10;
-        $users = $this->getUsersForPage($currentPage,$itemsPerPage);
-        $total = $this->getUsersNotBanned()->count();
+        $usersNotBanned = $this->getUsersNotBanned();
+        $users = $usersNotBanned->forPage($currentPage,$itemsPerPage);
+        $total = $usersNotBanned->count();
         $numberOfPages = intval(ceil($total/$itemsPerPage));
         return view('pages.admin', 
             ['users' => $users,

@@ -67,7 +67,6 @@ Route::get('/adm/users','AdminController@getUsersTableRoute');
 Route::put('/adm/users/{username}/promote','AdminController@promoteUser');
 Route::put('/adm/users/{username}/demote','AdminController@demoteUser');
 Route::post('/adm/users/{username}/ban','AdminController@banUser');
-Route::get('/adm/users/{username}/search','AdminController@searchUser');
 
 
 // // Authentication
