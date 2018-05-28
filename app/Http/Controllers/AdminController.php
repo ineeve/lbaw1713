@@ -10,14 +10,9 @@ use App\Ban;
 
 class AdminController extends Controller {
 
-    private function getUsersNotBanned() {
+    private function getAllUsers(){
         $this->authorize('admin', \Auth::user());
-        return User::orderBy('id','asc')
-            ->get()
-            ->filter(function($val){
-                return $val->ban->isEmpty();
-        });
-        
+        return User::orderBy('id','asc')->get();
     }
 
     private function getUsersTableView($usersList,$pageNumber,$itemsPerPage) {
@@ -81,7 +76,7 @@ class AdminController extends Controller {
         if ($request->searchToken){
             $users = $this->getUsersByName($request->searchToken);
         }else{
-            $users = $this->getUsersNotBanned();
+            $users = $this->getAllUsers();
         }
         return $this->getUsersTableView($users,$pageNumber,$itemsPerPage);
     }
@@ -91,7 +86,7 @@ class AdminController extends Controller {
         $this->authorize('admin', \Auth::user());
         $currentPage = 1;
         $itemsPerPage = 10;
-        $usersNotBanned = $this->getUsersNotBanned();
+        $usersNotBanned = $this->getAllUsers();
         $users = $usersNotBanned->forPage($currentPage,$itemsPerPage);
         $total = $usersNotBanned->count();
         $numberOfPages = intval(ceil($total/$itemsPerPage));
