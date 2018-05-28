@@ -4,6 +4,8 @@ let csrf = document.querySelector('meta[name="csrf-token"]').getAttribute('conte
 let modalCloseBtn = document.querySelector('#banModal .close');
 let itemsPerPage = 10;
 let currentPage = 1;
+let searchToken = "";
+let filterBy = [];
 
 function sendRequest(method,url,handler,body=null){
     let request = new XMLHttpRequest();
@@ -59,11 +61,12 @@ function createPaginationListeners(){
 }
 
 function searchUsernameHandler(e){
-    let searchToken = e.target.value;
+    searchToken = e.target.value;
+    let url = "/adm/users?pageNumber=" + currentPage + "&itemsPerPage=" + itemsPerPage;
     if (searchToken.length > 0){
-        sendRequest('get','adm/users/'+searchToken+"/search",replaceUsersTable);
+        sendRequest('get',url + "&searchToken="+searchToken,replaceUsersTable);
     } else{
-        sendRequest('get',"/adm/users?pageNumber="+1+"&itemsPerPage="+itemsPerPage,replaceUsersTable);
+        sendRequest('get',url,replaceUsersTable);
     }
     currentPage=1;
 
@@ -138,10 +141,14 @@ function demoteUser(){
 
 function usersChangePage(e){
     currentPage = e.target.parentNode.value;
+    let url = "/adm/users?pageNumber=" + currentPage + "&itemsPerPage=" + itemsPerPage;
     let numberOfPages = Math.ceil(total.getAttribute('value')/itemsPerPage);
     if(currentPage != NaN){
         if(currentPage<=0)return;
-        sendRequest('get',"/adm/users?pageNumber=" + currentPage + "&itemsPerPage=" + itemsPerPage, replaceUsersTable);
+        if (searchToken.length > 0){
+            url+="&searchToken="+searchToken
+        }
+        sendRequest('get',url, replaceUsersTable);
         sendRequest('get',"/pagination?pageNumber="+ currentPage + "&numberOfPages=" + numberOfPages, replacePagination);
     }
 }
