@@ -18,7 +18,7 @@
         @if($user->permission=='moderator' || $user->permission=='normal')
         <i class="text-success fas fa-angle-double-up mr-1 promote" data-toggle="tooltip" title="Promote user"></i>
             @if($banned)
-            <i class="text-danger fas fa-ban unban" data-toggle="tooltip" title="Unban user"></i>
+            <i class="text-danger fas fa-door-open unban" data-toggle="tooltip" title="Unban user"></i>
             @else
             <i class="text-danger fas fa-ban ban" data-toggle="modal" data-target="#banModal" title="Ban user"></i>
             @endif
