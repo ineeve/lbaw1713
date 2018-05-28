@@ -8,7 +8,15 @@
       <div class="border border-top-0 border-left-0 border-right-0 profile_item container p-2 mx-auto mt-3">
 
 
+        
         <div class="row">
+          <div class="col">
+            <img class="img-responsive" src="{{ Storage::url('users/'.($user->picture == null ? 'default' : $user->picture)) }}" alt="pic"
+              height="200" width="200">
+          </div>
+
+        </div>
+        <div class="row my-2">
           <div class="col">
             @if (Auth::check() && Auth::user()->username == $user->username)
             <a href="profile_edit.html">
@@ -33,13 +41,6 @@
             </div> @endif
 
           </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <img class="img-responsive" src="{{ Storage::url('users/'.($user->picture == null ? 'default' : $user->picture)) }}" alt="pic"
-              height="200" width="200">
-          </div>
-
         </div>
 
         <div class="row">
