@@ -96,17 +96,17 @@ class AdminController extends Controller {
 
     public function getCategoriesTab(Request $request){
         $this->authorize('admin', \Auth::user());
-        $currentPage = 1; $itemsPerPage = 10;
+        //$currentPage = 1; $itemsPerPage = 10;
         $sections = Section::get();
-        $total = $sections->count();
-        $sections = $sections->forPage($currentPage,$itemsPerPage);
-        $numberOfPages = intval(ceil($total/$itemsPerPage));
+        //$total = $sections->count();
+        //$sections = $sections->forPage($currentPage,$itemsPerPage);
+        //$numberOfPages = intval(ceil($total/$itemsPerPage));
         return view('partials.admin_categories_tab',
-            ['categories'=>$sections,
-            'numberOfPages'=>$numberOfPages,
-            'currentPage'=>$currentPage,
-            'itemsPerPage'=>$itemsPerPage,
-            'total'=>$total]);
+            ['categories'=>$sections]);
+            //'numberOfPages'=>$numberOfPages,
+            //'currentPage'=>$currentPage,
+            //'itemsPerPage'=>$itemsPerPage,
+            //'total'=>$total]);
     }
 
 
@@ -148,5 +148,16 @@ class AdminController extends Controller {
             'itemsPerPage'=>$itemsPerPage,
             'total'=>$total,
             'categories'=>$categories]);
+    }
+
+    /**
+     * Edit a Category's name and icon.
+     */
+    public function editCategory(Request $request, $categoryId) {
+        $this->authorize('admin', Auth::user());
+        $category = Section::find($categoryId);
+        $category->name = $request->name;
+        $category->icon = $request->icon;
+        $category->save();
     }
 }
