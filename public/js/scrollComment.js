@@ -1,8 +1,13 @@
 'use strict';
 
 jQuery(document).ready(function () {
+<<<<<<< HEAD
     let offset = 0;
     jQuery('#scrollComment').click(function (e) {
+=======
+    let offset = 0; 
+    jQuery('.comment #scroll').click(function (e) {
+>>>>>>> dc3051397884632a3213a9c6af27095e4dcf971a
         e.preventDefault();
         $.ajaxSetup({
             headers: {
@@ -27,5 +32,5 @@ jQuery(document).ready(function () {
             }
         });
     });
-    jQuery('#scrollComment').trigger('click');
+    jQuery('.comment #scroll').trigger('click');
 });
