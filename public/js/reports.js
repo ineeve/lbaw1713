@@ -11,7 +11,7 @@ function createPaginationHandlers(){
 }
 createPaginationHandlers();
 function usersChangePage(e){
-    let pageNumber = e.target.parentNode.value;
+    let pageNumber = e.target.parentNode.getAttribute("data-value");
     if(pageNumber != NaN){
         if(pageNumber<=0)return;
         if($('#TAB_news').hasClass('active')){
