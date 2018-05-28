@@ -30,7 +30,7 @@
             <div id="news_item_preview_list">
               @include('partials.news_item_preview_list',$news)
             </div>
-            <span class="previews"> @include('partials.load_more') </span>
+            <span class="previews"> @include('partials.load_more', ['hide' => count($news) === 0]) </span>
           </div>
         </div>
       </div>
