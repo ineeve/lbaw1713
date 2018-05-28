@@ -5,7 +5,7 @@
             <div id="editMenu">
 
             </div>
-            <div id="categories-list" class="d-flex align-items-between">
+            <div id="categories-list" class="d-flex align-items-center">
                 @each('partials.admin_category', $categories, 'category')
             </div>
         </div>
