@@ -20,10 +20,15 @@
 
             @else
             <div id="following_btn">
-              @if (Auth::user()->following($user->username))
+              @if (Auth::check() && Auth::user()->following($user->username))
               <button type="button" class="btn btn-outline-primary" onclick="stopFollowing( '{{ $user->username }}' )">Following</button>
               @else
+              @if(Auth::check())
               <button type="button" class="btn btn-primary" onclick="startFollowing( '{{ $user->username }}' )">Follow</button>
+              @else
+              @include('partials.modals.login_modal')
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">Follow</button>
+              @endif
               @endif
             </div> @endif
 
@@ -32,7 +37,7 @@
         <div class="row">
           <div class="col">
             <img class="img-responsive" src="{{ Storage::url('users/'.($user->picture == null ? 'default' : $user->picture)) }}" alt="pic"
-              height="200px" width="200px">
+              height="200" width="200">
           </div>
 
         </div>
