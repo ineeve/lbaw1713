@@ -3,9 +3,9 @@ console.log('app.js included');
 let previews_offset = 10;
 let comment_id;
 function addEventListeners() {
-  let scrollNews = document.querySelector('#scrollNewsPreview')
+  let scrollNews = document.querySelector('.previews #scroll')
   if (scrollNews != null) {
-    document.querySelector('#scrollNewsPreview').addEventListener('click', sendShowMorePreviews);
+    document.querySelector('.previews #scroll').addEventListener('click', sendShowMorePreviews);
   }
   let reportModalForm = document.querySelector('#reportModalForm');
   if (reportModalForm != null){

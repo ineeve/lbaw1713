@@ -93,7 +93,7 @@
 
       </div>
     </div>
-    <input id="user" type="hidden" value="{{$user->username}}">
+    <input id="user_profile" type="hidden" value="{{$user->username}}">
      
     <div class="col-lg-8 col-12 mt-3 mx-2">
       <h2 class="w-100 pl-0 mb-3">Articles</h2>

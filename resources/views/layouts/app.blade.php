@@ -55,7 +55,7 @@
 
 <body>
   <main>
-    @include('partials.header') @include('partials.modals.search_modal')
+    @include('partials.header') @include('partials.modals.search_modal', ['sections' => App\Section::get()])
       <section id="content">
         @yield('content')
       </section>

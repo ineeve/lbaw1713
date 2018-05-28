@@ -1,4 +1,3 @@
-
 function startFollowing(username) {
     $.ajaxSetup({
         headers: {
@@ -94,7 +93,7 @@ function followingChangePage(e){
     if(pageNumber != NaN){
         if(pageNumber<=0)return;
         
-        let username = $('input#user')[0].getAttribute("value");
+        let username = $('input#user_profile')[0].value;
         console.log("ok");
         jQuery.ajax({
             url: "/api/users/" + username + "/following",
