@@ -24,14 +24,11 @@
               <!-- Sort News Dropdown -->
               @include('partials.sort_news_dropdown')
             </div>
-
           </div>
-          <div class="d-flex flex-column">
-            <div id="news_item_preview_list">
-              @include('partials.news_item_preview_list',$news)
-            </div>
-            <span class="previews"> @include('partials.load_more', ['hide' => count($news) === 0]) </span>
+          <div id="news_item_preview_list" class="d-flex flex-column">
+            @include('partials.news_item_preview_list',$news)
           </div>
+          <span class="previews"> @include('partials.load_more', ['hide' => count($news) === 0]) </span>
         </div>
       </div>
     </div>

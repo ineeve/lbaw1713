@@ -74,12 +74,12 @@ class NewsController extends Controller
       return 'sections.name IN (' . implode(',', array_fill(0, $numBindings, '?')) . ') AND';
     }
 
-    private function getNewsByPopularity($section, $offset) {
+    private function getNewsByPopularity($section, $offset, $direction) {
       if(strcmp($section, 'All') == 0) {
         return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
           FROM news NATURAL JOIN newspoints JOIN users ON news.author_id = users.id
           WHERE NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
-          ORDER BY newspoints.points DESC LIMIT 10 OFFSET ?', [$offset]);
+          ORDER BY newspoints.points '.$direction.' LIMIT 10 OFFSET ?', [$offset]);
       } else if (strcmp($section, 'For You') == 0) {
         $selectInputs = $this->getUserSectionsArray();
         $userSectionsBindings = $this->getQueryBindings(count($selectInputs));
@@ -88,22 +88,22 @@ class NewsController extends Controller
           FROM news NATURAL JOIN newspoints JOIN users ON news.author_id = users.id
             INNER JOIN sections ON news.section_id = sections.id
           WHERE ' . $userSectionsBindings . ' NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
-          ORDER BY newspoints.points DESC LIMIT 10 OFFSET ?', $selectInputs);
+          ORDER BY newspoints.points '.$direction.' LIMIT 10 OFFSET ?', $selectInputs);
       } else {
         return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
           FROM news NATURAL JOIN newspoints JOIN users ON news.author_id = users.id
             INNER JOIN sections ON news.section_id = sections.id
           WHERE sections.name = ? AND NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
-          ORDER BY newspoints.points DESC LIMIT 10 OFFSET ?', [$section, $offset]);
+          ORDER BY newspoints.points '.$direction.' LIMIT 10 OFFSET ?', [$section, $offset]);
       }
     }
 
-    private function getNewsByDate($section, $offset) {
+    private function getNewsByDate($section, $offset, $direction) {
       if(strcmp($section, 'All') == 0) {
         return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
           FROM news JOIN users ON news.author_id = users.id
           WHERE NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
-          ORDER BY date DESC LIMIT 10 OFFSET ?', [$offset]);
+          ORDER BY date '.$direction.' LIMIT 10 OFFSET ?', [$offset]);
       } else if (strcmp($section, 'For You') == 0) {
         $selectInputs = $this->getUserSectionsArray();
         $userSectionsBindings = $this->getQueryBindings(count($selectInputs));
@@ -112,22 +112,22 @@ class NewsController extends Controller
           FROM news NATURAL JOIN newspoints JOIN users ON news.author_id = users.id
             INNER JOIN sections ON news.section_id = sections.id
           WHERE ' . $userSectionsBindings . ' NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
-          ORDER BY date DESC LIMIT 10 OFFSET ?', $selectInputs);
+          ORDER BY date '.$direction.' LIMIT 10 OFFSET ?', $selectInputs);
       } else {
         return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
           FROM news JOIN users ON news.author_id = users.id
             INNER JOIN sections ON news.section_id = sections.id
           WHERE sections.name = ? AND NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
-          ORDER BY date DESC LIMIT 10 OFFSET ?', [$section, $offset]);
+          ORDER BY date '.$direction.' LIMIT 10 OFFSET ?', [$section, $offset]);
       }
     }
 
-    private function getNewsByVotes($section, $offset) {
+    private function getNewsByVotes($section, $offset, $direction) {
       if(strcmp($section, 'All') == 0) {
         return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
             FROM news JOIN users ON news.author_id = users.id
             WHERE NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
-            ORDER BY votes DESC LIMIT 10 OFFSET ?', [$offset]);
+            ORDER BY votes '.$direction.' LIMIT 10 OFFSET ?', [$offset]);
       } else if (strcmp($section, 'For You') == 0) {
         $selectInputs = $this->getUserSectionsArray();
         $userSectionsBindings = $this->getQueryBindings(count($selectInputs));
@@ -136,27 +136,27 @@ class NewsController extends Controller
           FROM news NATURAL JOIN newspoints JOIN users ON news.author_id = users.id
             INNER JOIN sections ON news.section_id = sections.id
           WHERE ' . $userSectionsBindings . ' NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
-          ORDER BY votes DESC LIMIT 10 OFFSET ?', $selectInputs);
+          ORDER BY votes '.$direction.' LIMIT 10 OFFSET ?', $selectInputs);
       } else {
         return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
           FROM news JOIN users ON news.author_id = users.id
             INNER JOIN sections ON news.section_id = sections.id
           WHERE sections.name = ? AND NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
-          ORDER BY votes DESC LIMIT 10 OFFSET ?', [$section, $offset]);
+          ORDER BY votes '.$direction.' LIMIT 10 OFFSET ?', [$section, $offset]);
       }
     }
 
     /**
       * @param  String  $order Either 'POPULAR', 'RECENT' or 'VOTED'.
       */
-    private function getNews($section, $order, $offset) {
+    private function getNews($section, $order, $offset, $direction) {
       switch ($order) {
         case self::MOST_POPULAR:
-          return $this->getNewsByPopularity($section, $offset);
+          return $this->getNewsByPopularity($section, $offset, $direction);
         case self::MOST_RECENT:
-          return $this->getNewsByDate($section, $offset);
+          return $this->getNewsByDate($section, $offset, $direction);
         case self::MOST_VOTED:
-          return $this->getNewsByVotes($section, $offset);
+          return $this->getNewsByVotes($section, $offset, $direction);
       }
     }
 
@@ -199,10 +199,16 @@ class NewsController extends Controller
       return view('pages.searched_news',['news'=> $filteredNews, 'searchText' => $searchText]);
     }
 
-    public function list($section = 'All', $order = self::MOST_POPULAR, $offset = 0) {
+    public function list(Request $request, $section = 'All', $order = self::MOST_POPULAR, $offset = 0) {
       //$this->authorize('list', News::class);
       //echo($section.";".$order.";".$offset);
-      $news = $this->getNews($section, $order, $offset);
+      $reversed = $request->reversed;
+      if($reversed == "true"){
+        $direction = "ASC";
+      }else{
+        $direction = "DESC";
+      }
+      $news = $this->getNews($section, $order, $offset, $direction);
       $sections = DB::select('SELECT icon, name FROM Sections');
 
       return view('partials.news_item_preview_list', ['news' => $news, 'sections' => $sections]);
@@ -219,7 +225,7 @@ class NewsController extends Controller
       } else {
         $initial_page = 'All';
       }
-      $news = $this->getNews($initial_page, self::MOST_POPULAR, 0);
+      $news = $this->getNews($initial_page, self::MOST_POPULAR, 0, "DESC");
       $sections = DB::select('SELECT icon, name FROM Sections');
       
       return view('pages.news', ['news' => $news, 'sections' => $sections, 'currentSection' => $initial_page]);
