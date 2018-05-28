@@ -93,6 +93,10 @@ class AdminController extends Controller {
         return $this->getUsersTableView($users,$pageNumber,$itemsPerPage);
     }
 
+    public function getSections(Request $request){
+        $this->authorize('admin', \Auth::user());
+    }
+
     public function show()
     {
         $this->authorize('admin', Auth::user());
