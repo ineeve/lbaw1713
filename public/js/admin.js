@@ -183,12 +183,19 @@ function replaceUsersTable(){
 createAllListeners();
 
 $(document).ready(function() {
+    $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
     $('.unban').click(function(e) {
+        updateLastRowSelected(e);
+        let username = last_row_selected.id;
         $.ajax({
             url: '/adm/users/'+username+'/unban',
             method: 'post',
-            success: function() {
-
+            success: function(view) {
+                console.log(view);
             },
             error: function(xhr) {
                 console.log(xhr);
