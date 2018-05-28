@@ -188,21 +188,52 @@ $(document).ready(function() {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
       });
+    
+    /**
+     * Unban user.
+     */
     $('.unban').click(function(e) {
         updateLastRowSelected(e);
         let username = last_row_selected.id;
-        let userRow = e.target.parentNode.parentNode;
+        let banBtn = e.target;
+        let userRow = banBtn.parentNode.parentNode;
         console.log(e);
         $.ajax({
             url: '/adm/users/'+username+'/unban',
             method: 'post',
             success: function(msg) {
                 userRow.classList.remove('table-danger');
-                console.log(msg);
+                banBtn.outerHTML = '<i class="text-danger fas fa-ban ban" data-toggle="modal" data-target="#banModal" title="Ban user"></i>';
+                showSuccessMsg(msg);
             },
             error: function(xhr) {
+                showFailureMsg('Failed to unban user.');
                 console.log(xhr);
             }
         })
     })
 })
+
+function showSuccessMsg(msg) {
+    showMsg(msg, 'success');
+}
+
+function showFailureMsg(msg) {
+    showMsg(msg, 'danger');
+
+}
+
+/**
+ * 
+ * @param {*} msg Message to show.
+ * @param {*} type One of Bootstrap's alert-* types.
+ */
+function showMsg(msg, type) {
+    let alertDiv = document.getElementById('alert-messages');
+    let divElement = document.createElement('div');
+    let closeBtn = getCloseBtn();
+    divElement.setAttribute('class','alert alert-'+type);
+    divElement.innerText = msg;
+    divElement.appendChild(closeBtn);
+    alertDiv.appendChild(divElement);
+}
