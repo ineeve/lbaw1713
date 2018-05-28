@@ -1,4 +1,6 @@
-<tr id={{$user->username}}>
+<?php $banned = $user->ban()->exists(); ?>
+
+<tr id="{{$user->username}}" @if($banned) class="table-danger" @endif>
     <th class="text-left" scope="row">{{$user->id}}
     </th>
     <td class="text-right">{{$user->username}}
@@ -15,7 +17,11 @@
         @endif
         @if($user->permission=='moderator' || $user->permission=='normal')
         <i class="text-success fas fa-angle-double-up mr-1 promote" data-toggle="tooltip" title="Promote user"></i>
-        <i class="text-danger fas fa-ban ban" data-toggle="modal" data-target="#banModal" title="Ban user"></i>
+            @if($banned)
+            <i class="text-danger fas fa-ban unban" data-toggle="tooltip" title="Unban user"></i>
+            @else
+            <i class="text-danger fas fa-ban ban" data-toggle="modal" data-target="#banModal" title="Ban user"></i>
+            @endif
         @endif
     </td>
 </tr>
