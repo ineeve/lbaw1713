@@ -19,11 +19,10 @@ class CheckBanMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (true) {
-            $bandata = DB::table('bans')->where('banned_user_id', '=', Auth::id())->first();
+        if (Auth::check() && User::checkBan()) {
+            $bandata = DB::table('bans')->where('banned_user_id', Auth::id())->first();
             return response()->view('pages.banned', ['bandata' => $bandata]);
         }
-        dd("dudedudsfnodignoiefgboeihfoidwgfniodngoidsgoidsgiodngoifnohnd");
         return $next($request);
     }
 }

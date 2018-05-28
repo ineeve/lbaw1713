@@ -61,6 +61,6 @@ class User extends Authenticatable
      */
     public static function checkBan()
     {
-        return DB::table('bans')->where('banned_user_id', '=', Auth::id())->exists();
+        return DB::table('bans')->where('banned_user_id', '=', \Auth::id())->exists();
     }
 }

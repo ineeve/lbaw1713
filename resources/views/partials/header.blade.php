@@ -122,7 +122,7 @@
           </div>
         </div>
       </nav>
-      @if ($errors->has('email') || $errors->has('password'))
+      @if (isset($errors) && ($errors->has('email') || $errors->has('password')))
         <div class="container mt-2">
         @if ($errors->has('email'))
           <div class="alert alert-dismissible alert-danger">
