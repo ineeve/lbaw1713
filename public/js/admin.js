@@ -96,26 +96,28 @@ function getCloseBtn(){
     return closeBtn;
 }
 
-function banCallback(){
-    let alertDiv = document.getElementById('alert-messages');
-    let divElement = document.createElement('div');
-    let closeBtn = getCloseBtn();
+/**
+ * Change user row to the banned color and replace the ban button by the unban one.
+ */
+function banUserRow() {
     
-    if(this.status == 200){
-        last_row_selected.innerHTML = '';
-        let response = JSON.parse(this.responseText);
-        if(response != null){
-            divElement.setAttribute('class','alert alert-success');
-            divElement.innerText = response.message;
-            
-        }
-    }else{
-        divElement.setAttribute('class','alert alert-danger');
-        divElement.innerHTML = '<strong>Oh snap!</strong> Try again latter';
-    }
-    divElement.appendChild(closeBtn);
-    alertDiv.appendChild(divElement);
+    let userRow = last_row_selected;
+    let banBtn = $('#'+last_row_selected.id + ' .ban')[0];
+
+    userRow.classList.add('table-danger');
+    banBtn.outerHTML = '<i class="text-danger fas fa-door-open unban" data-toggle="tooltip" title="Unban user"></i>';
 }
+
+function banCallback() {
+    banUserRow();
+    if (this.status == 200) {
+        let msg = JSON.parse(this.responseText).message;
+        showSuccessMsg(msg);
+    } else {
+        showFailureMsg('Failed to ban user.');
+    }
+}
+
 function updateUserRow(){
     if(this.status == 200){
         last_row_selected.innerHTML = this.responseText;
@@ -192,7 +194,7 @@ $(document).ready(function() {
     /**
      * Unban user.
      */
-    $('.unban').click(function(e) {
+    $('body').on('click', '.unban', function(e) {
         updateLastRowSelected(e);
         let username = last_row_selected.id;
         let banBtn = e.target;
