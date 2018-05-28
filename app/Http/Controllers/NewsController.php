@@ -25,9 +25,10 @@ class NewsController extends Controller
     const MOST_VOTED = 'VOTED';
 
     private function searchUsers($searchText, $offset) {
-      return DB::select('SELECT users.id, username, picture
-      FROM users WHERE users.username = ?
-      ORDER BY username DESC LIMIT 5 OFFSET ?;',[$searchText, $offset]);
+      $name = strtolower($searchText);
+      return DB::select("SELECT users.id, username, picture
+      FROM users WHERE LOWER(users.username) LIKE '%{$name}%'
+      ORDER BY username DESC LIMIT 25 OFFSET ?;",[$offset]);
     }
 
     private function searchNewsByPopularity($searchText, $offset) {
@@ -198,10 +199,23 @@ class NewsController extends Controller
       return view('pages.searched_news',['news'=> $filteredNews, 'searchText' => $searchText]);
     }
 
-    public function getSearchUsers(Request $request){
+    public function getAdvancedSearchPage(Request $request){
+      $typeOfSearch = $request->elementToSearch;
       $searchText = $request->searchText;
-      $filteredUser = $this->searchUsers($searchText, 0);
-      return view('pages.searched_users',['users'=> $filteredUser, 'searchText' => $searchText]);
+
+      if($typeOfSearch == 'titleAndBody') {
+
+      }
+      if($typeOfSearch == 'onlyTitle') {
+
+      }
+      if($typeOfSearch == 'onlyBody') {
+
+      }
+      if($typeOfSearch == 'username') {
+        $filteredUser = $this->searchUsers($searchText, 0);
+        return view('pages.searched_users',['users'=> $filteredUser, 'searchText' => $searchText]);
+      }
     }
 
     public function list($section = 'All', $order = self::MOST_POPULAR, $offset = 0) {
