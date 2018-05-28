@@ -181,3 +181,18 @@ function replaceUsersTable(){
 }
 
 createAllListeners();
+
+$(document).ready(function() {
+    $('.unban').click(function(e) {
+        $.ajax({
+            url: '/adm/users/'+username+'/unban',
+            method: 'post',
+            success: function() {
+
+            },
+            error: function(xhr) {
+                console.log(xhr);
+            }
+        })
+    })
+})
