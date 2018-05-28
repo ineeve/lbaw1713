@@ -140,7 +140,7 @@ function demoteUser(){
 }
 
 function usersChangePage(e){
-    currentPage = e.target.parentNode.value;
+    currentPage = e.target.parentNode.getAttribute("data-value");
     let url = "/adm/users?pageNumber=" + currentPage + "&itemsPerPage=" + itemsPerPage;
     let numberOfPages = Math.ceil(total.getAttribute('value')/itemsPerPage);
     if(currentPage != NaN){
