@@ -83,6 +83,7 @@ Route::post('register', 'Auth\RegisterController@register');
 
 //Search
 Route::get('news/search','NewsController@getSearchPage')->name('search');
+Route::get('news/advanced_search','NewsController@getAdvancedSearchPage')->name('advanced_search');
 
 /*Form to create one piece of news*/
 Route::get('news/create', 'NewsController@createArticle')->name('create_news'); 

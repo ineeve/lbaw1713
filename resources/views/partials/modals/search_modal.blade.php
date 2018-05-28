@@ -10,17 +10,17 @@
             </button>
           </div>
           <div class="modal-body">
-            <form>
+            <form action="{{route("advanced_search")}}" method="get">
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search">
+                <input type="text" class="form-control" placeholder="Search" name="searchText">
               </div>
               <div class="form-group my-1">
-                <select class="custom-select">
-                  <option selected>Search for...</option>
-                  <option value="1">Only title</option>
-                  <option value="2">Only body</option>
-                  <option value="3">Title and body</option>
-                  <option value="4">Username</option>
+                <select class="custom-select" name="elementToSearch">
+                  <option value="titleAndBody" selected>Search for...</option>
+                  <option value="onlyTitle">Only title</option>
+                  <option value="onlyBody">Only body</option>
+                  <option value="titleAndBody">Title and body</option>
+                  <option value="username">Username</option>
                 </select>
               </div>
               <div class="form-group my-1">
