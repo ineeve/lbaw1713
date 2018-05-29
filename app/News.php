@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use App\Reporteditem;
 class News extends Model {
 
     // Don't add create and update timestamps in database.
@@ -346,7 +346,7 @@ class News extends Model {
     }
 
 
-    static public function getDeleted($article) {
+    static public function getDelected($article) {
         return DB::table('deleteditems')->where('news_id', $article->id)->get();
     }
     static public function newsExist($news_id) {

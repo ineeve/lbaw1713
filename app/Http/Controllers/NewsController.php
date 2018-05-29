@@ -15,7 +15,7 @@ use \stdClass;
 use App\News as News;
 use App\Section as Section;
 use App\Source as Source;
-
+use App\Comment;
 use App\Reporteditem;
 
 class NewsController extends Controller
@@ -283,12 +283,12 @@ class NewsController extends Controller
       $reported_item_id = -1;
       if (News::newsExist($news_id)) {
         if (!is_null($comment_id)) {
-          if (Comment::commentExist($news_id)){
+          if (Comment::commentExist($news_id,$comment_id)){
             $reported_item_id = Reporteditem::getReportedItemId($comment_id,$brief);
             $success = True;
           }
         } else {
-          $reported_item_id = Reporteditem::getReportedItemId($news_id,$brief);
+          $reported_item_id = Reporteditem::getReportedItemIdN($news_id,$brief);
           $success = True;
         }
       }
@@ -296,7 +296,7 @@ class NewsController extends Controller
         $reasons = explode(",",$reasons);
         foreach($reasons as $reason){
           if (in_array($reason, $validReasons)){
-            Reportitem::insertReason($reason, $reported_item_id);
+            Reporteditem::insertReason($reason, $reported_item_id);
           }else{
             $success = False;
           }

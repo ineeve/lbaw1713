@@ -5,6 +5,8 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
+
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -148,7 +150,7 @@ class User extends Authenticatable
        /**
      * $notification in notification type domain ['CommentMyPost', 'FollowMe', 'VoteMyPost', 'FollowedPublish']
      */
-    public function deactivateNotification($notification) {
+    static public function deactivateNotification($notification) {
       DB::insert('DELETE FROM SettingsNotifications
                     WHERE type = ? AND user_id = ?', [$notification, Auth::user()->id]);
     }
@@ -156,7 +158,7 @@ class User extends Authenticatable
      /**
      * $notification in notification type domain ['CommentMyPost', 'FollowMe', 'VoteMyPost', 'FollowedPublish']
      */
-    public function activateNotification($notification) {
+    static public function activateNotification($notification) {
       DB::insert('INSERT INTO SettingsNotifications (type, user_id)
                     VALUES (?, ?)', [$notification, Auth::user()->id]);
     }
