@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-12 col-md-10">
             <h3 ><i class="fa fa-laptop fa-fw"></i> Categories <i class="pl-2 fa fa-edit fa-fw" data-toggle="collapse" data-target="#editMenu"></i></h3>
-            <div id="editMenu" class="row collapse">
+            <div id="editMenu" class="collapse">
                 <div class="d-flex flex-column">
                     <h3>Pick a category to edit</h3>
                     <div class="d-flex p-3" style="background-color:gray;">
