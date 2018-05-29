@@ -208,7 +208,6 @@ class NewsController extends Controller
       }
       $news = $this->getNews($section, $order, $offset, $direction);
       $sections = DB::select('SELECT icon || \' fa-fw\', name FROM Sections');
-      //$sections->icon = $sections->icon . ' fa-fw';
 
       return view('partials.news_item_preview_list', ['news' => $news, 'sections' => $sections]);
     }
