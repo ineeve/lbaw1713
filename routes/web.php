@@ -66,7 +66,7 @@ Route::delete('/api/settings/interests', 'UserController@removeInterest')->name(
 Route::get('/adm','AdminController@show')->name('show_admin_page');
 Route::get('/adm/users','AdminController@getUsersTab');
 Route::get('/adm/categories','AdminController@getCategoriesTab');
-Route::Get('/adm/badges','AdminController@getBadgesTab');
+Route::get('/adm/badges','AdminController@getBadgesTab');
 Route::get('/adm/users/table','AdminController@getUsersTableRoute');
 Route::put('/adm/users/{username}/promote','AdminController@promoteUser');
 Route::put('/adm/users/{username}/demote','AdminController@demoteUser');
