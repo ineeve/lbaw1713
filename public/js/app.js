@@ -35,8 +35,16 @@ function submitReportForm(e){
   comment_id = null;
 }
 
+function createErrorMessage(content){
+  let errorMessage = document.createElement('strong');
+  errorMessage.setAttribute('id','reportModalErrorMessage');
+  errorMessage.setAttribute('class','error');
+  errorMessage.innerHTML= "<i class='fas fa-exclamation-triangle'></i>"+content;
+  return errorMessage;
+}
+
 function handleReportSubmit(e){
-  let text = e.target.responseText;
+  let response = this.responseText;
   let parameters = {brief: document.querySelector('#report-description-area').value};
   let reasonsGroup = document.querySelector('#reasonsGroup');
   parameters.reasons = Array.from(reasonsGroup.querySelectorAll('.active')).forEach(btn => {
@@ -44,14 +52,15 @@ function handleReportSubmit(e){
   });
   let briefTextarea = document.getElementById("report-description-area");
   briefTextarea != null ? briefTextarea.value = '' : null;
-  if (text != null){
-    let response = JSON.parse(text);
-    if (response){
-      let closeBtn = document.querySelector("#closeReportModal");
-      closeBtn.click();
-    } else {
-      alert('error');
+  if (this.status == 200){
+    let closeBtn = document.querySelector("#closeReportModal");
+    closeBtn.click();
+  } else{
+    if (document.getElementById('reportModalErrorMessage')==null){
+      let errorMessage = createErrorMessage(JSON.parse(response).message);
+      reasonsGroup.appendChild(errorMessage);
     }
+    
   }
 }
 

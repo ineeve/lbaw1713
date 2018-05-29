@@ -275,7 +275,6 @@ class NewsController extends Controller
       $brief = $request->input('brief');
       $reasons = $request->input('reasons');
       $validReasons = array_column(Reporteditem::getreportReasons(),'unnest');
-      $success = False;
       //check news is valid and check comment belongs to news.
       if (is_null($brief)) {
         $brief = '';
@@ -285,11 +284,9 @@ class NewsController extends Controller
         if (!is_null($comment_id)) {
           if (Comment::commentExist($news_id,$comment_id)){
             $reported_item_id = Reporteditem::getReportedItemId($comment_id,$brief);
-            $success = True;
           }
         } else {
           $reported_item_id = Reporteditem::getReportedItemIdN($news_id,$brief);
-          $success = True;
         }
       }
       if ($reported_item_id != -1){
@@ -298,11 +295,11 @@ class NewsController extends Controller
           if (in_array($reason, $validReasons)){
             Reporteditem::insertReason($reason, $reported_item_id);
           }else{
-            $success = False;
+            return Response::json(["message"=>"invalid reasons"],404);
           }
         }
       }
-      echo json_encode($success);
+      return Response::json(["message"=>"success"],200);
       
     }
 }
