@@ -18,7 +18,7 @@ main{
 .coolBtn {
   border: 0;
   background: transparent;
-
+  cursor: pointer;
 }
 
 div.section-div {
