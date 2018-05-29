@@ -15,7 +15,7 @@ main{
     transition: opacity;
 }
 
-#btnGroupDrop1 {
+.coolBtn {
   border: 0;
   background: transparent;
 
