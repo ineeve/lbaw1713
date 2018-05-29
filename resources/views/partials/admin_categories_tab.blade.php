@@ -9,19 +9,19 @@
                     <h3>Pick a category to edit</h3>
                     <div class="d-flex p-3" style="background-color:gray;">
                         <div class="mr-3">
-                            <i class="fa fa-laptop fa-fw big-icon" style="background-color:white;"></i>
+                            <i class="fa fa-laptop big-icon p-2" style="background-color:white;"></i>
                         </div>
                         <form method="POST" action="">
                             {{ csrf_field() }}
                             {{ method_field('PATCH') }}
                             <div class="form-group">
-                            <input type="text" name="icon" placeholder="Icon" class="form-control">
+                                <input type="text" name="name" placeholder="Name" class="form-control">
                             </div>
                             <div class="form-group">
-                            <input type="text" name="name" placeholder="Name" class="form-control">
+                                <input type="text" name="icon" placeholder="Icon" class="form-control">
                             </div>
                             <div class="form-group">
-                            <button type="submit" class="btn btn-secondary">Save</button>
+                                <button type="submit" class="btn btn-secondary">Save</button>
                             </div>
                         </form>
                     </div>
