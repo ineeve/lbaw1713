@@ -120,24 +120,23 @@
           </div>
         </div>
       </nav>
-      @if (!Request::is('register')) {
+      @if (!Request::is('register'))
         @if ($errors->has('email') || $errors->has('password'))
         <div class="container mt-2">
-        @if ($errors->has('email'))
-          <div class="alert alert-dismissible alert-danger">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <strong> {{ $errors->first('email') }} </strong>
-          </div>
-        @else
+          @if ($errors->has('email'))
             <div class="alert alert-dismissible alert-danger">
               <button type="button" class="close" data-dismiss="alert">&times;</button>
-              <strong> {{ $errors->first('password') }} </strong>
+              <strong> {{ $errors->first('email') }} </strong>
             </div>
-        @endif
+          @else
+              <div class="alert alert-dismissible alert-danger">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong> {{ $errors->first('password') }} </strong>
+              </div>
+          @endif
         </div>
       @endif
-      }
-      @endif
+    @endif
 
 
       
