@@ -6,12 +6,10 @@
     <div class="col-lg-3 col-12 mx-0">
 
       <div class="border border-top-0 border-left-0 border-right-0 profile_item container p-2 mx-auto mt-3">
-
-
         
         <div class="row">
           <div class="col">
-            <img class="img-responsive" src="{{ Storage::url('users/'.($user->picture == null ? 'default' : $user->picture)) }}" alt="pic"
+            <img class="img-responsive" src="{{ Storage::url('users/'.($user->picture == null ? 'default' : $user->picture)) }}" alt="{{$user->username}}'s profile picture"
               height="200" width="200">
           </div>
 
