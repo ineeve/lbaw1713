@@ -43,7 +43,7 @@ class ReporteditemController extends Controller
 
         $reasons = Reporteditem::getReasons($news_id);
         $route_mod_comment = '/api/news/'.$news_id.'/mod/create_comment';
-        return view('pages.report',['comments' => $comments, 'reasons' => $reasons, 'descriptions' => $descriptions, 'info' => $info[0],'route_mod_comment'=>$route_mod_comment, 'isReportedComment' => FALSE]);
+        return view('pages.report',['comments' => $comments, 'reasons' => $reasons, 'descriptions' => $descriptions, 'info' => $info[0],'route_mod_comment'=>$route_mod_comment, 'isReportedComment' => FALSE,'page_title'=>'Report']);
     }
     public function showReportOfComments($comment_id) {
         $this->authorize('mod', Auth::user());
@@ -56,7 +56,7 @@ class ReporteditemController extends Controller
         $reasons =  Reporteditem::getReasonsC($comment_id);
     
         $route_mod_comment = '/api/news/'.$info[0]->news_id.'/comments/'.$comment_id.'/mod/create_comment';
-        return view('pages.report',['comments' => $comments, 'reasons' => $reasons, 'descriptions' => $descriptions, 'info' => $info[0],'route_mod_comment'=>$route_mod_comment, 'isReportedComment' => TRUE]);
+        return view('pages.report',['comments' => $comments, 'reasons' => $reasons, 'descriptions' => $descriptions, 'info' => $info[0],'route_mod_comment'=>$route_mod_comment, 'isReportedComment' => TRUE,'page_title'=>'Report']);
     }
       
     public function show() {
@@ -68,7 +68,7 @@ class ReporteditemController extends Controller
         $currentPageComments = 1;
         $numberNews = Reporteditem::totalNews()/5;
         $numberComments = Reporteditem::totalComments()/5;
-        return view('pages.reports',['newsreports' => $reports, 'commentreports' => $commentsReports,'currentPageNews'=>$currentPageNews,'currentPageComments'=>$currentPageComments,'numberOfPagesNews'=>$numberNews,'numberOfPagesComments'=>$numberComments]);
+        return view('pages.reports',['newsreports' => $reports, 'commentreports' => $commentsReports,'currentPageNews'=>$currentPageNews,'currentPageComments'=>$currentPageComments,'numberOfPagesNews'=>$numberNews,'numberOfPagesComments'=>$numberComments,'page_title'=>'Reports']);
     }
     
     public function getReports() {

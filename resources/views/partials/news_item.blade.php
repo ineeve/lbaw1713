@@ -1,4 +1,4 @@
-@if(Auth::check()) @include('partials/report_modal',$reportReasons)
+@if(Auth::check()) @include('partials/modals/report_modal',$reportReasons)
 <meta name="news_id" content="{{$news->id}}"> @else @include('partials/modals/login_modal') @endif
 <script src="{{ asset('js/scrollComment.js') }}" defer></script>
   <div id="newsContent" class="tab-content">

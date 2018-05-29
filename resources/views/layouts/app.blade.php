@@ -9,19 +9,8 @@
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <title>{{ config('app.name', 'Laravel') }}</title>
+  <title>{{ $page_title }}</title>
 
-  <!-- Styles -->
-  <!-- <link href="{{ asset('css/milligram.min.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-  <script type="text/javascript">
-        // Fix for Firefox autofocus CSS bug
-        // See: http://stackoverflow.com/questions/18943276/html-5-autofocus-messes-up-css-loading/18945951#18945951
-  </script>
-  <script type="text/javascript" src={{ asset( 'js/app.js') }} defer>
-  </script> -->
-
-  <!-- OUR -->
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Font Awesome CSS -->
@@ -59,18 +48,20 @@
       <section id="content">
         @yield('content')
       </section>
-      <footer class="page-footer sticky-bottom mt-4">
+      
+  </main>
+   <footer class="page-footer sticky-bottom mt-4">
         <p class=" mx-auto text-center mb-0">
-          <a href="#">About us</a>
+          <a href="/about">About us</a>
           &middot;
-          <a href="#">FAQ</a>
+          <a href="/faq">FAQ</a>
           &middot;
           <a href="{{ url('privacy_policy') }}">Privacy Policy</a>
         </p>
         <p class="text-center footer-copyright mb-1">
           <i class="far fa-copyright fa-fw"></i> 2018 Photon News</p>
       </footer>
-  </main>
+  
 </body>
 
 </html>

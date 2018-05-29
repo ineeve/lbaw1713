@@ -47,11 +47,11 @@ class NewsController extends Controller
       private function searchNews($searchText, $order, $offset) {
         switch ($order) {
           case self::MOST_POPULAR:
-            return $this->searchNewsByPopularity($searchText, $offset);
+            return News::searchNewsByPopularity($searchText, $offset);
           case self::MOST_RECENT:
-            return $this->searchNewsByDate($searchText, $offset);
+            return News::searchNewsByDate($searchText, $offset);
           case self::MOST_VOTED:
-            return $this->searchNewsByVotes($searchText, $offset);
+            return News::searchNewsByVotes($searchText, $offset);
         }
       }
 
@@ -76,8 +76,8 @@ class NewsController extends Controller
 
     public function getSearchPage(Request $request){
       $searchText = $request->searchText;
-      $filteredNews = $this->searchNewsByPopularity($searchText, 0);
-      return view('pages.searched_news',['news'=> $filteredNews, 'searchText' => $searchText]);
+      $filteredNews = News::searchNewsByPopularity($searchText, 0);
+      return view('pages.searched_news',['news'=> $filteredNews, 'searchText' => $searchText,'page_title'=>'Search']);
     }
 
     public function list(Request $request, $section = 'All', $order = self::MOST_POPULAR, $offset = 0) {
@@ -107,7 +107,7 @@ class NewsController extends Controller
       $news = $this->getNews($initial_page, self::MOST_POPULAR, 0, "DESC");
       $sections = News::getSections();
       
-      return view('pages.news', ['news' => $news, 'sections' => $sections, 'currentSection' => $initial_page]);
+      return view('pages.news', ['news' => $news, 'sections' => $sections, 'currentSection' => $initial_page,'page_title'=>'Homepage']);
     }
 
     public function show($id) {
@@ -122,7 +122,7 @@ class NewsController extends Controller
       $sources = News::getSources($news->id);
       $reportReasons = array_column(Reporteditem::getreportReasons(),'unnest');
 
-      return view('pages.news_item', ['news' => $news, 'sources' => $sources, 'reportReasons'=> $reportReasons]);
+      return view('pages.news_item', ['news' => $news, 'sources' => $sources, 'reportReasons'=> $reportReasons,'page_title'=>$news->title]);
     }
 
     /**
@@ -235,7 +235,7 @@ class NewsController extends Controller
       $this->authorize('create', News::class);
       $sections = Section::pluck('name', 'id');
       $sources = array($this->getEmptySource());
-      return view('pages.news_editor', ['sections' => $sections, 'sources'=> $sources]);
+      return view('pages.news_editor', ['sections' => $sections, 'sources'=> $sources,'page_title'=>'Create an Article']);
     }
 
     public function editArticle($id) {
@@ -243,7 +243,7 @@ class NewsController extends Controller
       $article = News::find($id);
       $sources = Reporteditem::selectSources($id);
       $this->authorize('update', $article);
-      return view('pages.news_editor', ['sections' => $sections, 'article' => $article, 'sources' => $sources]);
+      return view('pages.news_editor', ['sections' => $sections, 'article' => $article, 'sources' => $sources,'page_title'=>'Edit an Article']);
     }
 
     //////////////////// EDITOR ABOVE
@@ -275,7 +275,6 @@ class NewsController extends Controller
       $brief = $request->input('brief');
       $reasons = $request->input('reasons');
       $validReasons = array_column(Reporteditem::getreportReasons(),'unnest');
-      $success = False;
       //check news is valid and check comment belongs to news.
       if (is_null($brief)) {
         $brief = '';
@@ -285,11 +284,9 @@ class NewsController extends Controller
         if (!is_null($comment_id)) {
           if (Comment::commentExist($news_id,$comment_id)){
             $reported_item_id = Reporteditem::getReportedItemId($comment_id,$brief);
-            $success = True;
           }
         } else {
           $reported_item_id = Reporteditem::getReportedItemIdN($news_id,$brief);
-          $success = True;
         }
       }
       if ($reported_item_id != -1){
@@ -298,11 +295,11 @@ class NewsController extends Controller
           if (in_array($reason, $validReasons)){
             Reporteditem::insertReason($reason, $reported_item_id);
           }else{
-            $success = False;
+            return Response::json(["message"=>"invalid reasons"],404);
           }
         }
       }
-      echo json_encode($success);
+      return Response::json(["message"=>"success"],200);
       
     }
 }

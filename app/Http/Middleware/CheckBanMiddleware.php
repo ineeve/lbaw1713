@@ -24,7 +24,8 @@ class CheckBanMiddleware
             $admin = User::find($bandata->admin_user_id);
             return response()->view('pages.banned', ['banner_name' => $admin->username,
                                                     'date' => $bandata->date,
-                                                    'reason' => $bandata->reason]);
+                                                    'reason' => $bandata->reason,
+                                                    'page_title'=>'Banned Page']);
         }
         return $next($request);
     }

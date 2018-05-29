@@ -1,10 +1,9 @@
-html, body {
+body {
   margin: 0;
-  height: 100%;
+  height: 100vh;
 }
-
-main {
-  min-height : 100%;
+main{
+  min-height: 90%;
 }
 
 .article-options .clickable-btn {
@@ -16,10 +15,10 @@ main {
     transition: opacity;
 }
 
-#btnGroupDrop1 {
+.coolBtn {
   border: 0;
   background: transparent;
-
+  cursor: pointer;
 }
 
 div.section-div {
@@ -142,4 +141,20 @@ a#statistics-tab.active {
 
 .error{
   color:red;
+}
+
+.screen-reader-only{
+  position:absolute;
+  left:-10000px;
+  top:auto;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+}
+
+footer{
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
 }
