@@ -3,7 +3,7 @@
 
 function createMinusFieldset(){
   let minusFieldset = document.createElement('fieldset');
-  minusFieldset.setAttribute('class','form-group');
+  minusFieldset.setAttribute('class','form-group mt-3');
   minusFieldset.setAttribute('onclick','removeSource(this)');
   let minusIcon = document.createElement('i');
   minusIcon.setAttribute('class','fas fa-minus-circle');
@@ -13,7 +13,7 @@ function createMinusFieldset(){
 
 function createPlusFieldset(){
     let plusFieldset = document.createElement('fieldset');
-    plusFieldset.setAttribute('class','form-group mr-3');
+    plusFieldset.setAttribute('class','form-group mr-3 mt-3');
     plusFieldset.setAttribute('onclick','addSource(this)');
     let plusIcon = document.createElement('i');
     plusIcon.setAttribute('class','fas fa-plus-circle');
@@ -70,6 +70,8 @@ function validateInput(author,date,link){
 function getInputFieldset(name,placeholder,required){
     let fieldset = document.createElement('fieldset');
     fieldset.setAttribute('class','form-group mr-3');
+    let label = document.createElement('label');
+    label.innerText = placeholder + ":";
     let input = document.createElement('input');
     input.setAttribute('class','form-control')
     input.setAttribute('placeholder',placeholder);
@@ -78,7 +80,8 @@ function getInputFieldset(name,placeholder,required){
     if (required){
         input.setAttribute('required','required');
     }
-    fieldset.appendChild(input);
+    label.appendChild(input);
+    fieldset.appendChild(label);
     return fieldset;
 }
 
