@@ -200,8 +200,6 @@ class NewsController extends Controller
     }
 
     public function list(Request $request, $section = 'All', $order = self::MOST_POPULAR, $offset = 0) {
-      //$this->authorize('list', News::class);
-      //echo($section.";".$order.";".$offset);
       $reversed = $request->reversed;
       if($reversed == "true"){
         $direction = "ASC";
@@ -227,7 +225,7 @@ class NewsController extends Controller
       }
       $news = $this->getNews($initial_page, self::MOST_POPULAR, 0, "DESC");
       $sections = DB::select('SELECT icon, name FROM Sections');
-      
+
       return view('pages.news', ['news' => $news, 'sections' => $sections, 'currentSection' => $initial_page]);
     }
 

@@ -56,7 +56,6 @@
 
             </div>
             @if(Auth::user()->permission == 'admin' || Auth::user()->permission ==  'moderator')
-            <!-- TODO: ver metodo delete para admin e moderadores -->
             <div class="centerText mt-2" name="delete" title="Use to delete this news. If you are the author the news will be permantly deleted from our servers.">
               <form action="{{ route('delete_news', $news->id) }}" method="post" class="delete-news">
                 {{ method_field('delete') }} {{ csrf_field() }}
