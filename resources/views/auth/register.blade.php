@@ -10,7 +10,7 @@
           <label for="username">Username:</label>
           @if ($errors->has('username'))
             <span class="error">
-                {{ $errors->first('username') }}
+              <i class="fas fa-exclamation-triangle"></i> {{ $errors->first('username') }}
             </span>
           @endif
           <input id="username" type="text" name="username" value="{{ old('username') }}" class="form-control" required autofocus>
@@ -19,7 +19,7 @@
           <label for="email">E-Mail Address:</label>
           @if ($errors->has('email'))
             <span class="error">
-                {{ $errors->first('email') }}
+              <i class="fas fa-exclamation-triangle"></i> {{ $errors->first('email') }}
             </span>
           @endif
           <input id="email" type="email" name="email" value="{{ old('email') }}" class="form-control" required>
@@ -28,7 +28,7 @@
           <label for="password">Password:</label>
           @if ($errors->has('password'))
             <span class="error">
-                {{ $errors->first('password') }}
+              <i class="fas fa-exclamation-triangle"></i> {{ $errors->first('password') }}
             </span>
           @endif
           <input id="password" type="password" name="password" class="form-control" required>
@@ -44,7 +44,7 @@
           <label for="picture">Profile picture:</label>
           @if ($errors->has('picture'))
             <span class="error">
-                {{ $errors->first('picture') }}
+              <i class="fas fa-exclamation-triangle"></i> {{ $errors->first('picture') }}
             </span>
           @endif
           <input id="picture" type="file" name="picture" class="form-control">
@@ -52,7 +52,7 @@
           <label for="gender">Gender:</label>
           @if ($errors->has('gender'))
             <span class="error">
-                {{ $errors->first('gender') }}
+              <i class="fas fa-exclamation-triangle"></i> {{ $errors->first('gender') }}
             </span>
           @endif
           <select class="custom-select" id="gender" name="gender" required="required">
@@ -66,7 +66,7 @@
           <label for="country">Country:</label>
           @if ($errors->has('country_id'))
             <span class="error">
-                {{ $errors->first('country_id') }}
+              <i class="fas fa-exclamation-triangle"></i> {{ $errors->first('country_id') }}
             </span>
           @endif
           <select id="country" name="country_id" class="form-control">

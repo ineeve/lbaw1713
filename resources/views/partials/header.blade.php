@@ -120,7 +120,8 @@
           </div>
         </div>
       </nav>
-      @if (($errors->has('email') || $errors->has('password')))
+      @if (!Request::is('register')) {
+        @if ($errors->has('email') || $errors->has('password'))
         <div class="container mt-2">
         @if ($errors->has('email'))
           <div class="alert alert-dismissible alert-danger">
@@ -135,5 +136,10 @@
         @endif
         </div>
       @endif
+      }
+      @endif
+
+
+      
       
 </header>
