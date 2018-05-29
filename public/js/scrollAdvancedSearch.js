@@ -18,7 +18,7 @@ jQuery(document).ready(function () {
             },
             success: function (result) {
                 if(result.next == 0){
-                    $('#users_item_preview_list').append("<div class=\"alert alert-dismissible alert-secondary\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Sorry!</strong> No more comments at the moment!</div>");
+                    $('#users_item_preview_list').append("<div style=\"width: 100%\" class=\"alert alert-dismissible alert-secondary\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Sorry!</strong> No more comments at the moment!</div>");
                 } else {
                     console.log(result.users);
                     result.users.forEach(function(element) {

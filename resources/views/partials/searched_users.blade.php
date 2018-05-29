@@ -15,15 +15,9 @@
         @endif
       </div>
       @if(isset($users) && count($users) > 0)
-      <div class="row">
-        <div class="col">
-          <a id="scroll_advanced_search_users" href="#" class="loadMore" style="text-decoration: none;">Show More</a>
-        </div>
-        <div class="col text-right">
-          <p class="totop">
-            <a style="text-decoration: none;" href="#top">Back to top</a>
-          </p>
-        </div>
+      <div class="container ml-0">
+        <button id="scroll_advanced_search_users" type="button" class="btn btn-light btn-lg btn-block loadMore">Show More</button>
+        <button type="button" class="btn btn-secondary btn-lg btn-block" onclick="location.href='#top'">Back To top</button>
       </div>
       @endif
     </div>
