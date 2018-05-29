@@ -13,7 +13,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="#categories_tab" role="button" data-toggle="tab" class="nav-link">
-                        <i class="fa fa-laptop fa-fw"></i> Categories</a>
+                        <i class="fas fa-puzzle-piece fa-fw"></i> Categories</a>
                 </li>
                 <li class="nav-item">
                     <a href="#badges_tab" role="button" data-toggle="tab" class="nav-link">
