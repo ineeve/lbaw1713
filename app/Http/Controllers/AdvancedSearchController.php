@@ -29,10 +29,10 @@ class AdvancedSearchController extends Controller
   
         if($typeOfSearch == 'username') {
           $filteredUser = $this->searchUsers($searchText, 0);
-          return view('pages.searched_users',['users'=> $filteredUser, 'searchText' => $searchText]);
+          return view('pages.searched_users',['users'=> $filteredUser, 'searchText' => $searchText,'page_title'=>'Search']);
         }
         $filteredNews = News::getNewsAdvanceSearch($request);
-            return view('pages.searched_news',['news'=> $filteredNews, 'searchText' => $searchText]);
+            return view('pages.searched_news',['news'=> $filteredNews, 'searchText' => $searchText,'page_title'=>'Search']);
       }
 
       public function scrollAdvancedSearchUsers(Request $request, $searchText) {
