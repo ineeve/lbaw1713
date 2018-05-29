@@ -226,16 +226,21 @@ class News extends Model {
       }
   
       static   public function getUserSectionsArray() {
-        $userSections = DB::select('SELECT name
-          FROM Sections
-            INNER JOIN UserInterests ON Sections.id = UserInterests.section_id
-          WHERE UserInterests.user_id = ?', [Auth::user()->id]);
-        $userSectionsArray = [];
-        for ($i = 0; $i < count($userSections); $i++) {
-          array_push($userSectionsArray, $userSections[$i]->name);
+          if(Auth::check()){
+            $userSections = DB::select('SELECT name
+            FROM Sections
+              INNER JOIN UserInterests ON Sections.id = UserInterests.section_id
+            WHERE UserInterests.user_id = ?', [Auth::user()->id]);
+          $userSectionsArray = [];
+          for ($i = 0; $i < count($userSections); $i++) {
+            array_push($userSectionsArray, $userSections[$i]->name);
+          }
+          return $userSectionsArray;
+        
+        }else{
+            return  array();
         }
-        return $userSectionsArray;
-      }
+        }
       static public function getQueryBindings($numBindings) {
         if ($numBindings == 0) {
           return "1 = 2 AND"; // impossible so no news are returned
