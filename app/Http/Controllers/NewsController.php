@@ -47,11 +47,11 @@ class NewsController extends Controller
       private function searchNews($searchText, $order, $offset) {
         switch ($order) {
           case self::MOST_POPULAR:
-            return $this->searchNewsByPopularity($searchText, $offset);
+            return News::searchNewsByPopularity($searchText, $offset);
           case self::MOST_RECENT:
-            return $this->searchNewsByDate($searchText, $offset);
+            return News::searchNewsByDate($searchText, $offset);
           case self::MOST_VOTED:
-            return $this->searchNewsByVotes($searchText, $offset);
+            return News::searchNewsByVotes($searchText, $offset);
         }
       }
 
@@ -76,7 +76,7 @@ class NewsController extends Controller
 
     public function getSearchPage(Request $request){
       $searchText = $request->searchText;
-      $filteredNews = $this->searchNewsByPopularity($searchText, 0);
+      $filteredNews = News::searchNewsByPopularity($searchText, 0);
       return view('pages.searched_news',['news'=> $filteredNews, 'searchText' => $searchText,'page_title'=>'Search']);
     }
 

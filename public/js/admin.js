@@ -331,3 +331,16 @@ function removeClassByPrefix(el, prefix) {
         }
     }
 }
+
+/**
+ * Replaces badge card with an aesthetically similar badge edit form.
+ * @param {*} badgeElem JS DOM element of a badge card.
+ * @param {String} badgeJson JSON representation of a Badge.
+ */
+function showBadgeEditForm(badgeElem, badgeJson) {
+    console.log(badgeElem);
+    console.log(badgeJson);
+    let form = document.createElement('form');
+
+    badgeElem.parentNode.replaceChild(form, badgeElem);
+}
