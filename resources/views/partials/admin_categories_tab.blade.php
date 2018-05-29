@@ -1,3 +1,5 @@
+@include('partials.modals.admin_add_category_modal')
+
 <div class="mb-2">
     <div class="row">
         <div class="col-12 col-md-10">
@@ -7,7 +9,7 @@
                     <h3>Pick a category to edit</h3>
                     <div class="d-flex p-3" style="background-color:gray;">
                         <div class="mr-3">
-                            <i class="fa fa-laptop fa-fw fa-5x big-icon" style="background-color:white;"></i>
+                            <i class="fa fa-laptop fa-fw big-icon" style="background-color:white;"></i>
                         </div>
                         <form method="POST" action="">
                             {{ csrf_field() }}
@@ -25,7 +27,11 @@
                     </div>
                 </div>
             </div>
-            <div id="categories-list" class="mt-2 d-flex flex-wrap">
+            <div id="categories-list" data-toggle="modal" data-target="#addCategoryModal" class="mt-2 d-flex flex-wrap">
+                <div class="news_box d-flex flex-column flex-wrap align-items-center mr-5">
+                    <i class="fas fa-plus-circle fa-fw medium-big-icon"></i>
+                    <p>Add Category</p>
+                </div>
                 @each('partials.admin_category', $categories, 'category')
             </div>
         </div>
