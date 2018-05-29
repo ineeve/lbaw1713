@@ -43,7 +43,7 @@ class AdvancedSearchController extends Controller
             $views[] = View::make('partials.users_item_preview_list')->with('user', $user)->render();
         }
     
-        $status_code = 200; // TODO: change if not found!
+        $status_code = 200;
         $data = [
             'users' => $views,
             'next' => count($filteredUser)

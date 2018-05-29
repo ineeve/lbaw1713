@@ -72,7 +72,7 @@ class UserController extends Controller
 
       $user = $this->queryUser($username);
 
-      $status_code = 200; // TODO: change if not found!
+      $status_code = 200;
       $data = [
           'view' => View::make('partials.news_item_preview_list')
               ->with('news', $news)

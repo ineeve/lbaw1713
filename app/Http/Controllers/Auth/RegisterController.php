@@ -44,7 +44,7 @@ class RegisterController extends Controller
     public function showRegistrationForm()
     {
       $countries = User::getCountries();
-      return view('auth.register', ['countries' => $countries]);
+      return view('auth.register', ['countries' => $countries,'page_title'=>'Register Form']);
     }
 
     /**
