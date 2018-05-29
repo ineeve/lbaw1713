@@ -43,7 +43,7 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
-      $countries = DB::select('SELECT * FROM countries');
+      $countries = User::getCountries();
       return view('auth.register', ['countries' => $countries]);
     }
 

@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Response;
 use Storage;
 use Image;
 use \stdClass;
-
+use App\User;
 use App\News as News;
 use App\Section as Section;
 use App\Source as Source;
@@ -20,9 +20,7 @@ class AdvancedSearchController extends Controller
 {
     private function searchUsers($searchText, $offset) {
         $name = strtolower($searchText);
-        return DB::select("SELECT users.id, username, picture
-        FROM users WHERE LOWER(users.username) LIKE '%{$name}%'
-        ORDER BY username DESC LIMIT 20 OFFSET ?;",[$offset]);
+        return User::searchUsers($name,$offset);
       }
 
       public function getAdvancedSearchPage(Request $request){
