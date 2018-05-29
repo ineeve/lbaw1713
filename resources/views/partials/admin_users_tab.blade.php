@@ -2,7 +2,7 @@
 <div class="mb-2">
     <div class="row">
         <div class="col-12 col-md-10">
-            <h3><i class="fa fa-bullseye fa-fw"></i> Users</h3>
+            <h3><i class="fas fa-user-tie fa-fw"></i> Users</h3>
             <div class="row m-2 align-items-center">
                 <h5>Filter By
                 </h5>

@@ -66,7 +66,7 @@
       </div>
     </div>
     <div class="row">
-
+      @if(count($descriptions) != 0)
       <div class="col">
         <h4 class="mb-3">
           <strong>Descriptions:</strong>
@@ -79,6 +79,7 @@
           @endforeach
         </ul>
       </div>
+      @endif
     </div>
   </div>
   <div class="col">

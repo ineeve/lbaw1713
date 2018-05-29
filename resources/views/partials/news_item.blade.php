@@ -92,9 +92,9 @@
             var news_id = "{{ $news->id }}"; //TODO get from route
           </script>
           <h1 class="title bold"> {{ $news->title }}</h1>
-          <a class="nounderline" style="color:inherit;" href="{{ url('users/'.$news->author) }}">
-            <h5 class="author">Author: {{ $news->author }}</h5>
-          </a>
+          <h5>Author: <a class="nounderline real_link" href="{{ url('users/'.$news->author) }}">{{ $news->author }}</a></h5>
+          
+          
           <h6 class="category">Category: {{ $news->section }}</h6>
           <h6 class="date"> {{ date("F jS, Y \a\\t H:i", strtotime($news->date)) }}</h6>
           <div class="body">
@@ -105,7 +105,7 @@
             @foreach ($sources as $source)
             <p>
               @if($source->author) {{$source->author}}, @endif @if($source->publication_year) {{$source->publication_year}} - @endif
-              <a href="{{ $source->link }}"> {{ $source->link }}</a>
+              <a class="real_link" href="{{ $source->link }}"> {{ $source->link }}</a>
             </p>
             @endforeach
           </div>
