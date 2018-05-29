@@ -9,7 +9,7 @@
                     <h3>Pick a category to edit</h3>
                     <div class="d-flex p-3" style="background-color:gray;">
                         <div class="mr-3 icon-preview">
-                            <i class="fa fa-laptop big-icon p-2" style="background-color:white;"></i>
+                            <i class="fa fa-laptop big-icon p-2" style="color:white; background-color:white;"></i>
                         </div>
                         <form method="POST" action="">
                             {{ csrf_field() }}
