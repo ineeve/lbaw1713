@@ -19,13 +19,13 @@ class Reporteditem extends Model
         return DB::select('SELECT news_id, comment_id FROM reporteditems WHERE id = ?',[$id]);
     }
     static public function getInfo($news_id){
-        return  DB::select('SELECT title, date, author_id, news.id, username FROM news JOIN users ON (author_id = users.id) WHERE news.id = ?',[$news_id]);
+        return  DB::select('SELECT title, date, author_id, news.id AS news_id, username, title AS title_link FROM news JOIN users ON (author_id = users.id) WHERE news.id = ?',[$news_id]);
     }
     static public function getInfoC($comment_id){
-        return  DB::select('SELECT target_news_id AS news_id, comments.id AS title, date, creator_user_id, username FROM comments JOIN users ON (creator_user_id = users.id) WHERE comments.id = ?',[$comment_id]);
+        return  DB::select('SELECT target_news_id AS news_id, comments.id AS title, comments.date AS date, creator_user_id, username, news.title AS title_link, comments.text FROM comments JOIN users ON (creator_user_id = users.id) JOIN news ON target_news_id = news.id WHERE comments.id = ?',[$comment_id]);
     }
     static public function getDescriptions($news_id){
-        return  DB::select('SELECT description FROM reporteditems WHERE news_id = ?',[$news_id]);
+        return  DB::select('SELECT description FROM reporteditems WHERE news_id = ? AND TRIM(description) NOT LIKE ?',[$news_id, '']);
     }
 
     static public function getComments($news_id){
@@ -117,7 +117,7 @@ class Reporteditem extends Model
       }
 
       static public function getDescriptionsC($comment_id){
-        return DB::select('SELECT description FROM reporteditems WHERE comment_id = ?',[$comment_id]);
+        return DB::select('SELECT description FROM reporteditems WHERE comment_id = ? AND TRIM(description) NOT LIKE ?',[$comment_id, '']);
     }
 
     static public function getCommentsC($comment_id){
