@@ -8,7 +8,7 @@
           <!-- ARTICLE OPTIONS -->
           <!-- TODO: ADD moderetor option -->
           <div class="col-12 col-md-1 px-0">
-            <div name="newsOptions" title="Vote and manage this news">
+            <div name="newsOptions">
               <div class="d-flex flex-md-column justify-content-center flex-row align-items-center mt-md-5" name="vote" title="Use to vote on the news" style="font-size:1.5em">
                 @if (Auth::check())
                 <i class="fas fa-arrow-alt-circle-up clickable-btn" id="upvote" onclick="upvote({{$news->id}})"></i>
@@ -49,10 +49,9 @@
             </div>
             @else @if (Auth::check())
             <!-- Report -->
-            <div data-toggle="modal" data-target="#reportModal">
+            <div data-toggle="modal" data-target="#reportModal" title="Use to report this news. The report will be analysed by our team of moderators.">
               <div class="centerText mt-4">
-                <span class="lightText mr-md-2">Report</span>
-                <i class="fas fa-ban clickable-btn" data-toggle="modal" data-target="#reportModal"></i>
+                <a href="#reportModal"><span class="lightText mr-md-1">Report</span><i class="fas fa-ban clickable-btn" data-toggle="modal" data-target="#reportModal"></i></a>
               </div>
 
             </div>
@@ -122,7 +121,7 @@
           </form>
           <div class="row" id="placeComments">
           </div>
-          <span class="comment"> @include('partials.load_more') </span>
+          <span class="comment"> @include('partials.load_more',['hide'=>false]) </span>
         </div>
       </div>
     </div>
