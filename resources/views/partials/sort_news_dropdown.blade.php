@@ -1,7 +1,7 @@
 
 <div class="btn-group d-flex align-items-center" role="group">
 
-    <button id="btnGroupDrop1" class="mr-2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button title="Ordering Criteria" id="btnGroupDrop1" class="mr-2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <span id="sort-option" data-name="POPULAR" >Popularity <i class="fas fa-chevron-down ml-2 mt-1"></i></span>
     </button>
 
