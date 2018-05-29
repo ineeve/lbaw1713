@@ -9,8 +9,8 @@
         </button>
       </div>
       <div class="modal-body">
-        <form id="reportModalForm" method="post">
-          <div id="reasonsGroup" class="form-group">
+        <form id="reportModalForm" method="post" >
+          <div id="reasonsGroup" class="form-group" >
             <label>Reasons:</label>
             <div class="d-flex flex-wrap items-collection">
               @foreach ($reportReasons as $reason)
