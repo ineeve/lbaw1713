@@ -4,7 +4,9 @@
       <nav class="row navbar navbar-expand-lg navbar-dark bg-primary mx-0">
         <div class="col-12 col-md-3">
           <a class="navbar-brand" href="{{ route('homepage') }}">Photon News</a>
+          <a class="screen-reader-only" href="#content">Jump to content</a>
         </div>
+        
         <div class="col-12 col-md-5">
           <div class="container ml-0 d-flex flex-column px-0">
             <form class="form-inline" action="{{route("search")}}" method="get">
