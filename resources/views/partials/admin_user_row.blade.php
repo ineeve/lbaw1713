@@ -13,14 +13,14 @@
     </td>
     <td class="text-right">
         @if($user->permission=='moderator')
-        <i class="text-danger fas fa-angle-double-down mr-1 demote" data-toggle="tooltip" title="Demote user"></i>
+        <i class="text-danger fas fa-angle-double-down fa-fw mr-1 demote" data-toggle="tooltip" title="Demote user"></i>
         @endif
         @if($user->permission=='moderator' || $user->permission=='normal')
-        <i class="text-success fas fa-angle-double-up mr-1 promote" data-toggle="tooltip" title="Promote user"></i>
+        <i class="text-success fas fa-angle-double-up fa-fw mr-1 promote" data-toggle="tooltip" title="Promote user"></i>
             @if($banned)
-            <i class="text-danger fas fa-door-open unban" data-toggle="tooltip" title="Unban user"></i>
+            <i class="text-danger fas fa-door-open fa-fw unban" data-toggle="tooltip" title="Unban user"></i>
             @else
-            <i class="text-danger fas fa-ban ban" data-toggle="modal" data-target="#banModal" title="Ban user"></i>
+            <i class="text-danger fas fa-ban fa-fw ban" data-toggle="modal" data-target="#banModal" title="Ban user"></i>
             @endif
         @endif
     </td>

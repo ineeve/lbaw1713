@@ -32,10 +32,10 @@
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
                 
                 @if((bool)Auth::user()->notifications()->where('was_read', FALSE)->first())
-                  <i class="fas fa-bell" style="color: yellow;">
+                  <i class="fas fa-bell fa-fw" style="color: yellow;">
                   </i> Notifications</a>
                 @else
-                <i class="fas fa-bell">
+                <i class="fas fa-bell fa-fw">
                   </i> Notifications</a>
                 @endif
                 <div class="dropdown-menu dropdown-menu-right position-absolute" >
@@ -45,31 +45,31 @@
               <!-- Account -->
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
-                  <i class="fas fa-user-circle mr-1"></i>{{ Auth::user()->username }}</a>
+                  <i class="fas fa-user-circle fa-fw mr-1"></i>{{ Auth::user()->username }}</a>
                 <div class="dropdown-menu dropdown-menu-right position-absolute">
                   <a class="dropdown-item" href="/users/{{Auth::user()->username}}">
-                    <i class="fas fa-user">
+                    <i class="fas fa-user fa-fw">
                     </i> Profile
                   </a>
                   @can('mod', Auth::user())
                     <a class="dropdown-item" href="/reports">
-                      <i class="fas fa-university">
+                      <i class="fas fa-university fa-fw">
                       </i> Forum
                     </a>
                   @endcan
                   <a class="dropdown-item" href="{{ route('show_settings') }}">
-                    <i class="fas fa-cog">
+                    <i class="fas fa-cog fa-fw">
                     </i> Settings
                   </a>
                   @can('admin', Auth::user())
                     <a class="dropdown-item" href="{{ route('show_admin_page') }}">
-                      <i class="fab fa-autoprefixer"></i>
+                      <i class="fab fa-autoprefixer fa-fw"></i>
                       Admin
                     </a>
                   @endcan
                   <form class="dropdown-item logout" method="POST" action="/logout" style="cursor:pointer">
                     <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
-                    <i class="fas fa-sign-out-alt">
+                    <i class="fas fa-sign-out-alt fa-fw">
                     </i> Log out
                     <script>
                       $('form.logout').click(function() {
@@ -87,7 +87,7 @@
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
                   aria-expanded="false">
                   <!-- Account -->
-                  <i class="fas fa-user-circle"></i> Sign In
+                  <i class="fas fa-user-circle fa-fw"></i> Sign In
                 </a>
                 <!-- DROPDOWN FOR SIGN IN -->
                 <div class="dropdown-menu dropdown-menu-right position-absolute mt-0">
