@@ -35,9 +35,9 @@ class NewsController extends Controller
         case self::MOST_POPULAR:
           return News::getNewsByPopularity($section, $offset, $direction);
         case self::MOST_RECENT:
-          return $this->getNewsByDate($section, $offset, $direction);
+          return News::getNewsByDate($section, $offset, $direction);
         case self::MOST_VOTED:
-          return $this->getNewsByVotes($section, $offset, $direction);
+          return News::getNewsByVotes($section, $offset, $direction);
       }
     }
 

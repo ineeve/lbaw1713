@@ -303,7 +303,28 @@ function showMsg(msg, type) {
  * Sets route of category edition form for clicked category.
  * @param {number} categoryId 
  */
-function setEdit(categoryId) {
+function setEdit(categoryId, categoryName, categoryIcon) {
     let form = $('#editMenu form')[0];
+    changeIconPreview(categoryIcon);
     form.action = "/adm/categories/" + categoryId;
+    form.name.value = categoryName;
+    form.icon.value = categoryIcon;
+}
+
+function changeIconPreview(newIcon) {
+    let iconPreview = $('#editMenu .icon-preview i')[0];
+    removeClassByPrefix(iconPreview, 'fa');
+    let newIconClasses = newIcon.split(' ');
+    for (let i = 0; i < newIconClasses.length; i++) {
+        iconPreview.classList.add(newIconClasses[i]);
+    }
+}
+
+function removeClassByPrefix(el, prefix) {
+    for (let i = 0; i < el.classList.length; i++) {
+        if (el.classList[i].substr(0, prefix.length) == prefix) {
+            el.classList.remove(el.classList[i]);
+            i--;
+        }
+    }
 }
