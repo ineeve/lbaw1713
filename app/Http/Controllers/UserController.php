@@ -199,6 +199,19 @@ class UserController extends Controller
     }
 
    
+   /**
+     * $notification in notification type domain ['CommentMyPost', 'FollowMe', 'VoteMyPost', 'FollowedPublish']
+     */
+    public function deactivateNotification($notification) {
+      User::deactivateNotification($notification);
+    }
+
+     /**
+     * $notification in notification type domain ['CommentMyPost', 'FollowMe', 'VoteMyPost', 'FollowedPublish']
+     */
+    public function activateNotification($notification) {
+      User::activateNotification($notification);
+    }
 
    
 
