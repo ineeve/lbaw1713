@@ -11,8 +11,10 @@ const USERS_TABLE_ROUTE = "/adm/users/table";
 function sendRequest(method,url,handler,body=null){
     let request = new XMLHttpRequest();
     request.open(method,url);
-    request.setRequestHeader('Content-Type','application/x-www-form-urlencoded')
-    request.setRequestHeader("X-CSRF-TOKEN", csrf);
+    if (method.toLowerCase() != 'get') {
+        request.setRequestHeader('Content-Type','application/x-www-form-urlencoded')
+        request.setRequestHeader("X-CSRF-TOKEN", csrf);
+    }
     request.onload = handler;
     request.send(body);
 }
@@ -304,8 +306,8 @@ function showMsg(msg, type) {
  * @param {number} categoryId 
  */
 function setEdit(categoryId, categoryName, categoryIcon) {
-    let form = $('#editMenu form')[0];
     changeIconPreview(categoryIcon);
+    let form = $('#editMenu form')[0];
     form.action = "/adm/categories/" + categoryId;
     form.name.value = categoryName;
     form.icon.value = categoryIcon;
@@ -313,6 +315,7 @@ function setEdit(categoryId, categoryName, categoryIcon) {
 
 function changeIconPreview(newIcon) {
     let iconPreview = $('#editMenu .icon-preview i')[0];
+    iconPreview.style.color = '#373a3c';
     removeClassByPrefix(iconPreview, 'fa');
     let newIconClasses = newIcon.split(' ');
     for (let i = 0; i < newIconClasses.length; i++) {

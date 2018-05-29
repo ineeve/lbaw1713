@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\View;
 use App\User;
 use App\Ban;
 use App\Section;
+use App\Badge;
 use Auth;
 
 class AdminController extends Controller {
@@ -112,7 +113,8 @@ class AdminController extends Controller {
 
     public function getBadgesTab(Request $request){
         $this->authorize('admin', \Auth::user());
-        return view('partials.admin_badges_tab');
+        $badges = Badge::get();
+        return view('partials.admin_badges_tab', ['badges' => $badges]);
     }
 
 
@@ -147,7 +149,6 @@ class AdminController extends Controller {
             'currentPage'=>$currentPage,
             'itemsPerPage'=>$itemsPerPage,
             'total'=>$total,
-            'categories'=>$categories,
             'page_title'=>'Control Panel']);
     }
 }
