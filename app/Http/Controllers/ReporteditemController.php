@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Reporteditem;
 use App\User;
+
 class ReporteditemController extends Controller
 {
 
