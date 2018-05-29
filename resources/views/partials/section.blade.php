@@ -14,6 +14,10 @@
               <a href="#" role="button" data-toggle="tab" data-name="All" class="nav-link section_item {{ $currentSection == 'All' ? 'active' : '' }}">
                 <i class="fa fa-bullseye fa-fw"></i> All</a>
             </li>
+            <li class="nav-item">
+              <a href="#" role="button" data-toggle="tab" data-name="Followed" class="nav-link section_item {{ $currentSection == 'Followed' ? 'active' : '' }}">
+                <i class="fas fa-users fa-fw"></i> Followed</a>
+            </li>
             @foreach ($sections as $section)
               <li class="nav-item">
                 <a href="#" data-name="{{ $section->name }}" role="button" data-toggle="tab" class="nav-link section_item">

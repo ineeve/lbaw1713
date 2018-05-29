@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Http\RedirectResponse;
 use Storage;
 use Image;
 use \stdClass;
@@ -30,6 +31,10 @@ class UserController extends Controller
     {
 
       $user = User::queryUser($username);
+      if($user instanceof RedirectResponse){
+
+        return $user;
+      }
 
       $total_badges = (User::countBadges())[0]->count;
 
@@ -121,7 +126,7 @@ class UserController extends Controller
     }
 
     public function stopFollowing($username) {
-      $user = $this->queryUser($username);
+      $user = User::queryUser($username);
 
       User::deleteFollowing($user);
 
@@ -199,6 +204,19 @@ class UserController extends Controller
     }
 
    
+   /**
+     * $notification in notification type domain ['CommentMyPost', 'FollowMe', 'VoteMyPost', 'FollowedPublish']
+     */
+    public function deactivateNotification($notification) {
+      User::deactivateNotification($notification);
+    }
+
+     /**
+     * $notification in notification type domain ['CommentMyPost', 'FollowMe', 'VoteMyPost', 'FollowedPublish']
+     */
+    public function activateNotification($notification) {
+      User::activateNotification($notification);
+    }
 
    
 

@@ -139,3 +139,7 @@ a#statistics-tab.active {
 .medium-big-icon {
   font-size: 7em;
 }
+
+.error{
+  color:red;
+}
