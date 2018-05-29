@@ -85,7 +85,7 @@ jQuery(document).ready(function () {
         });
     });
     // load more
-    jQuery('.previews #scroll').click(function (e) {
+    jQuery(' #scroll').click(function (e) {
         console.log('loading more');
         let section = $('#sections_list a.active').attr('data-name');
         if (section != null){
@@ -97,7 +97,7 @@ jQuery(document).ready(function () {
                 },
                 success: function (view) {
                     if(view.length == 0) {
-                        $('#allNews').append("<div class=\"alert alert-dismissible alert-secondary\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Sorry!</strong> No more news at the moment!</div>");
+                        $('#news_item_preview_list').append("<div class=\"alert alert-dismissible alert-secondary\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><strong>Sorry!</strong> No more news at the moment!</div>");
                     }
                     previews_offset+=10;
                     $('#news_item_preview_list').append(view);
@@ -115,7 +115,7 @@ jQuery(document).ready(function () {
                     searchText: searchedText
                 },
                 success: function (view) {
-                    $('#news_item_preview_list').empty();
+                    // $('#news_item_preview_list').empty();
                     $('#news_item_preview_list').append(view);
                 },
                 error: function (xhr) {
