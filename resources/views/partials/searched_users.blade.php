@@ -4,7 +4,9 @@
 <div class="container">
   <div id="users">
     <div class="row mt-2">
-
+      <div class="container d-flex justify-content-between">
+        <h1 id="searchedText" ><i class="fas fa-search"></i> {{$searchText}}</h1>
+      </div>
     </div>
     <div class="d-flex flex-column">
       <div id="users_item_preview_list" class="d-flex flex-wrap flex-row mx-auto mt-3">

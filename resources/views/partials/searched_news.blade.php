@@ -5,7 +5,6 @@
         <div class="row mt-2">
           <div class="container d-flex justify-content-between">
             <h1 id="searchedText" ><i class="fas fa-search"></i> {{$searchText}}</h1>
-            @include('partials.sort_news_dropdown')
           </div>
         </div>
         <div class="d-flex flex-column">
@@ -21,6 +20,5 @@
               @include('partials.load_more')
             @endif
           </div>
-          id="scroll_advanced_search_users"
       </div>
   </div>
