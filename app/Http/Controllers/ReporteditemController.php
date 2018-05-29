@@ -76,7 +76,7 @@ class ReporteditemController extends Controller
         $report_offset = Input::get('offset');
         $reports =Reporteditem::queryArticleReports($report_offset);
         $report_offset = $report_offset + count($reports);
-        $status_code = 200; // TODO: change if not found!
+        $status_code = 200;
         $currentPageNews = ($report_offset/5);
         $numberOfPagesNews = Reporteditem::totalNews()/5;
         $data = [
@@ -96,7 +96,7 @@ class ReporteditemController extends Controller
         $report_offset = Input::get('offset');
         $reports = Reporteditem::queryCommentsReports($report_offset);
         $report_offset = $report_offset + count($reports);
-        $status_code = 200; // TODO: change if not found!
+        $status_code = 200;
         $currentPageComments = ($report_offset/5);
         $numberOfPagesComments = Reporteditem::totalComments()/5;
         $data = [

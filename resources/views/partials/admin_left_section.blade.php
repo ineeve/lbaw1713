@@ -9,7 +9,7 @@
             <ul class="nav nav-pills flex-column left-pane">
                 <li class="nav-item">
                     <a href="#users_tab" role="button" data-toggle="tab" class="nav-link active">
-                        <i class="fa fa-bullseye fa-fw"></i> Users</a>
+                    <i class="fas fa-user-tie fa-fw"></i> Users</a>
                 </li>
                 <li class="nav-item">
                     <a href="#categories_tab" role="button" data-toggle="tab" class="nav-link">

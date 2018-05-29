@@ -18,9 +18,8 @@ class AjaxController extends Controller
     public function scrollComments(Request $request, $news_id)
     {
 
-        // echo "ECHOING NEWS ID: ".$news_id;
-        $comments = Comment::getComments($request, $news_id);
-        $status_code = 200; // TODO: change if not found!
+         $comments = Comment::getComments($request, $news_id);
+        $status_code = 200;
         $data = [
             'view' => View::make('partials.comment')
                 ->with('comments', $comments)
@@ -36,7 +35,7 @@ class AjaxController extends Controller
     {
         $news = News::getNews($request, $section);
 
-        $status_code = 200; // TODO: change if not found!
+        $status_code = 200;
         $view = View::make('partials.news_item_preview_list')->with('news', $news)->render();
         $data = ['news' => $view];
 
@@ -47,7 +46,7 @@ class AjaxController extends Controller
     {
 
         $news = News::getPreviews($request);
-        $status_code = 200; // TODO: change if not found!
+        $status_code = 200;
         $view = View::make('partials.news_item_preview_list')->with('news', $news)->render();
         $data = ['news' => $view];
 
