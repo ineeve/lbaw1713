@@ -6,7 +6,7 @@
       <!-- TABS -->
       <div class="col-xl-2 col-lg-3 col-12">
         <h3 data-toggle="collapse" data-target="#sections_list" aria-expanded="true" aria-controls="sections_list">
-          <i class="fas fa-bars"></i> Reports</h3>
+          <i class="fas fa-bars fa-fw"></i> Reports</h3>
         <div class="collapse show collapsible-lg" id="sections_list">
         <!-- TODO: Alterar vista -->
           <ul class="nav nav-pills flex-column left-pane">
@@ -41,13 +41,13 @@
                         <th scope="col" style="width: 16.67%; height: 25%;">News Title</th>
                         <th scope="col" style="width: 16.67%; height: 25%;">Author of the news</th>
                         <th scope="col" style="width: 16.67%; height: 25%;">Date of the posting
-                          <i class="fas fa-caret-down"></i>
+                          <i class="fas fa-caret-down fa-fw"></i>
                         </th>
                         <th scope="col" style="width: 16.67%; height: 25%;">Num. reports
-                          <i class="fas fa-caret-down"></i>
+                          <i class="fas fa-caret-down fa-fw"></i>
                         </th>
                         <th scope="col" style="width: 16.67%; height: 25%;">Date of the last report
-                          <i class="fas fa-caret-down"></i>
+                          <i class="fas fa-caret-down fa-fw"></i>
                         </th>
                         <th scope="col" style="width: 16.67%; height: 25%;">Reasons of the last report</th>
                       </tr>
@@ -79,13 +79,13 @@
                         <th scope="col" style="width: 16.67%; height: 25%;">Comment ID</th>
                         <th scope="col" style="width: 16.67%; height: 25%;">Author of the comment</th>
                         <th scope="col" style="width: 16.67%; height: 25%;">Date of the posting
-                          <i class="fas fa-caret-down"></i>
+                          <i class="fas fa-caret-down fa-fw"></i>
                         </th>
                         <th scope="col" style="width: 16.67%; height: 25%;">Num. reports
-                          <i class="fas fa-caret-down"></i>
+                          <i class="fas fa-caret-down fa-fw"></i>
                         </th>
                         <th scope="col" style="width: 16.67%; height: 25%;">Date of the last report
-                          <i class="fas fa-caret-down"></i>
+                          <i class="fas fa-caret-down fa-fw"></i>
                         </th>
                         <th scope="col" style="width: 16.67%; height: 25%;">Reasons of the last report</th>
                       </tr>

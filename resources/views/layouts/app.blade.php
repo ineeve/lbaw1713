@@ -68,7 +68,7 @@
           <a href="{{ url('privacy_policy') }}">Privacy Policy</a>
         </p>
         <p class="text-center footer-copyright mb-1">
-          <i class="far fa-copyright"></i> 2018 Photon News</p>
+          <i class="far fa-copyright fa-fw"></i> 2018 Photon News</p>
       </footer>
   </main>
 </body>

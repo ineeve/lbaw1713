@@ -7,7 +7,7 @@ jQuery(document).ready(function () {
     // Order changed dropdown
     jQuery('.order-criteria').click(function (e) {
         e.preventDefault();
-        $("#sort-option").html($(this).text()+ " <i class=\"fas fa-chevron-down ml-2 mt-1\"></i>");
+        $("#sort-option").html($(this).text()+ " <i class=\"fas fa-chevron-down fa-fw ml-2 mt-1\"></i>");
         let section = $('#sections_list a.active').attr('data-name');
         order = $(this).attr('data-name');
         $('#sort-option').attr('data-name',order);

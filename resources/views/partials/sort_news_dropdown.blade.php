@@ -11,6 +11,6 @@
         <a class="dropdown-item order-criteria" data-name="RECENT" href="#">Date</a>
     </div>
 
-    <i id="reverseOrderButton" class="fas fa-retweet" alt="Reverse Order" title="Reverse Order"></i>
+    <i id="reverseOrderButton" class="fas fa-retweet fa-fw" alt="Reverse Order" title="Reverse Order"></i>
     
 </div>

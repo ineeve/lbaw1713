@@ -45,7 +45,7 @@ a.nounderline {
     left: auto;
   }
 }
-/* TODO: why did we have this? - Anabela */
+
 div.news_box:hover {
    background-color: rgb(245, 245, 245);
 }
@@ -130,4 +130,12 @@ a#statistics-tab {
 
 a#statistics-tab.active {
   color: black;
+}
+
+.big-icon {
+  font-size: 10em;
+}
+
+.medium-big-icon {
+  font-size: 7em;
 }

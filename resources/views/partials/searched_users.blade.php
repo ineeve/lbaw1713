@@ -5,7 +5,7 @@
   <div id="users">
     <div class="row mt-2">
       <div class="container d-flex justify-content-between">
-        <h1 id="searchedText" ><i class="fas fa-search"></i> {{$searchText}}</h1>
+        <h1 id="searchedText" ><i class="fas fa-search fa-fw"></i> {{$searchText}}</h1>
       </div>
     </div>
     <div class="d-flex flex-column">
