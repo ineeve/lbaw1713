@@ -346,7 +346,7 @@ class News extends Model {
     }
 
 
-    static public function getDeleted($article) {
+    static public function getDelected($article) {
         return DB::table('deleteditems')->where('news_id', $article->id)->get();
     }
     static public function newsExist($news_id) {

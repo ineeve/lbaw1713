@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\User;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 class Reporteditem extends Model
 {
@@ -31,8 +31,7 @@ class Reporteditem extends Model
     static public function getComments($news_id){
         return  DB::select('SELECT  news_id, moderatorcomments.id, text, date, username AS commentator, Users.picture AS commentator_picture FROM moderatorcomments JOIN users ON(creator_user_id = users.id) WHERE news_id = ? ORDER BY date DESC',[$news_id]);
     }
-    public function queryCommentsReports($offset) {
-        $this->authorize('mod', \Auth::user());
+    static public function queryCommentsReports($offset) {
         return DB::select(';WITH r AS
         (
            SELECT *, ROW_NUMBER() OVER (PARTITION BY comment_id ORDER BY date DESC) AS rn
@@ -54,12 +53,11 @@ class Reporteditem extends Model
         LIMIT 5 OFFSET ?;
         ',[$offset]);
       }
-    static public function getReasons($news_id){
+      static public function getReasons($news_id){
         return   DB::select('SELECT reason, count(*) AS number FROM reasonsforreport WHERE reported_item_id IN ( SELECT id FROM reporteditems WHERE news_id = ?) GROUP BY reason',[$news_id]);
     }
 
-    public function queryArticleReports($offset) {
-        $this->authorize('mod', \Auth::user());
+    static public function queryArticleReports($offset) {
         return DB::select(';WITH r AS
         (
            SELECT *, ROW_NUMBER() OVER (PARTITION BY news_id ORDER BY date DESC) AS rn
@@ -79,8 +77,7 @@ class Reporteditem extends Model
         LIMIT 5 OFFSET ?;
         ',[$offset]);
       }
-      public function totalNews() {
-        $this->authorize('mod', \Auth::user());
+      static       public function totalNews() {
         return DB::select(';WITH r AS
         (
            SELECT *, ROW_NUMBER() OVER (PARTITION BY news_id ORDER BY date DESC) AS rn
@@ -99,8 +96,7 @@ class Reporteditem extends Model
         WHERE rn = 1;
         ')[0]->n;
       }
-      public function totalComments() {
-        $this->authorize('mod', \Auth::user());
+      static public function totalComments() {
         return DB::select(';WITH r AS
         (
            SELECT *, ROW_NUMBER() OVER (PARTITION BY comment_id ORDER BY date DESC) AS rn
