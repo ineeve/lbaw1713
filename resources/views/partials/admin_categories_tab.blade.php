@@ -27,12 +27,13 @@
                     </div>
                 </div>
             </div>
-            <div id="categories-list" data-toggle="modal" data-target="#addCategoryModal" class="mt-2 d-flex flex-wrap">
-                <div class="news_box d-flex flex-column flex-wrap align-items-center mr-5">
-                    <i class="fas fa-plus-circle fa-fw medium-big-icon"></i>
-                    <p>Add Category</p>
+            <div id="categories-list" class="mt-2 d-flex flex-wrap">
+                <div data-toggle="modal" data-target="#addCategoryModal">
+                    @include('partials.admin_category', ['cat_id' => NULL, 'cat_icon' => 'fas fa-plus-circle', 'cat_name' => 'Add Category', 'edit_cat' => false])
                 </div>
-                @each('partials.admin_category', $categories, 'category')
+                @foreach ($categories as $cat)
+                    @include('partials.admin_category', ['cat_id' => $cat->id, 'cat_icon' => $cat->icon, 'cat_name' => $cat->name, 'edit_cat' => true])
+                @endforeach
             </div>
         </div>
     </div>
