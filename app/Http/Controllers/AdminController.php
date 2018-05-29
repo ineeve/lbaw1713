@@ -149,15 +149,4 @@ class AdminController extends Controller {
             'total'=>$total,
             'categories'=>$categories]);
     }
-
-    /**
-     * Edit a Category's name and icon.
-     */
-    public function editCategory(Request $request, $categoryId) {
-        $this->authorize('admin', Auth::user());
-        $category = Section::find($categoryId);
-        $category->name = $request->name;
-        $category->icon = $request->icon;
-        $category->save();
-    }
 }

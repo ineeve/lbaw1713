@@ -72,7 +72,8 @@ Route::put('/adm/users/{username}/promote','AdminController@promoteUser');
 Route::put('/adm/users/{username}/demote','AdminController@demoteUser');
 Route::post('/adm/users/{username}/ban','AdminController@banUser');
 Route::post('/adm/users/{username}/unban','AdminController@unbanUser');
-Route::patch('/adm/categories/{id}', 'AdminController@editCategory')->name('edit_category');
+Route::post('/adm/categories/', 'SectionController@addCategory')->name('add_category');
+Route::patch('/adm/categories/{id}', 'SectionController@editCategory')->name('edit_category');
 
 
 // // Authentication
