@@ -17,7 +17,7 @@
             @foreach ($sections as $section)
               <li class="nav-item">
                 <a href="#" data-name="{{ $section->name }}" role="button" data-toggle="tab" class="nav-link section_item">
-                  <i class="{{ $section->icon }}"></i> {{ $section->name }}</a>
+                  <i class="{{ $section->icon }} fa-fw"></i> {{ $section->name }}</a>
               </li>
             @endforeach
           </ul>
