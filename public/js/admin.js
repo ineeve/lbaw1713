@@ -314,8 +314,6 @@ function setEdit(categoryId, categoryName, categoryIcon) {
 function changeIconPreview(newIcon) {
     let iconPreview = $('#editMenu .icon-preview i')[0];
     removeClassByPrefix(iconPreview, 'fa');
-    // let faRegex = new RegExp('\\b' + 'fa' + '(.*)?\\b', 'g');
-    // iconPreview.className.replace(faRegex, '');
     let newIconClasses = newIcon.split(' ');
     for (let i = 0; i < newIconClasses.length; i++) {
         iconPreview.classList.add(newIconClasses[i]);
@@ -323,8 +321,10 @@ function changeIconPreview(newIcon) {
 }
 
 function removeClassByPrefix(el, prefix) {
-    var regx = new RegExp('\\b' + prefix + '([-.]*)?\\b', 'g');
-    [...el.classList].map(className => {
-        regx.test(className) && el.classList.remove(className);
-    });
+    for (let i = 0; i < el.classList.length; i++) {
+        if (el.classList[i].substr(0, prefix.length) == prefix) {
+            el.classList.remove(el.classList[i]);
+            i--;
+        }
+    }
 }
