@@ -3,7 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\DB;
 class Comment extends Model
 {
   // Don't add create and update timestamps in database.
@@ -26,7 +28,7 @@ class Comment extends Model
     return $this->belongsTo('App\User');
   }
 static public function getComments(Request $request, $news_id){
-  DB::select('SELECT Comments.id AS id,text, date, Users.username AS commentator, Users.picture AS commentator_picture
+  return DB::select('SELECT Comments.id AS id,text, date, Users.username AS commentator, Users.picture AS commentator_picture
             FROM Comments, Users
             WHERE Comments.target_news_id = ? AND Comments.creator_user_id = Users.id
             AND NOT EXISTS (SELECT DeletedItems.comment_id FROM DeletedItems WHERE DeletedItems.comment_id = Comments.id)

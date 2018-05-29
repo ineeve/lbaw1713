@@ -16,6 +16,8 @@ use App\News as News;
 use App\Section as Section;
 use App\Source as Source;
 
+use App\Reporteditem;
+
 class NewsController extends Controller
 {
     const DEFAULT_IMAGE_NAME = 'default';
@@ -118,7 +120,7 @@ class NewsController extends Controller
       $news = $news[0];
 
       $sources = News::getSources($news->id);
-      $reportReasons = array_column(Reporteditems::getreportReasons(),'unnest');
+      $reportReasons = array_column(Reporteditem::getreportReasons(),'unnest');
 
       return view('pages.news_item', ['news' => $news, 'sources' => $sources, 'reportReasons'=> $reportReasons]);
     }
@@ -239,7 +241,7 @@ class NewsController extends Controller
     public function editArticle($id) {
       $sections = Section::pluck('name', 'id');
       $article = News::find($id);
-      $sources = Reporteditems::selectSources($id);
+      $sources = Reporteditem::selectSources($id);
       $this->authorize('update', $article);
       return view('pages.news_editor', ['sections' => $sections, 'article' => $article, 'sources' => $sources]);
     }
@@ -255,7 +257,7 @@ class NewsController extends Controller
         // item was already deleted
         return;
       }
-      Reporteditems::insertDeleted($article);
+      Reporteditem::insertDeleted($article);
     }
 
     /**
@@ -272,7 +274,7 @@ class NewsController extends Controller
     public function reportItem(Request $request, $news_id, $comment_id = NULL){
       $brief = $request->input('brief');
       $reasons = $request->input('reasons');
-      $validReasons = array_column(Reporteditems::getreportReasons(),'unnest');
+      $validReasons = array_column(Reporteditem::getreportReasons(),'unnest');
       $success = False;
       //check news is valid and check comment belongs to news.
       if (is_null($brief)) {

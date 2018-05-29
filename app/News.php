@@ -319,7 +319,7 @@ class News extends Model {
 
 
       static public function getSections() {
-        return DB::select('SELECT icon || \' fa-fw\', name FROM Sections');
+        return DB::select('SELECT icon || \' fa-fw\' AS icon, name FROM Sections');
     }
 
     static public function getArticle($id) {

@@ -6,7 +6,7 @@ use App\News as News;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
-
+use App\Comment;
 class AjaxController extends Controller
 {
     public function index()
@@ -19,7 +19,7 @@ class AjaxController extends Controller
     {
 
         // echo "ECHOING NEWS ID: ".$news_id;
-        $comments = Comment::getComments();
+        $comments = Comment::getComments($request, $news_id);
         $status_code = 200; // TODO: change if not found!
         $data = [
             'view' => View::make('partials.comment')

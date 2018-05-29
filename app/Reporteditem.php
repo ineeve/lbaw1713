@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\User;
+
+use Illuminate\Support\Facades\DB;
 class Reporteditem extends Model
 {
     // Don't add create and update timestamps in database.
