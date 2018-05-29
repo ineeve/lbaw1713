@@ -34,7 +34,7 @@ class ReporteditemController extends Controller
 
     public function showReportOfNews($news_id) {
         $this->authorize('mod', \Auth::user());
-        $info =  DB::select('SELECT title, date, author_id, news.id, username FROM news JOIN users ON (author_id = users.id) WHERE news.id = ?',[$news_id]);
+        $info =  DB::select('SELECT title, date, author_id, news.id AS news_id, username FROM news JOIN users ON (author_id = users.id) WHERE news.id = ?',[$news_id]);
 
         $descriptions = DB::select('SELECT description FROM reporteditems WHERE news_id = ?',[$news_id]);
 
