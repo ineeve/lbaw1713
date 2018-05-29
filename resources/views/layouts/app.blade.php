@@ -50,9 +50,9 @@
       </section>
       <footer class="page-footer sticky-bottom mt-4">
         <p class=" mx-auto text-center mb-0">
-          <a href="#">About us</a>
+          <a href="/about">About us</a>
           &middot;
-          <a href="#">FAQ</a>
+          <a href="/faq">FAQ</a>
           &middot;
           <a href="{{ url('privacy_policy') }}">Privacy Policy</a>
         </p>

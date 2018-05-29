@@ -103,6 +103,8 @@ Route::post('news', 'NewsController@create')->name('news');//NOT USING?
 
 /*Page showing the selected news*/
 Route::get('news/{id}', 'NewsController@show');
+Route::get('/about', 'PrivacyPolicyController@about');
+Route::get('/faq', 'PrivacyPolicyController@faq');
 
 //Edit news
 // TODO: Alterar Editor
