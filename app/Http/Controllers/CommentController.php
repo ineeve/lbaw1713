@@ -56,12 +56,7 @@ class CommentController extends Controller
     }
     
     public function markDeleted($comm_id){
-        $deletedItems = DB::table('deleteditems')->where('comment_id', $comm_id)->get();
-        if (count($deletedItems) > 0) {
-        // item was already deleted
-            return;
-      }
-      DB::insert('INSERT INTO DeletedItems (user_id, comment_id) VALUES (?, ?);', [Auth::user()->id, $comm_id]);
+        Comment::markDeleted($comm_id);
     }
 
 }

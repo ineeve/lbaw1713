@@ -15,7 +15,7 @@
       </div>
       <div class="ml-auto">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
-          <!-- <i class="fa fa-angle-down" ></i> -->
+          <!-- <i class="fa fa-angle-down fa-fw" ></i> -->
         </a>
         <div class="dropdown-menu" x-placement="bottom-start">
           @if(Auth::check())

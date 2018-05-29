@@ -22,82 +22,28 @@ use App\User as User;
 class UserController extends Controller
 {
     public function edit() {
-        $countries = DB::select('SELECT * FROM countries');
+        $countries = User::getCountries();
         return view('pages.profile_edit', ['countries' => $countries]);
     }
 
-    public function queryUser($username) {
-      $user = DB::select('SELECT users.id, username, email, gender, Countries.name As country, picture, points, permission
-      FROM Users LEFT JOIN Countries ON country_id = Countries.id
-      WHERE Users.username = ?;',[$username]);
-
-      if(count($user) == 0) {
-        return redirect('/error/404');
-      }
-
-      return $user[0];
-
-    }
-
-    public function queryArticles($username, $offset) {
-      return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview
-      FROM News INNER JOIN Users ON (News.author_id = Users.id)
-                  WHERE Users.username = ? AND
-                        NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
-                  ORDER BY date DESC LIMIT 5 OFFSET ?;',[$username, $offset]);
-    }
-
-    public function queryAllArticles($username) {
-      return DB::select('SELECT *
-      FROM News INNER JOIN Users ON (News.author_id = Users.id)
-                  WHERE Users.username = ? AND
-                        NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id);',[$username]);
-    }
-
-    public function queryFollowing($username, $offset) {
-      return DB::select('SELECT users.id, username, picture
-      FROM users INNER JOIN follows ON users.id = follows.followed_user_id 
-      WHERE EXISTS (SELECT users.id FROM users WHERE users.username = ? AND users.id = follows.follower_user_id)
-      ORDER BY username DESC LIMIT 5 OFFSET ?;',[$username, $offset]);
-    }
-
-    public function queryAllFollowing($username) {
-      return DB::select('SELECT *
-      FROM users INNER JOIN follows ON users.id = follows.followed_user_id 
-      WHERE EXISTS (SELECT users.id FROM users WHERE users.username = ? AND users.id = follows.follower_user_id);',[$username]);
-    }
-
-    public function queryBadges($username, $offset) {
-      return DB::select('SELECT badges.id as badge_id, name, brief, votes, comments, articles FROM badges JOIN achievements ON badges.id = achievements.badge_id
-      JOIN users ON users.id = achievements.user_id
-      WHERE users.username = ? LIMIT 6 OFFSET ?;',[$username, $offset]);
-    }
-
-    public function queryNthBadges($username, $n) {
-      return DB::select('SELECT badges.id as badge_id, name, brief, votes, comments, articles FROM badges JOIN achievements ON badges.id = achievements.badge_id
-      JOIN users ON users.id = achievements.user_id
-      WHERE users.username = ? LIMIT ? OFFSET 0;',[$username, $n]);
-    }
-    
     public function show($username)
     {
 
-      $user = $this->queryUser($username);
+      $user = User::queryUser($username);
 
-      $total_badges = (DB::select('SELECT count(*)
-      FROM badges;'))[0]->count;
+      $total_badges = (User::countBadges())[0]->count;
 
-      $nth_badges = $this->queryNthBadges($username, 6);
+      $nth_badges = User::queryNthBadges($username, 6);
 
-      $achieved_badges = $this->queryBadges($username, 0);
+      $achieved_badges = User::queryBadges($username, 0);
 
-      $news = $this->queryArticles($username, 0);
+      $news = User::queryArticles($username, 0);
 
-      $articles_count = ceil(count($this->queryAllArticles($username))/ 5);
+      $articles_count = ceil(count(User::queryAllArticles($username))/ 5);
 
-      $following = $this->queryFollowing($username, 0);
+      $following = User::queryFollowing($username, 0);
 
-      $following_count = ceil(count($this->queryAllFollowing($username))/ 5);
+      $following_count = ceil(count(User::queryAllFollowing($username))/ 5);
       
       $articles_offset = 0;
       $following_offset = 0;
@@ -165,10 +111,9 @@ class UserController extends Controller
     }
 
     public function startFollowing($username) {
-      $user = $this->queryUser($username);
+      $user = User::queryUser($username);
 
-      DB::insert('INSERT INTO Follows (follower_user_id, followed_user_id)
-                    VALUES (?, ?)', [Auth::user()->id, $user->id]);
+      User::insertFollowing($user);
 
       $status_code = 200;
       $data = [];
@@ -178,8 +123,8 @@ class UserController extends Controller
     public function stopFollowing($username) {
       $user = $this->queryUser($username);
 
-      DB::insert('DELETE FROM Follows
-      WHERE follower_user_id = ? AND followed_user_id = ?', [Auth::user()->id, $user->id]);
+      User::deleteFollowing($user);
+
 
       $status_code = 200;
       $data = [];
@@ -248,42 +193,24 @@ class UserController extends Controller
     public function showSettings() {
       $user = Auth::user();
       $sections = Section::all();
-      $userSections = DB::select('SELECT *
-                                    FROM Sections
-                                      INNER JOIN UserInterests ON Sections.id = UserInterests.section_id
-                                    WHERE UserInterests.user_id = ?', [$user->id]);
-      $userNotifs = DB::table('settingsnotifications')->where('user_id', $user->id)->pluck('type');
+      $userSections = User::getUserSections($user);
+      $userNotifs = User::getUserNoti($user);
       return view('pages.settings', ['sections' => $sections, 'userSections' => $userSections, 'userNotifs' => $userNotifs]);
     }
 
-    /**
-     * $notification in notification type domain ['CommentMyPost', 'FollowMe', 'VoteMyPost', 'FollowedPublish']
-     */
-    public function activateNotification($notification) {
-      DB::insert('INSERT INTO SettingsNotifications (type, user_id)
-                    VALUES (?, ?)', [$notification, Auth::user()->id]);
-    }
+   
 
-    /**
-     * $notification in notification type domain ['CommentMyPost', 'FollowMe', 'VoteMyPost', 'FollowedPublish']
-     */
-    public function deactivateNotification($notification) {
-      DB::insert('DELETE FROM SettingsNotifications
-                    WHERE type = ? AND user_id = ?', [$notification, Auth::user()->id]);
-    }
+   
 
     public function addInterest(Request $request) {
       $status_code = 200;
-      $current = DB::select('SELECT 1 FROM UserInterests
-                  WHERE user_id = ? AND section_id = ?', [Auth::user()->id, $request->interest_id]);
-      
+      $current = User::userInterest($request);
       if (count($current) > 0) {
         $response = ['added' => false];
         return Response::JSON($response, $status_code);
       }
       
-      $new = DB::insert('INSERT INTO UserInterests (user_id, section_id)
-                    VALUES (?, ?);', [Auth::user()->id, $request->interest_id]);
+      $new = User::insertuserInterest($request);
       $section = Section::find($request->interest_id);
       $response = ['added' => true, 'section' => $section];
       return Response::JSON($response, $status_code);
@@ -291,8 +218,7 @@ class UserController extends Controller
 
     public function removeInterest(Request $request) {
       $status_code = 200;
-      $removed = DB::delete('DELETE FROM UserInterests
-                              WHERE user_id = ? AND section_id = ?', [Auth::user()->id, $request->interest_id]);
+      $removed = User::deleteuserInterest($request);
       $response = ['removed' => $removed];
       return Response::JSON($response, $status_code);
     }

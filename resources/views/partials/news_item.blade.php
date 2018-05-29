@@ -11,13 +11,13 @@
             <div name="newsOptions">
               <div class="d-flex flex-md-column justify-content-center flex-row align-items-center mt-md-5" name="vote" title="Use to vote on the news" style="font-size:1.5em">
                 @if (Auth::check())
-                <i class="fas fa-arrow-alt-circle-up clickable-btn" id="upvote" onclick="upvote({{$news->id}})"></i>
+                <i class="fas fa-arrow-alt-circle-up fa-fw clickable-btn" id="upvote" onclick="upvote({{$news->id}})"></i>
                 <span id="votesCounter" class="mx-2">{{ $news->votes }}</span>
-                <i class="fas fa-arrow-alt-circle-down clickable-btn" id="downvote" onclick="downvote({{$news->id}})"></i>
+                <i class="fas fa-arrow-alt-circle-down fa-fw clickable-btn" id="downvote" onclick="downvote({{$news->id}})"></i>
                 @else
-                <i class="fas fa-arrow-alt-circle-up clickable-btn" id="upvote" data-toggle="modal" data-target="#loginModal"></i>
+                <i class="fas fa-arrow-alt-circle-up fa-fw clickable-btn" id="upvote" data-toggle="modal" data-target="#loginModal"></i>
                 <span id="votesCounter" class="mx-2">{{ $news->votes }}</span>
-                <i class="fas fa-arrow-alt-circle-down clickable-btn" id="downvote" data-toggle="modal" data-target="#loginModal"></i>
+                <i class="fas fa-arrow-alt-circle-down fa-fw clickable-btn" id="downvote" data-toggle="modal" data-target="#loginModal"></i>
                 @endif
               </div>
 
@@ -26,7 +26,7 @@
             <div class="centerText mt-2 mt-md-4" name="edit" title="Use to edit this news">
               <a href="{{ url('news/'.$news->id.'/edit') }}" class="lightText">
                 <span class="mr-md-1">Edit</span>
-                <i class="fas fa-edit clickable-btn"></i>
+                <i class="fas fa-edit fa-fw clickable-btn"></i>
               </a>
             </div>
             <!-- Delete -->
@@ -38,7 +38,7 @@
                     this.style.cursor='pointer';" onMouseOut="this.style.textDecoration= 'none';
                     this.style.color='initial';">
                   <span class="mr-md-1">Delete</span>
-                  <i class="fas fa-times clickable-btn"></i>
+                  <i class="fas fa-times fa-fw clickable-btn"></i>
                 </span>
                 <script>
                   $('span.delete-news').click(function () {
@@ -51,12 +51,11 @@
             <!-- Report -->
             <div data-toggle="modal" data-target="#reportModal" title="Use to report this news. The report will be analysed by our team of moderators.">
               <div class="centerText mt-4">
-                <a href="#reportModal"><span class="lightText mr-md-1">Report</span><i class="fas fa-ban clickable-btn" data-toggle="modal" data-target="#reportModal"></i></a>
+                <a href="#reportModal"><span class="lightText mr-md-1">Report</span><i class="fas fa-ban fa-fw clickable-btn" data-toggle="modal" data-target="#reportModal"></i></a>
               </div>
 
             </div>
             @if(Auth::user()->permission == 'admin' || Auth::user()->permission ==  'moderator')
-            <!-- TODO: ver metodo delete para admin e moderadores -->
             <div class="centerText mt-2" name="delete" title="Use to delete this news. If you are the author the news will be permantly deleted from our servers.">
               <form action="{{ route('delete_news', $news->id) }}" method="post" class="delete-news">
                 {{ method_field('delete') }} {{ csrf_field() }}
@@ -65,7 +64,7 @@
                     this.style.cursor='pointer';" onMouseOut="this.style.textDecoration= 'none';
                     this.style.color='initial';">
                   <span class="mr-md-1">Delete</span>
-                  <i class="fas fa-times clickable-btn"></i>
+                  <i class="fas fa-times fa-fw clickable-btn"></i>
                 </span>
                 <script>
                   $('span.delete-news').click(function () {
@@ -79,7 +78,7 @@
             <span data-toggle="modal" data-target="#loginModal">
               <div class="centerText mt-4">
                 <span class="lightText mr-md-2">Report</span>
-                <i class="fas fa-ban clickable-btn" data-toggle="modal" data-target="#loginModal"></i>
+                <i class="fas fa-ban fa-fw clickable-btn" data-toggle="modal" data-target="#loginModal"></i>
               </div>
             </span>
             @endif @endif
@@ -121,7 +120,7 @@
           </form>
           <div class="row" id="placeComments">
           </div>
-          <span class="comment"> @include('partials.load_more',['hide'=>false]) </span>
+          <span class="comment"> @include('partials.load_more') </span>
         </div>
       </div>
     </div>

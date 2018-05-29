@@ -1,5 +1,5 @@
 <a class="dropdown-item" href="{{ url('notifications/'.$notification->id) }}">
-    <i class="fas fa-user-circle">
+    <i class="fas fa-user-circle fa-fw">
     </i>
     @switch($notification->type)
         @case('CommentMyPost')

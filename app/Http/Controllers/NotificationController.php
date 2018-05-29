@@ -14,9 +14,7 @@ class NotificationController extends Controller
     const PUBLISH = 'FollowedPublish';
 
     public function queryUser($user_id) {
-        $user = DB::select('SELECT users.id, username, email, gender, Countries.name As country, picture, points, permission
-        FROM users NATURAL JOIN countries
-        WHERE users.id = ?;',[$user_id]);
+        $user = User::getUser($user_id);
   
         if(count($user) == 0) {
           return redirect('/error/404');
