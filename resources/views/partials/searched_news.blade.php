@@ -18,7 +18,7 @@
               @endif
             </div>
             @if(isset($news) && count($news) > 0)
-              @include('partials.load_more')
+              @include('partials.load_more', ['hide'=>false])
             @endif
           </div>
           id="scroll_advanced_search_users"
