@@ -44,23 +44,24 @@
 
 <body>
   <main>
-  @include('partials.header') @include('partials.modals.search_modal', ['sections' => App\Section::get()])
-    <section id="content">
-      @yield('content')
-    </section>
+    @include('partials.header') @include('partials.modals.search_modal', ['sections' => App\Section::get()])
+      <section id="content">
+        @yield('content')
+      </section>
+      
   </main>
-    <footer class="page-footer mt-4">
-      <p class=" mx-auto text-center mb-0">
-        <a href="#">About us</a>
-        &middot;
-        <a href="#">FAQ</a>
-        &middot;
-        <a href="{{ url('privacy_policy') }}">Privacy Policy</a>
-      </p>
-      <p class="text-center footer-copyright mb-1">
-        <i class="far fa-copyright fa-fw"></i> 2018 Photon News</p>
-    </footer>
-
+   <footer class="page-footer sticky-bottom mt-4">
+        <p class=" mx-auto text-center mb-0">
+          <a href="/about">About us</a>
+          &middot;
+          <a href="/faq">FAQ</a>
+          &middot;
+          <a href="{{ url('privacy_policy') }}">Privacy Policy</a>
+        </p>
+        <p class="text-center footer-copyright mb-1">
+          <i class="far fa-copyright fa-fw"></i> 2018 Photon News</p>
+      </footer>
+  
 </body>
 
 </html>
