@@ -120,7 +120,7 @@
           </form>
           <div class="row" id="placeComments">
           </div>
-          <span class="comment"> @include('partials.load_more',['hide'=>false]) </span>
+          <span class="comment"> @include('partials.load_more') </span>
         </div>
       </div>
     </div>

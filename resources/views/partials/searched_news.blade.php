@@ -17,7 +17,7 @@
               @endif
             </div>
             @if(isset($news) && count($news) > 0)
-              @include('partials.load_more', ['hide'=>false])
+              @include('partials.load_more')
             @endif
           </div>
       </div>
