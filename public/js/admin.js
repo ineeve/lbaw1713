@@ -165,7 +165,7 @@ function banUserRow() {
     let banBtn = $('#'+last_row_selected.id + ' .ban')[0];
 
     userRow.classList.add('table-danger');
-    banBtn.outerHTML = '<i class="text-danger fas fa-door-open unban" data-toggle="tooltip" title="Unban user"></i>';
+    banBtn.outerHTML = '<i class="text-danger fas fa-door-open fa-fw unban" data-toggle="tooltip" title="Unban user"></i>';
 }
 
 function banCallback() {
@@ -264,7 +264,7 @@ $(document).ready(function() {
             method: 'post',
             success: function(msg) {
                 userRow.classList.remove('table-danger');
-                banBtn.outerHTML = '<i class="text-danger fas fa-ban ban" data-toggle="modal" data-target="#banModal" title="Ban user"></i>';
+                banBtn.outerHTML = '<i class="text-danger fas fa-ban fa-fw ban" data-toggle="modal" data-target="#banModal" title="Ban user"></i>';
                 showSuccessMsg(msg);
             },
             error: function(xhr) {

@@ -19,7 +19,7 @@
             @if (Auth::check() && Auth::user()->username == $user->username)
             <a href="profile_edit.html">
               <div class="ml-3 mt-1 d-flex flex-row align-items-center">
-                <i class="fa fa-edit"></i>
+                <i class="fa fa-edit fa-fw"></i>
                 <h5 class="ml-2 mt-2">Edit Profile</h5>
               </div>
             </a>

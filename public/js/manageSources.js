@@ -6,7 +6,7 @@ function createMinusFieldset(){
   minusFieldset.setAttribute('class','form-group mt-3');
   minusFieldset.setAttribute('onclick','removeSource(this)');
   let minusIcon = document.createElement('i');
-  minusIcon.setAttribute('class','fas fa-minus-circle');
+  minusIcon.setAttribute('class','fas fa-minus-circle fa-fw');
   minusFieldset.appendChild(minusIcon);
   return minusFieldset;
 }
@@ -16,7 +16,7 @@ function createPlusFieldset(){
     plusFieldset.setAttribute('class','form-group mr-3 mt-3');
     plusFieldset.setAttribute('onclick','addSource(this)');
     let plusIcon = document.createElement('i');
-    plusIcon.setAttribute('class','fas fa-plus-circle');
+    plusIcon.setAttribute('class','fas fa-plus-circle fa-fw');
     plusFieldset.appendChild(plusIcon);
     return plusFieldset;
 }

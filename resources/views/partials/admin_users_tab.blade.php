@@ -2,7 +2,7 @@
 <div class="mb-2">
     <div class="row">
         <div class="col-12 col-md-10">
-            <h3><i class="fa fa-bullseye"></i> Users</h3>
+            <h3><i class="fa fa-bullseye fa-fw"></i> Users</h3>
             <div class="row m-2 align-items-center">
                 <h5>Filter By
                 </h5>
@@ -54,11 +54,11 @@
                     <tbody>
                         <tr>
                             <td>
-                                <i class="text-danger fas fa-ban"></i> Ban</td>
+                                <i class="text-danger fas fa-ban fa-fw"></i> Ban</td>
                             <td>
-                                <i class="text-success fas fa-angle-double-up"></i> Promote</td>
+                                <i class="text-success fas fa-angle-double-up fa-fw"></i> Promote</td>
                             <td>
-                                <i class="text-danger fas fa-angle-double-down"></i> Demote</td>
+                                <i class="text-danger fas fa-angle-double-down fa-fw"></i> Demote</td>
                         </tr>
                     </tbody>
                 </table>

@@ -22,18 +22,18 @@
 
       @if($first && $last)
         <fieldset class="form-group mr-3 mt-3" onclick="addSource(this)">
-          <i class="fas fa-plus-circle"></i>
+          <i class="fas fa-plus-circle fa-fw"></i>
         </fieldset>
       @elseif (!$first && $last)
         <fieldset class="form-group mr-3 mt-3" onclick="addSource(this)">
-          <i class="fas fa-plus-circle"></i>
+          <i class="fas fa-plus-circle fa-fw"></i>
         </fieldset>
         <fieldset class="form-group mt-3" onclick="removeSource(this)">
-        <i class="fas fa-minus-circle"></i>
+        <i class="fas fa-minus-circle fa-fw"></i>
         </fieldset>
       @else
         <fieldset class="form-group mt-3" onclick="removeSource(this)">
-        <i class="fas fa-minus-circle"></i>
+        <i class="fas fa-minus-circle fa-fw"></i>
         </fieldset>
       @endif
       
