@@ -338,4 +338,19 @@ class News extends Model {
     static public function insertSource($news_id,$created_source_id) {
         DB::table('newssources')->insert(['news_id' => $news_id, 'source_id' => $created_source_id ]);
     }
+
+    static public function selectSources($id) {
+        return DB::select('SELECT link,author,publication_year FROM 
+        sources JOIN (SELECT * FROM newssources WHERE news_id=?) AS sourcesForANews ON sources.id = sourcesForANews.source_id',
+        [$id]);
+    }
+
+
+    static public function getDeleted($article) {
+        return DB::table('deleteditems')->where('news_id', $article->id)->get();
+    }
+    static public function newsExist($news_id) {
+        return DB::table('news')->where('id',$news_id)->exists();
+    }
+    
 }

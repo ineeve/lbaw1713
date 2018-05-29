@@ -118,7 +118,7 @@ class NewsController extends Controller
       $news = $news[0];
 
       $sources = News::getSources($news->id);
-      $reportReasons = array_column(DB::select('SELECT unnest(enum_range(NULL::reason_type))'),'unnest');
+      $reportReasons = array_column(Reporteditems::getreportReasons(),'unnest');
 
       return view('pages.news_item', ['news' => $news, 'sources' => $sources, 'reportReasons'=> $reportReasons]);
     }
@@ -239,9 +239,7 @@ class NewsController extends Controller
     public function editArticle($id) {
       $sections = Section::pluck('name', 'id');
       $article = News::find($id);
-      $sources = DB::select('SELECT link,author,publication_year FROM 
-        sources JOIN (SELECT * FROM newssources WHERE news_id=?) AS sourcesForANews ON sources.id = sourcesForANews.source_id',
-        [$id]);
+      $sources = Reporteditems::selectSources($id);
       $this->authorize('update', $article);
       return view('pages.news_editor', ['sections' => $sections, 'article' => $article, 'sources' => $sources]);
     }
@@ -252,12 +250,12 @@ class NewsController extends Controller
      * Inserts article in the DeletedItems table rather than actually deleting it.
      */
     private function markDeleted($article) {
-      $deletedItems = DB::table('deleteditems')->where('news_id', $article->id)->get();
+      $deletedItems = News::getDelected($article);
       if (count($deletedItems) > 0) {
         // item was already deleted
         return;
       }
-      DB::insert('INSERT INTO DeletedItems (user_id, news_id) VALUES (?, ?);', [Auth::user()->id, $article->id]);
+      Reporteditems::insertDeleted($article);
     }
 
     /**
@@ -274,25 +272,21 @@ class NewsController extends Controller
     public function reportItem(Request $request, $news_id, $comment_id = NULL){
       $brief = $request->input('brief');
       $reasons = $request->input('reasons');
-      $validReasons = array_column(DB::select('SELECT unnest(enum_range(NULL::reason_type))'),'unnest');
+      $validReasons = array_column(Reporteditems::getreportReasons(),'unnest');
       $success = False;
       //check news is valid and check comment belongs to news.
       if (is_null($brief)) {
         $brief = '';
       }
       $reported_item_id = -1;
-      if (DB::table('news')->where('id',$news_id)->exists()) {
+      if (News::newsExist($news_id)) {
         if (!is_null($comment_id)) {
-          if (DB::table('comments')->where('id',$comment_id)->where('target_news_id',$news_id)->exists()){
-            $reported_item_id = DB::table('reporteditems')->insertGetId([
-              'user_id' => Auth::user()->id, 'comment_id' => $comment_id, 'description' => $brief
-            ]);
+          if (Comment::commentExist($news_id)){
+            $reported_item_id = Reporteditem::getReportedItemId($comment_id,$brief);
             $success = True;
           }
         } else {
-          $reported_item_id = DB::table('reporteditems')->insertGetId([
-            'user_id' => Auth::user()->id, 'news_id' => $news_id, 'description' => $brief
-          ]);
+          $reported_item_id = Reporteditem::getReportedItemId($news_id,$brief);
           $success = True;
         }
       }
@@ -300,9 +294,7 @@ class NewsController extends Controller
         $reasons = explode(",",$reasons);
         foreach($reasons as $reason){
           if (in_array($reason, $validReasons)){
-            DB::table('reasonsforreport')->insert([
-              'reason' => $reason, 'reported_item_id' => $reported_item_id
-            ]);
+            Reportitem::insertReason($reason, $reported_item_id);
           }else{
             $success = False;
           }

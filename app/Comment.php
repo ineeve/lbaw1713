@@ -41,4 +41,7 @@ static public function markDeleted($comm_id){
 }
 DB::insert('INSERT INTO DeletedItems (user_id, comment_id) VALUES (?, ?);', [Auth::user()->id, $comm_id]);
 }
+static public function commentExist($news_id) {
+  return DDB::table('comments')->where('id',$comment_id)->where('target_news_id',$news_id)->exists();
+}
 }

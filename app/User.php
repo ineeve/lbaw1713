@@ -160,4 +160,17 @@ class User extends Authenticatable
       DB::insert('INSERT INTO SettingsNotifications (type, user_id)
                     VALUES (?, ?)', [$notification, Auth::user()->id]);
     }
+
+    static public function userInterest($request) {
+      return DB::select('SELECT 1 FROM UserInterests
+      WHERE user_id = ? AND section_id = ?', [Auth::user()->id, $request->interest_id]);
+    }
+    static public function insertuserInterest($request) {
+      return DB::insert('INSERT INTO UserInterests (user_id, section_id)
+      VALUES (?, ?);', [Auth::user()->id, $request->interest_id]);
+    }
+    static public function deleteuserInterest($request) {
+      return DB::delete('DELETE FROM UserInterests
+      WHERE user_id = ? AND section_id = ?', [Auth::user()->id, $request->interest_id]);
+    }
 }
