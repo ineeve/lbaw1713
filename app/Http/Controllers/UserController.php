@@ -126,7 +126,7 @@ class UserController extends Controller
     }
 
     public function stopFollowing($username) {
-      $user = $this->queryUser($username);
+      $user = User::queryUser($username);
 
       User::deleteFollowing($user);
 
