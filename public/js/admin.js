@@ -303,7 +303,9 @@ function showMsg(msg, type) {
  * Sets route of category edition form for clicked category.
  * @param {number} categoryId 
  */
-function setEdit(categoryId) {
+function setEdit(categoryId, categoryName, categoryIcon) {
     let form = $('#editMenu form')[0];
     form.action = "/adm/categories/" + categoryId;
+    form.name.value = categoryName;
+    form.icon.value = categoryIcon;
 }
