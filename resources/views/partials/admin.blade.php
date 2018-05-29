@@ -16,10 +16,8 @@
                 @endif
                 </div>
                 <div class="tab-pane" id="categories_tab" role="tabpanel" aria-labelledby="categories_tab">
-                    @include('partials.admin_categories_tab', ['categories' => $categories])
                 </div>
                 <div class="tab-pane" id="badges_tab" role="tabpanel" aria-labelledby="badges_tab">
-                    @include('partials.admin_badges_tab', ['badges' => $badges])
                 </div>
                 <div class="tab-pane" id="statistics_tab" role="tabpanel" aria-labelledby="statistics_tab">...
                 </div>

@@ -11,8 +11,10 @@ const USERS_TABLE_ROUTE = "/adm/users/table";
 function sendRequest(method,url,handler,body=null){
     let request = new XMLHttpRequest();
     request.open(method,url);
-    request.setRequestHeader('Content-Type','application/x-www-form-urlencoded')
-    request.setRequestHeader("X-CSRF-TOKEN", csrf);
+    if (method.toLowerCase() != 'get') {
+        request.setRequestHeader('Content-Type','application/x-www-form-urlencoded')
+        request.setRequestHeader("X-CSRF-TOKEN", csrf);
+    }
     request.onload = handler;
     request.send(body);
 }
