@@ -24,7 +24,7 @@ class UserController extends Controller
 {
     public function edit() {
         $countries = User::getCountries();
-        return view('pages.profile_edit', ['countries' => $countries]);
+        return view('pages.profile_edit', ['countries' => $countries,'page_title'=>'Edit Profile']);
     }
 
     public function show($username)
@@ -52,7 +52,6 @@ class UserController extends Controller
       
       $articles_offset = 0;
       $following_offset = 0;
-
       return view('pages.profile', ['user' => $user,
        'total_badges' => $total_badges,
        'nth_badges' => $nth_badges,
@@ -62,7 +61,7 @@ class UserController extends Controller
        'following_count' => $following_count,
        'following' => $following,
        'articles_offset' => $articles_offset,
-       'following_offset' => $following_offset]);
+       'following_offset' => $following_offset,'page_title'=>'Profile of '. $user->username]);
     }
 
     public function getArticles($username) {
@@ -200,7 +199,7 @@ class UserController extends Controller
       $sections = Section::all();
       $userSections = User::getUserSections($user);
       $userNotifs = User::getUserNoti($user);
-      return view('pages.settings', ['sections' => $sections, 'userSections' => $userSections, 'userNotifs' => $userNotifs]);
+      return view('pages.settings', ['sections' => $sections, 'userSections' => $userSections, 'userNotifs' => $userNotifs,'page_title'=>'Settings']);
     }
 
    

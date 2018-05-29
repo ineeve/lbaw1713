@@ -77,7 +77,7 @@ class NewsController extends Controller
     public function getSearchPage(Request $request){
       $searchText = $request->searchText;
       $filteredNews = $this->searchNewsByPopularity($searchText, 0);
-      return view('pages.searched_news',['news'=> $filteredNews, 'searchText' => $searchText]);
+      return view('pages.searched_news',['news'=> $filteredNews, 'searchText' => $searchText,'page_title'=>'Search']);
     }
 
     public function list(Request $request, $section = 'All', $order = self::MOST_POPULAR, $offset = 0) {
@@ -107,7 +107,7 @@ class NewsController extends Controller
       $news = $this->getNews($initial_page, self::MOST_POPULAR, 0, "DESC");
       $sections = News::getSections();
       
-      return view('pages.news', ['news' => $news, 'sections' => $sections, 'currentSection' => $initial_page]);
+      return view('pages.news', ['news' => $news, 'sections' => $sections, 'currentSection' => $initial_page,'page_title'=>'Homepage']);
     }
 
     public function show($id) {
@@ -122,7 +122,7 @@ class NewsController extends Controller
       $sources = News::getSources($news->id);
       $reportReasons = array_column(Reporteditem::getreportReasons(),'unnest');
 
-      return view('pages.news_item', ['news' => $news, 'sources' => $sources, 'reportReasons'=> $reportReasons]);
+      return view('pages.news_item', ['news' => $news, 'sources' => $sources, 'reportReasons'=> $reportReasons,'page_title'=>$news->title]);
     }
 
     /**
@@ -235,7 +235,7 @@ class NewsController extends Controller
       $this->authorize('create', News::class);
       $sections = Section::pluck('name', 'id');
       $sources = array($this->getEmptySource());
-      return view('pages.news_editor', ['sections' => $sections, 'sources'=> $sources]);
+      return view('pages.news_editor', ['sections' => $sections, 'sources'=> $sources,'page_title'=>'Create an Article']);
     }
 
     public function editArticle($id) {
@@ -243,7 +243,7 @@ class NewsController extends Controller
       $article = News::find($id);
       $sources = Reporteditem::selectSources($id);
       $this->authorize('update', $article);
-      return view('pages.news_editor', ['sections' => $sections, 'article' => $article, 'sources' => $sources]);
+      return view('pages.news_editor', ['sections' => $sections, 'article' => $article, 'sources' => $sources,'page_title'=>'Edit an Article']);
     }
 
     //////////////////// EDITOR ABOVE

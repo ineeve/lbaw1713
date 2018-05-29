@@ -148,6 +148,7 @@ class AdminController extends Controller {
             'numberOfPages' => $numberOfPages,
             'currentPage'=>$currentPage,
             'itemsPerPage'=>$itemsPerPage,
-            'total'=>$total]);
+            'total'=>$total,
+            'page_title'=>'Control Panel']);
     }
 }

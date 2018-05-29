@@ -12,8 +12,10 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function errorNotFound() {
-        return view('pages.errorNotFound');  
+        return view('pages.errorNotFound',[
+        'page_title'=>'Error Page']);  
     } public function errorUnauthorizedAction() {
-        return view('pages.errorUnauthorizedAction');  
+        return view('pages.errorUnauthorizedAction',[
+        'page_title'=>'Error Page']);  
     }
 }
