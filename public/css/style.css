@@ -56,11 +56,6 @@ div.news_box:hover {
   -o-transition: all 600ms ease-in-out;
 }
 
-/* TODO: why did we have this? - Anabela */
-/* p.totop a {
-  display: none;
-} */
-
 @media screen and (width: 768px) {
   #sections_list {
       display: none;
@@ -90,9 +85,11 @@ div.news_box:hover {
 .bold{
   font-weight: bold;
 }
-
-a{
+a {
   color:inherit;
+}
+.real_link {
+  color: #2780e3;
 }
 
 .lightText{
