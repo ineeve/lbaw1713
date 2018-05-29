@@ -55,7 +55,7 @@ function articlesChangePage(e){
     if(pageNumber != NaN){
         if(pageNumber<=0)return;
         
-        let username = $('input#user')[0].getAttribute("value");
+        let username = $('input#user_profile')[0].getAttribute("value");
         jQuery.ajax({
             url: "/api/users/" + username + "/articles",
             method: 'get',

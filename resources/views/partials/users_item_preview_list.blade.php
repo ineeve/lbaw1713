@@ -2,7 +2,7 @@
 style="width: 150px;">
     <div style="position:relative;">
         <div class="my-2">
-            <img class="img-responsive" src="{{ Storage::url('users/'.($user->picture == null ? 'default' : $user->picture)) }}" alt="pic" >
+            <img class="img-responsive" src="{{ Storage::url('users/'.($user->picture == null ? 'default' : $user->picture)) }}" alt="{{ $user->username }} profile picture">
         </div>
         <div class="mx-3">
             <div class="row">
