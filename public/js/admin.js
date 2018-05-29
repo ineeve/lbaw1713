@@ -331,3 +331,7 @@ function removeClassByPrefix(el, prefix) {
         }
     }
 }
+
+function showBadgeEditForm(badgeElem) {
+    console.log(badgeElem);
+}
