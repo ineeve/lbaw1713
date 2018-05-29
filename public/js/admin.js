@@ -305,7 +305,26 @@ function showMsg(msg, type) {
  */
 function setEdit(categoryId, categoryName, categoryIcon) {
     let form = $('#editMenu form')[0];
+    changeIconPreview(categoryIcon);
     form.action = "/adm/categories/" + categoryId;
     form.name.value = categoryName;
     form.icon.value = categoryIcon;
+}
+
+function changeIconPreview(newIcon) {
+    let iconPreview = $('#editMenu .icon-preview i')[0];
+    removeClassByPrefix(iconPreview, 'fa');
+    // let faRegex = new RegExp('\\b' + 'fa' + '(.*)?\\b', 'g');
+    // iconPreview.className.replace(faRegex, '');
+    let newIconClasses = newIcon.split(' ');
+    for (let i = 0; i < newIconClasses.length; i++) {
+        iconPreview.classList.add(newIconClasses[i]);
+    }
+}
+
+function removeClassByPrefix(el, prefix) {
+    var regx = new RegExp('\\b' + prefix + '([-.]*)?\\b', 'g');
+    [...el.classList].map(className => {
+        regx.test(className) && el.classList.remove(className);
+    });
 }
