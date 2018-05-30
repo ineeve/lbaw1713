@@ -12,7 +12,8 @@
       <div class="modal-body">
         <form action="{{route('advanced_search')}}" method="get">
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="Search" name="searchText">
+            <label for="advancedsearch-searchText">Search Text *</label>
+            <input id="advancedsearch-searchText"type="text" class="form-control" placeholder="Search" name="searchText">
           </div>
           <div class="form-group my-1">
             <select class="custom-select" name="elementToSearch">
@@ -25,6 +26,7 @@
           </div>
           <div class="form-group my-1">
             <select name="sectionSearch" class="custom-select">
+              <option value="">All</option>
               @foreach($sections as $section)
               <option value="{{ $section->id }}">{{ $section->name }}</option>
               @endforeach

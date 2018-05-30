@@ -6,6 +6,10 @@ main{
   min-height: 90%;
 }
 
+p {
+  line-height: 1.5;
+}
+
 .article-options .clickable-btn {
     opacity: 0.7;
 }
