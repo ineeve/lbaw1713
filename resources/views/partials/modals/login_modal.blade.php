@@ -12,11 +12,11 @@
             <form class="px-4 py-3" method="POST" action="/login">
                 {{ csrf_field() }}
                 <div class="form-group">
-                  <label for="modalFormEmail">Email address</label>
+                  <label for="modalFormEmail">Email address *</label>
                   <input name="email" type="email" class="form-control" id="modalFormEmail" placeholder="email@example.com" required>
                 </div>
                 <div class="form-group">
-                  <label for="modalFormPassword">Password</label>
+                  <label for="modalFormPassword">Password *</label>
                   <input name="password" type="password" class="form-control" id="modalFormPassword" placeholder="Password" required>
                 </div>
                 <div class="form-check">
@@ -26,11 +26,12 @@
                   </label>
                 </div>
                 <button type="submit" class="btn btn-primary">Sign in</button>
+                <div class="mt-2">* Field is required</div>
               </form>
-              <div class="modal-divider"></div>
-              <div class="modal-divider"></div>
-              <a class="modal-item" href="/register">New around here? Sign up</a>
-              <a class="modal-item" href="{{ route('password.request') }}">Forgot password?</a>
+              <div class="modal-footer">
+                <a class="modal-item" href="/register">New around here? Sign up</a>
+                <a class="modal-item" href="{{ route('password.request') }}">Forgot password?</a>
+              </div>             
         </div>
       </div>
     </div>
