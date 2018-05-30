@@ -97,18 +97,10 @@ class AdminController extends Controller {
 
     public function getCategoriesTab(Request $request){
         $this->authorize('admin', \Auth::user());
-        //$currentPage = 1; $itemsPerPage = 10;
         $sections = Section::get();
-        //$total = $sections->count();
-        //$sections = $sections->forPage($currentPage,$itemsPerPage);
-        //$numberOfPages = intval(ceil($total/$itemsPerPage));
         return view('partials.admin_categories_tab',
             ['categories'=>$sections]);
-            //'numberOfPages'=>$numberOfPages,
-            //'currentPage'=>$currentPage,
-            //'itemsPerPage'=>$itemsPerPage,
-            //'total'=>$total]);
-    }
+       }
 
 
     public function getBadgesTab(Request $request){

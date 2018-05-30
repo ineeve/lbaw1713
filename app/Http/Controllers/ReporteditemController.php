@@ -17,10 +17,7 @@ class ReporteditemController extends Controller
 
     public function showReport($id) {
         $this->authorize('mod', \Auth::user());
-        //get All news Reports
-        // $reports = $this->queryArticleReports(0);
-        // $commentsReports = $this->queryCommentsReports(0);
-        // print_r($reports);
+      
         $separate =  Reporteditem::getReport($id);
         if($separate == null) return redirect('error/404');
         if($separate[0]->news_id != null){
