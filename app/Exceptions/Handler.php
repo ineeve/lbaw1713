@@ -54,10 +54,10 @@ class Handler extends ExceptionHandler
         if($exception instanceof  AuthorizationException) {
             return redirect('/error/403');
         }
-        else{
+  /*      else{
             return redirect('/error/404');
         }
-
+*/
         return parent::render($request, $exception);
     }
 }
