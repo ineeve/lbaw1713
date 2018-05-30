@@ -42,12 +42,12 @@ class News extends Model {
     static public function queryNewsFromAllSectionsTB($searchText, $startDate, $endDate, $author) {
         if($request->authorSearch == null) {
             return DB::select("SELECT news.id, title, users.username As author, date, votes, image, substring(body, '(?:<p>)[^<>]*\.(?:<\/p>)') as body_preview FROM news JOIN users ON news.author_id = users.id
-            WHERE textsearchable_body_and_title_index_col @@ plainto_tsquery('english',?)
+            WHERE textsearchable_body_and_title_index_col @@ plainto_tsquery('english',?) AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE News.id = DeletedItems.news_id)
             AND date BETWEEN ? AND ?
            ;",[$searchText,$startDate,$endDate]); 
         } else {
             return DB::select("SELECT news.id, title, users.username As author, date, votes, image, substring(body, '(?:<p>)[^<>]*\.(?:<\/p>)') as body_preview FROM news JOIN users ON news.author_id = users.id
-            WHERE textsearchable_body_and_title_index_col @@ plainto_tsquery('english',?)
+            WHERE textsearchable_body_and_title_index_col @@ plainto_tsquery('english',?) AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE News.id = DeletedItems.news_id)
             AND date BETWEEN ? AND ?
            
             AND username = ?;",[$searchText,$startDate,$endDate, $author ]); 
@@ -57,13 +57,13 @@ class News extends Model {
     static public function queryNewsFromSpecificSectionTB($searchText, $startDate, $endDate, $section, $author) {
         if($author == null) {
             return DB::select("SELECT news.id, title, users.username As author, date, votes, image, substring(body, '(?:<p>)[^<>]*\.(?:<\/p>)') as body_preview FROM news JOIN users ON news.author_id = users.id
-            WHERE textsearchable_body_and_title_index_col @@ plainto_tsquery('english',?)
+            WHERE textsearchable_body_and_title_index_col @@ plainto_tsquery('english',?) AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE News.id = DeletedItems.news_id)
             AND date BETWEEN ? AND ?
             AND section_id = ?
             ;",[$searchText,$startDate,$endDate,$section]); 
         } else {
             return DB::select("SELECT news.id, title, users.username As author, date, votes, image, substring(body, '(?:<p>)[^<>]*\.(?:<\/p>)') as body_preview FROM news JOIN users ON news.author_id = users.id
-            WHERE textsearchable_body_and_title_index_col @@ plainto_tsquery('english',?)
+            WHERE textsearchable_body_and_title_index_col @@ plainto_tsquery('english',?) AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE News.id = DeletedItems.news_id)
             AND date BETWEEN ? AND ?
             AND section_id = ?
             AND username = ?;",[$searchText,$startDate,$endDate, $section, $author]); 
@@ -73,12 +73,12 @@ class News extends Model {
     static public function queryNewsFromAllSectionsT($searchText, $startDate, $endDate, $author) {
         if($author == null) {
             return DB::select("SELECT news.id, title, users.username As author, date, votes, image, substring(body, '(?:<p>)[^<>]*\.(?:<\/p>)') as body_preview FROM news JOIN users ON news.author_id = users.id
-            WHERE textsearchable_title_index_col @@ plainto_tsquery('english',?)
+            WHERE textsearchable_title_index_col @@ plainto_tsquery('english',?) AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE News.id = DeletedItems.news_id)
             AND date BETWEEN ? AND ?
            ;",[$searchText,$startDate,$endDate]); 
         } else {
             return DB::select("SELECT news.id, title, users.username As author, date, votes, image, substring(body, '(?:<p>)[^<>]*\.(?:<\/p>)') as body_preview FROM news JOIN users ON news.author_id = users.id
-            WHERE textsearchable_title_index_col @@ plainto_tsquery('english',?)
+            WHERE textsearchable_title_index_col @@ plainto_tsquery('english',?) AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE News.id = DeletedItems.news_id)
             AND date BETWEEN ? AND ?
            
             AND username = ?;",[$searchText,$startDate,$endDate, $author]); 
@@ -88,13 +88,13 @@ class News extends Model {
     static public function queryNewsFromSpecificSectionT($searchText, $startDate, $endDate, $section, $author) {
         if($author == null) {
             return DB::select("SELECT news.id, title, users.username As author, date, votes, image, substring(body, '(?:<p>)[^<>]*\.(?:<\/p>)') as body_preview FROM news JOIN users ON news.author_id = users.id
-            WHERE textsearchable_title_index_col @@ plainto_tsquery('english',?)
+            WHERE textsearchable_title_index_col @@ plainto_tsquery('english',?) AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE News.id = DeletedItems.news_id)
             AND date BETWEEN ? AND ?
             AND section_id = ?
             ;",[$searchText,$startDate,$endDate,$section]); 
         } else {
             return DB::select("SELECT news.id, title, users.username As author, date, votes, image, substring(body, '(?:<p>)[^<>]*\.(?:<\/p>)') as body_preview FROM news JOIN users ON news.author_id = users.id
-            WHERE textsearchable_title_index_col @@ plainto_tsquery('english',?)
+            WHERE textsearchable_title_index_col @@ plainto_tsquery('english',?) AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE News.id = DeletedItems.news_id)
             AND date BETWEEN ? AND ?
             AND section_id = ?
             AND username = ?;",[$searchText,$startDate,$endDate, $section, $author]); 
@@ -104,12 +104,12 @@ class News extends Model {
     static public function queryNewsFromAllSectionsB($searchText, $startDate, $endDate, $author) {
         if($author == null) {
             return DB::select("SELECT news.id, title, users.username As author, date, votes, image, substring(body, '(?:<p>)[^<>]*\.(?:<\/p>)') as body_preview FROM news JOIN users ON news.author_id = users.id
-            WHERE textsearchable_body_index_col @@ plainto_tsquery('english',?)
+            WHERE textsearchable_body_index_col @@ plainto_tsquery('english',?) AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE News.id = DeletedItems.news_id)
             AND date BETWEEN ? AND ?
            ;",[$searchText,$startDate,$endDate]); 
         } else {
             return DB::select("SELECT news.id, title, users.username As author, date, votes, image, substring(body, '(?:<p>)[^<>]*\.(?:<\/p>)') as body_preview FROM news JOIN users ON news.author_id = users.id
-            WHERE textsearchable_body_index_col @@ plainto_tsquery('english',?)
+            WHERE textsearchable_body_index_col @@ plainto_tsquery('english',?) AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE News.id = DeletedItems.news_id)
             AND date BETWEEN ? AND ?
            
             AND username = ?;",[$searchText,$startDate,$endDate, $author]); 
@@ -119,13 +119,13 @@ class News extends Model {
     static public function queryNewsFromSpecificSectionB($searchText, $startDate, $endDate, $section, $author) {
         if($author == null) {
             return DB::select("SELECT news.id, title, users.username As author, date, votes, image, substring(body, '(?:<p>)[^<>]*\.(?:<\/p>)') as body_preview FROM news JOIN users ON news.author_id = users.id
-            WHERE textsearchable_body_index_col @@ plainto_tsquery('english',?)
+            WHERE textsearchable_body_index_col @@ plainto_tsquery('english',?) AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE News.id = DeletedItems.news_id)
             AND date BETWEEN ? AND ?
             AND section_id = ?
             ;",[$searchText,$startDate,$endDate, $section]); 
         } else {
             return DB::select("SELECT news.id, title, users.username As author, date, votes, image, substring(body, '(?:<p>)[^<>]*\.(?:<\/p>)') as body_preview FROM news JOIN users ON news.author_id = users.id
-            WHERE textsearchable_body_index_col @@ plainto_tsquery('english',?)
+            WHERE textsearchable_body_index_col @@ plainto_tsquery('english',?) AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE News.id = DeletedItems.news_id)
             AND date BETWEEN ? AND ?
             AND section_id = ?
             AND username = ?;",[$searchText,$startDate,$endDate, $section, $author]); 
@@ -268,7 +268,7 @@ class News extends Model {
             }
             return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview FROM news NATURAL JOIN newspoints JOIN follows ON(followed_user_id= author_id)
             JOIN users ON (author_id = users.id)
-            WHERE follower_user_id = ?
+            WHERE follower_user_id = ? AND NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
             ORDER BY newspoints.points '.$direction.' LIMIT 10 OFFSET ?', [Auth::user()->id,$offset]);
         } 
         else {
@@ -301,7 +301,7 @@ class News extends Model {
             }
             return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview FROM news NATURAL JOIN newspoints JOIN follows ON(followed_user_id= author_id)
             JOIN users ON (author_id = users.id)
-            WHERE follower_user_id = ?
+            WHERE follower_user_id = ? AND NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
             ORDER BY votes '.$direction.' LIMIT 10 OFFSET ?', [Auth::user()->id,$offset]);
         } 
      else {
@@ -337,7 +337,7 @@ class News extends Model {
             }
                         return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview FROM news NATURAL JOIN newspoints JOIN follows ON(followed_user_id= author_id)
             JOIN users ON (author_id = users.id)
-            WHERE follower_user_id = ?
+            WHERE follower_user_id = ? AND NOT EXISTS (SELECT * FROM DeletedItems WHERE DeletedItems.news_id = News.id)
             ORDER BY date '.$direction.' LIMIT 10 OFFSET ?', [Auth::user()->id,$offset]);
         } else {
           return DB::select('SELECT news.id, title, users.username As author, date, votes, image, substring(body, \'(?:<p>)[^<>]*\.(?:<\/p>)\') as body_preview

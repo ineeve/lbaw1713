@@ -10,12 +10,13 @@
           <div class="modal-body">
             <form id="banDescriptionForm">
               <div class="form-group">
-                <label for="banDescriptionTextarea">Ban description</label>
+                <label for="banDescriptionTextarea">Ban description *</label>
                 <textarea class="form-control" id="banDescriptionTextarea" rows="3" required></textarea>
               </div>
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               <button type="submit" class="btn btn-primary float-right">Confirm</button>
             </form>
+            <div class="mt-2">* Field is required</div>
           </div>
         </div>
       </div>
