@@ -279,33 +279,35 @@ class NewsController extends Controller
       if (is_null($brief)) {
         $brief = '';
       }
+      $allValidFlag = true;
+      $reasons = explode(",",$reasons);
+      foreach($reasons as $reason){
+        if (!in_array($reason, $validReasons)){
+          $allValidFlag = false;
+        }
+      }
+      if (!$allValidFlag){
+        return Response::json(["message"=>"invalid reasons"],404);
+      }
+
       $reported_item_id = -1;
       if (News::newsExist($news_id)) {
         if (!is_null($comment_id)) {
-          if (Comment::commentExist($news_id,$comment_id)){
+          if (Comment::commentgetReportedItemIdNExist($news_id,$comment_id)){
             $reported_item_id = Reporteditem::getReportedItemId($comment_id,$brief);
           }
         } else {
           $reported_item_id = Reporteditem::getReportedItemIdN($news_id,$brief);
         }
       }
-
       if ($reported_item_id != -1){
-        $allValidFlag = true;
-        $reasons = explode(",",$reasons);
         foreach($reasons as $reason){
-          if (!in_array($reason, $validReasons)){
-            $allValidFlag = false;
-          }
+          Reporteditem::insertReason($reason, $reported_item_id);
         }
-        if ($allValidFlag){
-          foreach($reasons as $reason){
-            Reporteditem::insertReason($reason, $reported_item_id);
-          }
-        }else{
-          return Response::json(["message"=>"invalid reasons"],404);
-        }
-      }
+      } else{
+        return Response::json(["message"=>"item not found"],404);
+      }    
+        
       return Response::json(["message"=>"success"],200);
       
     }
