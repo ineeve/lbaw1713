@@ -250,7 +250,7 @@ $(document).ready(function() {
         headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
-      });
+    });
     
     /**
      * Unban user.
@@ -344,8 +344,8 @@ function showBadgeEditForm(badgeElem, badge) {
     let form = document.createElement('form');
     form.className = 'card mt-3 mr-3';
     form.style = 'width: 16rem;';
-    form.method = 'put';
-    form.action = '/adm/badges/' + badge.id;
+    form.id = badge.id;
+    form.onsubmit = submitEditBadgeForm;
 
     let cardHeader = createBadgeFormHeader(badge);
     form.appendChild(cardHeader);
@@ -355,6 +355,10 @@ function showBadgeEditForm(badgeElem, badge) {
 
     let reqsList = createBadgeFormReqsList(badge);
     form.appendChild(reqsList);
+
+    let buttons = createBadgeFormButtons();
+    form.appendChild(buttons.cancelBtn);
+    form.appendChild(buttons.saveBtn);
 
     badgeElem.parentNode.replaceChild(form, badgeElem);
 }
@@ -366,13 +370,9 @@ function createBadgeFormHeader(badge) {
     nameInput.type = 'text';
     nameInput.className = 'form-control';
     nameInput.placeholder = 'Name';
+    nameInput.name = 'name';
     nameInput.value = badge.name;
     cardHeader.appendChild(nameInput);
-    let saveBtn = document.createElement('button');
-    saveBtn.textContent = 'Save';
-    saveBtn.type = 'submit';
-    saveBtn.className = 'btn btn-primary';
-    cardHeader.appendChild(saveBtn);
     return cardHeader;
 }
 
@@ -381,6 +381,7 @@ function createBadgeFormBrief(badge) {
     briefDiv.className = 'card-body';
     let briefInput = document.createElement('input');
     briefInput.className = 'card-title m-0 form-control';
+    briefInput.name = 'brief';
     briefInput.value = badge.brief;
     briefDiv.appendChild(briefInput);
     return briefDiv;
@@ -406,6 +407,9 @@ function createBadgeFormReqsList(badge) {
     votesCounter.className = 'float-right form-control';
     commentsCounter.className = 'float-right form-control';
     articlesCounter.className = 'float-right form-control';
+    votesCounter.name = 'votes';
+    commentsCounter.name = 'comments';
+    articlesCounter.name = 'articles';
     votesCounter.value = badge.votes;
     commentsCounter.value = badge.comments;
     articlesCounter.value = badge.articles;
@@ -417,6 +421,61 @@ function createBadgeFormReqsList(badge) {
     reqsList.appendChild(commentsItem);
     reqsList.appendChild(articlesItem);
     return reqsList;
+}
+
+function createBadgeFormButtons() {
+    let saveBtn = document.createElement('button');
+    saveBtn.textContent = 'Save';
+    saveBtn.type = 'submit';
+    saveBtn.className = 'btn btn-primary';
+    let cancelBtn = document.createElement('button');
+    cancelBtn.textContent = 'Cancel';
+    cancelBtn.onclick = cancelBadgeForm;
+    cancelBtn.className = 'btn btn-secondary';
+    return {'cancelBtn': cancelBtn, 'saveBtn': saveBtn};
+}
+
+function submitEditBadgeForm(event) {
+    event.preventDefault();
+    let form = event.target;
+    let badgeId = form.id;
+
+    $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    })
+
+    $.ajax({
+        url: '/adm/badges/'+badgeId,
+        method: 'put',
+        data: $('form#'+badgeId).serialize(),
+        success: function(view) {
+            form.outerHTML = view;
+        },
+        error: function(xhr) {
+            console.log(xhr);
+        }
+    })
+
+    console.log(event);
+}
+
+function cancelBadgeForm(e) {
+    e.preventDefault();
+    let form = e.target.parentNode;
+    let badgeId = form.id;
+
+    $.ajax({
+        url: '/adm/badges/'+badgeId,
+        method: 'get',
+        success: function(view) {
+            form.outerHTML = view;
+        },
+        error: function(xhr) {
+            console.log(xhr);
+        }
+    })
 }
 
 {/* <div class="card mt-3 mr-3" style="width:16rem;">

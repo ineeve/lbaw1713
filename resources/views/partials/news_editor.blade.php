@@ -10,7 +10,7 @@
   @endif
 
   <fieldset class="form-group">
-    {{ Form::label('title', 'Title') }}
+    {{ Form::label('title', 'Title *') }}
     @if ($errors->has('title'))
       <div class="alert alert-dismissible alert-danger">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -20,7 +20,7 @@
     {{ Form::text('title', null, ['class' => 'form-control', 'required'=>'required', 'placeholder' => 'Insert title here']) }}
 
 
-    {{ Form::label('section_id', 'Category') }}
+    {{ Form::label('section_id', 'Category *') }}
     @if ($errors->has('category'))
       <div class="alert alert-dismissible alert-danger">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -42,7 +42,7 @@
   </fieldset>
 
   <fieldset class="form-group">
-    {{ Form::label('body', 'Body') }}
+    {{ Form::label('body', 'Body *') }}
     @if ($errors->has('body'))
       <div class="alert alert-dismissible alert-danger">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -53,7 +53,7 @@
 
   </fieldset>
 
-  {{ Form::label('sources', 'Sources') }}
+  {{ Form::label('sources', 'Sources *') }}
  
   <div id="editor-sources">
   @if (isset($sources))
@@ -73,6 +73,7 @@
 
 
   {{ Form::submit('Submit', ['name' => 'submit', 'class' => 'btn btn-primary']) }}
+  <div class="mt-5">* Field is required</div>
 
   {{ Form::close() }}
 
