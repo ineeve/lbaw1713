@@ -40,7 +40,7 @@ class News extends Model {
     }
 
     static public function queryNewsFromAllSectionsTB($searchText, $startDate, $endDate, $author) {
-        if($request->authorSearch == null) {
+        if($author == null) {
             return DB::select("SELECT news.id, title, users.username As author, date, votes, image, substring(body, '(?:<p>)[^<>]*\.(?:<\/p>)') as body_preview FROM news JOIN users ON news.author_id = users.id
             WHERE textsearchable_body_and_title_index_col @@ plainto_tsquery('english',?) AND NOT EXISTS (SELECT DeletedItems.news_id FROM DeletedItems WHERE News.id = DeletedItems.news_id)
             AND date BETWEEN ? AND ?
