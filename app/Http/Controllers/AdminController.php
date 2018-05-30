@@ -100,10 +100,12 @@ class AdminController extends Controller {
     public function getStatsTab(Request $request) {
         $this->authorize('admin', \Auth::user());
         $num_users = User::count();
+        $num_bans = Ban::count();
         $num_news = News::count();
         $num_comments = Comment::count();
         return view('partials.admin_stats_tab',
-            ['num_users' => $num_users, 'num_news' => $num_news, 'num_comments' => $num_comments]);
+            ['num_users' => $num_users, 'num_bans' => $num_bans,
+            'num_news' => $num_news, 'num_comments' => $num_comments]);
     }
 
     public function getCategoriesTab(Request $request){
