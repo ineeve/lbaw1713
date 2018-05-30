@@ -83,6 +83,7 @@
     </div>
   </div>
   <div class="col">
+    <h4>Comments List</h4>
     @include('partials.comment_mod', ['comments'=>$comments,'route_mod_comment'=>$route_mod_comment])
   </div>
 </div>
