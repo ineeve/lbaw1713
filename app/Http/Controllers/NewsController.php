@@ -289,14 +289,21 @@ class NewsController extends Controller
           $reported_item_id = Reporteditem::getReportedItemIdN($news_id,$brief);
         }
       }
+
       if ($reported_item_id != -1){
+        $allValidFlag = true;
         $reasons = explode(",",$reasons);
         foreach($reasons as $reason){
-          if (in_array($reason, $validReasons)){
-            Reporteditem::insertReason($reason, $reported_item_id);
-          }else{
-            return Response::json(["message"=>"invalid reasons"],404);
+          if (!in_array($reason, $validReasons)){
+            $allValidFlag = false;
           }
+        }
+        if ($allValidFlag){
+          foreach($reasons as $reason){
+            Reporteditem::insertReason($reason, $reported_item_id);
+          }
+        }else{
+          return Response::json(["message"=>"invalid reasons"],404);
         }
       }
       return Response::json(["message"=>"success"],200);
