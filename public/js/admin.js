@@ -250,7 +250,7 @@ $(document).ready(function() {
         headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
-      });
+    });
     
     /**
      * Unban user.
@@ -335,12 +335,129 @@ function removeClassByPrefix(el, prefix) {
 /**
  * Replaces badge card with an aesthetically similar badge edit form.
  * @param {*} badgeElem JS DOM element of a badge card.
- * @param {String} badgeJson JSON representation of a Badge.
+ * @param {Object} badge Badge.
  */
-function showBadgeEditForm(badgeElem, badgeJson) {
+function showBadgeEditForm(badgeElem, badge) {
     console.log(badgeElem);
-    console.log(badgeJson);
+    console.log(badge);
+
     let form = document.createElement('form');
+    form.className = 'card mt-3 mr-3';
+    form.style = 'width: 16rem;';
+    form.id = badge.id;
+    form.onsubmit = submitEditBadgeForm;
+
+    let cardHeader = createBadgeFormHeader(badge);
+    form.appendChild(cardHeader);
+
+    let briefDiv = createBadgeFormBrief(badge);
+    form.appendChild(briefDiv);
+
+    let reqsList = createBadgeFormReqsList(badge);
+    form.appendChild(reqsList);
 
     badgeElem.parentNode.replaceChild(form, badgeElem);
 }
+
+function createBadgeFormHeader(badge) {
+    let cardHeader = document.createElement('h3');
+    cardHeader.className = 'card-header d-flex justify-content-between align-items-center';
+    let nameInput = document.createElement('input');
+    nameInput.type = 'text';
+    nameInput.className = 'form-control';
+    nameInput.placeholder = 'Name';
+    nameInput.name = 'name';
+    nameInput.value = badge.name;
+    cardHeader.appendChild(nameInput);
+    let saveBtn = document.createElement('button');
+    saveBtn.textContent = 'Save';
+    saveBtn.type = 'submit';
+    saveBtn.className = 'btn btn-primary';
+    cardHeader.appendChild(saveBtn);
+    return cardHeader;
+}
+
+function createBadgeFormBrief(badge) {
+    let briefDiv = document.createElement('div');
+    briefDiv.className = 'card-body';
+    let briefInput = document.createElement('input');
+    briefInput.className = 'card-title m-0 form-control';
+    briefInput.name = 'brief';
+    briefInput.value = badge.brief;
+    briefDiv.appendChild(briefInput);
+    return briefDiv;
+}
+
+function createBadgeFormReqsList(badge) {
+    let reqsList = document.createElement('ul');
+    reqsList.className = 'list-group list-group-flush';
+
+    let votesItem = document.createElement('li');
+    let commentsItem = document.createElement('li');
+    let articlesItem = document.createElement('li');
+    votesItem.className = 'list-group-item';
+    commentsItem.className = 'list-group-item';
+    articlesItem.className = 'list-group-item';
+    votesItem.textContent = 'Votes';
+    commentsItem.textContent = 'Comments';
+    articlesItem.textContent = 'News';
+
+    let votesCounter = document.createElement('input');
+    let commentsCounter = document.createElement('input');
+    let articlesCounter = document.createElement('input');
+    votesCounter.className = 'float-right form-control';
+    commentsCounter.className = 'float-right form-control';
+    articlesCounter.className = 'float-right form-control';
+    votesCounter.name = 'votes';
+    commentsCounter.name = 'comments';
+    articlesCounter.name = 'articles';
+    votesCounter.value = badge.votes;
+    commentsCounter.value = badge.comments;
+    articlesCounter.value = badge.articles;
+    votesItem.appendChild(votesCounter);
+    commentsItem.appendChild(commentsCounter);
+    articlesItem.appendChild(articlesCounter);
+
+    reqsList.appendChild(votesItem);
+    reqsList.appendChild(commentsItem);
+    reqsList.appendChild(articlesItem);
+    return reqsList;
+}
+
+function submitEditBadgeForm(event) {
+    event.preventDefault();
+    let form = event.target;
+    let badgeId = form.id;
+
+    $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    })
+
+    $.ajax({
+        url: '/adm/badges/'+badgeId,
+        method: 'put',
+        data: $('form#'+badgeId).serialize(),
+        success: function(view) {
+            form.outerHTML = view;
+        },
+        error: function(xhr) {
+            console.log(xhr);
+        }
+    })
+
+    console.log(event);
+}
+
+{/* <div class="card mt-3 mr-3" style="width:16rem;">
+  <h3 class="card-header d-flex justify-content-between align-items-center">{{$badge->name}} <i class="fa fa-edit fa-fw float-right" onclick="showBadgeEditForm(this.parentNode.parentNode, {{json_encode($badge)}})"></i></h3>
+  <div class="card-body">
+    <h5 class="card-title m-0">{{$badge->brief}}</h5>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Votes <span class="float-right">{{$badge->votes}}</span></li>
+    <li class="list-group-item">Comments <span class="float-right">{{$badge->comments}}</span></li>
+    <li class="list-group-item">News <span class="float-right">{{$badge->articles}}</span></li>
+  </ul>
+</div> */}

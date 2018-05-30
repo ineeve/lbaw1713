@@ -241,7 +241,7 @@ class NewsController extends Controller
     public function editArticle($id) {
       $sections = Section::pluck('name', 'id');
       $article = News::find($id);
-      $sources = Reporteditem::selectSources($id);
+      $sources = News::selectSources($id);
       $this->authorize('update', $article);
       return view('pages.news_editor', ['sections' => $sections, 'article' => $article, 'sources' => $sources,'page_title'=>'Edit an Article']);
     }
