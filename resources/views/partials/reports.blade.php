@@ -8,7 +8,6 @@
         <h3 data-toggle="collapse" data-target="#sections_list" aria-expanded="true" aria-controls="sections_list">
           <i class="fas fa-bars fa-fw"></i> Reports</h3>
         <div class="collapse show collapsible-lg" id="sections_list">
-        <!-- TODO: Alterar vista -->
           <ul class="nav nav-pills flex-column left-pane">
             <li class="nav-item">
               <a id="TAB_news" class="nav-link active" data-toggle="tab" href="#news-reports">News</a>

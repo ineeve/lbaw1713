@@ -96,11 +96,11 @@
                   <form class="px-4 py-3" method="POST" action="/login">
                     {{ csrf_field() }}
                     <div class="form-group">
-                      <label for="dropdownFormEmail">Email address</label>
+                      <label for="dropdownFormEmail">Email address *</label>
                       <input name="email" type="email" class="form-control" id="dropdownFormEmail" placeholder="email@example.com" required>
                     </div>
                     <div class="form-group">
-                      <label for="dropdownFormPassword">Password</label>
+                      <label for="dropdownFormPassword">Password *</label>
                       <input name="password" type="password" class="form-control" id="dropdownFormPassword" placeholder="Password" required>
                     </div>
                     <div class="form-check">
@@ -110,12 +110,12 @@
                       </label>
                     </div>
                     <button type="submit" class="btn btn-primary">Sign in</button>
+                    <div class="mt-2">* Field is required</div>
                   </form>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="/register">New around here? Sign up</a>
-                  <a class="dropdown-item" href="{{ route('password.request') }}">Forgot password?</a>
-                  
-                </div>
+                    <a class="dropdown-item" href="/register">New around here? Sign up</a>
+                    <a class="dropdown-item" href="{{ route('password.request') }}">Forgot password?</a>
+                  </div>
               </li>
             </ul>
             @endif
