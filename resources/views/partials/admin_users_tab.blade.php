@@ -3,39 +3,10 @@
     <div class="row">
         <div class="col-12 col-md-10">
             <h3><i class="fas fa-user-tie fa-fw"></i> Users</h3>
-            <div class="row m-2 align-items-center">
-                <h5>Filter By
-                </h5>
-                <form class="d-flex ml-2">
-                    <div class="dropdown">
-                        <button class="btn btn-light dropdown-toggle" type="button" id="roleFilter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Role
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="roleFilter">
-                            <li>
-                                <div class="dropdown-item">
-                                    <label>
-                                        <input type="checkbox"> Admin</label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="dropdown-item">
-                                    <label>
-                                        <input type="checkbox"> Moderator</label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="dropdown-item">
-                                    <label>
-                                        <input type="checkbox"> Normal</label>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </form>
-            </div>
-            <div class="row d-flex justify-content-between m-2">
+            
+            <div class="row d-flex justify-content-between mt-3 ml-1 mb-2">
                 <form class="d-flex align-items-center">
+                    <label for="searchUsername">Search by username</label>
                     <input id="searchUsername" class="form-control mr-sm-2 rounded" type="search" placeholder="Search by username ..." aria-label="Search">
                 </form>
             </div>
