@@ -1,5 +1,3 @@
-console.log('app.js included');
-
 let comment_id;
 function addEventListeners() {
   let reportModalForm = document.querySelector('#reportModalForm');
