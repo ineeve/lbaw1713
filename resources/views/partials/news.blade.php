@@ -28,7 +28,7 @@
           <div id="news_item_preview_list" class="d-flex flex-column">
             @include('partials.news_item_preview_list',$news)
           </div>
-          <span class="previews"> @include('partials.load_more') </span>
+          <div class="previews"> @include('partials.load_more') </div>
         </div>
       </div>
     </div>

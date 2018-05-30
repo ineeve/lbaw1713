@@ -30,7 +30,7 @@
                 Report
               </a>
               @if(Auth::user()->permission == 'admin' || Auth::user()->permission ==  'moderator')
-              <!-- TODO: A FAZEER COMO SE FOSSE O AUTOR  È SUPOSTO?-->
+              
               <a class="dropdown-item deleteComment" href="/api/news/{{$news_id}}/comments/{{$comment->id}}">Delete</a>
             
               @endif
