@@ -77,7 +77,6 @@ function replaceTabContent(tabID, newContent){
 }
 
 function changeSectionHandler(e){
-    console.log('changing section')
     let section_name = e.target.innerText.trim();
     if (section_name.length == 0){
         section_name = e.target.parentNode.innerText.trim();
@@ -275,6 +274,14 @@ $(document).ready(function() {
             }
         })
     })
+
+    /**
+     * Show 'add badge' form.
+     */
+    $('body').on('click', '#badges-list a', function(e) {
+        e.preventDefault();
+        showAddBadgeForm(e.currentTarget);
+    })
 })
 
 function showSuccessMsg(msg) {
@@ -337,12 +344,12 @@ function removeClassByPrefix(el, prefix) {
  * @param {*} badgeElem JS DOM element of a badge card.
  * @param {Object} badge Badge.
  */
-function showBadgeEditForm(badgeElem, badge) {
+function showBadgeEditForm(badgeElem, badge, submitHandler, cancelHandler) {
     let form = document.createElement('form');
     form.className = 'card mt-3 mr-3';
     form.style = 'width: 16rem;';
     form.id = badge.id;
-    form.onsubmit = submitEditBadgeForm;
+    form.onsubmit = submitHandler;
 
     let cardHeader = createBadgeFormHeader(badge);
     form.appendChild(cardHeader);
@@ -353,7 +360,7 @@ function showBadgeEditForm(badgeElem, badge) {
     let reqsList = createBadgeFormReqsList(badge);
     form.appendChild(reqsList);
 
-    let buttons = createBadgeFormButtons();
+    let buttons = createBadgeFormButtons(cancelHandler);
     form.appendChild(buttons);
 
     badgeElem.parentNode.replaceChild(form, badgeElem);
@@ -406,7 +413,7 @@ function createBadgeFormReqsList(badge) {
     return reqsList;
 }
 
-function createBadgeFormButtons() {
+function createBadgeFormButtons(cancelHandler) {
     let btnsDiv = document.createElement('div');
     btnsDiv.className = 'card-body d-flex justify-content-end';
 
@@ -416,12 +423,43 @@ function createBadgeFormButtons() {
     saveBtn.className = 'btn btn-primary ml-2';
     let cancelBtn = document.createElement('button');
     cancelBtn.textContent = 'Cancel';
-    cancelBtn.onclick = cancelBadgeForm;
+    cancelBtn.onclick = cancelHandler;
     cancelBtn.className = 'btn btn-secondary';
 
     btnsDiv.appendChild(cancelBtn);
     btnsDiv.appendChild(saveBtn);
     return btnsDiv;
+}
+
+function submitAddBadgeForm(event) {
+    event.preventDefault();
+    let form = event.target;
+    let badgeId = form.id;
+
+    $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    })
+
+    $.ajax({
+        url: '/adm/badges',
+        method: 'post',
+        data: $('form#'+badgeId).serialize(),
+        success: function(view) {
+            let addBadgeElem = document.createElement('a');
+            addBadgeElem.href='';
+            addBadgeElem.className = 'd-flex flex-column align-items-center nounderline mt-3 mr-3';
+            addBadgeElem.style="min-width:16rem;";
+            addBadgeElem.innerHTML = '<i class="fas fa-plus-circle fa-fw medium-big-icon"></i>'
+                                    + '<p class="m-0">Add Badge</p>'
+            form.parentNode.appendChild(addBadgeElem);
+            form.outerHTML = view;
+        },
+        error: function(xhr) {
+            console.log(xhr);
+        }
+    })
 }
 
 function submitEditBadgeForm(event) {
@@ -446,11 +484,21 @@ function submitEditBadgeForm(event) {
             console.log(xhr);
         }
     })
-
-    console.log(event);
 }
 
-function cancelBadgeForm(e) {
+function cancelAddBadgeForm(e) {
+    e.preventDefault();
+    let form = e.target.parentNode.parentNode;
+    let addBadgeElem = document.createElement('a');
+    addBadgeElem.href='';
+    addBadgeElem.className = 'd-flex flex-column align-items-center nounderline mt-3 mr-3';
+    addBadgeElem.style="min-width:16rem;";
+    addBadgeElem.innerHTML = '<i class="fas fa-plus-circle fa-fw medium-big-icon"></i>'
+                            + '<p class="m-0">Add Badge</p>'
+    form.parentNode.replaceChild(addBadgeElem, form);
+}
+
+function cancelEditBadgeForm(e) {
     e.preventDefault();
     let form = e.target.parentNode.parentNode;
     let badgeId = form.id;
@@ -465,6 +513,14 @@ function cancelBadgeForm(e) {
             console.log(xhr);
         }
     })
+}
+
+function createEmptyBadge() {
+    return {name: '', brief: '', votes: 0, articles: 0, comments: 0};
+}
+
+function showAddBadgeForm(addBadgeElem) {
+    showBadgeEditForm(addBadgeElem, createEmptyBadge(), submitAddBadgeForm, cancelAddBadgeForm);
 }
 
 {/* <div class="card mt-3 mr-3" style="width:16rem;">

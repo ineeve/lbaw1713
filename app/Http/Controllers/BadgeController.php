@@ -17,8 +17,9 @@ class BadgeController extends Controller {
         $badge->votes = $request->votes;
         $badge->articles = $request->articles;
         $badge->comments = $request->comments;
+        $badge->creator_user_id = Auth::id();
         $badge->save();
-        return view('partials.admin_page', ['badge' => $badge]);
+        return view('partials.admin_badge', ['badge' => $badge]);
     }
 
     function showAdmin($badge_id) {

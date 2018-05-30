@@ -30,7 +30,6 @@ class CommentController extends Controller
     public function update($news_id, $comm_id, Request $request) {
         $comment = Comment::find($comm_id);
         $this->authorize('update', $comment);
-       // dd($request);
         $comment->text = $request->text;
         $comment->save();
         $status_code = 200; 

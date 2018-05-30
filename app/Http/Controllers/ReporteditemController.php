@@ -17,10 +17,7 @@ class ReporteditemController extends Controller
 
     public function showReport($id) {
         $this->authorize('mod', \Auth::user());
-        //get All news Reports
-        // $reports = $this->queryArticleReports(0);
-        // $commentsReports = $this->queryCommentsReports(0);
-        // print_r($reports);
+      
         $separate =  Reporteditem::getReport($id);
         if($separate == null) return redirect('error/404');
         if($separate[0]->news_id != null){
@@ -66,8 +63,8 @@ class ReporteditemController extends Controller
         $commentsReports = Reporteditem::queryCommentsReports(0);
         $currentPageNews = 1;
         $currentPageComments = 1;
-        $numberNews = Reporteditem::totalNews()/5;
-        $numberComments = Reporteditem::totalComments()/5;
+        $numberNews = floor(Reporteditem::totalNews()/5);
+        $numberComments = floor(Reporteditem::totalComments()/5);
         return view('pages.reports',['newsreports' => $reports, 'commentreports' => $commentsReports,'currentPageNews'=>$currentPageNews,'currentPageComments'=>$currentPageComments,'numberOfPagesNews'=>$numberNews,'numberOfPagesComments'=>$numberComments,'page_title'=>'Reports']);
     }
     
@@ -77,8 +74,8 @@ class ReporteditemController extends Controller
         $reports =Reporteditem::queryArticleReports($report_offset);
         $report_offset = $report_offset + count($reports);
         $status_code = 200;
-        $currentPageNews = ($report_offset/5);
-        $numberOfPagesNews = Reporteditem::totalNews()/5;
+        $currentPageNews = floor($report_offset/5);
+        $numberOfPagesNews = floor(Reporteditem::totalNews()/5);
         $data = [
             'view' => View::make('partials.reports_list')
                 ->with('newsreports', $reports)
@@ -97,8 +94,8 @@ class ReporteditemController extends Controller
         $reports = Reporteditem::queryCommentsReports($report_offset);
         $report_offset = $report_offset + count($reports);
         $status_code = 200;
-        $currentPageComments = ($report_offset/5);
-        $numberOfPagesComments = Reporteditem::totalComments()/5;
+        $currentPageComments = floor($report_offset/5);
+        $numberOfPagesComments = floor(Reporteditem::totalComments()/5);
         $data = [
             'view' => View::make('partials.report_list_comment')
                 ->with('commentreports', $reports)
