@@ -110,7 +110,8 @@
       @if ($following != null) @include('partials.following_list',$following)
     </div>
     @if(!($following_offset == 0 && $following_count
-    <=0 )) <div id="following_pagination">
+    <=0 )) 
+    <div id="following_pagination">
       @include('partials.following_pagination_btn',[$following_offset, $following_count])
   </div>
   @endif @else
@@ -118,5 +119,6 @@
   @endif
 </div>
 
+</div>
 </div>
 </div>
