@@ -94,8 +94,8 @@ class ReporteditemController extends Controller
         $reports = Reporteditem::queryCommentsReports($report_offset);
         $report_offset = $report_offset + count($reports);
         $status_code = 200;
-        $currentPageComments = ($report_offset/5);
-        $numberOfPagesComments = Reporteditem::totalComments()/5;
+        $currentPageComments = floor($report_offset/5);
+        $numberOfPagesComments = floor(Reporteditem::totalComments()/5);
         $data = [
             'view' => View::make('partials.report_list_comment')
                 ->with('commentreports', $reports)
