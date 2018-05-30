@@ -14,7 +14,6 @@
             </div>
             <!-- USERS TABLE -->
             @include('partials.admin_users_table',['users' => $users, 'total'=> $total])
-
         </div>
     </div>
     <div class="row">

@@ -5,14 +5,14 @@
       <a href="/news/{{$report->news_id}}">{{ $report->title }}</a>
     </th>
     <td>{{ $report->username }}</td>
-    <td>{{ $report->newsdate }}</td>
+    <td>{{ date("F jS, Y \a\\t H:i", strtotime($report->newsdate)) }}</td>
     <td>
       <div class="d-flex flex-column justify-content-between">
         <p>{{$report->numberreports}}</p>
         <a href="/reports/{{$report->id}}">+ Show More</a>
       </div>
     </td>
-    <td>{{$report->reportdate}}</td>
+    <td>{{ date("F jS, Y \a\\t H:i", strtotime($report->reportdate)) }}</td>
     <td>{{$report->description}}</td>
   </tr>
   @endforeach
