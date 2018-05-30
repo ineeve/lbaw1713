@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-12 col-md-11">
             <h3>
-                <i class="fa fa-flask fa-fw"></i> Badges</h3>
+                <i class="fas fa-star fa-fw"></i> Badges</h3>
             <!-- Badges listing -->
             <div id="badges-list" class="mt-2 d-flex flex-wrap align-items-center">
                 @foreach ($badges as $badge) @include('partials.admin_badge', ['badge' => $badge]) @endforeach

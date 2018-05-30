@@ -17,11 +17,11 @@
                 </li>
                 <li class="nav-item">
                     <a href="#badges_tab" role="button" data-toggle="tab" class="nav-link">
-                        <i class="fa fa-flask fa-fw"></i> Badges</a>
+                        <i class="fas fa-star fa-fw"></i> Badges</a>
                 </li>
                 <li class="nav-item">
                     <a href="#statistics_tab" role="button" data-toggle="tab" class="nav-link">
-                        <i class="fa fa-briefcase fa-fw"></i> Statistics</a>
+                        <i class="fas fa-chart-pie fa-fw"></i> Statistics</a>
                 </li>
             </ul>
         </div>

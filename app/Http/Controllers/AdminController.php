@@ -9,6 +9,8 @@ use App\User;
 use App\Ban;
 use App\Section;
 use App\Badge;
+use App\News;
+use App\Comment;
 use Auth;
 
 class AdminController extends Controller {
@@ -95,8 +97,16 @@ class AdminController extends Controller {
         return $this->getUsersTableView($users,$pageNumber,$itemsPerPage);
     }
 
-    public function getCategoriesTab(Request $request){
+    public function getStatsTab(Request $request) {
         $this->authorize('admin', \Auth::user());
+        $num_users = User::count();
+        $num_news = News::count();
+        $num_comments = Comment::count();
+        return view('partials.admin_stats_tab',
+            ['num_users' => $num_users, 'num_news' => $num_news, 'num_comments' => $num_comments]);
+    }
+
+    public function getCategoriesTab(Request $request){
         $sections = Section::get();
         return view('partials.admin_categories_tab',
             ['categories'=>$sections]);

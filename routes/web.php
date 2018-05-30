@@ -67,6 +67,7 @@ Route::get('/adm','AdminController@show')->name('show_admin_page');
 Route::get('/adm/users','AdminController@getUsersTab');
 Route::get('/adm/categories','AdminController@getCategoriesTab');
 Route::get('/adm/badges','AdminController@getBadgesTab');
+Route::get('/adm/statistics', 'AdminController@getStatsTab');
 Route::post('/adm/badges', 'BadgeController@create');
 Route::get('/adm/badges/{id}', 'BadgeController@showAdmin');
 Route::put('/adm/badges/{id}', 'BadgeController@update');
