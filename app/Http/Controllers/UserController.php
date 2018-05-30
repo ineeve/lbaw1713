@@ -97,7 +97,7 @@ class UserController extends Controller
 
       $user = $this->queryUser($username);
 
-      $status_code = 200; // TODO: change if not found!
+      $status_code = 200; 
       $data = [
           'view' => View::make('partials.following_list')
               ->with('following', $following)

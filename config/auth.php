@@ -69,11 +69,7 @@ return [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
-        // TODO: find out why
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+  
     ],
 
     /*

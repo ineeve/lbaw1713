@@ -6,7 +6,6 @@
       <div class="container mt-4">
         <div class="row">
           <!-- ARTICLE OPTIONS -->
-          <!-- TODO: ADD moderetor option -->
           <div class="col-12 col-md-1 px-0">
             <div name="newsOptions">
               <div class="d-flex flex-md-column justify-content-center flex-row align-items-center mt-md-5" name="vote" title="Use to vote on the news" style="font-size:1.5em">
@@ -89,7 +88,7 @@
         <!-- ARTICLE -->
         <div class="col-12 col-md-11 mt-3 article px-10">
           <script type="text/javascript">
-            var news_id = "{{ $news->id }}"; //TODO get from route
+            var news_id = "{{ $news->id }}"; 
           </script>
           <h1 class="title bold"> {{ $news->title }}</h1>
           <h5>Author: <a class="nounderline real_link" href="{{ url('users/'.$news->author) }}">{{ $news->author }}</a></h5>
