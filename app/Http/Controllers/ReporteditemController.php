@@ -63,8 +63,8 @@ class ReporteditemController extends Controller
         $commentsReports = Reporteditem::queryCommentsReports(0);
         $currentPageNews = 1;
         $currentPageComments = 1;
-        $numberNews = Reporteditem::totalNews()/5;
-        $numberComments = Reporteditem::totalComments()/5;
+        $numberNews = floor(Reporteditem::totalNews()/5);
+        $numberComments = floor(Reporteditem::totalComments()/5);
         return view('pages.reports',['newsreports' => $reports, 'commentreports' => $commentsReports,'currentPageNews'=>$currentPageNews,'currentPageComments'=>$currentPageComments,'numberOfPagesNews'=>$numberNews,'numberOfPagesComments'=>$numberComments,'page_title'=>'Reports']);
     }
     
@@ -74,8 +74,8 @@ class ReporteditemController extends Controller
         $reports =Reporteditem::queryArticleReports($report_offset);
         $report_offset = $report_offset + count($reports);
         $status_code = 200;
-        $currentPageNews = ($report_offset/5);
-        $numberOfPagesNews = Reporteditem::totalNews()/5;
+        $currentPageNews = floor($report_offset/5);
+        $numberOfPagesNews = floor(Reporteditem::totalNews()/5);
         $data = [
             'view' => View::make('partials.reports_list')
                 ->with('newsreports', $reports)
