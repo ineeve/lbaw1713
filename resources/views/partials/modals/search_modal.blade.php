@@ -13,11 +13,11 @@
         <form action="{{route('advanced_search')}}" method="get">
           <div class="form-group">
             <label for="advancedsearch-searchText">Search Text *</label>
-            <input id="advancedsearch-searchText"type="text" class="form-control" placeholder="Search" name="searchText" required>
+            <input id="advancedsearch-searchText" type="text" class="form-control" placeholder="Search" name="searchText" required>
           </div>
           <div class="form-group my-1">
             <label for="advancedsearch-typeOfSearch">Type of search</label>
-            <select id="advancedsearch-typeOfSearch"class="custom-select" name="elementToSearch">
+            <select id="advancedsearch-typeOfSearch" class="custom-select" name="elementToSearch">
               <option value="titleAndBody" selected>Search for...</option>
               <option value="onlyTitle">Only title</option>
               <option value="onlyBody">Only body</option>
