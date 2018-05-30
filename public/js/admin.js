@@ -356,6 +356,10 @@ function showBadgeEditForm(badgeElem, badge) {
     let reqsList = createBadgeFormReqsList(badge);
     form.appendChild(reqsList);
 
+    let buttons = createBadgeFormButtons();
+    form.appendChild(buttons.cancelBtn);
+    form.appendChild(buttons.saveBtn);
+
     badgeElem.parentNode.replaceChild(form, badgeElem);
 }
 
@@ -369,11 +373,6 @@ function createBadgeFormHeader(badge) {
     nameInput.name = 'name';
     nameInput.value = badge.name;
     cardHeader.appendChild(nameInput);
-    let saveBtn = document.createElement('button');
-    saveBtn.textContent = 'Save';
-    saveBtn.type = 'submit';
-    saveBtn.className = 'btn btn-primary';
-    cardHeader.appendChild(saveBtn);
     return cardHeader;
 }
 
@@ -424,6 +423,18 @@ function createBadgeFormReqsList(badge) {
     return reqsList;
 }
 
+function createBadgeFormButtons() {
+    let saveBtn = document.createElement('button');
+    saveBtn.textContent = 'Save';
+    saveBtn.type = 'submit';
+    saveBtn.className = 'btn btn-primary';
+    let cancelBtn = document.createElement('button');
+    cancelBtn.textContent = 'Cancel';
+    cancelBtn.onclick = cancelBadgeForm;
+    cancelBtn.className = 'btn btn-secondary';
+    return {'cancelBtn': cancelBtn, 'saveBtn': saveBtn};
+}
+
 function submitEditBadgeForm(event) {
     event.preventDefault();
     let form = event.target;
@@ -448,6 +459,23 @@ function submitEditBadgeForm(event) {
     })
 
     console.log(event);
+}
+
+function cancelBadgeForm(e) {
+    e.preventDefault();
+    let form = e.target.parentNode;
+    let badgeId = form.id;
+
+    $.ajax({
+        url: '/adm/badges/'+badgeId,
+        method: 'get',
+        success: function(view) {
+            form.outerHTML = view;
+        },
+        error: function(xhr) {
+            console.log(xhr);
+        }
+    })
 }
 
 {/* <div class="card mt-3 mr-3" style="width:16rem;">

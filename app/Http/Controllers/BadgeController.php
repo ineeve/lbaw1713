@@ -9,6 +9,12 @@ use Auth;
 
 class BadgeController extends Controller {
     
+    function showAdmin($badge_id) {
+        $this->authorize('admin', Auth::user());
+        $badge = Badge::find($badge_id);
+        return view('partials.admin_badge', ['badge' => $badge]);
+    }
+
     function update(Request $request, $badge_id) {
         $this->authorize('admin', Auth::user());
         $badge = Badge::find($badge_id);
