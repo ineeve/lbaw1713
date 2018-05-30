@@ -338,9 +338,6 @@ function removeClassByPrefix(el, prefix) {
  * @param {Object} badge Badge.
  */
 function showBadgeEditForm(badgeElem, badge) {
-    console.log(badgeElem);
-    console.log(badge);
-
     let form = document.createElement('form');
     form.className = 'card mt-3 mr-3';
     form.style = 'width: 16rem;';
@@ -357,8 +354,7 @@ function showBadgeEditForm(badgeElem, badge) {
     form.appendChild(reqsList);
 
     let buttons = createBadgeFormButtons();
-    form.appendChild(buttons.cancelBtn);
-    form.appendChild(buttons.saveBtn);
+    form.appendChild(buttons);
 
     badgeElem.parentNode.replaceChild(form, badgeElem);
 }
@@ -382,6 +378,7 @@ function createBadgeFormBrief(badge) {
     let briefInput = document.createElement('input');
     briefInput.className = 'card-title m-0 form-control';
     briefInput.name = 'brief';
+    briefInput.placeholder = 'Brief';
     briefInput.value = badge.brief;
     briefDiv.appendChild(briefInput);
     return briefDiv;
@@ -392,30 +389,16 @@ function createBadgeFormReqsList(badge) {
     reqsList.className = 'list-group list-group-flush';
 
     let votesItem = document.createElement('li');
-    let commentsItem = document.createElement('li');
-    let articlesItem = document.createElement('li');
-    votesItem.className = 'list-group-item';
-    commentsItem.className = 'list-group-item';
-    articlesItem.className = 'list-group-item';
-    votesItem.textContent = 'Votes';
-    commentsItem.textContent = 'Comments';
-    articlesItem.textContent = 'News';
+    votesItem.className = 'list-group-item d-flex align-items-center justify-content-between';
+    votesItem.innerHTML = 'Votes <input class="form-control" style="max-width:4rem;" type="number" name="votes" value="'+badge.votes+'">';
 
-    let votesCounter = document.createElement('input');
-    let commentsCounter = document.createElement('input');
-    let articlesCounter = document.createElement('input');
-    votesCounter.className = 'float-right form-control';
-    commentsCounter.className = 'float-right form-control';
-    articlesCounter.className = 'float-right form-control';
-    votesCounter.name = 'votes';
-    commentsCounter.name = 'comments';
-    articlesCounter.name = 'articles';
-    votesCounter.value = badge.votes;
-    commentsCounter.value = badge.comments;
-    articlesCounter.value = badge.articles;
-    votesItem.appendChild(votesCounter);
-    commentsItem.appendChild(commentsCounter);
-    articlesItem.appendChild(articlesCounter);
+    let commentsItem = document.createElement('li');
+    commentsItem.className = 'list-group-item d-flex align-items-center justify-content-between';
+    commentsItem.innerHTML = 'Comments <input class="form-control" style="max-width:4rem;" type="number" name="comments" value="'+badge.comments+'">';
+
+    let articlesItem = document.createElement('li');
+    articlesItem.className = 'list-group-item d-flex align-items-center justify-content-between';
+    articlesItem.innerHTML = 'Articles <input class="form-control" style="max-width:4rem;" type="number" name="articles" value="'+badge.articles+'">';
 
     reqsList.appendChild(votesItem);
     reqsList.appendChild(commentsItem);
@@ -424,15 +407,21 @@ function createBadgeFormReqsList(badge) {
 }
 
 function createBadgeFormButtons() {
+    let btnsDiv = document.createElement('div');
+    btnsDiv.className = 'card-body d-flex justify-content-end';
+
     let saveBtn = document.createElement('button');
     saveBtn.textContent = 'Save';
     saveBtn.type = 'submit';
-    saveBtn.className = 'btn btn-primary';
+    saveBtn.className = 'btn btn-primary ml-2';
     let cancelBtn = document.createElement('button');
     cancelBtn.textContent = 'Cancel';
     cancelBtn.onclick = cancelBadgeForm;
     cancelBtn.className = 'btn btn-secondary';
-    return {'cancelBtn': cancelBtn, 'saveBtn': saveBtn};
+
+    btnsDiv.appendChild(cancelBtn);
+    btnsDiv.appendChild(saveBtn);
+    return btnsDiv;
 }
 
 function submitEditBadgeForm(event) {
@@ -463,7 +452,7 @@ function submitEditBadgeForm(event) {
 
 function cancelBadgeForm(e) {
     e.preventDefault();
-    let form = e.target.parentNode;
+    let form = e.target.parentNode.parentNode;
     let badgeId = form.id;
 
     $.ajax({

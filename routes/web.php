@@ -67,6 +67,7 @@ Route::get('/adm','AdminController@show')->name('show_admin_page');
 Route::get('/adm/users','AdminController@getUsersTab');
 Route::get('/adm/categories','AdminController@getCategoriesTab');
 Route::get('/adm/badges','AdminController@getBadgesTab');
+Route::post('/adm/badges', 'BadgeController@create');
 Route::get('/adm/badges/{id}', 'BadgeController@showAdmin');
 Route::put('/adm/badges/{id}', 'BadgeController@update');
 Route::get('/adm/users/table','AdminController@getUsersTableRoute');
@@ -109,7 +110,6 @@ Route::get('/about', 'PrivacyPolicyController@about');
 Route::get('/faq', 'PrivacyPolicyController@faq');
 
 //Edit news
-// TODO: Alterar Editor
 /*Form to edit one news*/
 Route::get('news/{id}/edit', 'NewsController@editArticle');
 /*Action to edit one news*/
@@ -128,8 +128,6 @@ Route::get('api/news/{news_id}/vote','AjaxController@getUserVote');
 /*Page that informs the user of our privacy policies*/
 Route::get('privacy_policy','PrivacyPolicyController@show');
 
-
-// Comments - TODO: Add more methods once they're implemented
 Route::resource('news/{id}/comments', 'CommentController')->only([
     'store', 'update'
 ]);

@@ -33,7 +33,6 @@ class CommentController extends Controller
        // dd($request);
         $comment->text = $request->text;
         $comment->save();
-        // TODO: see if happened
         $status_code = 200; 
         return Response::json(['id' => $comment->id, 'body' => $comment->text], $status_code);
     }
