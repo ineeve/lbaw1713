@@ -129,7 +129,7 @@ class AdminController extends Controller {
         $users = $allUsers->forPage($currentPage,$itemsPerPage);
         $total = $allUsers->count();
         $numberOfPages = intval(ceil($total/$itemsPerPage));
-        return view('partials.admin_user_tab',
+        return view('partials.admin_users_tab',
             ['users' => $users,
             'numberOfPages' => $numberOfPages,
             'currentPage'=>$currentPage,
